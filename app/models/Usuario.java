@@ -19,6 +19,7 @@ public class Usuario extends Model {
 	private String email;	
 	@Required(message = "Este campo não pode estar vazio!")
 	private String senha;
+	private boolean verificado;
 
 	public Long getId() {
 		return id;
@@ -42,6 +43,14 @@ public class Usuario extends Model {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public boolean isVerificado() {
+		return verificado;
+	}
+
+	public void setVerificado(boolean verificado) {
+		this.verificado = verificado;
 	}
 	
 	
