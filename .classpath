@@ -1,10 +1,12 @@
 <classpath>
   <classpathentry kind="src" path="app"/>
   <classpathentry kind="src" path="conf"/>
-  <classpathentry kind="src" path="target\scala-2.12\twirl\main"/>
-  <classpathentry kind="src" path="target\scala-2.12\routes\main"/>
   <classpathentry excluding="resources\" kind="src" path="test"/>
-  <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"></classpathentry>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\org.scala-lang\scala-library\srcs\scala-library-2.12.4-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.12.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\org.scala-lang\scala-library\docs\scala-library-2.12.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
   <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-enhancer\srcs\play-enhancer-1.2.2-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-enhancer\jars\play-enhancer-1.2.2.jar">
     <attributes>
       <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.typesafe.play\play-enhancer\docs\play-enhancer-1.2.2-javadoc.jar!/"/>
@@ -189,6 +191,11 @@
   <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-functional_2.12\srcs\play-functional_2.12-2.6.9-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-functional_2.12\jars\play-functional_2.12-2.6.9.jar">
     <attributes>
       <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.typesafe.play\play-functional_2.12\docs\play-functional_2.12-2.6.9-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\org.scala-lang\scala-reflect\srcs\scala-reflect-2.12.4-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.12.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\org.scala-lang\scala-reflect\docs\scala-reflect-2.12.4-javadoc.jar!/"/>
     </attributes>
   </classpathentry>
   <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\org.typelevel\macro-compat_2.12\srcs\macro-compat_2.12-1.1.1-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\org.typelevel\macro-compat_2.12\jars\macro-compat_2.12-1.1.1.jar">
@@ -413,6 +420,27 @@
       <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.adrianhurt\play-bootstrap-core_2.12\docs\play-bootstrap-core_2.12-1.4-P26-SNAPSHOT-javadoc.jar!/"/>
     </attributes>
   </classpathentry>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-mailer_2.12\srcs\play-mailer_2.12-6.0.1-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-mailer_2.12\jars\play-mailer_2.12-6.0.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.typesafe.play\play-mailer_2.12\docs\play-mailer_2.12-6.0.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\org.apache.commons\commons-email\srcs\commons-email-1.5-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\org.apache.commons\commons-email\jars\commons-email-1.5.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\org.apache.commons\commons-email\docs\commons-email-1.5-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\com.sun.mail\javax.mail\srcs\javax.mail-1.5.6-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\com.sun.mail\javax.mail\jars\javax.mail-1.5.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.sun.mail\javax.mail\docs\javax.mail-1.5.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\javax.activation\activation\srcs\activation-1.1-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\javax.activation\activation\jars\activation-1.1.jar"/>
+  <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-mailer-guice_2.12\srcs\play-mailer-guice_2.12-6.0.1-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-mailer-guice_2.12\jars\play-mailer-guice_2.12-6.0.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.typesafe.play\play-mailer-guice_2.12\docs\play-mailer-guice_2.12-6.0.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
   <classpathentry sourcepath="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-test_2.12\srcs\play-test_2.12-2.6.15-sources.jar" kind="lib" path="C:\Users\adria\.ivy2\cache\com.typesafe.play\play-test_2.12\jars\play-test_2.12-2.6.15.jar">
     <attributes>
       <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\com.typesafe.play\play-test_2.12\docs\play-test_2.12-2.6.15-javadoc.jar!/"/>
@@ -556,6 +584,7 @@
       <attribute name="javadoc_location" value="jar:file:C:\Users\adria\.ivy2\cache\org.seleniumhq.selenium\selenium-firefox-driver\docs\selenium-firefox-driver-3.5.3-javadoc.jar!/"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="lib" path=".\target\scala-2.12\classes_managed"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="output" path="bin"/>
 </classpath>
