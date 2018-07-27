@@ -1,0 +1,143 @@
+@(usuarios : List[Usuario])
+
+@implicitField = @{ FieldConstructor(campo.f) }
+
+@import helper._
+
+@styles = {
+	<link href="@routes.Assets.versioned("css/principal.css")" rel="stylesheet" media="screen">
+}
+
+@scripts = {	
+	<script src="@routes.Assets.versioned("js/principal.js")"></script>
+}
+
+@main("Novo usuario", styles, scripts) {
+
+<div class="container">
+	<h1>Click the filter icon <small>(<i class="glyphicon glyphicon-filter"></i>)</small></h1>
+		<div class="row">
+	        <div class="col-md-2">
+	            <nav class="nav-sidebar">
+	                <ul class="nav">
+	                    <li class="active"><a href="javascript:;">Executar</a></li>
+	                    <li><a href="javascript:;">Estudo de Caso 0</a></li>
+	                    <li><a href="javascript:;">Estudo de Caso 1</a></li>
+	                    <li class="active"><a href="javascript:;">Ajuda</a></li>
+	                    <li><a href="javascript:;">Como usar</a></li>
+	                    <li><a href="javascript:;">Sobre</a></li>
+	                    <li class="nav-divider"></li>
+	                    <li class="active"><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> Sair</a></li>
+	                </ul>
+	            </nav>
+	        </div>
+			<div class="col-md-10">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Meus Resultados</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+					</div>
+					@if(usuarios.isEmpty) {
+						<h3>Sem usuarios</h3>
+					} else {
+						<table class="table table-hover" id="dev-table">	
+							<thead>
+								<tr>
+									<th>Agrupar</th>
+									<th>EC</th>
+									<th>Data</th>
+									<th>Usuário</th>
+								</tr>
+							</thead>							
+							<tfoot>
+								@for(usuario <- usuarios) {
+									<tr>
+										<td style="text-align: center;"><input id="agrupar" type="checkbox" name="remember" value="1"></td>
+										<td>@usuario.getEmail()</td>
+										<td>@usuario.getSenha()</td>
+									</tr>
+								}
+							</tfoot>
+						</table>
+					}
+				</div>
+			</div>
+			<div class="col-md-10">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Resultados Compartilhados</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Tasks" />
+					</div>
+					<table class="table table-hover" id="task-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Task</th>
+								<th>Assignee</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Site Wireframes</td>
+								<td>John Smith</td>
+								<td>in progress</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Mobile Landing Page</td>
+								<td>Kilgore Trout</td>
+								<td>completed</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Add SEO tags</td>
+								<td>Bob Loblaw</td>
+								<td>failed qa</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Migrate to Bootstrap 3</td>
+								<td>Emily Hoenikker</td>
+								<td>in progress</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Update jQuery library</td>
+								<td>Holden Caulfield</td>
+								<td>deployed</td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>Issues in IE7</td>
+								<td>Jane Doe</td>
+								<td>failed qa</td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td>Bugs from Sprint 14</td>
+								<td>Kilgore Trout</td>
+								<td>completed</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+}

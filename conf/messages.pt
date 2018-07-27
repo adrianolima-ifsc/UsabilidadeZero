@@ -1,0 +1,20 @@
+#
+# Mensagens
+# 
+
+# globais
+global.home=HOME
+global.erro=ERRO INTERNO DO SISTEMA
+global.gravar=GRAVAR
+global.cancel=CANCELAR
+
+# estudo
+estudo.duracao=DURAÇÃO
+estudo.novo=NOVO ESTUDO
+estudo.ano=ANO
+estudo.nome=FILME
+estudo.diretor=DIRETOR
+estudo.nome.hint=INFORME O NOME DO FILME
+estudo.genero=GÊNERO
+estudo.ano.combo=-- ANO --
+estudo.diretor.combo=-- DIRETOR --
