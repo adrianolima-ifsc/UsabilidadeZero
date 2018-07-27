@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.util.*;
 import javax.inject.Inject;
 import play.api.data.*;
+import play.api.libs.mailer.*;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
@@ -17,13 +18,15 @@ public class ControladorUsuario extends Controller {
 	private final FormFactory formFactory;
 	private Form<Usuario> usuarioForm;
 	private Validador validador;
+	private MailerClient mailer;
 
 	@Inject
-	public ControladorUsuario(FormFactory formFactory, Validador validador) {
+	public ControladorUsuario(FormFactory formFactory, Validador validador, MailerClient mailer) {
 
 		this.formFactory = formFactory;
 		this.usuarioForm = formFactory.form(Usuario.class);
 		this.validador = validador;
+		this.mailer = mailer;
 	}
 
 	public Result lista() {
@@ -37,19 +40,23 @@ public class ControladorUsuario extends Controller {
 	public Result entrar() {
 		
 		Form<Usuario> form = usuarioForm.bindFromRequest();
-		Usuario usuario = form.get();
-		String criptoSenha = Encriptador.crypt(usuario.getSenha());
-		usuario.setSenha(criptoSenha);
-		
-		usuario.save();
-		flash("success", "Usuario cadastrado com sucesso!");
 		
         if(form.hasErrors()) {
         	flash("danger", "Foram identificados problemas no cadastro!");
     		return badRequest(telaLogin.render(usuarioForm));        	
-        }  
-//        
-//        Usuario usuario = form.get();
+        }
+ 
+        Usuario usuario = form.get();
+        String criptoSenha = Encriptador.crypt(usuario.getSenha());
+        usuario.setSenha(criptoSenha);        
+        usuario.save();
+        
+        TokenCadastro token = new TokenCadastro(usuario);
+        token.save();
+        
+        mailer.send(new EmailCadastro(token));
+        
+        flash("success", "Usuario cadastrado com sucesso!");
 //        
 //		try {
 //			
