@@ -3,10 +3,12 @@ package controllers;
 import models.*;
 import views.html.*;
 import validadores.*;
+import daos.*;
 
 import java.security.MessageDigest;
 import java.util.*;
 import javax.inject.Inject;
+
 import play.api.data.*;
 import play.api.libs.mailer.*;
 import play.data.Form;
@@ -19,6 +21,10 @@ public class ControladorUsuario extends Controller {
 	private Form<Usuario> usuarioForm;
 	private Validador validador;
 	private MailerClient mailer;
+	@Inject
+	private TokenCadastroDAO tokenCadastroDAO;
+	@Inject
+	private UsuarioDAO usuarioDAO;
 
 	@Inject
 	public ControladorUsuario(FormFactory formFactory, Validador validador, MailerClient mailer) {
@@ -82,6 +88,35 @@ public class ControladorUsuario extends Controller {
 //        return redirect(routes.ControladorUsuario.lista());
         return redirect("/login"); // TODO rota
         
+	}
+	
+	public Result confirmaCadastro(String email, String codigo) {
+		
+		Optional<TokenCadastro> possivelToken = TokenCadastroDAO.comCodigo(codigo);
+		Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
+		
+		if(possivelToken.isPresent() && possivelUsuario.isPresent()) {
+			
+			TokenCadastro token = possivelToken.get();
+			Usuario usuario = possivelUsuario.get();
+			
+			if(token.getUsuario().equals(usuario)) {
+				
+				token.delete();
+				usuario.setVerificado(true);
+				usuario.update();
+				
+				flash("success", "Seu usuário foi confirmado com sucesso!");
+				
+				// TODO logar usuario;
+				
+				return redirect("/usuario/painel"); // TODO rota
+			}
+		}
+		
+		flash("danger", "Algo deu errado ao tentar confirmar o seu cadastro!");
+		
+		return redirect("/login"); // TODO rota
 	}
 
 	public Result detalhar(Long id) {
