@@ -69,7 +69,7 @@ public class ControladorUsuario extends Controller {
         	
 	        	if(usuarioCadastrado.isVerificado()) {
 	        		
-	        		insereUsuarioSessao(usuario);
+	        		insereUsuarioSessao(usuarioCadastrado);
 	        		flash("success", "Login realizado com sucesso!");
 	        		
 	        		return redirect(routes.ControladorUsuario.mostraPainel());
@@ -167,6 +167,9 @@ public class ControladorUsuario extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostraPainel() {
 
+		String codigo = session(AUTH);
+		Usuario usuario = usuarioDAO.comToken(codigo).get();
+		
 		List<Usuario> usuarios = usuarioDAO.mostraTodos();
 
 		return ok(painel.render(usuarios));
