@@ -15,4 +15,10 @@ public class UsuarioDAO {
 		return Optional.ofNullable(usuario);
 	}
 
+	public Optional<Usuario> comEmailSenha(String email, String criptoSenha) {
+		
+		Usuario usuario = usuarios.query().where().eq("email", email).eq("senha", criptoSenha).findOne();
+		return Optional.ofNullable(usuario);
+	}
+
 }
