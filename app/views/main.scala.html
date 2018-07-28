@@ -24,6 +24,17 @@
         <main class="container">
             <h1 class="principal text-center"><strong>UsabilidadeZero</strong></h1>
             @content
+            
+            @if(flash.containsKey("sucesso")) {
+				<div class="alert alert-success">
+					@flash.get("sucesso")
+				</div>
+			}
+			@if(flash.containsKey("erro")) {
+				<div class="alert alert-danger">
+					@flash.get("erro")
+				</div>
+			}
         </main>
     </body>
 </html>
