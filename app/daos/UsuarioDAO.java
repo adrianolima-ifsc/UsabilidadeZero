@@ -1,9 +1,9 @@
 package daos;
 
-import java.util.Optional;
+import models.*;
 
+import java.util.Optional;
 import io.ebean.Finder;
-import models.Usuario;
 
 public class UsuarioDAO {
 	
