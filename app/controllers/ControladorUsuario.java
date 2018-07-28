@@ -144,15 +144,15 @@ public class ControladorUsuario extends Controller {
 				
 				flash("success", "Seu usuário foi confirmado com sucesso!");
 				
-				// TODO logar usuario;
+				session(AUTH, usuario.getEmail());
 				
-				return redirect("/usuario/painel"); // TODO rota
+				return redirect(routes.ControladorUsuario.mostraPainel());
 			}
 		}
 		
 		flash("danger", "Algo deu errado ao tentar confirmar o seu cadastro!");
 		
-		return redirect("/login"); // TODO rota
+		return redirect(routes.HomeController.index());
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
