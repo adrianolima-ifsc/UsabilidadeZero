@@ -5,15 +5,15 @@ import views.html.*;
 import validadores.*;
 import daos.*;
 
-import java.security.MessageDigest;
 import java.util.*;
 import javax.inject.Inject;
 
-import play.api.data.*;
+import autenticadores.UsuarioAutenticado;
 import play.api.libs.mailer.*;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
+import play.mvc.Security.Authenticated;
 
 public class ControladorUsuario extends Controller {
 
@@ -25,6 +25,8 @@ public class ControladorUsuario extends Controller {
 	private TokenCadastroDAO tokenCadastroDAO;
 	@Inject
 	private UsuarioDAO usuarioDAO;
+	
+	public static final String AUTH = "auth";
 
 	@Inject
 	public ControladorUsuario(FormFactory formFactory, Validador validador, MailerClient mailer) {
@@ -53,17 +55,52 @@ public class ControladorUsuario extends Controller {
         }
  
         Usuario usuario = form.get();
+        String email = usuario.getEmail();
         String criptoSenha = Encriptador.crypt(usuario.getSenha());
-        usuario.setSenha(criptoSenha);        
-        usuario.save();
         
-        TokenCadastro token = new TokenCadastro(usuario);
-        token.save();
+        Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
         
-        mailer.send(new EmailCadastro(token));
+        if(possivelUsuario.isPresent()) {
+        	
+        	Usuario usuarioCadastrado = possivelUsuario.get();
+        	String senhaCadastrada = usuarioCadastrado.getSenha();
+        	
+        	if(senhaCadastrada.equals(criptoSenha)) {
+        	
+	        	if(usuarioCadastrado.isVerificado()) {
+	        		
+	        		session(AUTH, usuario.getEmail());
+	        		flash("success", "Login realizado com sucesso!");
+	        		
+	        		return redirect(routes.ControladorUsuario.mostraPainel());
+	        		
+	        	} else {
+	        		
+	        		flash("danger", "Usuario não confirmado!");     
+	        		return redirect(routes.HomeController.index());        	   	
+	        	}
+        	
+        	} else {
+        		
+        		flash("danger", "Senha não confere!");
+        		return redirect(routes.HomeController.index());
+        	}
+        	
+        } else {
         
-        flash("success", "Usuario cadastrado com sucesso!");
+	        usuario.setSenha(criptoSenha);        
+	        usuario.save();
+	        
+	        TokenCadastro token = new TokenCadastro(usuario);
+	        token.save();
+	        
+	        mailer.send(new EmailCadastro(token));
+	        
+	        flash("success", "Usuario cadastrado com sucesso!");
+        
+        }
 //        
+        return redirect(routes.HomeController.index());
 //		try {
 //			
 //			Usuario cadastrado = Usuario.find.query().where().eq("email", usuario.email).findOne();
@@ -86,7 +123,6 @@ public class ControladorUsuario extends Controller {
 //		}
 //        
 //        return redirect(routes.ControladorUsuario.lista());
-        return redirect("/login"); // TODO rota
         
 	}
 	
@@ -118,6 +154,12 @@ public class ControladorUsuario extends Controller {
 		
 		return redirect("/login"); // TODO rota
 	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result mostraPainel() {
+		
+		return ok("Painel de usuário");
+	}
 
 	public Result detalhar(Long id) {
 
@@ -126,22 +168,22 @@ public class ControladorUsuario extends Controller {
 		return ok();
 	}
 
-	public Result alterar(Long id) {
-
-//		formFactory.form(Usuario.class).fill(Usuario.find.byId(id));
-//		Form<Usuario> alterarForm = formFactory.form(Usuario.class).bindFromRequest();
+//	public Result alterar(Long id) {
 //
-//		if (alterarForm.hasErrors()) {
-//			return badRequest();
-//		}
+////		formFactory.form(Usuario.class).fill(Usuario.find.byId(id));
+////		Form<Usuario> alterarForm = formFactory.form(Usuario.class).bindFromRequest();
+////
+////		if (alterarForm.hasErrors()) {
+////			return badRequest();
+////		}
+////
+////		alterarForm.get();
+////
+////		flash("sucesso", "Usuario " + alterarForm.get().getEmail() + " alterado com sucesso");
 //
-//		alterarForm.get();
+//		return redirect(routes.ControladorUsuario.lista());
 //
-//		flash("sucesso", "Usuario " + alterarForm.get().getEmail() + " alterado com sucesso");
-
-		return redirect(routes.ControladorUsuario.lista());
-
-	}
+//	}
 
 	public Result remover(Long id) {
 
@@ -151,28 +193,5 @@ public class ControladorUsuario extends Controller {
 
 		return lista();
 	}
-	
-//	public class Encriptador {
-//		
-//		private static MessageDigest md;
-//
-//		public static String comMD5(String senha) {
-//			try {
-//				md = MessageDigest.getInstance("MD5");
-//				byte[] passBytes = senha.getBytes();
-//				md.reset();
-//				byte[] digested = md.digest(passBytes);
-//				StringBuffer sb = new StringBuffer();
-//				for (int i = 0; i < digested.length; i++) {
-//					sb.append(Integer.toHexString(0xff & digested[i]));
-//				}
-//				return sb.toString();
-//			} catch (NoSuchAlgorithmException ex) {
-//				Logger.getLogger(CryptWithMD5.class.getName()).log(Level.SEVERE, null, ex);
-//			}
-//			return null;
-//
-//		}
-//	}
 
 }
