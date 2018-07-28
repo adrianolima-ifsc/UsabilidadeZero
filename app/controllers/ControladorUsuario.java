@@ -19,7 +19,9 @@ public class ControladorUsuario extends Controller {
 
 	private final FormFactory formFactory;
 	private Form<Usuario> usuarioForm;
+	@Inject
 	private Validador validador;
+	@Inject
 	private MailerClient mailer;
 	@Inject
 	private TokenCadastroDAO tokenCadastroDAO;
@@ -29,12 +31,10 @@ public class ControladorUsuario extends Controller {
 	public static final String AUTH = "auth";
 
 	@Inject
-	public ControladorUsuario(FormFactory formFactory, Validador validador, MailerClient mailer) {
+	public ControladorUsuario(FormFactory formFactory) {
 
 		this.formFactory = formFactory;
 		this.usuarioForm = formFactory.form(Usuario.class);
-		this.validador = validador;
-		this.mailer = mailer;
 	}
 
 	public Result lista() {

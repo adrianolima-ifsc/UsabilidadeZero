@@ -734,3 +734,16 @@ play.sbt.PlayExceptions$CompilationException: Compilation error[value sair is no
     play.filters.hosts.AllowedHostsFilter
 
 2018-07-28 13:39:42,859 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-180 - Application started (Dev)
+2018-07-28 13:47:26,723 [INFO] from application in application-akka.actor.default-dispatcher-7 - Shutting down connection pool.
+2018-07-28 13:47:27,256 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-199 - Creating Pool for datasource 'default'
+2018-07-28 13:47:27,257 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-199 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-28 13:47:27,274 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-199 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-28 13:47:27,375 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-199 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-28 13:47:27,393 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-199 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-28 13:47:27,475 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-199 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-28 13:47:27,476 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-199 - Application started (Dev)
