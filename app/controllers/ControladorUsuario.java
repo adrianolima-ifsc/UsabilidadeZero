@@ -157,8 +157,19 @@ public class ControladorUsuario extends Controller {
 	
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostraPainel() {
+
+		List<Usuario> usuarios = usuarioDAO.mostraTodos();
+
+		return ok(painel.render(usuarios));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result sair() {
 		
-		return ok("Painel de usuário");
+		session().clear();
+		flash("success", "Você saiu do sistema!");
+		
+		return redirect(routes.HomeController.index());
 	}
 
 	public Result detalhar(Long id) {
