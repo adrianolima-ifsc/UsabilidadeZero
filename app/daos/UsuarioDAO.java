@@ -17,13 +17,29 @@ public class UsuarioDAO {
 
 	public Optional<Usuario> comEmailSenha(String email, String criptoSenha) {
 		
-		Usuario usuario = find.query().where().eq("email", email).eq("senha", criptoSenha).findOne();
+		Usuario usuario = find
+				.query()
+				.where()
+				.eq("email", email)
+				.eq("senha", criptoSenha)
+				.findOne();
+		
 		return Optional.ofNullable(usuario);
 	}
 	
 	public List<Usuario> mostraTodos() {
 		
 		return find.all();
+	}
+
+	public Optional<Usuario> comToken(String codigo) {
+		
+		Usuario usuario = find
+				.query()
+				.where()
+				.eq("token.codigo", codigo)
+				.findOne();
+		return Optional.ofNullable(usuario);
 	}
 
 }

@@ -69,7 +69,7 @@ public class ControladorUsuario extends Controller {
         	
 	        	if(usuarioCadastrado.isVerificado()) {
 	        		
-	        		session(AUTH, usuario.getEmail());
+	        		insereUsuarioSessao(usuario);
 	        		flash("success", "Login realizado com sucesso!");
 	        		
 	        		return redirect(routes.ControladorUsuario.mostraPainel());
@@ -133,18 +133,23 @@ public class ControladorUsuario extends Controller {
 		
 		if(possivelToken.isPresent() && possivelUsuario.isPresent()) {
 			
-			TokenCadastro token = possivelToken.get();
+			TokenCadastro tokenCadastro = possivelToken.get();
 			Usuario usuario = possivelUsuario.get();
 			
-			if(token.getUsuario().equals(usuario)) {
+			if(tokenCadastro.getUsuario().equals(usuario)) {
 				
-				token.delete();
+				tokenCadastro.delete();
 				usuario.setVerificado(true);
+				
+				TokenSistema tokenSistema = new TokenSistema(usuario);
+				tokenSistema.save();
+				usuario.setToken(tokenSistema);
+				
 				usuario.update();
 				
 				flash("success", "Seu usuário foi confirmado com sucesso!");
 				
-				session(AUTH, usuario.getEmail());
+				insereUsuarioSessao(usuario);
 				
 				return redirect(routes.ControladorUsuario.mostraPainel());
 			}
@@ -153,6 +158,10 @@ public class ControladorUsuario extends Controller {
 		flash("danger", "Algo deu errado ao tentar confirmar o seu cadastro!");
 		
 		return redirect(routes.HomeController.index());
+	}
+
+	private void insereUsuarioSessao(Usuario usuario) {
+		session(AUTH, usuario.getToken().getCodigo());
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

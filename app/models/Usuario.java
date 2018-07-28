@@ -20,6 +20,8 @@ public class Usuario extends Model {
 	@Required(message = "Este campo não pode estar vazio!")
 	private String senha;
 	private boolean verificado;
+	@OneToOne(mappedBy = "usuario")
+	private TokenSistema token;
 
 	public Long getId() {
 		return id;
@@ -52,7 +54,12 @@ public class Usuario extends Model {
 	public void setVerificado(boolean verificado) {
 		this.verificado = verificado;
 	}
-	
-	
 
+	public TokenSistema getToken() {
+		return token;
+	}
+
+	public void setToken(TokenSistema token) {
+		this.token = token;
+	}
 }
