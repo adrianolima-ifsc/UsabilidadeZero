@@ -1,4 +1,4 @@
-@(usuarios : List[Usuario])
+@(conteudo: Html = Html(""))
 
 @implicitField = @{ FieldConstructor(campo.f) }
 
@@ -12,14 +12,14 @@
 	<script src="@routes.Assets.versioned("js/painel.js")"></script>
 }
 
-@main("Novo usuario", styles, scripts) {
+@main("Painel", styles, scripts) {
 <div class="row">
     <div class="col-md-2">
         <nav class="nav-sidebar">
             <ul class="nav">
                 <li class="active"><a href="javascript:;">Executar</a></li>
-                <li><a href="javascript:;">Estudo de Caso 0</a></li>
-                <li><a href="javascript:;">Estudo de Caso 1</a></li>
+                <li><a href="@routes.ControladorUsuario.mostraEC(false)">Estudo de Caso 0</a></li>
+                <li><a href="@routes.ControladorUsuario.mostraEC(true)">Estudo de Caso 1</a></li>
                 <li class="active"><a href="javascript:;">Ajuda</a></li>
                 <li><a href="javascript:;">Como usar</a></li>
                 <li><a href="@routes.HomeController.mostraSobre">Sobre</a></li>
@@ -29,8 +29,7 @@
         </nav>
     </div>
 	<div class="col-md-10">
-		@resultados("Meus Resultados", usuarios)
-		@resultados("Resultados Compartilhados", usuarios)
+		@conteudo
 		<div style="margin-top:10px" class="form-group">
 			<div class="col-sm-3 col-md-3"></div>
 			<div class="col-sm-2 col-md-2 controls">

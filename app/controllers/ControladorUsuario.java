@@ -151,7 +151,15 @@ public class ControladorUsuario extends Controller {
 		
 		List<Usuario> usuarios = usuarioDAO.mostraTodos();
 
-		return ok(painel.render(usuarios));
+		return ok(painel.render(resultados.render("teste", usuarios)));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result mostraEC(boolean estudo) {
+
+		String codigo = session(AUTH);
+
+		return ok(painel.render(telaEC.render(estudo)));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
