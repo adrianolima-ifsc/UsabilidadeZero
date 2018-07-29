@@ -22,6 +22,6 @@ public class HomeController extends Controller {
 
 	public Result index() {
 
-		return ok(telaLogin.render(usuarioForm));
+		return ok(login.render(usuarioForm));
 	}
 }

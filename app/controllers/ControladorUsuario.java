@@ -50,8 +50,9 @@ public class ControladorUsuario extends Controller {
 		Form<Usuario> form = usuarioForm.bindFromRequest();
 		
         if(form.hasErrors()) {
+        	
         	flash("danger", "Foram identificados problemas no cadastro!");
-    		return badRequest(telaLogin.render(usuarioForm));        	
+    		return badRequest(login.render(usuarioForm));        	
         }
  
         Usuario usuario = form.get();
@@ -99,31 +100,8 @@ public class ControladorUsuario extends Controller {
 	        flash("success", "Usuario cadastrado com sucesso!");
         
         }
-//        
-        return redirect(routes.HomeController.index());
-//		try {
-//			
-//			Usuario cadastrado = Usuario.find.query().where().eq("email", usuario.email).findOne();
-//			
-//			if(cadastrado==null) {
-//		        
-//		        usuario.save();        
-//		        flash("success", "Registro gravado com sucesso");
-//		        		        
-//			} else if(!usuario.senha.equals(cadastrado.senha)) {
-//				
-//		        flash("erro", "Senha incorreta!");
-//	    		return ok(telaLogin.render(usuarioForm));
-//				
-//			}
-//			
-//		} catch (Exception e) {
-//        	flash("erro", "Registro duplicado:" + usuario.email);
-//    		return ok(telaLogin.render(usuarioForm));
-//		}
-//        
-//        return redirect(routes.ControladorUsuario.lista());
         
+        return redirect(routes.HomeController.index());        
 	}
 	
 	public Result confirmaCadastro(String email, String codigo) {
@@ -161,6 +139,7 @@ public class ControladorUsuario extends Controller {
 	}
 
 	private void insereUsuarioSessao(Usuario usuario) {
+		
 		session(AUTH, usuario.getToken().getCodigo());
 	}
 	

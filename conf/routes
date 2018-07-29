@@ -4,16 +4,14 @@
 
 GET     /                           		controllers.HomeController.index
 POST 	/login	 							controllers.ControladorUsuario.entrar
+GET		/logout								controllers.ControladorUsuario.sair
 
 GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmaCadastro(email, codigo)
 
 GET		/painel								controllers.ControladorUsuario.mostraPainel
 
-GET		/logout								controllers.ControladorUsuario.sair
-
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file						controllers.Assets.versioned(path="/public", file: Asset)
-
 
 GET 	/usuario 							controllers.ControladorUsuario.lista
 # GET 	/usuario/novo 						controllers.ControladorUsuario.novoUsuario
