@@ -1,7 +1,6 @@
 package controllers;
 
-import javax.inject.Inject;
-
+import autenticadores.*;
 import models.*;
 import views.html.*;
 
@@ -9,6 +8,8 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security.Authenticated;
+import javax.inject.Inject;
 
 public class HomeController extends Controller {
 
@@ -23,5 +24,13 @@ public class HomeController extends Controller {
 	public Result index() {
 
 		return ok(login.render(usuarioForm));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result mostraSobre() {
+		
+		return ok(sobre.render(
+				"UsabilidadeZero",
+				play.core.PlayVersion.current()));
 	}
 }

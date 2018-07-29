@@ -10,6 +10,8 @@ GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmaCad
 
 GET		/painel								controllers.ControladorUsuario.mostraPainel
 
+GET		/sobre								controllers.HomeController.mostraSobre
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file						controllers.Assets.versioned(path="/public", file: Asset)
 
