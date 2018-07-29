@@ -29,8 +29,9 @@ public class HomeController extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostraSobre() {
 		
-		return ok(sobre.render(
+
+		return ok(painel.render(sobre.render(
 				"UsabilidadeZero",
-				play.core.PlayVersion.current()));
+				play.core.PlayVersion.current())));
 	}
 }
