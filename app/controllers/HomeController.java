@@ -28,10 +28,15 @@ public class HomeController extends Controller {
 	
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostraSobre() {
-		
 
 		return ok(painel.render(sobre.render(
 				"UsabilidadeZero",
 				play.core.PlayVersion.current())));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result iniciarEC0() {
+		
+		return ok();
 	}
 }

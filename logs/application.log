@@ -2719,3 +2719,291 @@ play.sbt.PlayExceptions$CompilationException: Compilation error[ error: method r
     play.filters.hosts.AllowedHostsFilter
 
 2018-07-29 12:58:35,059 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-845 - Application started (Dev)
+2018-07-29 13:06:46,398 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-859 - 
+
+! @78m3a69e8 - Internal server error, for (GET) [/painel] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[too many arguments (2) for method apply: (usuarios: java.util.List[models.Usuario])play.twirl.api.HtmlFormat.Appendable in object resultadosTabela]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:146)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$1(PlayReload.scala:33)
+	at scala.Option.map(Option.scala:146)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:28)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:24)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:51)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:51)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:76)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:412)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:50)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:55)
+	at play.runsupport.Reloader.reload(Reloader.scala:412)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:123)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:222)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:137)
+	at akka.stream.impl.fusing.MapAsync$$anon$25.onPush(Ops.scala:1194)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:519)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:482)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:378)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:585)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:469)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:560)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:742)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:757)
+	at akka.actor.Actor.aroundReceive(Actor.scala:517)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:667)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:590)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:559)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-07-29 13:07:20,913 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-859 - 
+
+! @78m3a88j3 - Internal server error, for (GET) [/painel] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[too many arguments (2) for method apply: (usuarios: java.util.List[models.Usuario])play.twirl.api.HtmlFormat.Appendable in object resultadosTabela]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:146)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$1(PlayReload.scala:33)
+	at scala.Option.map(Option.scala:146)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:28)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:24)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:51)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:51)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:76)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:412)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:50)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:55)
+	at play.runsupport.Reloader.reload(Reloader.scala:412)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:123)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:222)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:137)
+	at akka.stream.impl.fusing.MapAsync$$anon$25.onPush(Ops.scala:1194)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:519)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:482)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:378)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:585)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:469)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:560)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:742)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:757)
+	at akka.actor.Actor.aroundReceive(Actor.scala:517)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:667)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:590)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:559)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-07-29 13:08:34,920 [INFO] from application in application-akka.actor.default-dispatcher-15 - Shutting down connection pool.
+2018-07-29 13:08:35,141 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-859 - Creating Pool for datasource 'default'
+2018-07-29 13:08:35,142 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-859 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 13:08:35,167 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-859 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 13:08:35,292 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-859 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 13:08:35,315 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-859 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 13:08:35,872 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-859 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 13:08:35,873 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-859 - Application started (Dev)
+2018-07-29 13:10:34,435 [INFO] from application in application-akka.actor.default-dispatcher-13 - Shutting down connection pool.
+2018-07-29 13:10:34,599 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-842 - Creating Pool for datasource 'default'
+2018-07-29 13:10:34,603 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-842 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 13:10:34,624 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-842 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 13:10:34,786 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-842 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 13:10:34,798 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-842 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 13:10:35,356 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-842 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 13:10:35,356 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-842 - Application started (Dev)
+2018-07-29 13:11:12,217 [INFO] from application in application-akka.actor.default-dispatcher-15 - Shutting down connection pool.
+2018-07-29 13:11:12,868 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-859 - Creating Pool for datasource 'default'
+2018-07-29 13:11:12,870 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-859 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 13:11:12,894 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-859 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 13:11:13,027 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-859 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 13:11:13,044 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-859 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 13:11:13,153 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-859 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 13:11:13,154 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-859 - Application started (Dev)
+2018-07-29 13:14:06,097 [INFO] from application in application-akka.actor.default-dispatcher-15 - Shutting down connection pool.
+2018-07-29 13:14:06,789 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-909 - Creating Pool for datasource 'default'
+2018-07-29 13:14:06,789 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-909 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 13:14:06,817 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-909 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 13:14:06,934 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-909 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 13:14:06,949 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-909 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 13:14:07,039 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-909 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 13:14:07,042 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-909 - Application started (Dev)
+2018-07-29 13:14:41,096 [INFO] from application in application-akka.actor.default-dispatcher-10 - Shutting down connection pool.
+2018-07-29 13:14:41,746 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-920 - Creating Pool for datasource 'default'
+2018-07-29 13:14:41,747 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-920 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 13:14:41,765 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-920 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 13:14:41,858 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-920 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 13:14:41,865 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-920 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 13:14:41,944 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-920 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 13:14:41,944 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-920 - Application started (Dev)
+2018-07-29 16:46:31,430 [WARN] from com.zaxxer.hikari.pool.HikariPool in HikariPool-83 housekeeper - HikariPool-83 - Thread starvation or clock leap detected (housekeeper delta=3h29s364ms625µs919ns).
+2018-07-29 21:41:46,497 [WARN] from com.zaxxer.hikari.pool.HikariPool in HikariPool-106 housekeeper - HikariPool-106 - Thread starvation or clock leap detected (housekeeper delta=7h55m43s603ms916µs343ns).
+2018-07-29 21:42:06,615 [WARN] from com.zaxxer.hikari.pool.HikariPool in HikariPool-83 housekeeper - HikariPool-83 - Thread starvation or clock leap detected (housekeeper delta=4h55m44s206ms308µs63ns).
+2018-07-29 21:43:45,392 [INFO] from application in application-akka.actor.default-dispatcher-21 - Shutting down connection pool.
+2018-07-29 21:43:45,613 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-942 - Creating Pool for datasource 'default'
+2018-07-29 21:43:45,617 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-942 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:43:45,635 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-942 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:43:45,746 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-942 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:43:45,782 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-942 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:43:46,772 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-942 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:43:46,773 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-942 - Application started (Dev)
+2018-07-29 21:46:23,283 [INFO] from application in application-akka.actor.default-dispatcher-11 - Shutting down connection pool.
+2018-07-29 21:46:23,445 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-945 - Creating Pool for datasource 'default'
+2018-07-29 21:46:23,446 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-945 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:46:23,471 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-945 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:46:23,567 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-945 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:46:23,583 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-945 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:46:24,249 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-945 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:46:24,249 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-945 - Application started (Dev)
+2018-07-29 21:47:29,572 [INFO] from application in application-akka.actor.default-dispatcher-8 - Shutting down connection pool.
+2018-07-29 21:47:29,727 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-958 - Creating Pool for datasource 'default'
+2018-07-29 21:47:29,728 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-958 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:47:29,747 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-958 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:47:29,856 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-958 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:47:29,867 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-958 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:47:30,423 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-958 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:47:30,423 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-958 - Application started (Dev)
+2018-07-29 21:50:15,282 [INFO] from application in application-akka.actor.default-dispatcher-10 - Shutting down connection pool.
+2018-07-29 21:50:15,487 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-978 - Creating Pool for datasource 'default'
+2018-07-29 21:50:15,489 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-978 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:50:15,524 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-978 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:50:15,645 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-978 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:50:15,660 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-978 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:50:16,444 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-978 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:50:16,444 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-978 - Application started (Dev)
+2018-07-29 21:51:52,853 [INFO] from application in application-akka.actor.default-dispatcher-14 - Shutting down connection pool.
+2018-07-29 21:51:53,018 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-984 - Creating Pool for datasource 'default'
+2018-07-29 21:51:53,018 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-984 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:51:53,040 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-984 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:51:53,136 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-984 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:51:53,155 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-984 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:51:53,705 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-984 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:51:53,705 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-984 - Application started (Dev)
+2018-07-29 21:52:16,586 [INFO] from application in application-akka.actor.default-dispatcher-8 - Shutting down connection pool.
+2018-07-29 21:52:17,259 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-999 - Creating Pool for datasource 'default'
+2018-07-29 21:52:17,261 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-999 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:52:17,282 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-999 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:52:17,422 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-999 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:52:17,445 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-999 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:52:17,597 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-999 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:52:17,597 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-999 - Application started (Dev)
+2018-07-29 21:53:11,435 [INFO] from application in application-akka.actor.default-dispatcher-12 - Shutting down connection pool.
+2018-07-29 21:53:12,701 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-1004 - Creating Pool for datasource 'default'
+2018-07-29 21:53:12,701 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-1004 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:53:12,725 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-1004 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:53:12,941 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-1004 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:53:12,996 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-1004 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:53:13,145 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-1004 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:53:13,145 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-1004 - Application started (Dev)
+2018-07-29 21:53:46,833 [INFO] from application in application-akka.actor.default-dispatcher-8 - Shutting down connection pool.
+2018-07-29 21:53:47,618 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-1003 - Creating Pool for datasource 'default'
+2018-07-29 21:53:47,618 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-1003 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 21:53:47,641 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-1003 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 21:53:47,780 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-1003 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 21:53:47,799 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-1003 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 21:53:47,941 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-1003 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 21:53:47,942 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-1003 - Application started (Dev)
+2018-07-29 22:03:19,566 [INFO] from application in application-akka.actor.default-dispatcher-3 - Shutting down connection pool.
+2018-07-29 22:03:20,218 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-1032 - Creating Pool for datasource 'default'
+2018-07-29 22:03:20,219 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-1032 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 22:03:20,237 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-1032 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 22:03:20,338 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-1032 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 22:03:20,356 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-1032 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 22:03:20,478 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-1032 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 22:03:20,478 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-1032 - Application started (Dev)
+2018-07-29 22:10:08,157 [INFO] from application in application-akka.actor.default-dispatcher-12 - Shutting down connection pool.
+2018-07-29 22:10:08,444 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-1056 - Creating Pool for datasource 'default'
+2018-07-29 22:10:08,448 [WARN] from com.zaxxer.hikari.util.DriverDataSource in play-dev-mode-akka.actor.default-dispatcher-1056 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-29 22:10:08,482 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-1056 - Database [default] connected at jdbc:mysql://localhost/usabilidade?useTimezone=true&serverTimezone=UTC
+2018-07-29 22:10:08,636 [WARN] from application in play-dev-mode-akka.actor.default-dispatcher-1056 - application.langs is deprecated, use play.i18n.langs instead
+2018-07-29 22:10:08,691 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-1056 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-07-29 22:10:09,309 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-1056 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2018-07-29 22:10:09,309 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-1056 - Application started (Dev)

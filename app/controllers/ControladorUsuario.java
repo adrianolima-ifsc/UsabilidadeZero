@@ -151,7 +151,7 @@ public class ControladorUsuario extends Controller {
 		
 		List<Usuario> usuarios = usuarioDAO.mostraTodos();
 
-		return ok(painel.render(resultados.render("teste", usuarios)));
+		return ok(painel.render(resultados.render(usuarios)));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

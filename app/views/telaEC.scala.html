@@ -5,28 +5,28 @@
 @import helper._
 
 <div class="row">
-	<div class="md-col-2"></div>
 	<div class="md-col-8">
 		@if(ec) {
 			<h2 class="text-center">Estudo de Caso 1</h2>
-			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente cuja interface procura atender a princípios de usabilidade. Esse ambiente é um "Portal de Eventos". Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
+			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
+			cuja interface procura atender a princípios de usabilidade. Esse ambiente é um "Portal de Eventos". 
+			Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
 		} else {
 			<h2 class="text-center">Estudo de Caso 0</h2>
-			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente cuja interface teve sua usabilidade propositalmente reduzida. Esse ambiente é um "Portal de Eventos". Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
+			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
+			cuja interface teve sua usabilidade propositalmente reduzida. Esse ambiente é um "Portal de Eventos". 
+			Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
 		}
-		<p class="">Nenhuma dica ou orientação será dada durante a execução das tarefas. Caso você entenda que elas já foram concluídas, você deve clicar no botão "Concluir", localizado no canto superior direito da sua tela. Você também pode desistir da tarefa a qualquer momento. Basta clicar no botão "Desistir", também no canto superior direito da tela.</p>
-		<p>Após executar as 3 tarefas, você deve ainda preencher um rápido questionário de avaliação da atividade. No final, você receberá um relatório com os resultados de sua participação para que você possa analisar o seu desempenho neste estudo de caso.</p>
+		<p>Nenhuma dica ou orientação será dada durante a execução das tarefas. 
+		Caso você entenda que elas já foram concluídas, você deve clicar no botão "Concluir", 
+		localizado no canto superior direito da sua tela. 
+		Você também pode desistir da tarefa a qualquer momento. 
+		Basta clicar no botão "Desistir", também no canto superior direito da tela.</p>
+		<p>Após executar as 3 tarefas, você deve ainda preencher um rápido questionário de avaliação da atividade. 
+		No final, você receberá um relatório com os resultados de sua participação para que você possa analisar 
+		o seu desempenho neste estudo de caso.</p>
 	</div>	
-	<div style="margin-top:10px" class="form-group">
-		<div class="col-sm-3 col-md-3"></div>
-		<div class="col-sm-2 col-md-2 controls">
-			@form(helper.CSRF(routes.ControladorUsuario.lista)) {
-				<input type="submit" value="Voltar" class="btn btn-primary btn-block">
-			}
-		</div>
-		<div class="col-sm-2 col-md-2"></div>
-		<div class="col-sm-2 col-md-2 controls">
-			<input type="submit" value="Próximo" class="btn btn-primary btn-block">
-		</div>
-	</div> 	
+	<div class="col-sm-2 col-md-2 text-center">
+		<a class="btn btn-primary btn-block" href="#">Iniciar</a>
+	</div>
 </div>
