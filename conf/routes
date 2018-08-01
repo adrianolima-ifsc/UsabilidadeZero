@@ -6,12 +6,13 @@ GET     /                           		controllers.HomeController.index
 POST 	/login	 							controllers.ControladorUsuario.entrar
 GET		/logout								controllers.ControladorUsuario.sair
 
-GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmaCadastro(email, codigo)
+GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmarCadastro(email, codigo)
 
-GET		/painel								controllers.ControladorUsuario.mostraPainel
+GET		/painel								controllers.ControladorUsuario.mostrarPainel
 
-GET		/painel/:ec							controllers.ControladorUsuario.mostraEC(ec:Boolean)
-GET		/sobre								controllers.HomeController.mostraSobre
+GET		/painel/:ec							controllers.ControladorUsuario.mostrarEC(ec:Boolean)
+GET		/estudo/:ec							controllers.HomeController.iniciarEC(ec:Boolean)
+GET		/sobre								controllers.HomeController.mostrarSobre
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file						controllers.Assets.versioned(path="/public", file: Asset)

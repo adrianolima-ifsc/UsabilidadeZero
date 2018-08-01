@@ -13,8 +13,23 @@
         @styles
     </head>
     <body>
+    	<header class="navbar navbar-default">
+    		<div class="container">
+	    		<div class="row">
+	    			<div class="col-md-2">
+			    		<h1>Tarefa 1</h1>
+	    			</div>
+	    			<div class="col-md-8">
+	    				<p>Você deve descobrir o valor de inscrição do próximo "Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</p>
+	    			</div>
+	    			<div class="col-md-2 text-right">
+	    				<a href="#"><button class="btn btn-primary">Concluir</button></a>
+	    				<a href="#"><button class="btn btn-danger">Desistir</button></a>
+	    			</div>
+	    		</div>
+    		</div>
+		</header>
         <div class="container">
-            <h1 class="principal text-center"><strong>UsabilidadeZero</strong></h1>
             @content
         </div>
         <script src="@routes.Assets.versioned("bootstrap/js/bootstrap.min.js")"></script>

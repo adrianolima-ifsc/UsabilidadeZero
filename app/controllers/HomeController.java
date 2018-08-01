@@ -27,7 +27,7 @@ public class HomeController extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result mostraSobre() {
+	public Result mostrarSobre() {
 
 		return ok(painel.render(sobre.render(
 				"UsabilidadeZero",
@@ -35,8 +35,8 @@ public class HomeController extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarEC0() {
+	public Result iniciarEC(boolean ec) {
 		
-		return ok();
+		return ok(EC.render(ec));
 	}
 }

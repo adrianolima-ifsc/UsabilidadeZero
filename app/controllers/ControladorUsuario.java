@@ -73,7 +73,7 @@ public class ControladorUsuario extends Controller {
 	        		insereUsuarioSessao(usuarioCadastrado);
 	        		flash("success", "Login realizado com sucesso!");
 	        		
-	        		return redirect(routes.ControladorUsuario.mostraPainel());
+	        		return redirect(routes.ControladorUsuario.mostrarPainel());
 	        		
 	        	} else {
 	        		
@@ -104,7 +104,7 @@ public class ControladorUsuario extends Controller {
         return redirect(routes.HomeController.index());        
 	}
 	
-	public Result confirmaCadastro(String email, String codigo) {
+	public Result confirmarCadastro(String email, String codigo) {
 		
 		Optional<TokenCadastro> possivelToken = TokenCadastroDAO.comCodigo(codigo);
 		Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
@@ -129,7 +129,7 @@ public class ControladorUsuario extends Controller {
 				
 				insereUsuarioSessao(usuario);
 				
-				return redirect(routes.ControladorUsuario.mostraPainel());
+				return redirect(routes.ControladorUsuario.mostrarPainel());
 			}
 		}
 		
@@ -144,7 +144,7 @@ public class ControladorUsuario extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result mostraPainel() {
+	public Result mostrarPainel() {
 
 		String codigo = session(AUTH);
 		Usuario usuario = usuarioDAO.comToken(codigo).get();
@@ -155,7 +155,7 @@ public class ControladorUsuario extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result mostraEC(boolean estudo) {
+	public Result mostrarEC(boolean estudo) {
 
 		String codigo = session(AUTH);
 
