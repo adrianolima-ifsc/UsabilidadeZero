@@ -10,6 +10,18 @@ create table estudo (
   constraint pk_estudo primary key (id)
 );
 
+create table evento (
+  id                            bigint auto_increment not null,
+  nome                          varchar(255),
+  sigla                         varchar(255),
+  descricao                     varchar(255),
+  local                         varchar(255),
+  data                          datetime(6),
+  preco                         double not null,
+  categoria                     varchar(255),
+  constraint pk_evento primary key (id)
+);
+
 create table tarefa (
   id                            bigint auto_increment not null,
   tipo                          tinyint(1) default 0 not null,
@@ -57,6 +69,8 @@ alter table token_cadastro drop foreign key fk_token_cadastro_usuario_id;
 alter table token_sistema drop foreign key fk_token_sistema_usuario_id;
 
 drop table if exists estudo;
+
+drop table if exists evento;
 
 drop table if exists tarefa;
 

@@ -10,8 +10,9 @@ GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmarCa
 
 GET		/painel								controllers.ControladorUsuario.mostrarPainel
 
-GET		/painel/:ec							controllers.ControladorUsuario.mostrarEC(ec:Boolean)
-GET		/estudo/:ec							controllers.HomeController.iniciarEC(ec:Boolean)
+GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean)
+GET		/estudo/:ec							controllers.HomeController.iniciarEstudoDeCaso(ec:Boolean)
+GET		/portal								controllers.HomeController.iniciarTarefa1()
 GET		/sobre								controllers.HomeController.mostrarSobre
 
 # Map static resources from the /public folder to the /assets URL path

@@ -2,6 +2,8 @@ package validadores;
 
 import models.*;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 
 import daos.UsuarioDAO;
@@ -20,11 +22,11 @@ public class Validador {
 	public boolean temErros(Form<Usuario> form) {
 
 		validaSenha(form);
-		return false;
+		return form.hasErrors();
 	}
 
 	private void validaSenha(Form<Usuario> form) {
-		String senha = form.field("senha").valueOr("");
+		Optional<String> senha = form.field("senha").getValue();
 	}
 
 }

@@ -17,7 +17,6 @@ import play.mvc.Security.Authenticated;
 
 public class ControladorUsuario extends Controller {
 
-	private final FormFactory formFactory;
 	private Form<Usuario> usuarioForm;
 	@Inject
 	private Validador validador;
@@ -33,7 +32,6 @@ public class ControladorUsuario extends Controller {
 	@Inject
 	public ControladorUsuario(FormFactory formFactory) {
 
-		this.formFactory = formFactory;
 		this.usuarioForm = formFactory.form(Usuario.class);
 	}
 
@@ -49,7 +47,7 @@ public class ControladorUsuario extends Controller {
 		
 		Form<Usuario> form = usuarioForm.bindFromRequest();
 		
-        if(form.hasErrors()) {
+        if(validador.temErros(form)) {
         	
         	flash("danger", "Foram identificados problemas no cadastro!");
     		return badRequest(login.render(usuarioForm));        	
@@ -70,7 +68,7 @@ public class ControladorUsuario extends Controller {
         	
 	        	if(usuarioCadastrado.isVerificado()) {
 	        		
-	        		insereUsuarioSessao(usuarioCadastrado);
+	        		session(AUTH, usuarioCadastrado.getToken().getCodigo());
 	        		flash("success", "Login realizado com sucesso!");
 	        		
 	        		return redirect(routes.ControladorUsuario.mostrarPainel());
@@ -97,7 +95,10 @@ public class ControladorUsuario extends Controller {
 	        
 	        mailer.send(new EmailCadastro(token));
 	        
-	        flash("success", "Usuario cadastrado com sucesso!");
+	        String msg = String.format("Usuario cadastrado com sucesso! Verifique o email enviado para o endereço %s "
+	        		+ "para confirmação do seu cadastro.", usuario.getEmail());
+	        
+	        flash("success", msg);
         
         }
         
@@ -127,7 +128,7 @@ public class ControladorUsuario extends Controller {
 				
 				flash("success", "Seu usuário foi confirmado com sucesso!");
 				
-				insereUsuarioSessao(usuario);
+				session(AUTH, usuario.getToken().getCodigo());
 				
 				return redirect(routes.ControladorUsuario.mostrarPainel());
 			}
@@ -136,11 +137,6 @@ public class ControladorUsuario extends Controller {
 		flash("danger", "Algo deu errado ao tentar confirmar o seu cadastro!");
 		
 		return redirect(routes.HomeController.index());
-	}
-
-	private void insereUsuarioSessao(Usuario usuario) {
-		
-		session(AUTH, usuario.getToken().getCodigo());
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -152,14 +148,6 @@ public class ControladorUsuario extends Controller {
 		List<Usuario> usuarios = usuarioDAO.mostraTodos();
 
 		return ok(painel.render(resultados.render(usuarios)));
-	}
-	
-	@Authenticated(UsuarioAutenticado.class)
-	public Result mostrarEC(boolean estudo) {
-
-		String codigo = session(AUTH);
-
-		return ok(painel.render(telaEC.render(estudo)));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -177,23 +165,6 @@ public class ControladorUsuario extends Controller {
 
 		return ok();
 	}
-
-//	public Result alterar(Long id) {
-//
-////		formFactory.form(Usuario.class).fill(Usuario.find.byId(id));
-////		Form<Usuario> alterarForm = formFactory.form(Usuario.class).bindFromRequest();
-////
-////		if (alterarForm.hasErrors()) {
-////			return badRequest();
-////		}
-////
-////		alterarForm.get();
-////
-////		flash("sucesso", "Usuario " + alterarForm.get().getEmail() + " alterado com sucesso");
-//
-//		return redirect(routes.ControladorUsuario.lista());
-//
-//	}
 
 	public Result remover(Long id) {
 

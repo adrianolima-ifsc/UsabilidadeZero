@@ -15,9 +15,9 @@ public class Usuario extends Model {
 	
 	@Id @GeneratedValue
 	private Long id;	
-	@Required
+	@Required(message = "Você precisa fornecer um email válido!")
 	private String email;	
-	@Required(message = "Este campo não pode estar vazio!")
+	@Required(message = "Você precisa fornecer uma senha!")
 	private String senha;
 	private boolean verificado;
 	@OneToOne(mappedBy = "usuario")
