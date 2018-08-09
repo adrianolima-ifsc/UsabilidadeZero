@@ -1,0 +1,25 @@
+main {
+	font-family: serif;
+}
+
+main h1 {
+	font-family: "Aguafina Script", serif;
+	text-align: center;
+	color: #ffc40d;
+	font-size: 300%;
+}
+
+a {
+	font-family: serif;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.evento {
+	background-color: red;
+	margin-top: 30px;
+	text-align: center;
+	font-family: serif;
+}

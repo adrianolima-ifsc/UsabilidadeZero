@@ -141,9 +141,6 @@ public class ControladorUsuario extends Controller {
 	
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarPainel() {
-
-		String codigo = session(AUTH);
-		Usuario usuario = usuarioDAO.comToken(codigo).get();
 		
 		List<Usuario> usuarios = usuarioDAO.mostraTodos();
 

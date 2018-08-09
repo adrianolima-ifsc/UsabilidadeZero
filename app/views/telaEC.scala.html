@@ -1,9 +1,5 @@
 @(ec : Boolean)
 
-@implicitField = @{ FieldConstructor(campo.f) }
-
-@import helper._
-
 <div class="row">
 	<div>
 		@if(ec) {
@@ -27,6 +23,6 @@
 		o seu desempenho neste estudo de caso.</p>
 	</div>	
 	<div class="text-center">
-		<a href="@routes.HomeController.iniciarEstudoDeCaso(ec)"><button class="btn btn-primary center-block">Iniciar</button></a>
+		<a href="@routes.ControladorEstudos.iniciarEstudoDeCaso(ec)"><button class="btn btn-primary center-block">Iniciar</button></a>
 	</div>
 </div>

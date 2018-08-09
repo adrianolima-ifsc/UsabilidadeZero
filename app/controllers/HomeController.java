@@ -40,15 +40,4 @@ public class HomeController extends Controller {
 		return ok(painel.render(telaEC.render(estudo)));
 	}
 	
-	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarEstudoDeCaso(boolean ec) {
-		
-		return ok(tarefa1.render(ec));
-	}
-	
-	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarTarefa1() {
-		
-		return ok(portal.render());
-	}
 }
