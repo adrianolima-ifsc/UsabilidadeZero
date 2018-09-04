@@ -1,0 +1,24 @@
+@(evento: Evento)
+
+@styles = {
+<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
+<link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
+}
+
+@estudoDeCaso("Tarefa 1", styles) {
+<main>
+	<h1>Portal de Eventos</h1>
+	<div class="container evento-detalhes">
+		<div class="col-sm-6 col-md-6 col-md-offset-3">
+			<div class="thumbnail evento-detalhes">
+				<div class="caption">
+					<h3>@evento.getSigla()</h3>
+					<p>O pagamento poderá ser feito </p>
+					<p>@evento.getPreco()</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+}
+
