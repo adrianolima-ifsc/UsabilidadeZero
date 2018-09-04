@@ -1,0 +1,30 @@
+@(evento: Evento)
+
+@styles = {
+<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
+<link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
+}
+
+@estudoDeCaso("Tarefa 1", styles) {
+<main>
+	<h1>Portal de Eventos</h1>
+	<div class="container evento-detalhes">
+		<div class="col-sm-6 col-md-6 col-md-offset-3">
+			<div class="thumbnail evento-detalhes">
+				<div class="caption">
+					<h3>@evento.getSigla()</h3>
+					@Html(evento.getDescricao())
+					<p class="text-center">
+						<a href="#" class="btn btn-primary" role="button">Participe</a> 
+						<a href="@routes.ControladorEventos.mostrarPrograma(evento.getId())" class="btn btn-success" role="button">Programa</a>
+						<a href="@routes.ControladorEventos.mostrarLocal(evento.getId())" class="btn btn-info" role="button">Local</a>
+						<a href="#" class="btn btn-warning" role="button">Mais Informações</a>
+						<a href="@routes.ControladorEventos.mostrarPagamento(evento.getId())" class="btn btn-danger" role="button">Pagamento</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+}
+
