@@ -14,9 +14,10 @@ create table evento (
   id                            bigint auto_increment not null,
   nome                          varchar(255),
   sigla                         varchar(255),
-  descricao                     varchar(255),
+  descricao                     TEXT,
+  programa                      TEXT,
   local                         varchar(255),
-  data                          datetime(6),
+  data                          integer not null,
   preco                         double not null,
   categoria                     varchar(255),
   constraint pk_evento primary key (id)

@@ -2,6 +2,10 @@ main {
 	font-family: serif;
 }
 
+footer {
+	margin-top: 1.25em;
+}
+
 main h1 {
 	font-family: "Aguafina Script", serif;
 	text-align: center;
@@ -9,7 +13,11 @@ main h1 {
 	font-size: 300%;
 }
 
-a {
+main a {
+	font-family: serif;
+}
+
+footer a {
 	font-family: serif;
 }
 
@@ -22,4 +30,8 @@ a:hover {
 	margin-top: 30px;
 	text-align: center;
 	font-family: serif;
+}
+
+.evento-detalhes {
+	margin: 0 auto;
 }

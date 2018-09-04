@@ -75,13 +75,15 @@ public class ControladorUsuario extends Controller {
 	        		
 	        	} else {
 	        		
-	        		flash("danger", "Usuario não confirmado!");     
+	        		flash("danger", "Usuário não confirmado!");     
 	        		return redirect(routes.HomeController.index());        	   	
 	        	}
         	
         	} else {
         		
-        		flash("danger", "Senha não confere!");
+        		String msg = String.format("A senha digitada não partence ao usuário %s. Tente novamente.", email);
+        		
+        		flash("danger", msg);
         		return redirect(routes.HomeController.index());
         	}
         	
@@ -95,8 +97,8 @@ public class ControladorUsuario extends Controller {
 	        
 	        mailer.send(new EmailCadastro(token));
 	        
-	        String msg = String.format("Usuario cadastrado com sucesso! Verifique o email enviado para o endereço %s "
-	        		+ "para confirmação do seu cadastro.", usuario.getEmail());
+	        String msg = String.format("Usuário cadastrado com sucesso! Verifique o email enviado para o endereço %s "
+	        		+ "para confirmação do seu cadastro.", email);
 	        
 	        flash("success", msg);
         

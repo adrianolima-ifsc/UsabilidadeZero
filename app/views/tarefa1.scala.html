@@ -7,12 +7,13 @@
 @estudoDeCaso("Tarefa 1") {
 <div class="row">
    	<div class="container text-center">
+   		<div class="col-md-6 col-md-offset-3">
    		<h2>Tarefa 1</h2>
  		<h4>Você deve descobrir o valor de inscrição do próximo 
    		"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
-	</div>		                           
-	@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1())) {
-		@b3.submit('class -> "btn btn-primary btn-block") { Iniciar }
-	}
+		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1())) {
+			@b3.submit('class -> "btn btn-primary") { Iniciar }
+		}
+	</div>
 </div>
 }

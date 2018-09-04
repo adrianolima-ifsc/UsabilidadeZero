@@ -15,74 +15,68 @@ public class Evento extends Model {
 	private Long id;	
 	private String nome;	
 	private String sigla;
+	@Column(columnDefinition = "TEXT")
 	private String descricao;
+	@Column(columnDefinition = "TEXT")
+	private String programa;
 	private String local;
-	private Date data;
+	private int data;
 	private double preco;
 	private String categoria;
 	
 	public Long getId() {
 		return id;
 	}
-	
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public String getNome() {
 		return nome;
 	}
-	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 	public String getSigla() {
 		return sigla;
 	}
-	
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
 	}
-	
 	public String getDescricao() {
 		return descricao;
 	}
-	
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+	public String getPrograma() {
+		return programa;
+	}
+	public void setPrograma(String programa) {
+		this.programa = programa;
+	}
 	public String getLocal() {
 		return local;
 	}
-	
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	
-	public Date getData() {
+	public int getData() {
 		return data;
 	}
-	
-	public void setData(Date data) {
+	public void setData(int data) {
 		this.data = data;
 	}
-	
 	public double getPreco() {
 		return preco;
 	}
-	
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	
 	public String getCategoria() {
 		return categoria;
 	}
-	
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-
+	
 }

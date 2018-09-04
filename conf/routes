@@ -16,6 +16,11 @@ GET		/sobre								controllers.HomeController.mostrarSobre
 GET		/estudo/:ec							controllers.ControladorEstudos.iniciarEstudoDeCaso(ec:Boolean)
 GET		/portal								controllers.ControladorEstudos.iniciarTarefa1()
 
+GET		/evento/:id							controllers.ControladorEventos.detalhar(id:Long)
+GET		/evento/:id/programa				controllers.ControladorEventos.mostrarPrograma(id:Long)
+GET		/evento/:id/pagamento				controllers.ControladorEventos.mostrarPagamento(id:Long)
+GET		/evento/:id/local					controllers.ControladorEventos.mostrarLocal(id:Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file						controllers.Assets.versioned(path="/public", file: Asset)
 
