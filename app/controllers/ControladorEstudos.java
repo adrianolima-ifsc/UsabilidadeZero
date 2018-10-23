@@ -38,16 +38,16 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarTarefa1(boolean estudo) {
 		
-		timer1 = new Timer(0, new ActionListener() {
-			
-			public void actionPerformed(ActionEvent evt) {
-
-				if (evt.getActionCommand().equals(anObject)) {
-					timer.stop();
-					//...Update the GUI...
-	        	}
-			}    
-		});
+//		timer1 = new Timer(0, new ActionListener() {
+//			
+//			public void actionPerformed(ActionEvent evt) {
+//
+//				if (evt.getActionCommand().equals(anObject)) {
+//					timer.stop();
+//					//...Update the GUI...
+//	        	}
+//			}    
+//		});
 		
 		List<Evento> eventos = eventoDAO.mostraTodos();
 		

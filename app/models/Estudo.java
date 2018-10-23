@@ -13,8 +13,7 @@ public class Estudo extends Model {
 	private static final Long serialVersionUID = 1L;
 	
 	@Id
-	public Long id;
-	
+	public Long id;	
 	@Constraints.Required
 	public boolean tipo;
 
@@ -24,11 +23,8 @@ public class Estudo extends Model {
 	@Formats.DateTime(pattern="dd/MM/yyyy")
 	public Date data;
 
-	public Tarefa tarefa1;
-
-	public Tarefa tarefa2;
-
-	public Tarefa tarefa3;
+	@OneToMany(mappedBy = "estudo")
+	public List<Tarefa> tarefas;
 	
 	public static Finder<Long, Estudo> find = new Finder<>(Estudo.class);
 

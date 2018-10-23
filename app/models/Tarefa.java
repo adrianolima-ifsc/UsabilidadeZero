@@ -14,18 +14,15 @@ public class Tarefa extends Model {
 	
 	@Id
 	public Long id;
-	
 	@Constraints.Required
-	public boolean tipo;
+	public String codigo;
+	@ManyToOne
+	public Estudo estudo;
 
-	public boolean eficaciaPercebida;
-
-	public boolean eficaciaMedida;
-
+	public Date dataHoraInicio;
+	public Date dataHoraFim;
 	public int cliques;
 
-	public int tempo;
-	
 	public static Finder<Long, Tarefa> find = new Finder<>(Tarefa.class);
 
 }
