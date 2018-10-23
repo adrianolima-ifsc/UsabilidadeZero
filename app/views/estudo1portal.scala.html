@@ -1,0 +1,50 @@
+@(eventos: List[Evento])
+
+@styles = {
+}
+
+@scripts = {
+	<script src="@routes.Assets.versioned("js/filtro.js")"></script>
+}
+
+@estudoDeCaso("Tarefa 1", styles, scripts) {
+<main>
+	<h1 class="text-center">Portal de Eventos</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="col-xs-12">
+					<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<h3>Próximos Eventos</h3>
+					<div id="myDIV">
+						@for(evento <- eventos) {
+							@if(evento.getData >= 0) {
+								<button class="btn btn-primary btn-block">@evento.getNome (@evento.getSigla)</button>
+							}
+						}
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<h3>Últimos Eventos</h3>
+					<div id="myDIV">
+						@for(evento <- eventos) {
+							@if(evento.getData < 0) {
+								<button class="btn btn-success btn-block">@evento.getNome (@evento.getSigla)</button>
+							}
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<footer>
+	<div class="container">
+		<div class="row text-center">
+			<p>Cliques: 0</p>
+		</div>
+	</div>
+</footer>
+}

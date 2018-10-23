@@ -19,6 +19,8 @@ public class Evento extends Model {
 	private String descricao;
 	@Column(columnDefinition = "TEXT")
 	private String programa;
+	@Column(columnDefinition = "TEXT")
+	private String informacoes;
 	private String local;
 	private int data;
 	private double preco;
@@ -54,6 +56,12 @@ public class Evento extends Model {
 	public void setPrograma(String programa) {
 		this.programa = programa;
 	}
+	public String getInformacoes() {
+		return informacoes;
+	}
+	public void setInformacoes(String informacoes) {
+		this.informacoes = informacoes;
+	}
 	public String getLocal() {
 		return local;
 	}
@@ -78,5 +86,5 @@ public class Evento extends Model {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
 }
+	

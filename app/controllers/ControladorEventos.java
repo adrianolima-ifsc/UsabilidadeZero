@@ -41,13 +41,6 @@ public class ControladorEventos extends Controller {
 		return ok(estudo0programa.render(evento, programa));
 	}
 	
-	public Result mostrarPagamento(Long id) {
-		
-		Evento evento = eventoDAO.comId(id);
-		
-		return ok(pagamentoEstudo0.render(evento));
-	}
-	
 	public Result mostrarLocal(Long id) {
 		
 		Evento evento = eventoDAO.comId(id);
@@ -62,7 +55,28 @@ public class ControladorEventos extends Controller {
 				"/" + Integer.toString(mes) +
 				"/" + Integer.toString(ano);
 		
-		return ok(localEstudo0.render(evento, dataInicial, dataFinal));
+		return ok(estudo0local.render(evento, dataInicial, dataFinal));
+	}
+	
+	public Result mostrarInformacoes(Long id) {
+		
+		Evento evento = eventoDAO.comId(id);
+		
+		return ok(estudo0informacoes.render(evento));
+	}
+	
+	public Result mostrarPagamento(Long id) {
+		
+		Evento evento = eventoDAO.comId(id);
+		
+		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
+		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
+		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) / 30 - 2) + 1;
+		int ano = hoje.get(Calendar.YEAR);
+		
+		String data = Integer.toString(dia) + "/" + Integer.toString(mes) +	"/" + Integer.toString(ano);
+		
+		return ok(estudo0pagamento.render(evento, data));
 	}
 
 }

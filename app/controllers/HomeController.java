@@ -37,7 +37,7 @@ public class HomeController extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarEstudoDeCaso(boolean estudo) {
 
-		return ok(painel.render(telaEC.render(estudo)));
+		return ok(painel.render(estudoCasoInstrucao.render(estudo)));
 	}
 	
 }

@@ -15,6 +15,8 @@ import play.data.FormFactory;
 import play.mvc.*;
 import play.mvc.Security.Authenticated;
 
+//import org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider;
+
 public class ControladorUsuario extends Controller {
 
 	private Form<Usuario> usuarioForm;
@@ -55,6 +57,8 @@ public class ControladorUsuario extends Controller {
  
         Usuario usuario = form.get();
         String email = usuario.getEmail();
+        
+        String criptoUsuario = Encriptador.crypt(usuario.getEmail());
         String criptoSenha = Encriptador.crypt(usuario.getSenha());
         
         Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);

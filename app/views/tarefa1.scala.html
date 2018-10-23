@@ -11,7 +11,7 @@
    		<h2>Tarefa 1</h2>
  		<h4>Você deve descobrir o valor de inscrição do próximo 
    		"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
-		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1())) {
+		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1(ec))) {
 			@b3.submit('class -> "btn btn-primary") { Iniciar }
 		}
 	</div>

@@ -16,6 +16,7 @@ create table evento (
   sigla                         varchar(255),
   descricao                     TEXT,
   programa                      TEXT,
+  informacoes                   TEXT,
   local                         varchar(255),
   data                          integer not null,
   preco                         double not null,
