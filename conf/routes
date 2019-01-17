@@ -13,7 +13,7 @@ GET		/painel								controllers.ControladorUsuario.mostrarPainel
 GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean)
 GET		/sobre								controllers.HomeController.mostrarSobre
 
-GET		/estudo/:ec							controllers.ControladorEstudos.iniciarEstudoDeCaso(ec:Boolean)
+POST	/estudo								controllers.ControladorEstudos.iniciarEstudoDeCaso
 GET		/portal/:ec							controllers.ControladorEstudos.iniciarTarefa1(ec:Boolean)
 
 GET		/evento/:id							controllers.ControladorEventos.detalhar(id:Long)

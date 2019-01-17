@@ -1,8 +1,10 @@
-@(ec : Boolean)
+@(estudoForm : Form[Estudo], tipo : Boolean)
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
 
 <div class="row">
 	<div>
-		@if(ec) {
+		@if(tipo) {
 			<h2 class="text-center">Estudo de Caso 1</h2>
 			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
 			cuja <strong>interface procura atender a princípios de usabilidade</strong>. Esse ambiente é um "Portal de Eventos". 
@@ -23,6 +25,14 @@
 		o seu desempenho neste estudo de caso.</p>
 	</div>	
 	<div class="text-center">
-		<a href="@routes.ControladorEstudos.iniciarEstudoDeCaso(ec)"><button class="btn btn-primary center-block">Iniciar</button></a>
+		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarEstudoDeCaso), 
+			'id -> "loginform", 
+			'class -> "form-horizontal", 
+			'role -> "form") {
+
+			@b3.hidden( estudoForm("tipo"), 'value -> tipo )
+			
+			<input type="submit" value="Iniciar" class="btn btn-primary center-block">
+		}
 	</div>
 </div>

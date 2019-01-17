@@ -14,8 +14,10 @@ public class Tarefa extends Model {
 	
 	@Id
 	public Long id;
+	
 	@Constraints.Required
 	public String codigo;
+	
 	@ManyToOne
 	public Estudo estudo;
 

@@ -39,6 +39,7 @@ public class UsuarioDAO {
 				.where()
 				.eq("token.codigo", codigo)
 				.findOne();
+		
 		return Optional.ofNullable(usuario);
 	}
 
