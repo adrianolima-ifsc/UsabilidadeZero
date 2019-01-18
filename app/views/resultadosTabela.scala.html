@@ -1,4 +1,4 @@
-@(titulo : String, usuarios : List[Usuario])
+@(titulo : String, estudos : List[Estudo])
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
@@ -12,8 +12,8 @@
 	<div class="panel-body">
 		<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
 	</div>
-	@if(usuarios.isEmpty) {
-		<h3>Sem usuarios</h3>
+	@if(estudos.isEmpty) {
+		<h3>Sem estudos</h3>
 	} else {
 		<table class="table table-hover" id="dev-table">	
 			<thead>
@@ -25,11 +25,11 @@
 				</tr>
 			</thead>							
 			<tfoot>
-				@for(usuario <- usuarios) {
+				@for(estudo <- estudos) {
 					<tr>
 						<td style="text-align: center;"><input type="checkbox" name="remember" value="1"></td>
-						<td>@usuario.getEmail()</td>
-						<td>@usuario.getSenha()</td>
+						<td>@estudo.isTipo</td>
+						<td>@estudo.getData</td>
 					</tr>
 				}
 			</tfoot>

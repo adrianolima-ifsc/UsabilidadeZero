@@ -69,5 +69,4 @@ public class ControladorEstudos extends Controller {
 		
 		return ok(estudo0portal.render(eventos));
 	}
-
 }

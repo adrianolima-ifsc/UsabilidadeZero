@@ -26,6 +26,8 @@ public class ControladorUsuario extends Controller {
 	private TokenCadastroDAO tokenCadastroDAO;
 	@Inject
 	private UsuarioDAO usuarioDAO;
+	@Inject
+	private EstudoDAO estudoDAO;
 	
 	public static final String AUTH = "auth";
 
@@ -146,9 +148,12 @@ public class ControladorUsuario extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarPainel() {
 		
-		List<Usuario> usuarios = usuarioDAO.mostraTodos();
+		List<Estudo> estudos = estudoDAO.mostraTodos();
+		
+		String codigo = session(AUTH);
+        Usuario usuario = usuarioDAO.comToken(codigo).get();
 
-		return ok(painel.render(resultados.render(usuarios)));
+		return ok(painel.render(resultados.render(estudos)));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
