@@ -17,7 +17,7 @@ POST	/estudo								controllers.ControladorEstudos.iniciarEstudoDeCaso
 GET		/portal/:id							controllers.ControladorEstudos.iniciarTarefa1(id:Long)
 
 POST	/evento								controllers.ControladorEventos.detalhar
-GET		/evento/:id/programa				controllers.ControladorEventos.mostrarPrograma(id:Long)
+POST	/evento/programa					controllers.ControladorEventos.mostrarPrograma
 GET		/evento/:id/local					controllers.ControladorEventos.mostrarLocal(id:Long)
 GET		/evento/:id/informacoes				controllers.ControladorEventos.mostrarInformacoes(id:Long)
 GET		/evento/:id/pagamento				controllers.ControladorEventos.mostrarPagamento(id:Long)

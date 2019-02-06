@@ -1,4 +1,6 @@
-@(tarefa: Tarefa, evento: Evento)
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], evento: Evento)
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
 
 @styles = {
 <link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
@@ -6,7 +8,7 @@
 }
 
 @estudoDeCaso("Tarefa 1", tarefa.getCliques, styles) {
-<main>
+<div>
 	<h1>Portal de Eventos</h1>
 	<p>@session.get("cliques")</p>
 	<div class="container evento-detalhes">
@@ -17,7 +19,17 @@
 					@Html(evento.getDescricao())
 					<p class="text-center">
 						<a href="#" class="btn btn-primary" role="button">Participe</a> 
-						<a href="@routes.ControladorEventos.mostrarPrograma(evento.getId())" class="btn btn-success" role="button">Programa</a>
+						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma), 
+							'id -> "tarefaform", 
+							'class -> "form-horizontal", 
+							'role -> "form") {
+
+							@b3.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
+							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+							@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+								
+							<input type="submit" value="Programa" class="btn btn-success">
+						}
 						<a href="@routes.ControladorEventos.mostrarLocal(evento.getId())" class="btn btn-info" role="button">Local</a>
 						<a href="@routes.ControladorEventos.mostrarInformacoes(evento.getId())" class="btn btn-warning" role="button">Mais Informações</a>
 						<a href="@routes.ControladorEventos.mostrarPagamento(evento.getId())" class="btn btn-danger" role="button">Pagamento</a>
@@ -26,6 +38,6 @@
 			</div>
 		</div>
 	</div>
-</main>
+</div>
 }
 

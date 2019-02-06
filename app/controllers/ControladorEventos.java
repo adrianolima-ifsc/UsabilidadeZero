@@ -15,6 +15,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.estudo0informacoes;
 import views.html.estudo0local;
+import views.html.estudo0pagamento;
 import views.html.estudo0programa;
 import views.html.telaEvento;
 
@@ -47,12 +48,14 @@ public class ControladorEventos extends Controller {
 		
 		Evento evento = eventoDAO.comId(form.getEvento());
 		
-		return ok(telaEvento.render(tarefa, evento));
+		return ok(telaEvento.render(tarefa, tarefaForm, evento));
 	}
 
-	public Result mostrarPrograma(Long id) {
+	public Result mostrarPrograma() {
 		
-		Evento evento = eventoDAO.comId(id);
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		
+		Evento evento = eventoDAO.comId(form.getEvento());
 		
 		String programa = evento.getPrograma();
 
