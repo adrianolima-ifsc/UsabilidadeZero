@@ -1,13 +1,14 @@
-@(evento: Evento)
+@(tarefa: Tarefa, evento: Evento)
 
 @styles = {
 <link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
 <link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
 }
 
-@estudoDeCaso("Tarefa 1", styles) {
+@estudoDeCaso("Tarefa 1", tarefa.getCliques, styles) {
 <main>
 	<h1>Portal de Eventos</h1>
+	<p>@session.get("cliques")</p>
 	<div class="container evento-detalhes">
 		<div class="col-sm-6 col-md-6 col-md-offset-3">
 			<div class="thumbnail evento-detalhes">
