@@ -1,4 +1,8 @@
-@(title: String, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+@(title: String, cliques: Long, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+
+@helper.javascriptRouter("jsRoutes")(
+	routes.javascript.ControladorEstudos.atualizaCliquesTarefa
+)
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -29,9 +33,19 @@
 	    		</div>
     		</div>
 		</header>
-		@content
+		<main>
+			@content
+		</main>
+        <footer>
+            <div class="container">
+                <div class="row text-center">
+                    <p>Cliques: <span id="contador">@cliques</span></p>
+                </div>
+            </div>
+        </footer>
 		<script src="@routes.Assets.versioned("js/jquery-3.3.1.min.js")"></script>
         <script src="@routes.Assets.versioned("bootstrap/js/bootstrap.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/contador-cliques.js")"></script>
         @scripts
     </body>
 </html>

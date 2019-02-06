@@ -7,10 +7,3 @@ $(document).ready(function(){
 	});
 });
 
-var count = 0;
-
-$(document).click(function(){
-	count++;
-	$("p").text("Cliques: " + count);
-});
-

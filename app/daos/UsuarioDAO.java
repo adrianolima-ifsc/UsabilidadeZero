@@ -1,3 +1,4 @@
+
 package daos;
 
 import models.*;
@@ -11,7 +12,12 @@ public class UsuarioDAO {
 	
 	public Optional<Usuario> comEmail(String email) {
 		
-		Usuario usuario = find.query().where().eq("email", email).findOne();
+		Usuario usuario = find
+				.query()
+				.where()
+				.eq("email", email)
+				.findOne();
+		
 		return Optional.ofNullable(usuario);
 	}
 

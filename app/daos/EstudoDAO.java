@@ -14,9 +14,15 @@ public class EstudoDAO {
 		return find.all();
 	}
 
-	public Estudo comId(Long id) {
+	public Optional<Estudo> comId(Long id) {
 		
-		return find.query().where().eq("id", id).findOne();
+		Estudo estudo = find
+				.query()
+				.where()
+				.eq("id", id)
+				.findOne();
+		
+		return Optional.ofNullable(estudo);
 	}
 
 }

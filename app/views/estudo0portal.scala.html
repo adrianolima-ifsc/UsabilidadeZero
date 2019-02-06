@@ -1,26 +1,39 @@
-@(eventos: List[Evento])
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], eventos: List[Evento])
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
 
 @styles = {
-<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
-<link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
+	<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
+	<link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
 }
 
-@estudoDeCaso("Tarefa 1", styles) {
-<main>
+@scripts = {
+}
+
+@estudoDeCaso("Tarefa 1", tarefa.getCliques, styles, scripts) {
+<div>
 	<h1>Portal de Eventos</h1>
 	<div class="container">
 		<div class="row col-md-8 col-md-offset-2">
 			@for(evento <- eventos) {
 			<div class="col-xs-6 col-sm-4 col-md-3">
-				<a href="@routes.ControladorEventos.detalhar(evento.getId())" class="thumbnail evento">
-					<h4>@evento.getSigla()</h4>
-				</a>
+				@b3.form(action=helper.CSRF(routes.ControladorEventos.detalhar), 
+					'id -> "tarefaform", 
+					'class -> "form-horizontal", 
+					'role -> "form") {
+
+					@b3.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
+					@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+					@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+						
+					<input type="submit" value="@evento.getSigla" class="thumbnail evento">
+				}
 			</div>
 			}
 		</div>
 	</div>
-</main>
-<footer>
+</div>
+<div>
 	<div class="container">
 		<div class="row text-center">
 			<a href="#">Sobre |</a>
@@ -30,5 +43,5 @@
 			<a href="#">Siga-nos nas redes sociais</a>
 		</div>
 	</div>
-</footer>
+</div>
 }

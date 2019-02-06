@@ -14,18 +14,13 @@ public class Usuario extends Model {
 	
 	@Id @GeneratedValue
 	private Long id;	
-	
 	@Required(message = "Você precisa fornecer um email válido!")
 	private String email;	
-	
 	@Required(message = "Você precisa fornecer uma senha!")
 	private String senha;
-	
 	private boolean verificado;
-	
 	@OneToOne(mappedBy = "usuario")
 	private TokenSistema token;
-	
 	@OneToMany(mappedBy = "usuario")
 	private List<Estudo> estudos;
 

@@ -1,25 +1,55 @@
 package controllers;
 
-import daos.*;
-import models.*;
-import views.html.*;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
-import java.util.*;
-import play.mvc.*;
+
+import daos.EventoDAO;
+import daos.TarefaDAO;
+import models.Evento;
+import models.Tarefa;
+import play.data.Form;
+import play.data.FormFactory;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.estudo0informacoes;
+import views.html.estudo0local;
+import views.html.estudo0programa;
+import views.html.telaEvento;
 
 public class ControladorEventos extends Controller {
 	
 	@Inject
-	EventoDAO eventoDAO;
+	private EventoDAO eventoDAO;
 	
-	public Result detalhar(Long id) {
-		
-		Evento evento = eventoDAO.comId(id);
-		
-		return ok(telaEvento.render(evento));
+	@Inject
+	private TarefaDAO tarefaDAO;
+	
+	private Form<Tarefa> tarefaForm;
+	
+	@Inject	
+	public ControladorEventos(FormFactory formFactory) {
+
+		this.tarefaForm = formFactory.form(Tarefa.class);
 	}
 	
+	public Result detalhar() {
+		
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
+		
+		int cliques = form.getCliques();
+		tarefa.setCliques(cliques);
+		
+		tarefa.update();
+		
+		Evento evento = eventoDAO.comId(form.getEvento());
+		
+		return ok(telaEvento.render(tarefa, evento));
+	}
+
 	public Result mostrarPrograma(Long id) {
 		
 		Evento evento = eventoDAO.comId(id);

@@ -1,34 +1,44 @@
 package controllers;
 
-import autenticadores.*;
-import daos.*;
-import models.*;
-import validadores.*;
-import views.html.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.swing.Timer;
 
-import play.api.libs.mailer.*;
+import autenticadores.UsuarioAutenticado;
+import daos.EstudoDAO;
+import daos.EventoDAO;
+import daos.TarefaDAO;
+import daos.TokenSistemaDAO;
+import daos.UsuarioDAO;
+import models.Estudo;
+import models.Evento;
+import models.Tarefa;
+import models.TokenSistema;
+import models.Usuario;
 import play.data.Form;
 import play.data.FormFactory;
-import play.mvc.*;
-import play.mvc.Http.Context;
+import play.mvc.Controller;
+import play.mvc.Result;
 import play.mvc.Security.Authenticated;
+import views.html.estudo0portal;
+import views.html.tarefa1;
 
 public class ControladorEstudos extends Controller {
 
 	@Inject
-	private EventoDAO eventoDAO;
+	private EventoDAO eventoDAO;	
 	@Inject
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO usuarioDAO;	
+	@Inject 
+	private EstudoDAO estudoDAO;
+	@Inject
+	private TarefaDAO tarefaDAO;
+	@Inject
+	private TokenSistemaDAO tokenSistemaDAO;
 	private Form<Estudo> estudoForm;
-	private Form<Usuario> usuarioForm;
+	private Form<Tarefa> tarefaForm;
 
 	public static final String AUTH = "auth";
 	
@@ -36,20 +46,19 @@ public class ControladorEstudos extends Controller {
 	public ControladorEstudos(FormFactory formFactory) {
 
 		this.estudoForm = formFactory.form(Estudo.class);
-		this.usuarioForm = formFactory.form(Usuario.class);
+		this.tarefaForm = formFactory.form(Tarefa.class);
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarEstudoDeCaso() {
 		
 		Form<Estudo> form = estudoForm.bindFromRequest();
-		Estudo estudo = form.get();
+		Estudo estudo = form.get();	
 		
 		Calendar calendario = Calendar.getInstance();
 		estudo.setData(calendario.getTime());
 		
-		String codigo = session(AUTH);
-        Usuario usuario = usuarioDAO.comToken(codigo).get();
+        Usuario usuario = usuarioDAO.comToken(session(AUTH)).get();
         estudo.setUsuario(usuario);
 		
         estudo.save();
@@ -58,15 +67,61 @@ public class ControladorEstudos extends Controller {
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarTarefa1(boolean estudo) {
+	public Result iniciarTarefa1(Long id) {
 		
-		List<Evento> eventos = eventoDAO.mostraTodos();
+		String codigoSessao = session(AUTH);
 		
-		if(estudo) {
+		Estudo estudo = estudoDAO.comId(id).get();		
+		List<Evento> eventos = eventoDAO.mostraTodos();		
+		
+		Tarefa tarefa;
+		Optional<Tarefa> possivelTarefa = tarefaDAO.comToken(codigoSessao);
+		
+		if(possivelTarefa.isPresent()) {
 			
-			return ok(estudo1portal.render(eventos));
+			tarefa = possivelTarefa.get();
+			tarefa.update();
+			
+		} else {
+			
+			Calendar calendario = Calendar.getInstance();			
+			tarefa = new Tarefa(estudo, calendario.getTime());
+			
+			TokenSistema token = tokenSistemaDAO.comCodigo(codigoSessao).get();
+			token.setTarefa(tarefa);
+			token.update();
+			
+			tarefa.setToken(token);
+			
+			if(estudo.isTipo()) {
+				
+				tarefa.setCodigo("EC11");
+			
+			} else {
+			
+				tarefa.setCodigo("EC01");
+			}
+			
+			tarefa.save();
 		}
 		
-		return ok(estudo0portal.render(eventos));
+		return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result iniciarTarefa2() {
+		
+		return ok();
+	}
+	
+	public Result atualizaCliquesTarefa(Long id, Long cliques) {
+		
+		Tarefa tarefa = tarefaDAO.comId(id).get();
+		
+		tarefa.setCliques(Math.toIntExact(cliques));
+		
+		tarefa.update();
+		
+		return ok();
 	}
 }

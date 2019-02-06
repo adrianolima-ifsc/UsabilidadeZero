@@ -14,9 +14,9 @@ GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean
 GET		/sobre								controllers.HomeController.mostrarSobre
 
 POST	/estudo								controllers.ControladorEstudos.iniciarEstudoDeCaso
-GET		/portal/:ec							controllers.ControladorEstudos.iniciarTarefa1(ec:Boolean)
+GET		/portal/:id							controllers.ControladorEstudos.iniciarTarefa1(id:Long)
 
-GET		/evento/:id							controllers.ControladorEventos.detalhar(id:Long)
+POST	/evento								controllers.ControladorEventos.detalhar
 GET		/evento/:id/programa				controllers.ControladorEventos.mostrarPrograma(id:Long)
 GET		/evento/:id/local					controllers.ControladorEventos.mostrarLocal(id:Long)
 GET		/evento/:id/informacoes				controllers.ControladorEventos.mostrarInformacoes(id:Long)
@@ -30,3 +30,6 @@ GET 	/usuario 							controllers.ControladorUsuario.lista
 GET 	/usuario/:id 						controllers.ControladorUsuario.detalhar(id:Long)
 # POST 	/usuario/:id 						controllers.ControladorUsuario.alterar(id:Long)
 POST 	/usuario/:id/remover 				controllers.ControladorUsuario.remover(id:Long)
+
+# Javascript routing
+GET		/cliques/:id/:cliques				controllers.ControladorEstudos.atualizaCliquesTarefa(id:Long, cliques:Long)

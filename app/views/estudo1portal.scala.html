@@ -1,4 +1,4 @@
-@(eventos: List[Evento])
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], eventos: List[Evento])
 
 @styles = {
 }
@@ -7,7 +7,7 @@
 	<script src="@routes.Assets.versioned("js/filtro.js")"></script>
 }
 
-@estudoDeCaso("Tarefa 1", styles, scripts) {
+@estudoDeCaso("Tarefa 1", 34, styles, scripts) {
 <main>
 	<h1 class="text-center">Portal de Eventos</h1>
 	<div class="container-fluid">
@@ -40,11 +40,4 @@
 		</div>
 	</div>
 </main>
-<footer>
-	<div class="container">
-		<div class="row text-center">
-			<p>Cliques: 0</p>
-		</div>
-	</div>
-</footer>
 }

@@ -11,7 +11,11 @@ public class TokenCadastroDAO {
 
 	public static Optional<TokenCadastro> comCodigo(String codigo) {
 		
-		TokenCadastro token = tokens.query().where().eq("codigo", codigo).findOne();
+		TokenCadastro token = tokens
+				.query()
+				.where()
+				.eq("codigo", codigo)
+				.findOne();
 		return Optional.ofNullable(token);
 	}
 

@@ -1,18 +1,20 @@
 package controllers;
 
-import autenticadores.*;
-import models.*;
-import views.html.*;
+import javax.inject.Inject;
 
+import autenticadores.UsuarioAutenticado;
+import models.Estudo;
+import models.Usuario;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
-
-import java.util.Date;
-import java.util.Calendar;
-import javax.inject.Inject;
+import play.routing.JavaScriptReverseRouter;
+import views.html.estudoCasoInstrucao;
+import views.html.login;
+import views.html.painel;
+import views.html.sobre;
 
 public class HomeController extends Controller {
 
@@ -44,5 +46,4 @@ public class HomeController extends Controller {
 		
 		return ok(painel.render(estudoCasoInstrucao.render(estudoForm, tipo)));
 	}
-	
 }

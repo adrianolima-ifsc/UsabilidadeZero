@@ -4,18 +4,16 @@
 
 @import helper._
 
-@estudoDeCaso("Tarefa 1") {
+@main("Tarefa 1") {
 <div class="row">
    	<div class="container text-center">
    		<div class="col-md-6 col-md-offset-3">
    		<h2>Tarefa 1</h2>
  		<h4>Você deve descobrir o valor de inscrição do próximo @estudo.isTipo
    		"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
-		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1(estudo.getTipo))) {
+		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1(estudo.getId))) {
 			@b3.submit('class -> "btn btn-primary") { Iniciar }
 		}
-		<p>@estudo.getData</p>
-		<p>@usuario.getEmail</p>
 	</div>
 </div>
 }

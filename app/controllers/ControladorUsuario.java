@@ -1,19 +1,30 @@
 package controllers;
 
-import models.*;
-import views.html.*;
-import validadores.*;
-import daos.*;
+import java.util.List;
+import java.util.Optional;
 
-import java.util.*;
 import javax.inject.Inject;
 
 import autenticadores.UsuarioAutenticado;
-import play.api.libs.mailer.*;
+import daos.EstudoDAO;
+import daos.TokenCadastroDAO;
+import daos.UsuarioDAO;
+import models.EmailCadastro;
+import models.Estudo;
+import models.TokenCadastro;
+import models.TokenSistema;
+import models.Usuario;
+import play.api.libs.mailer.MailerClient;
 import play.data.Form;
 import play.data.FormFactory;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
 import play.mvc.Security.Authenticated;
+import validadores.Encriptador;
+import validadores.Validador;
+import views.html.login;
+import views.html.painel;
+import views.html.resultados;
 
 public class ControladorUsuario extends Controller {
 
@@ -128,8 +139,8 @@ public class ControladorUsuario extends Controller {
 				
 				TokenSistema tokenSistema = new TokenSistema(usuario);
 				tokenSistema.save();
-				usuario.setToken(tokenSistema);
 				
+				usuario.setToken(tokenSistema);
 				usuario.update();
 				
 				flash("success", "Seu usuário foi confirmado com sucesso!");
