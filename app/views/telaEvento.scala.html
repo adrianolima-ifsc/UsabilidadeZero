@@ -18,9 +18,17 @@
 					<h3>@evento.getSigla()</h3>
 					@Html(evento.getDescricao())
 					<p class="text-center">
-						<a href="#" class="btn btn-primary" role="button">Participe</a> 
 						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
-							'class -> "form-horizontal", 
+							'class -> "form-horizontal botao-evento", 
+							'role -> "form") {
+
+							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+							@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+								
+							<input type="submit" value="Participe" class="btn btn-primary">
+						} 
+						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
+							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
 							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
@@ -30,7 +38,7 @@
 						} 
 
 						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarLocal),
-							'class -> "form-horizontal", 
+							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
 							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
@@ -40,7 +48,7 @@
 						} 
 
 						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarInformacoes),
-							'class -> "form-horizontal", 
+							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
 							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
@@ -50,7 +58,7 @@
 						} 
 
 						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPagamento),
-							'class -> "form-horizontal", 
+							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
 							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
