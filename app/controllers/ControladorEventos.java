@@ -41,8 +41,9 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 		
-		int cliques = form.getCliques();
-		tarefa.setCliques(cliques);
+		Long cliquesForm = form.getCliques();
+		
+		if (cliquesForm > tarefa.getCliques()) tarefa.setCliques(cliquesForm);
 		
 		tarefa.update();
 		
@@ -55,7 +56,10 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
+		
 		Evento evento = eventoDAO.comId(form.getEvento());
+		String siglaEvento = evento.getSigla();
 		
 		String programa = evento.getPrograma();
 
@@ -71,12 +75,14 @@ public class ControladorEventos extends Controller {
 		programa = programa.replace("@dia2", dia2);
 		programa = programa.replace("@dia3", dia3);
 		
-		return ok(estudo0programa.render(evento, programa));
+		return ok(estudo0programa.render(tarefa, siglaEvento, programa));
 	}
 	
-	public Result mostrarLocal(Long id) {
+	public Result mostrarLocal() {
 		
-		Evento evento = eventoDAO.comId(id);
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
+		Evento evento = eventoDAO.comId(form.getEvento());
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
@@ -88,19 +94,23 @@ public class ControladorEventos extends Controller {
 				"/" + Integer.toString(mes) +
 				"/" + Integer.toString(ano);
 		
-		return ok(estudo0local.render(evento, dataInicial, dataFinal));
+		return ok(estudo0local.render(tarefa, evento, dataInicial, dataFinal));
 	}
 	
-	public Result mostrarInformacoes(Long id) {
+	public Result mostrarInformacoes() {
 		
-		Evento evento = eventoDAO.comId(id);
-		
-		return ok(estudo0informacoes.render(evento));
+		Tarefa form = tarefaForm.bindFromRequest().get();		
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();		
+		Evento evento = eventoDAO.comId(form.getEvento());
+
+		return ok(estudo0informacoes.render(tarefa, evento));
 	}
 	
-	public Result mostrarPagamento(Long id) {
+	public Result mostrarPagamento() {
 		
-		Evento evento = eventoDAO.comId(id);
+		Tarefa form = tarefaForm.bindFromRequest().get();		
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();		
+		Evento evento = eventoDAO.comId(form.getEvento());
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
@@ -109,7 +119,7 @@ public class ControladorEventos extends Controller {
 		
 		String data = Integer.toString(dia) + "/" + Integer.toString(mes) +	"/" + Integer.toString(ano);
 		
-		return ok(estudo0pagamento.render(evento, data));
+		return ok(estudo0pagamento.render(tarefa, evento, data));
 	}
 
 }

@@ -1,11 +1,11 @@
-@(evento: Evento, data: String)
+@(tarefa: Tarefa, evento: Evento, data: String)
 
 @styles = {
 <link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
 <link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
 }
 
-@estudoDeCaso("Tarefa 1", 33, styles) {
+@estudoDeCaso("Tarefa 1", tarefa, styles) {
 <main>
 	<h1>Portal de Eventos</h1>
 	<div class="container evento-detalhes">

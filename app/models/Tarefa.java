@@ -23,7 +23,7 @@ public class Tarefa extends Model {
 	public Long evento;
 	public Date dataHoraInicio;
 	public Date dataHoraFim;
-	public int cliques;
+	public Long cliques;
 	public boolean concluidoReal;
 	public boolean concluidoPercebido;
 	@OneToOne
@@ -35,7 +35,7 @@ public class Tarefa extends Model {
 
 		this.estudo = estudo;
 		this.dataHoraInicio = time;
-		this.cliques = 0;
+		this.cliques = (long) 0;
 		this.concluidoReal = false;
 		this.concluidoPercebido = false;
 	}
@@ -80,11 +80,11 @@ public class Tarefa extends Model {
 		this.dataHoraFim = dataHoraFim;
 	}
 
-	public int getCliques() {
+	public Long getCliques() {
 		return cliques;
 	}
 
-	public void setCliques(int cliques) {
+	public void setCliques(Long cliques) {
 		this.cliques = cliques;
 	}
 

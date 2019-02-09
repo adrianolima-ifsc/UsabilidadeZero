@@ -1,4 +1,4 @@
-@(estudo: Estudo, usuario: Usuario)
+@(estudo: Estudo, estudoForm: Form[Estudo], usuario: Usuario)
 
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
 
@@ -8,12 +8,20 @@
 <div class="row">
    	<div class="container text-center">
    		<div class="col-md-6 col-md-offset-3">
-   		<h2>Tarefa 1</h2>
- 		<h4>Você deve descobrir o valor de inscrição do próximo @estudo.isTipo
-   		"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
-		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1(estudo.getId))) {
-			@b3.submit('class -> "btn btn-primary") { Iniciar }
-		}
+	   		<h2>Tarefa 1</h2>
+	 		<h4>Você deve descobrir o valor de inscrição do próximo @estudo.isTipo
+	   		"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
+
+			@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1), 
+				'id -> "estudoform", 
+				'class -> "form-horizontal", 
+				'role -> "form") {
+
+				@b3.hidden( estudoForm("id"), 'value -> estudo.getId )
+
+				<input type="submit" value="Iniciar" class="btn btn-primary">
+			}
+		</div>
 	</div>
 </div>
 }

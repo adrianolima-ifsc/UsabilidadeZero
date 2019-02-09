@@ -1,14 +1,18 @@
-var idTarefa = $('input[name="id"]').val();
-var cliquesTarefa = $('input[name="cliques"]').val();
+var idTarefa = $("#id-tarefa").text();
+var cliquesTarefa = 0;
 
-$("#contador").text(cliquesTarefa);
+//$("#contador").text(cliquesTarefa);
 
-$(document).click(function(){
+$(document).click(adicionaCliques);
+
+//$(window).onbeforeunload = adicionaCliques;
+
+function adicionaCliques() {
 
 	cliquesTarefa++;
 
 	$('input[name="cliques"]').val(cliquesTarefa);
 	$("#contador").text(cliquesTarefa);
 	
-	$.get(jsRoutes.controllers.ControladorEstudos.atualizaCliquesTarefa(idTarefa, cliquesTarefa))
-});
+	$.get(jsRoutes.controllers.ControladorEstudos.adicionaCliquesTarefa(idTarefa))
+}

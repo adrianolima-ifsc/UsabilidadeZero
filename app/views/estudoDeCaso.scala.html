@@ -1,7 +1,7 @@
-@(title: String, cliques: Long, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+@(title: String, tarefa: Tarefa, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
 
 @helper.javascriptRouter("jsRoutes")(
-	routes.javascript.ControladorEstudos.atualizaCliquesTarefa
+	routes.javascript.ControladorEstudos.adicionaCliquesTarefa
 )
 
 <!DOCTYPE html>
@@ -39,7 +39,8 @@
         <footer>
             <div class="container">
                 <div class="row text-center">
-                    <p>Cliques: <span id="contador">@cliques</span></p>
+                	<p>Tarefa: <span id="id-tarefa">@tarefa.getId</span></p>
+                    <p>Cliques: <span id="contador">0</span></p>
                 </div>
             </div>
         </footer>

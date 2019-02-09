@@ -10,16 +10,17 @@
 @scripts = {
 }
 
-@estudoDeCaso("Tarefa 1", tarefa.getCliques, styles, scripts) {
+@estudoDeCaso("Tarefa 1", tarefa, styles, scripts) {
 <div>
 	<h1>Portal de Eventos</h1>
 	<div class="container">
 		<div class="row col-md-8 col-md-offset-2">
+			<p hidden>Tarefa: <span>@tarefa.getId</span></p>
 			@for(evento <- eventos) {
 			<div class="col-xs-6 col-sm-4 col-md-3">
 				@b3.form(action=helper.CSRF(routes.ControladorEventos.detalhar), 
 					'id -> "tarefaform", 
-					'class -> "form-horizontal", 
+					'class -> "form-horizontal thumbnail evento", 
 					'role -> "form") {
 
 					@b3.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )

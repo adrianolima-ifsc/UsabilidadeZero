@@ -37,6 +37,7 @@ public class ControladorEstudos extends Controller {
 	private TarefaDAO tarefaDAO;
 	@Inject
 	private TokenSistemaDAO tokenSistemaDAO;
+	
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
 
@@ -63,15 +64,18 @@ public class ControladorEstudos extends Controller {
 		
         estudo.save();
         
-		return ok(tarefa1.render(estudo, usuario));
+		return ok(tarefa1.render(estudo, estudoForm, usuario));
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarTarefa1(Long id) {
+	public Result iniciarTarefa1() {
 		
 		String codigoSessao = session(AUTH);
 		
-		Estudo estudo = estudoDAO.comId(id).get();		
+		Form<Estudo> form = estudoForm.bindFromRequest();
+		Estudo formEstudo = form.get();	
+		
+		Estudo estudo = estudoDAO.comId(formEstudo.getId()).get();		
 		List<Evento> eventos = eventoDAO.mostraTodos();		
 		
 		Tarefa tarefa;
@@ -114,11 +118,14 @@ public class ControladorEstudos extends Controller {
 		return ok();
 	}
 	
-	public Result atualizaCliquesTarefa(Long id, Long cliques) {
+	@Authenticated(UsuarioAutenticado.class)
+	public Result adicionaCliquesTarefa(Long id) {
 		
 		Tarefa tarefa = tarefaDAO.comId(id).get();
 		
-		tarefa.setCliques(Math.toIntExact(cliques));
+		Long cliques = tarefa.getCliques();
+		cliques++;
+		tarefa.setCliques(cliques);
 		
 		tarefa.update();
 		

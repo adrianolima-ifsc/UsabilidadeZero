@@ -32,7 +32,7 @@ create table tarefa (
   evento                        bigint,
   data_hora_inicio              datetime(6),
   data_hora_fim                 datetime(6),
-  cliques                       integer not null,
+  cliques                       bigint,
   concluido_real                tinyint(1) default 0 not null,
   concluido_percebido           tinyint(1) default 0 not null,
   token_id                      bigint,

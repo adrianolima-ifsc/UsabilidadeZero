@@ -27,6 +27,7 @@ a:hover {
 
 .evento {
 	background-color: red;
+	border-color: red;
 	margin-top: 30px;
 	text-align: center;
 	font-family: serif;
