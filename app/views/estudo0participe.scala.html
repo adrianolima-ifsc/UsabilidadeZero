@@ -1,0 +1,55 @@
+@(tarefa: Tarefa, inscricaoForm: Form[Inscricao], evento: Evento)
+
+@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col-md-4", "col-md-8") }
+
+@styles = {
+	<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
+	<link href="@routes.Assets.versioned("css/estudo0.css")" rel="stylesheet" media="screen">
+}
+							
+@valores = @{ Seq(
+	"true"->("R$ " + evento.getPreco.toString), 
+	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
+)}
+
+@estudoDeCaso("Tarefa 1", tarefa, styles) {
+<div>
+	<h1>Portal de Eventos</h1>
+	<p>@session.get("cliques")</p>
+	<div class="container evento-detalhes">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="thumbnail evento-detalhes">
+				<div class="caption">
+					<h3>@evento.getSigla()</h3>
+						<div class="col-md-12">
+					<p class="text-center">
+						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
+							'class -> "form-horizontal", 
+							'role -> "form") {
+
+							@b3.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+							@b3.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+
+							@b3.text( inscricaoForm("nome"), '_label -> "Nome" )
+							@b3.text( inscricaoForm("email"), '_label -> "Email" )
+							@b3.text( inscricaoForm("fone"), '_label -> "Fone" )
+							@b3.text( inscricaoForm("cpf"), '_label -> "CPF" )
+							@b3.text( inscricaoForm("endereco"), '_label -> "Endereço" )
+							@b3.text( inscricaoForm("cidade"), '_label -> "Cidade" )
+							@b3.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
+							@b3.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
+							@b3.text( inscricaoForm("validade"), '_label -> "Validade" )
+							@b3.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança" )
+							@b3.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+								
+							<input type="submit" value="Participe" class="btn btn-primary">
+						} 
+					</p>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+}
+

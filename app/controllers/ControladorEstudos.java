@@ -119,6 +119,23 @@ public class ControladorEstudos extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
+	public Result concluirTarefa(boolean concluiu) {
+		
+		if(concluiu) {
+			
+			
+		}
+	
+		return ok();
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result desistirTarefa() {
+		
+		return ok();
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
 	public Result adicionaCliquesTarefa(Long id) {
 		
 		Tarefa tarefa = tarefaDAO.comId(id).get();

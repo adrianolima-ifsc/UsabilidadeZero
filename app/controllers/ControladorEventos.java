@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import daos.EventoDAO;
 import daos.TarefaDAO;
 import models.Evento;
+import models.Inscricao;
 import models.Tarefa;
 import play.data.Form;
 import play.data.FormFactory;
@@ -16,6 +17,7 @@ import play.mvc.Result;
 import views.html.estudo0informacoes;
 import views.html.estudo0local;
 import views.html.estudo0pagamento;
+import views.html.estudo0participe;
 import views.html.estudo0programa;
 import views.html.telaEvento;
 
@@ -28,11 +30,13 @@ public class ControladorEventos extends Controller {
 	private TarefaDAO tarefaDAO;
 	
 	private Form<Tarefa> tarefaForm;
+	private Form<Inscricao> inscricaoForm;
 	
 	@Inject	
 	public ControladorEventos(FormFactory formFactory) {
 
 		this.tarefaForm = formFactory.form(Tarefa.class);
+		this.inscricaoForm = formFactory.form(Inscricao.class);
 	}
 	
 	public Result detalhar() {
@@ -120,6 +124,17 @@ public class ControladorEventos extends Controller {
 		String data = Integer.toString(dia) + "/" + Integer.toString(mes) +	"/" + Integer.toString(ano);
 		
 		return ok(estudo0pagamento.render(tarefa, evento, data));
+	}
+	
+	public Result mostrarParticipe() {
+		
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
+		
+		Evento evento = eventoDAO.comId(form.getEvento());
+		
+		return ok(estudo0participe.render(tarefa, inscricaoForm, evento));
 	}
 
 }

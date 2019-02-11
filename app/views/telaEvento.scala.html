@@ -4,7 +4,7 @@
 
 @styles = {
 <link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
-<link href="@routes.Assets.versioned("css/estudoDeCaso0.css")" rel="stylesheet" media="screen">
+<link href="@routes.Assets.versioned("css/estudo0.css")" rel="stylesheet" media="screen">
 }
 
 @estudoDeCaso("Tarefa 1", tarefa, styles) {
@@ -18,7 +18,7 @@
 					<h3>@evento.getSigla()</h3>
 					@Html(evento.getDescricao())
 					<p class="text-center">
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
+						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarParticipe),
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
@@ -27,6 +27,7 @@
 								
 							<input type="submit" value="Participe" class="btn btn-primary">
 						} 
+
 						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
