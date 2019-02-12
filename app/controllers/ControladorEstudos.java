@@ -19,6 +19,7 @@ import models.TokenSistema;
 import models.Usuario;
 import play.data.Form;
 import play.data.FormFactory;
+import play.filters.csrf.AddCSRFToken;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
@@ -118,15 +119,16 @@ public class ControladorEstudos extends Controller {
 		return ok();
 	}
 	
+	@AddCSRFToken
 	@Authenticated(UsuarioAutenticado.class)
-	public Result concluirTarefa(boolean concluiu) {
+	public Result concluirTarefa() {
 		
-		if(concluiu) {
-			
-			
-		}
+//		if(concluiu) {
+//			
+//			return ok("verdade");
+//		}
 	
-		return ok();
+		return ok("Valeu!!!");
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

@@ -18,7 +18,7 @@
 			<p hidden>Tarefa: <span>@tarefa.getId</span></p>
 			@for(evento <- eventos) {
 			<div class="col-xs-6 col-sm-4 col-md-3">
-				@b3.form(action=helper.CSRF(routes.ControladorEventos.detalhar), 
+				@b3.formCSRF(routes.ControladorEventos.detalhar, 
 					'id -> "tarefaform", 
 					'class -> "form-horizontal thumbnail evento", 
 					'role -> "form") {

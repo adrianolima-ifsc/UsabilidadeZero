@@ -1,7 +1,8 @@
 @(title: String, tarefa: Tarefa, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
 
 @helper.javascriptRouter("jsRoutes")(
-	routes.javascript.ControladorEstudos.adicionaCliquesTarefa
+	routes.javascript.ControladorEstudos.adicionaCliquesTarefa,
+	routes.javascript.ControladorEstudos.concluirTarefa
 )
 
 <!DOCTYPE html>
@@ -27,8 +28,12 @@
 	    				"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
 	    			</div>
 	    			<div class="col-md-2 text-right">
-	    				<a href="@routes.ControladorEstudos.concluirTarefa(false)"><button class="btn btn-success">Concluir</button></a>
-	    				<a href="@routes.ControladorEstudos.desistirTarefa"><button class="btn btn-danger">Desistir</button></a>
+	    				<a id="concluir-tarefa">
+	    					<button class="btn btn-success">Concluir</button>
+	    				</a>
+	    				<a id="desistir-tarefa">
+	    					<button class="btn btn-danger">Desistir</button>
+	    				</a>
 	    			</div>
 	    		</div>
     		</div>
@@ -46,7 +51,7 @@
         </footer>
 		<script src="@routes.Assets.versioned("js/jquery-3.3.1.min.js")"></script>
         <script src="@routes.Assets.versioned("bootstrap/js/bootstrap.min.js")"></script>
-		<script src="@routes.Assets.versioned("js/contador-cliques.js")"></script>
+		<script src="@routes.Assets.versioned("js/tarefa.js")"></script>
         @scripts
     </body>
 </html>

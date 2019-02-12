@@ -16,3 +16,21 @@ function adicionaCliques() {
 	
 	$.get(jsRoutes.controllers.ControladorEstudos.adicionaCliquesTarefa(idTarefa))
 }
+
+$("#concluir-tarefa").click(function() {
+
+	var valor = $("#valor").val();
+
+	var tarefa = {
+		id: idTarefa,
+		valor: valor
+	}
+
+	console.log(tarefa);
+
+	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), "tarefa");
+})
+
+$("#desistir-tarefa").click(function() {
+	console.log("Desistir");
+})
