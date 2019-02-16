@@ -7,7 +7,7 @@
 <link href="@routes.Assets.versioned("css/estudo0.css")" rel="stylesheet" media="screen">
 }
 
-@estudoDeCaso("Tarefa 1", tarefa, styles) {
+@mainEstudo("Tarefa 1", tarefa, styles) {
 <div>
 	<h1>Portal de Eventos</h1>
 	<p>@session.get("cliques")</p>
@@ -18,7 +18,7 @@
 					<h3>@evento.getSigla()</h3>
 					@Html(evento.getDescricao())
 					<p class="text-center">
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarParticipe),
+						@b3.formCSRF(routes.ControladorEventos.mostrarParticipe,
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
@@ -28,7 +28,7 @@
 							<input type="submit" value="Participe" class="btn btn-primary">
 						} 
 
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
+						@b3.formCSRF(routes.ControladorEventos.mostrarPrograma,
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
@@ -38,7 +38,7 @@
 							<input type="submit" value="Programa" class="btn btn-success">
 						} 
 
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarLocal),
+						@b3.formCSRF(routes.ControladorEventos.mostrarLocal,
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
@@ -48,7 +48,7 @@
 							<input type="submit" value="Local" class="btn btn-info">
 						} 
 
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarInformacoes),
+						@b3.formCSRF(routes.ControladorEventos.mostrarInformacoes,
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
@@ -58,7 +58,7 @@
 							<input type="submit" value="Mais Informações" class="btn btn-warning">
 						} 
 
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPagamento),
+						@b3.formCSRF(routes.ControladorEventos.mostrarPagamento,
 							'class -> "form-horizontal botao-evento", 
 							'role -> "form") {
 
