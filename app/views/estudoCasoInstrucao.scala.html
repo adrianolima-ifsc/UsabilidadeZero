@@ -25,7 +25,7 @@
 		o seu desempenho neste estudo de caso.</p>
 	</div>	
 	<div class="text-center">
-		@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarEstudoDeCaso), 
+		@b3.formCSRF(routes.ControladorEstudos.iniciarEstudoDeCaso, 
 			'id -> "loginform", 
 			'class -> "form-horizontal", 
 			'role -> "form") {

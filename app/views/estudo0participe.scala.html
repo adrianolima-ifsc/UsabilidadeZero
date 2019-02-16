@@ -23,7 +23,7 @@
 					<h3>@evento.getSigla()</h3>
 						<div class="col-md-12">
 					<p class="text-center">
-						@b3.form(action=helper.CSRF(routes.ControladorEventos.mostrarPrograma),
+						@b3.formCSRF(routes.ControladorEstudos.concluirTarefa,
 							'class -> "form-horizontal", 
 							'role -> "form") {
 

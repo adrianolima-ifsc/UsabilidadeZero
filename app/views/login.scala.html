@@ -18,7 +18,7 @@
 			@notificacoes()
 			<div class="row">						
 				<div class="col-xs-6 col-sm-6 col-md-6 login-box" style="padding-right:20px; border-right: 1px solid #ccc;">	                           
-					@b3.form(action=helper.CSRF(routes.ControladorUsuario.entrar), 
+					@b3.formCSRF(routes.ControladorUsuario.entrar, 
 						'id -> "loginform", 
 						'class -> "form-horizontal", 
 						'role -> "form") {

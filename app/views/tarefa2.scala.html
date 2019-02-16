@@ -11,7 +11,7 @@
 	   		<h2>Tarefa 2</h2>
 	 		<h4>Você deve fazer a inscrição no evento encontrado com o respectivo pagamento</h4>
 
-			@b3.form(action=helper.CSRF(routes.ControladorEstudos.iniciarTarefa1), 
+			@b3.formCSRF(routes.ControladorEstudos.iniciarTarefa1, 
 				'id -> "estudoform", 
 				'class -> "form-horizontal", 
 				'role -> "form") {
