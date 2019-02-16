@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import autenticadores.UsuarioAutenticado;
 import daos.EstudoDAO;
 import daos.EventoDAO;
@@ -14,13 +16,17 @@ import daos.TokenSistemaDAO;
 import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
+import models.Inscricao;
 import models.Tarefa;
 import models.TokenSistema;
 import models.Usuario;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
 import play.filters.csrf.AddCSRFToken;
 import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
@@ -41,6 +47,8 @@ public class ControladorEstudos extends Controller {
 	
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
+	private Form<Inscricao> inscricaoForm;
+	DynamicForm testeForm;
 
 	public static final String AUTH = "auth";
 	
@@ -49,6 +57,8 @@ public class ControladorEstudos extends Controller {
 
 		this.estudoForm = formFactory.form(Estudo.class);
 		this.tarefaForm = formFactory.form(Tarefa.class);
+		this.inscricaoForm = formFactory.form(Inscricao.class);
+		this.testeForm = formFactory.form();
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
@@ -119,16 +129,41 @@ public class ControladorEstudos extends Controller {
 		return ok();
 	}
 	
-	@AddCSRFToken
 	@Authenticated(UsuarioAutenticado.class)
 	public Result concluirTarefa() {
 		
-//		if(concluiu) {
+	    JsonNode json = request().body().asJson();
+	    if(json == null) {
+	        return badRequest("Expecting Json data");
+	    } else {
+	        Long id = json.findPath("idTarefa").asLong();
+	        if(id == null) {
+	            return badRequest("Missing parameter [id]");
+	        } else {
+	            return ok("Hello " + id);
+	        }
+	    }
+		
+//		DynamicForm teste = testeForm.bindFromRequest();
+//	    Optional<String> valor = Optional.ofNullable(teste.get("nome"));
+//	    
+//	    return ok(valor.get());
+	    
+//	    if(valor.isPresent()) {
+//		
+//			Inscricao inscricao = inscricaoForm.bindFromRequest().get();
+//
+//			if(inscricao.isValor()) {
+//
+//				return ok("Concluiu");
+//			}
+//
+//			return ok("Errou!");
+//
+//		} else {
 //			
-//			return ok("verdade");
+//			return ok("Deu zica!");
 //		}
-	
-		return ok("Valeu!!!");
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

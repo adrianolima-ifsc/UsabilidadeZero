@@ -26,13 +26,9 @@ $("#concluir-tarefa").click(function() {
 		valor: valor
 	}
 
-	var tarefaJson = JSON.parse(tarefa);
-
 	console.log(tarefa);
 
-	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), tarefaJson, function() {
-		console.log("Concluir");
-	});
+	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), "tarefa", function() {});
 })
 
 $("#desistir-tarefa").click(function() {

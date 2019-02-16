@@ -15,6 +15,7 @@ GET		/sobre								controllers.HomeController.mostrarSobre
 
 POST	/estudo								controllers.ControladorEstudos.iniciarEstudoDeCaso
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa1
++ nocsrf
 POST	/concluir							controllers.ControladorEstudos.concluirTarefa
 GET		/desistir							controllers.ControladorEstudos.desistirTarefa
 
