@@ -1,0 +1,25 @@
+@(tarefas: List[Tarefa])
+
+<div>
+	<h1>Resultado</h1>
+	<div class="col-md-6 col-md-offset-3">
+		<table class="table table-hover">
+			<thead>
+				<th>Eficiência</th>
+				<th>Eficácia</th>
+			</thead>
+			<tbody>
+				@for(tarefa <- tarefas) {
+				<tr>
+					<td>Tarefa @tarefa.getId</td>
+					<td>@{(tarefa.getDataHoraFim.getTime - tarefa.getDataHoraInicio.getTime)/1000;} s</td>
+					<td>@tarefa.getCliques</td>
+					<td>@tarefa.isConcluidoPercebido</td>
+					<td>@tarefa.isConcluidoReal</td>
+				</tr>
+				}
+			</tbody>
+		</table>
+		<a href="#" class="btn btn-primary">Próximo</a>
+	</div>
+</div>
