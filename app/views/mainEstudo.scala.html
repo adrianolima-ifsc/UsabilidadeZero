@@ -1,7 +1,8 @@
 @(title: String, tarefa: Tarefa, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
 
 @helper.javascriptRouter("jsRoutes")(
-	routes.javascript.ControladorEstudos.adicionaCliquesTarefa
+    routes.javascript.ControladorEstudos.adicionaCliquesTarefa,
+	routes.javascript.ControladorEstudos.concluirTarefa
 )
 
 <!DOCTYPE html>

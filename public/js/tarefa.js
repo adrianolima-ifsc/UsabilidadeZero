@@ -17,22 +17,27 @@ function adicionaCliques() {
 	$.get(jsRoutes.controllers.ControladorEstudos.adicionaCliquesTarefa(idTarefa))
 }
 
-$("#concluir-tarefa").click(function() {
+var botaoConcluir = $("#concluir-tarefa");
+var botaoDesistir = $("#desistir-tarefa");
 
-	var valor = $("#valor").val();
+botaoConcluir.click(function() {
 
-	var tarefa = {
+	let valor = $("#valor").val();
+
+	let tarefa = {
 		id: idTarefa,
 		valor: valor
 	}
 
-	var tarefaJson = JSON.parse(tarefa);
+	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), tarefa, function(data) {
 
-	console.log(tarefa);
-
-	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), tarefaJson, function() {
-		console.log("Concluir");
+		$('main').html(data);
 	});
+
+	botaoConcluir.attr("disabled", true);
+	botaoDesistir.attr("disabled", true);
+
+	console.log(this);
 })
 
 $("#desistir-tarefa").click(function() {

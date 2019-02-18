@@ -30,7 +30,10 @@ import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
+import views.html.painel;
+import views.html.sobre;
 import views.html.tarefa1;
+import views.html.relatorio;
 
 public class ControladorEstudos extends Controller {
 
@@ -132,38 +135,25 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result concluirTarefa() {
 		
-	    JsonNode json = request().body().asJson();
-	    if(json == null) {
-	        return badRequest("Expecting Json data");
-	    } else {
-	        Long id = json.findPath("idTarefa").asLong();
-	        if(id == null) {
-	            return badRequest("Missing parameter [id]");
-	        } else {
-	            return ok("Hello " + id);
-	        }
-	    }
+		DynamicForm teste = testeForm.bindFromRequest();
+		Long id = Long.parseLong(teste.get("id"));
 		
-//		DynamicForm teste = testeForm.bindFromRequest();
-//	    Optional<String> valor = Optional.ofNullable(teste.get("nome"));
-//	    
-//	    return ok(valor.get());
-	    
-//	    if(valor.isPresent()) {
-//		
-//			Inscricao inscricao = inscricaoForm.bindFromRequest().get();
-//
-//			if(inscricao.isValor()) {
-//
-//				return ok("Concluiu");
-//			}
-//
-//			return ok("Errou!");
-//
-//		} else {
-//			
-//			return ok("Deu zica!");
-//		}
+		Tarefa tarefa = tarefaDAO.comId(id).get();
+		
+		Calendar calendario = Calendar.getInstance();
+		tarefa.setDataHoraFim(calendario.getTime());
+		
+		tarefa.setConcluidoPercebido(true);
+		
+		Boolean concluidoReal = Boolean.valueOf(teste.get("valor"));
+		tarefa.setConcluidoReal(concluidoReal);
+			
+		tarefa.update();
+		
+		Long idEstudo = tarefa.getEstudo().getId();
+		Estudo estudo = estudoDAO.comId(idEstudo).get();
+		
+		return ok(relatorio.render(estudo.getTarefas()));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
