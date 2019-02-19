@@ -30,6 +30,7 @@ import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
+import views.html.estudo1portal;
 import views.html.painel;
 import views.html.sobre;
 import views.html.tarefa1;
@@ -84,8 +85,6 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarTarefa1() {
 		
-		String codigoSessao = session(AUTH);
-		
 		Form<Estudo> form = estudoForm.bindFromRequest();
 		Estudo formEstudo = form.get();	
 		
@@ -93,37 +92,39 @@ public class ControladorEstudos extends Controller {
 		List<Evento> eventos = eventoDAO.mostraTodos();		
 		
 		Tarefa tarefa;
-		Optional<Tarefa> possivelTarefa = tarefaDAO.comToken(codigoSessao);
+		Optional<Tarefa> possivelTarefa = tarefaDAO.comToken(session(AUTH));
 		
 		if(possivelTarefa.isPresent()) {
 			
 			tarefa = possivelTarefa.get();
-			tarefa.update();
 			
+			if(tarefa.getEstudo().getId() != estudo.getId()) {
+				
+				tarefa.setToken(null);
+				tarefa.update();
+				tarefa = criarNovaTarefa(estudo);
+			}
+		
 		} else {
 			
-			Calendar calendario = Calendar.getInstance();			
-			tarefa = new Tarefa(estudo, calendario.getTime());
+			tarefa = criarNovaTarefa(estudo);
+		}
+
+		if(estudo.isTipo()) {
 			
-			TokenSistema token = tokenSistemaDAO.comCodigo(codigoSessao).get();
-			token.setTarefa(tarefa);
-			token.update();
+			tarefa.setCodigo("EC11");
+			tarefa.update();
 			
-			tarefa.setToken(token);
+			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
+		
+		} else {
 			
-			if(estudo.isTipo()) {
-				
-				tarefa.setCodigo("EC11");
+			tarefa.setCodigo("EC01");
+			tarefa.update();
 			
-			} else {
-			
-				tarefa.setCodigo("EC01");
-			}
-			
-			tarefa.save();
+			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
 		}
 		
-		return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -174,5 +175,21 @@ public class ControladorEstudos extends Controller {
 		tarefa.update();
 		
 		return ok();
+	}
+	
+	public Tarefa criarNovaTarefa(Estudo estudo) {
+		
+		Calendar calendario = Calendar.getInstance();			
+		Tarefa tarefa = new Tarefa(estudo, calendario.getTime());
+		
+		TokenSistema token = tokenSistemaDAO.comCodigo(session(AUTH)).get();
+		token.setTarefa(tarefa);
+		token.update();
+		
+		tarefa.setToken(token);
+		
+		tarefa.save();
+		
+		return tarefa;
 	}
 }
