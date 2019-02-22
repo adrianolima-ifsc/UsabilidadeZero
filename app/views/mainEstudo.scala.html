@@ -10,25 +10,34 @@
     <head>
         <title>UsabilidadeZero - @title</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@routes.Assets.versioned("css/main.css")" rel="stylesheet" media="screen">
-        <link href="@routes.Assets.versioned("css/outros/bootstrap.min.css")" rel="stylesheet" media="screen">
-        <link href="@routes.Assets.versioned("css/outros/argon.min.css")" rel="stylesheet" media="screen">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+        <!-- Icons -->
+        <link href="@routes.Assets.versioned("css/outros/nucleo.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("css/outros/font-awesome.min.css")" rel="stylesheet">
+        <!-- Theme CSS -->
+        <link href="@routes.Assets.versioned("css/outros/bootstrap.min.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("css/outros/argon.min.css")" rel="stylesheet">
+        <!-- Imagens -->
         <link href="@routes.Assets.versioned("images/favicon.png")" rel="shortcut icon" type="image/png">
+
+        <link href="@routes.Assets.versioned("css/main.css")" rel="stylesheet">
         @styles
     </head>
     <body>
-    	<header class="navbar navbar-expand-lg navbar-dark bg-default headroom">
+    	<header class="navbar navbar-expand-lg navbar-dark bg-default">
     		<div class="container">
 	    		<div class="row">
-	    			<div class="col-md-2">
-			    		<span class="navbar-brand mb-0 h1">Tarefa 1</span>
+	    			<div class="col-1">
+			    		<h1 class="navbar-brand mb-0">Tarefa 1</h1>
 	    			</div>
-	    			<div class="col-md-8">
-	    				<h4>Você deve descobrir o valor de inscrição do próximo 
-	    				"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais"</h4>
+	    			<div class="col-8">
+	    				<span class="text-light">Você deve descobrir o valor de inscrição do próximo 
+	    				"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais"</span>
 	    			</div>
-	    			<div class="col-md-2 text-right">
+	    			<div class="col text-right">
 	    				<button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
 	    				<button id="desistir-tarefa" class="btn btn-sm btn-danger">Desistir</button>
 	    			</div>
@@ -46,10 +55,10 @@
                 </div>
             </div>
         </footer>
-        <script src="@routes.Assets.versioned("js/outros/jquery-3.3.1.min.js")"></script>
+        <script src="@routes.Assets.versioned("js/outros/jquery.min.js")"></script>
+        <script src="@routes.Assets.versioned("js/outros/popper.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/bootstrap.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/argon.min.js")"></script>
-        <script src="@routes.Assets.versioned("js/outros/headroom.min.js")"></script>
 		<script src="@routes.Assets.versioned("js/tarefa.js")"></script>
         @scripts
     </body>

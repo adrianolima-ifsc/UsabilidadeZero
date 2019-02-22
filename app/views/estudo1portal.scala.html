@@ -8,26 +8,34 @@
 }
 
 @mainEstudo("Tarefa 1", tarefa, styles, scripts) {
-<div class="container">
-	<h1 class="text-center">Portal de Eventos</h1>
-	<div class="col-md-8 col-md-offset-2">
-		<div class="container">
-			<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
-		</div>
-		<div class="row">
-			@for(evento <- eventos) {
-				@if(evento.getData >= 0) {
-					<div id="myDIV" class="col-md-4">
-						<div class="thumbnail">
-							<div class="caption">
-								<h3>@evento.getSigla</h3>
-								<p>@evento.getNome</p>
+	<div class="container bg-light">
+		<h1 class="text-center">Portal de Eventos</h1>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="container">
+				<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
+			</div>
+			<div class="album py-5">
+				<div class="container">
+					<div class="row">
+							@for(evento <- eventos) {
+								@if(evento.getData >= 0) {
+						<div class="col-md-4">
+							<div class="card mb-4 box-shadow">
+									<div id="myDIV" class="card-body">
+										<div class="thumbnail">
+											<div class="caption">
+												<h3>@evento.getSigla</h3>
+												<p>@evento.getNome</p>
+											</div>
+										</div>
+									</div>
 							</div>
 						</div>
+								}
+							}
 					</div>
-				}
-			}
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 }
