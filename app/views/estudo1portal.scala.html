@@ -1,6 +1,7 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], eventos: List[Evento])
 
 @styles = {
+    <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
 }
 
 @scripts = {
@@ -8,34 +9,57 @@
 }
 
 @mainEstudo("Tarefa 1", tarefa, styles, scripts) {
-	<div class="container bg-light">
-		<h1 class="text-center">Portal de Eventos</h1>
-		<div class="col-md-8 col-md-offset-2">
-			<div class="container">
-				<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
-			</div>
-			<div class="album py-5">
-				<div class="container">
-					<div class="row">
-							@for(evento <- eventos) {
-								@if(evento.getData >= 0) {
-						<div class="col-md-4">
-							<div class="card mb-4 box-shadow">
-									<div id="myDIV" class="card-body">
-										<div class="thumbnail">
-											<div class="caption">
-												<h3>@evento.getSigla</h3>
-												<p>@evento.getNome</p>
-											</div>
-										</div>
-									</div>
+
+<section class="jumbotron text-center">
+	<div class="container">
+		<h1 class="jumbotron-heading">Portal de Eventos</h1>		
+	</div>
+</section>
+
+<div class="album py-5 bg-light">
+	<div class="container">
+		<div>
+			
+		<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
+		</div>
+		<div class="row">
+			@for(evento <- eventos) {
+				@if(evento.getData >= 0) {
+					<div id="myDIV" class="card-deck col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div class="card-body">
+								<h5 class="cart-title">@evento.getSigla</h5>
+								<p class="card-text">@evento.getNome</p>
+							</div>
+							<div class="card-footer bg-transparent border-light">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@evento.getSigla">Modal</button>
 							</div>
 						</div>
-								}
-							}
 					</div>
-				</div>
-			</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="@evento.getSigla" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle">@evento.getNome</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									@Html(evento.getDescricao)
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			}
 		</div>
 	</div>
+</div>
 }
