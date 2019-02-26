@@ -101,6 +101,22 @@ public class ControladorEventos extends Controller {
 		return ok(estudo0local.render(tarefa, evento, dataInicial, dataFinal));
 	}
 	
+	public String calcularData(int data) {
+		
+		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
+		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
+		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
+		int ano = hoje.get(Calendar.YEAR);
+		
+		String dataCalculada = Integer.toString(dia) +
+				" - " +
+				Integer.toString(dia + 2) + 
+				"/" + Integer.toString(mes) +
+				"/" + Integer.toString(ano);
+		
+		return dataCalculada;
+	}
+	
 	public Result mostrarInformacoes() {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();		
