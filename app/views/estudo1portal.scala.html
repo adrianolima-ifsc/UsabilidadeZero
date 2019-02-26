@@ -8,6 +8,22 @@
 	<script src="@routes.Assets.versioned("js/filtro.js")"></script>
 }
 
+@import java.util.Calendar
+
+@dataCalculada(data: Integer) = @{	
+	
+	val hoje = Calendar.getInstance(TimeZone.getDefault());
+	val dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
+	val mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
+	val ano = hoje.get(Calendar.YEAR);
+	
+	Integer.toString(dia) +
+			" - " +
+			Integer.toString(dia + 2) + 
+			"/" + Integer.toString(mes) +
+			"/" + Integer.toString(ano);
+}
+
 @mainEstudo("Tarefa 1", tarefa, styles, scripts) {
 
 <section class="jumbotron text-center">
@@ -30,6 +46,8 @@
 							<div class="card-body">
 								<h5 class="cart-title">@evento.getSigla</h5>
 								<p class="card-text">@evento.getNome</p>
+								<p><small class="text-muted">@evento.getLocal</small></p>
+								<p><small class="text-muted">@dataCalculada(evento.getData)</small></p>
 							</div>
 							<div class="card-footer bg-transparent border-light">
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@evento.getSigla">Modal</button>
