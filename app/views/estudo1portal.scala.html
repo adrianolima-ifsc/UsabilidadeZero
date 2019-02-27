@@ -41,15 +41,16 @@
 		<div class="row">
 			@for(evento <- eventos) {
 				@if(evento.getData >= 0) {
-					<div id="myDIV" class="card-deck col-md-4">
+					<div id="myDIV" class="col-md-4">
 						<div class="card mb-4 box-shadow">
 							<div class="card-body">
 								<h5 class="cart-title">@evento.getSigla</h5>
 								<p class="card-text">@evento.getNome</p>
 								<p><small class="text-muted">@evento.getLocal</small></p>
 								<p><small class="text-muted">@dataCalculada(evento.getData)</small></p>
+								<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#@evento.getSigla-collapse" aria-expanded="false">Collapse</button>
 							</div>
-							<div class="card-footer bg-transparent border-light">
+							<div class="card-footer bg-transparent border-light collapse" id="@evento.getSigla-collapse">
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@evento.getSigla">Modal</button>
 							</div>
 						</div>
