@@ -21,6 +21,10 @@ footer a {
 	font-family: serif;
 }
 
+button {
+	box-shadow: none;
+}
+
 a:hover {
 	text-decoration: none;
 }

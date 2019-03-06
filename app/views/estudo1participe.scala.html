@@ -1,0 +1,70 @@
+@(tarefa: Tarefa, inscricaoForm: Form[Inscricao], evento: Evento, data: String)
+
+@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col", "col") }
+
+@styles = {
+    <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> 
+	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
+}
+							
+@valores = @{ Seq(
+	"true"->("R$ " + evento.getPreco.toString), 
+	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
+)}
+
+@mainEstudo("Tarefa 1", tarefa, styles) {
+
+<section class="jumbotron text-center">
+	<div class="container">
+		<h1 class="jumbotron-heading">@evento.getNome</h1>	
+	</div>
+</section>
+
+<div class="container w-50">
+	<div class="text-justify">					
+					<p>Os pagamentos podem ser efetuados via cartão de crédito [Visa/MasterCard], cartão de débito, boleto bancário ou nota de empenho. Outras questões ou solicitações devem ser enviadas por email.</p>
+
+					<p>Os pagamentos por boleto e débito encerram-se no dia @data, após esse período estarão disponíveis as formas de pagamento por cartão de crédito, nota de empenho e faturamento. Caso não possa efetuar o pagamento pelas formas citadas, poderá efetuar o pagamento em espécie na secretaria do evento.</p>
+
+					<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
+	</div>
+
+					@b3.formCSRF(routes.ControladorEstudos.concluirTarefa,
+						'role -> "form") {
+
+						@b3.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+						@b3.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+
+						@b3.text( inscricaoForm("nome"), '_label -> "Nome" )
+						@b3.text( inscricaoForm("email"), '_label -> "Email" )
+						@b3.text( inscricaoForm("fone"), '_label -> "Fone" )
+						@b3.text( inscricaoForm("cpf"), '_label -> "CPF" )
+						@b3.text( inscricaoForm("endereco"), '_label -> "Endereço" )
+						@b3.text( inscricaoForm("cidade"), '_label -> "Cidade" )
+
+						<hr class="mb-4">
+						<h4 class="mb-3">Payment</h4>
+						<div class="row">
+							<div class="col">
+								@b3.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
+							</div>
+							<div class="col"> 
+								@b3.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
+							</div>
+						</div>
+						<div class="row"> 
+							<div class="col-3"> 
+								@b3.text( inscricaoForm("validade"), '_label -> "Validade" )
+							</div>
+							<div class="col-3"> 
+								@b3.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
+							</div>
+						</div>
+						@b3.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+							
+						<input type="submit" value="Participe" class="btn btn-primary">
+					} 
+</div>
+}
+

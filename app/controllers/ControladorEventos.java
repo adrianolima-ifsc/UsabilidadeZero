@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import daos.EventoDAO;
 import daos.TarefaDAO;
+import models.Estudo;
 import models.Evento;
 import models.Inscricao;
 import models.Tarefa;
@@ -14,12 +15,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.estudo0informacoes;
-import views.html.estudo0local;
-import views.html.estudo0pagamento;
-import views.html.estudo0participe;
-import views.html.estudo0programa;
-import views.html.telaEvento;
+import views.html.*;
 
 public class ControladorEventos extends Controller {
 	
@@ -42,31 +38,32 @@ public class ControladorEventos extends Controller {
 	public Result detalhar() {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
-		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 		
 		Long cliquesForm = form.getCliques();
-		
 		if (cliquesForm > tarefa.getCliques()) tarefa.setCliques(cliquesForm);
 		
 		tarefa.update();
 		
 		Evento evento = eventoDAO.comId(form.getEvento());
 		
-		return ok(telaEvento.render(tarefa, tarefaForm, evento));
+		Estudo estudo = tarefa.getEstudo();
+		if(estudo.isTipo()) {
+			
+			String data = calcularDataEvento(evento.getData(), "-");
+			
+			return ok(estudo1evento.render(tarefa, tarefaForm, evento, data));
+		}
+		
+		return ok(estudo0evento.render(tarefa, tarefaForm, evento));
 	}
 
 	public Result mostrarPrograma() {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
-		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
-		
 		Evento evento = eventoDAO.comId(form.getEvento());
-		String siglaEvento = evento.getSigla();
 		
-		String programa = evento.getPrograma();
-
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
 		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) / 30) + 1;
@@ -75,11 +72,19 @@ public class ControladorEventos extends Controller {
 		String dia2 = Integer.toString(dia + 1) + "/" + Integer.toString(mes);
 		String dia3 = Integer.toString(dia + 2) + "/" + Integer.toString(mes);
 		
+		String programa = evento.getPrograma();
+		
 		programa = programa.replace("@dia1", dia1);
 		programa = programa.replace("@dia2", dia2);
 		programa = programa.replace("@dia3", dia3);
 		
-		return ok(estudo0programa.render(tarefa, siglaEvento, programa));
+		Estudo estudo = tarefa.getEstudo();
+		if(estudo.isTipo()) {
+			
+			return ok(estudo1programa.render(tarefa, evento.getNome(), programa));
+		}
+		
+		return ok(estudo0programa.render(tarefa, evento.getSigla(), programa));
 	}
 	
 	public Result mostrarLocal() {
@@ -101,27 +106,17 @@ public class ControladorEventos extends Controller {
 		return ok(estudo0local.render(tarefa, evento, dataInicial, dataFinal));
 	}
 	
-	public String calcularData(int data) {
-		
-		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
-		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
-		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
-		int ano = hoje.get(Calendar.YEAR);
-		
-		String dataCalculada = Integer.toString(dia) +
-				" - " +
-				Integer.toString(dia + 2) + 
-				"/" + Integer.toString(mes) +
-				"/" + Integer.toString(ano);
-		
-		return dataCalculada;
-	}
-	
 	public Result mostrarInformacoes() {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();		
 		Evento evento = eventoDAO.comId(form.getEvento());
+		Estudo estudo = tarefa.getEstudo();
+		
+		if(estudo.isTipo()) {
+			
+			return ok(estudo1informacoes.render(tarefa, evento));
+		}
 
 		return ok(estudo0informacoes.render(tarefa, evento));
 	}
@@ -132,12 +127,7 @@ public class ControladorEventos extends Controller {
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();		
 		Evento evento = eventoDAO.comId(form.getEvento());
 		
-		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
-		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
-		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) / 30 - 2) + 1;
-		int ano = hoje.get(Calendar.YEAR);
-		
-		String data = Integer.toString(dia) + "/" + Integer.toString(mes) +	"/" + Integer.toString(ano);
+		String data = calcularDataPagamento(evento.getData());
 		
 		return ok(estudo0pagamento.render(tarefa, evento, data));
 	}
@@ -145,12 +135,43 @@ public class ControladorEventos extends Controller {
 	public Result mostrarParticipe() {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
-		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
-		
 		Evento evento = eventoDAO.comId(form.getEvento());
 		
+		Estudo estudo = tarefa.getEstudo();
+		if(estudo.isTipo()) {
+			
+			String data = calcularDataPagamento(evento.getData());
+			return ok(estudo1participe.render(tarefa, inscricaoForm, evento, data));
+		}
+		
 		return ok(estudo0participe.render(tarefa, inscricaoForm, evento));
+	}
+	
+	public String calcularDataEvento(int data, String separador) {
+		
+		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
+		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
+		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
+		int ano = hoje.get(Calendar.YEAR);
+		
+		return Integer.toString(dia) + 
+				" " + separador + " " +
+				Integer.toString(dia + 2) + 
+				"/" + Integer.toString(mes) +
+				"/" + Integer.toString(ano);
+	}
+	
+	public String calcularDataPagamento(int data) {
+		
+		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
+		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
+		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30 - 2) + 1;
+		int ano = hoje.get(Calendar.YEAR);
+		
+		return Integer.toString(dia) + 
+				"/" + Integer.toString(mes) + 
+				"/" + Integer.toString(ano);
 	}
 
 }

@@ -1,5 +1,7 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], eventos: List[Evento])
 
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
 }
@@ -17,8 +19,7 @@
 	val mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
 	val ano = hoje.get(Calendar.YEAR);
 	
-	Integer.toString(dia) +
-			" - " +
+	Integer.toString(dia) +	" a " +
 			Integer.toString(dia + 2) + 
 			"/" + Integer.toString(mes) +
 			"/" + Integer.toString(ano);
@@ -34,47 +35,28 @@
 
 <div class="album py-5 bg-light">
 	<div class="container">
-		<div>
-			
-		<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
+		<div>			
+			<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
 		</div>
 		<div class="row">
 			@for(evento <- eventos) {
 				@if(evento.getData >= 0) {
 					<div id="myDIV" class="col-md-4">
-						<div class="card mb-4 box-shadow">
-							<div class="card-body">
+						@b3.formCSRF(routes.ControladorEventos.detalhar, 
+							'id -> "tarefaform", 
+							'role -> "form") {
+
+							@b3.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
+							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+							@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+								
+							<button type="submit" class="card card-body mb-4 w-100 box-shadow">
 								<h5 class="cart-title">@evento.getSigla</h5>
 								<p class="card-text">@evento.getNome</p>
 								<p><small class="text-muted">@evento.getLocal</small></p>
 								<p><small class="text-muted">@dataCalculada(evento.getData)</small></p>
-								<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#@evento.getSigla-collapse" aria-expanded="false">Collapse</button>
-							</div>
-							<div class="card-footer bg-transparent border-light collapse" id="@evento.getSigla-collapse">
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@evento.getSigla">Modal</button>
-							</div>
-						</div>
-					</div>
-
-					<!-- Modal -->
-					<div class="modal fade" id="@evento.getSigla" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalCenterTitle">@evento.getNome</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									@Html(evento.getDescricao)
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
-								</div>
-							</div>
-						</div>
+							</button>
+						}
 					</div>
 				}
 			}

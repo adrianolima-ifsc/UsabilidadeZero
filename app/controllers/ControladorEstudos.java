@@ -29,12 +29,7 @@ import play.mvc.Http;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
-import views.html.estudo0portal;
-import views.html.estudo1portal;
-import views.html.painel;
-import views.html.sobre;
-import views.html.tarefa1;
-import views.html.relatorio;
+import views.html.*;
 
 public class ControladorEstudos extends Controller {
 

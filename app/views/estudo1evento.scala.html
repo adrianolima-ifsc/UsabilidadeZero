@@ -1,0 +1,88 @@
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], evento: Evento, data: String)
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+
+@styles = {
+    <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> 
+	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet" media="screen">
+}
+
+@scripts = {}
+
+@mainEstudo("Tarefa 1", tarefa, styles) {
+
+<section class="jumbotron text-center">
+	<div class="container">
+		<h1 class="jumbotron-heading">@evento.getNome</h1>		
+		<div class="row text-center data-local">
+			<div class="col">
+				<div class="card card-body box-shadow">
+					<p><i class="far fa-calendar"></i> @data</p>
+				</div>				
+			</div>
+			<div class="col">
+				<div class="card card-body box-shadow">
+					<p><i class="fas fa-map-marker-alt"></i> @evento.getLocal</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="container w-50">
+	<div class="text-justify">
+		@Html(evento.getDescricao())
+	</div>
+	<div class="row">
+		<div class="col"> 
+			@b3.formCSRF(routes.ControladorEventos.mostrarParticipe,
+				'class -> "form-horizontal botao-evento", 
+				'role -> "form") {
+
+				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+					
+				<input type="submit" value="Participe" class="btn btn-primary btn-block">
+			} 
+		</div>
+
+		<div class="col"> 
+			@b3.formCSRF(routes.ControladorEventos.mostrarPrograma,
+				'class -> "form-horizontal botao-evento", 
+				'role -> "form") {
+
+				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+					
+				<input type="submit" value="Programa" class="btn btn-secondary btn-block">
+			} 
+		</div>
+
+		<div class="col"> 
+			@b3.formCSRF(routes.ControladorEventos.mostrarInformacoes,
+				'class -> "form-horizontal botao-evento", 
+				'role -> "form") {
+
+				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+					
+				<input type="submit" value="Informações" class="btn btn-secondary btn-block">
+			} 
+		</div>
+
+		<div class="col"> 
+			@b3.formCSRF(routes.ControladorEventos.mostrarPagamento,
+				'class -> "form-horizontal botao-evento", 
+				'role -> "form") {
+
+				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+					
+				<input type="submit" value="Pagamento" class="btn btn-danger btn-block">
+			} 
+		</div>
+	</div>
+</div>
+}
+
