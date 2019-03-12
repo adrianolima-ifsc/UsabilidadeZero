@@ -22,7 +22,7 @@ var botaoDesistir = $("#desistir-tarefa");
 
 botaoConcluir.click(function() {
 
-	let valor = $("#valor").val();
+	let valor = $('[name="valor"]').val();
 
 	let tarefa = {
 		id: idTarefa,
@@ -31,7 +31,12 @@ botaoConcluir.click(function() {
 
 	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), tarefa, function(data) {
 
-		$('main').html(data);
+		$('#conteudo').html(data);
+
+		$('#modal-relatorio').modal({
+			keyboard: false,
+			backdrop: 'static'});
+		$('#modal-relatorio').modal('toggle');
 	});
 
 	botaoConcluir.attr("disabled", true);
