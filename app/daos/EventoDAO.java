@@ -14,9 +14,15 @@ public class EventoDAO {
 		return find.all();
 	}
 
-	public Evento comId(Long id) {
+	public Optional<Evento> comId(Long id) {
 		
-		return find.query().where().eq("id", id).findOne();
+		Evento evento = find
+				.query()
+				.where()
+				.eq("id", id)
+				.findOne();
+		
+		return Optional.ofNullable(evento); 
 	}
 
 }

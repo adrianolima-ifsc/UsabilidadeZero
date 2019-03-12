@@ -45,7 +45,7 @@ public class ControladorEventos extends Controller {
 		
 		tarefa.update();
 		
-		Evento evento = eventoDAO.comId(form.getEvento());
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
 		Estudo estudo = tarefa.getEstudo();
 		if(estudo.isTipo()) {
@@ -62,7 +62,7 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
-		Evento evento = eventoDAO.comId(form.getEvento());
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
@@ -91,7 +91,7 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
-		Evento evento = eventoDAO.comId(form.getEvento());
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
@@ -110,7 +110,7 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();		
-		Evento evento = eventoDAO.comId(form.getEvento());
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		Estudo estudo = tarefa.getEstudo();
 		
 		if(estudo.isTipo()) {
@@ -125,7 +125,7 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();		
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();		
-		Evento evento = eventoDAO.comId(form.getEvento());
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
 		String data = calcularDataPagamento(evento.getData());
 		
@@ -136,7 +136,7 @@ public class ControladorEventos extends Controller {
 		
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
-		Evento evento = eventoDAO.comId(form.getEvento());
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
 		Estudo estudo = tarefa.getEstudo();
 		if(estudo.isTipo()) {
@@ -146,6 +146,15 @@ public class ControladorEventos extends Controller {
 		}
 		
 		return ok(estudo0participe.render(tarefa, inscricaoForm, evento));
+	}
+	
+	public Result mostrarInscricao() {
+		
+		Inscricao form = inscricaoForm.bindFromRequest().get();
+		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
+		
+		return ok(estudo1inscricao.render(tarefa, inscricaoForm, evento));
 	}
 	
 	public String calcularDataEvento(int data, String separador) {

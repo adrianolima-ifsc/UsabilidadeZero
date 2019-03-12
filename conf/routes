@@ -25,6 +25,7 @@ POST	/evento/local						controllers.ControladorEventos.mostrarLocal
 POST	/evento/informacoes					controllers.ControladorEventos.mostrarInformacoes
 POST	/evento/pagamento					controllers.ControladorEventos.mostrarPagamento
 POST	/evento/participe					controllers.ControladorEventos.mostrarParticipe
+POST	/evento/inscricao					controllers.ControladorEventos.mostrarInscricao
 
 GET 	/usuario 							controllers.ControladorUsuario.lista
 # GET 	/usuario/novo 						controllers.ControladorUsuario.novoUsuario
