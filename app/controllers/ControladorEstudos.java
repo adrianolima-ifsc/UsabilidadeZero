@@ -131,25 +131,22 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result concluirTarefa() {
 		
-		DynamicForm teste = testeForm.bindFromRequest();
-		Long id = Long.parseLong(teste.get("id"));
-		
-		Tarefa tarefa = tarefaDAO.comId(id).get();
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 		
 		Calendar calendario = Calendar.getInstance();
 		tarefa.setDataHoraFim(calendario.getTime());
 		
 		tarefa.setConcluidoPercebido(true);
 		
-		Boolean concluidoReal = Boolean.valueOf(teste.get("valor"));
-		tarefa.setConcluidoReal(concluidoReal);
+		tarefa.setConcluidoReal(form.isConcluidoReal());
 			
 		tarefa.update();
 		
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorio.render(estudo.getTarefas()));
+		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas()));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

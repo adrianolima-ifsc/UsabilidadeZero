@@ -81,10 +81,10 @@ public class ControladorEventos extends Controller {
 		Estudo estudo = tarefa.getEstudo();
 		if(estudo.isTipo()) {
 			
-			return ok(estudo1programa.render(tarefa, evento.getNome(), programa));
+			return ok(estudo1programa.render(tarefa, tarefaForm, evento.getNome(), programa));
 		}
 		
-		return ok(estudo0programa.render(tarefa, evento.getSigla(), programa));
+		return ok(estudo0programa.render(tarefa,tarefaForm, evento.getSigla(), programa));
 	}
 	
 	public Result mostrarLocal() {
@@ -103,7 +103,7 @@ public class ControladorEventos extends Controller {
 				"/" + Integer.toString(mes) +
 				"/" + Integer.toString(ano);
 		
-		return ok(estudo0local.render(tarefa, evento, dataInicial, dataFinal));
+		return ok(estudo0local.render(tarefa, tarefaForm, evento, dataInicial, dataFinal));
 	}
 	
 	public Result mostrarInformacoes() {
@@ -115,10 +115,10 @@ public class ControladorEventos extends Controller {
 		
 		if(estudo.isTipo()) {
 			
-			return ok(estudo1informacoes.render(tarefa, evento));
+			return ok(estudo1informacoes.render(tarefa, tarefaForm, evento));
 		}
 
-		return ok(estudo0informacoes.render(tarefa, evento));
+		return ok(estudo0informacoes.render(tarefa, tarefaForm, evento));
 	}
 	
 	public Result mostrarPagamento() {
@@ -129,7 +129,7 @@ public class ControladorEventos extends Controller {
 		
 		String data = calcularDataPagamento(evento.getData());
 		
-		return ok(estudo0pagamento.render(tarefa, evento, data));
+		return ok(estudo0pagamento.render(tarefa, tarefaForm, evento, data));
 	}
 	
 	public Result mostrarParticipe() {
@@ -142,10 +142,10 @@ public class ControladorEventos extends Controller {
 		if(estudo.isTipo()) {
 			
 			String data = calcularDataPagamento(evento.getData());
-			return ok(estudo1participe.render(tarefa, inscricaoForm, evento, data));
+			return ok(estudo1participe.render(tarefa, tarefaForm, inscricaoForm, evento, data));
 		}
 		
-		return ok(estudo0participe.render(tarefa, inscricaoForm, evento));
+		return ok(estudo0participe.render(tarefa, tarefaForm, inscricaoForm, evento));
 	}
 	
 	public Result mostrarInscricao() {
@@ -154,7 +154,7 @@ public class ControladorEventos extends Controller {
 		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
 		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
-		return ok(estudo1inscricao.render(tarefa, inscricaoForm, evento));
+		return ok(estudo1inscricao.render(tarefa, tarefaForm, inscricaoForm, evento));
 	}
 	
 	public String calcularDataEvento(int data, String separador) {

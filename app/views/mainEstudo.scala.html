@@ -1,4 +1,6 @@
-@(title: String, tarefa: Tarefa, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+@(title: String, tarefa: Tarefa, tarefaForm: Form[Tarefa], styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+
+@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col", "col") }
 
 @helper.javascriptRouter("jsRoutes")(
     routes.javascript.ControladorEstudos.adicionaCliquesTarefa,
@@ -35,8 +37,22 @@
     	    				"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais"</span>
     	    			</div>
     	    			<div class="col-auto text-right">
-    	    				<button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
-    	    				<button id="desistir-tarefa" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-relatorio">Desistir</button>
+                            <div class="row">
+                                <div class="col"> 
+                                    @b3.formCSRF(routes.ControladorEstudos.concluirTarefa,
+                                        'role -> "form") {
+
+                                        @b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+                                        @b3.hidden( tarefaForm("evento"), 'value -> tarefa.getEvento )
+                                        @b3.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
+
+                                        <button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
+                                    }
+                                </div>
+                                <div class="col">                            
+            	    				<button id="desistir-tarefa" class="btn btn-sm btn-danger">Desistir</button>
+                                </div>
+                            </div>
     	    			</div>
     	    		</div>
         		</div>
@@ -44,24 +60,6 @@
 		</header>
 		<main role="main">
 			@content
-
-            <!-- Modal -->
-            <div class="modal fade" id="modal-relatorio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Relatório da Tarefa</h5>
-                        </div>
-                        <div class="modal-body" id="conteudo">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 		</main>
         <footer>
             <div class="container">
@@ -74,7 +72,7 @@
         <script src="@routes.Assets.versioned("js/outros/jquery.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/popper.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/bootstrap.min.js")"></script>
-		<script src="@routes.Assets.versioned("js/tarefa.js")"></script>
+		<script src="@routes.Assets.versioned("js/contador-cliques.js")"></script>
         @scripts
     </body>
 </html>
