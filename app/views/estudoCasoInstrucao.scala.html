@@ -1,38 +1,36 @@
 @(estudoForm : Form[Estudo], tipo : Boolean)
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
-<div class="row">
-	<div>
-		@if(tipo) {
-			<h2 class="text-center">Estudo de Caso 1</h2>
-			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
-			cuja <strong>interface procura atender a princípios de usabilidade</strong>. Esse ambiente é um "Portal de Eventos". 
-			Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
-		} else {
-			<h2 class="text-center">Estudo de Caso 0</h2>
-			<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
-			cuja interface teve sua <strong>usabilidade propositalmente reduzida</strong>. Esse ambiente é um "Portal de Eventos". 
-			Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
-		}
-		<p>Nenhuma dica ou orientação será dada durante a execução das tarefas. 
-		Caso você entenda que elas já foram concluídas, você deve clicar no botão "Concluir", 
-		localizado no canto superior direito da sua tela. 
-		Você também pode desistir da tarefa a qualquer momento. 
-		Basta clicar no botão "Desistir", também no canto superior direito da tela.</p>
-		<p>Após executar as 3 tarefas, você deve ainda preencher um rápido questionário de avaliação da atividade. 
-		No final, você receberá um relatório com os resultados de sua participação para que você possa analisar 
-		o seu desempenho neste estudo de caso.</p>
-	</div>	
-	<div class="text-center">
-		@b3.formCSRF(routes.ControladorEstudos.iniciarEstudoDeCaso, 
-			'id -> "loginform", 
-			'class -> "form-horizontal", 
-			'role -> "form") {
+<div>
+	@if(tipo) {
+		<h2 class="text-center">Estudo de Caso 1</h2>
+		<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
+		cuja <strong>interface procura atender a princípios de usabilidade</strong>. Esse ambiente é um "Portal de Eventos". 
+		Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
+	} else {
+		<h2 class="text-center">Estudo de Caso 0</h2>
+		<p>Neste estudo de caso, você vai ser solicitado a executar 3 tarefas em um ambiente 
+		cuja interface teve sua <strong>usabilidade propositalmente reduzida</strong>. Esse ambiente é um "Portal de Eventos". 
+		Nesse portal é possível  ver detalhes e inscrever-se nos eventos e também emitir certificados de participação.</p>
+	}
+	<p>Nenhuma dica ou orientação será dada durante a execução das tarefas. 
+	Caso você entenda que elas já foram concluídas, você deve clicar no botão "Concluir", 
+	localizado no canto superior direito da sua tela. 
+	Você também pode desistir da tarefa a qualquer momento. 
+	Basta clicar no botão "Desistir", também no canto superior direito da tela.</p>
+	<p>Após executar as 3 tarefas, você deve ainda preencher um rápido questionário de avaliação da atividade. 
+	No final, você receberá um relatório com os resultados de sua participação para que você possa analisar 
+	o seu desempenho neste estudo de caso.</p>
+</div>	
+<div class="text-center">
+	@b4.formCSRF(routes.ControladorEstudos.iniciarEstudoDeCaso, 
+		'id -> "loginform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
 
-			@b3.hidden( estudoForm("tipo"), 'value -> tipo )
-			
-			<input type="submit" value="Iniciar" class="btn btn-primary center-block">
-		}
-	</div>
+		@b4.hidden( estudoForm("tipo"), 'value -> tipo )
+		
+		<input type="submit" value="Iniciar" class="btn btn-primary center-block">
+	}
 </div>
