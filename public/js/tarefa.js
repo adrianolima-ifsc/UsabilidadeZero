@@ -17,34 +17,9 @@ function adicionaCliques() {
 	$.get(jsRoutes.controllers.ControladorEstudos.adicionaCliquesTarefa(idTarefa))
 }
 
-var botaoConcluir = $("#concluir-tarefa");
-var botaoDesistir = $("#desistir-tarefa");
-
-botaoConcluir.click(function() {
+$("#valor").change(function() {
 
 	let valor = $('[name="valor"]').val();
 
-	let tarefa = {
-		id: idTarefa,
-		valor: valor
-	}
-
-	$.post(jsRoutes.controllers.ControladorEstudos.concluirTarefa(), tarefa, function(data) {
-
-		$('#conteudo').html(data);
-
-		$('#modal-relatorio').modal({
-			keyboard: false,
-			backdrop: 'static'});
-		$('#modal-relatorio').modal('toggle');
-	});
-
-	botaoConcluir.attr("disabled", true);
-	botaoDesistir.attr("disabled", true);
-
-	console.log(this);
-})
-
-$("#desistir-tarefa").click(function() {
-	console.log("Desistir");
-})
+	$('[name="concluidoReal"]').val(valor);
+});

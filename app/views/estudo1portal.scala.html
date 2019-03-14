@@ -1,6 +1,6 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], eventos: List[Evento])
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
@@ -42,13 +42,13 @@
 			@for(evento <- eventos) {
 				@if(evento.getData >= 0) {
 					<div id="myDIV" class="col-md-4">
-						@b3.formCSRF(routes.ControladorEventos.detalhar, 
+						@b4.formCSRF(routes.ControladorEventos.detalhar, 
 							'id -> "tarefaform", 
 							'role -> "form") {
 
-							@b3.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
-							@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-							@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+							@b4.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
+							@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+							@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 								
 							<button type="submit" class="card card-body mb-4 w-100 box-shadow">
 								<h5 class="cart-title">@evento.getSigla</h5>

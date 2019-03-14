@@ -1,11 +1,15 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], inscricaoForm: Form[Inscricao], evento: Evento)
 
-@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col", "col") }
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-4", "col-8") }
 
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> 
 	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
+}
+
+@scripts = {
+	<script src="@routes.Assets.versioned("js/teste.js")"></script>
 }
 							
 @valores = @{ Seq(
@@ -13,7 +17,7 @@
 	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
 )}
 
-@mainEstudo("Tarefa 1", tarefa, tarefaForm, styles) {
+@mainEstudo("Tarefa 1", tarefa, tarefaForm, styles, scripts) {
 
 <section class="jumbotron text-center">
 	<div class="container">
@@ -23,38 +27,38 @@
 
 <div class="container w-50">
 	<h1 class="text-center">Inscrição</h1>
-	@b3.formCSRF(routes.ControladorEstudos.concluirTarefa,
+	@b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
 		'role -> "form") {
 
-		@b3.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
-		@b3.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+		@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+		@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
 
 		<h4 class="mb-3">Participante</h4>
-		@b3.text( inscricaoForm("nome"), '_label -> "Nome" )
-		@b3.text( inscricaoForm("email"), '_label -> "Email" )
-		@b3.text( inscricaoForm("fone"), '_label -> "Fone" )
-		@b3.text( inscricaoForm("cpf"), '_label -> "CPF" )
-		@b3.text( inscricaoForm("endereco"), '_label -> "Endereço" )
-		@b3.text( inscricaoForm("cidade"), '_label -> "Cidade" )
+		@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
+		@b4.text( inscricaoForm("email"), '_label -> "Email" )
+		@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
+		@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
+		@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
+		@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
 
 		<h4 class="mb-3">Pagamento</h4>
 		<div class="row">
 			<div class="col">
-				@b3.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
+				@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
 			</div>
 			<div class="col"> 
-				@b3.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
+				@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
 			</div>
 		</div>
 		<div class="row"> 
 			<div class="col-3"> 
-				@b3.text( inscricaoForm("validade"), '_label -> "Validade" )
+				@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
 			</div>
 			<div class="col-3"> 
-				@b3.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
+				@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
 			</div>
 		</div>
-		@b3.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+		@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 			
 		<input type="submit" value="Participe" class="btn btn-primary">
 	} 

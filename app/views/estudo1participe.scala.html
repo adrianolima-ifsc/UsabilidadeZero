@@ -1,19 +1,16 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], inscricaoForm: Form[Inscricao], evento: Evento, data: String)
 
-@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col", "col") }
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col", "col") }
 
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> 
 	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
 }
-							
-@valores = @{ Seq(
-	"true"->("R$ " + evento.getPreco.toString), 
-	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
-)}
 
-@mainEstudo("Tarefa 1", tarefa, tarefaForm, styles) {
+@scripts = {}
+
+@mainEstudo("Tarefa 1", tarefa, tarefaForm, styles, scripts) {
 
 <section class="jumbotron text-center">
 	<div class="container">
@@ -37,12 +34,12 @@
 
 	<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
 
-	@b3.formCSRF(routes.ControladorEventos.mostrarInscricao,
+	@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
 		'role -> "form") {
 
-		@b3.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
-		@b3.hidden( inscricaoForm("evento"), 'value -> evento.getId )
-		@b3.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
+		@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+		@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+		@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
 			
 		<input type="submit" value="Participe" class="btn btn-primary">
 	} 

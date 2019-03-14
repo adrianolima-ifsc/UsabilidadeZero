@@ -1,6 +1,6 @@
 @(title: String, tarefa: Tarefa, tarefaForm: Form[Tarefa], styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
 
-@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col", "col") }
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col", "col") }
 
 @helper.javascriptRouter("jsRoutes")(
     routes.javascript.ControladorEstudos.adicionaCliquesTarefa,
@@ -39,12 +39,12 @@
     	    			<div class="col-auto text-right">
                             <div class="row">
                                 <div class="col"> 
-                                    @b3.formCSRF(routes.ControladorEstudos.concluirTarefa,
+                                    @b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
                                         'role -> "form") {
 
-                                        @b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-                                        @b3.hidden( tarefaForm("evento"), 'value -> tarefa.getEvento )
-                                        @b3.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
+                                        @b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+                                        @b4.hidden( tarefaForm("evento"), 'value -> tarefa.getEvento )
+                                        @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
 
                                         <button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
                                     }
@@ -72,7 +72,7 @@
         <script src="@routes.Assets.versioned("js/outros/jquery.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/popper.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/bootstrap.min.js")"></script>
-		<script src="@routes.Assets.versioned("js/contador-cliques.js")"></script>
+		<script src="@routes.Assets.versioned("js/tarefa.js")"></script>
         @scripts
     </body>
 </html>

@@ -1,6 +1,6 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], evento: Evento, data: String)
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
@@ -36,48 +36,48 @@
 	</div>
 	<div class="row">
 		<div class="col"> 
-			@b3.formCSRF(routes.ControladorEventos.mostrarParticipe,
+			@b4.formCSRF(routes.ControladorEventos.mostrarParticipe,
 				'class -> "form-horizontal botao-evento", 
 				'role -> "form") {
 
-				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 					
 				<input type="submit" value="Participe" class="btn btn-primary btn-block">
 			} 
 		</div>
 
 		<div class="col"> 
-			@b3.formCSRF(routes.ControladorEventos.mostrarPrograma,
+			@b4.formCSRF(routes.ControladorEventos.mostrarPrograma,
 				'class -> "form-horizontal botao-evento", 
 				'role -> "form") {
 
-				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 					
 				<input type="submit" value="Programa" class="btn btn-secondary btn-block">
 			} 
 		</div>
 
 		<div class="col"> 
-			@b3.formCSRF(routes.ControladorEventos.mostrarInformacoes,
+			@b4.formCSRF(routes.ControladorEventos.mostrarInformacoes,
 				'class -> "form-horizontal botao-evento", 
 				'role -> "form") {
 
-				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 					
 				<input type="submit" value="Informações" class="btn btn-secondary btn-block">
 			} 
 		</div>
 
 		<div class="col"> 
-			@b3.formCSRF(routes.ControladorEventos.mostrarPagamento,
+			@b4.formCSRF(routes.ControladorEventos.mostrarPagamento,
 				'class -> "form-horizontal botao-evento", 
 				'role -> "form") {
 
-				@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
+				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 					
 				<input type="submit" value="Pagamento" class="btn btn-danger btn-block">
 			} 

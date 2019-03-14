@@ -1,13 +1,11 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], tarefas: List[Tarefa])
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
-
 @styles = {
     <link href="@routes.Assets.versioned("css/relatorio.css")" rel="stylesheet">
 }
 
 @scripts = {
-	<script src="@routes.Assets.versioned("js/teste.js")"></script>
+	<script src="@routes.Assets.versioned("js/concluir-tarefa.js")"></script>
 }
 
 @import java.util.Calendar
