@@ -25,21 +25,20 @@
 
 @mainEstudo("Tarefa 1", tarefa, tarefaForm, styles, scripts) {
 
-
 <div id="tabela" class="container w-50">
 	<h3 class="text-center">Relatório</h3>
 	<table class="table table-hover">
 		<thead>
 			<th>ID Tarefa</th>
-			<th>Eficiência</th>
-			<th>Eficácia</th>
+			<th>Tempo</th>
+			<th>Cliques</th>
 			<th>Concluído Percebido</th>
 			<th>Concluído Real</th>
 		</thead>
 		<tbody>
 			@for(tarefa <- tarefas) {
 			<tr>
-				<td>Tarefa @tarefa.getId</td>
+				<td>@tarefa.getCodigo</td>
 				<td>@{(tarefa.getDataHoraFim.getTime - tarefa.getDataHoraInicio.getTime)/1000;} s</td>
 				<td>@tarefa.getCliques</td>
 				<td>@tarefa.isConcluidoPercebido</td>
@@ -48,5 +47,6 @@
 			}
 		</tbody>
 	</table>
+	<a class="btn btn-primary" href="@routes.ControladorEstudos.iniciarTarefa2">Próxima Tarefa</a>
 </div>
 }
