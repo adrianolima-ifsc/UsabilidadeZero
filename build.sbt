@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
 	guice,
 	"mysql" % "mysql-connector-java" % "8.0.11",
 	"org.webjars" % "bootstrap" % "3.3.6",
-	"com.adrianhurt" %% "play-bootstrap" % "1.4-P26-B3-SNAPSHOT",
+	"com.adrianhurt" %% "play-bootstrap" % "1.4-P26-B4-SNAPSHOT",
 	"com.typesafe.play" %% "play-mailer" % "6.0.1",
 	"com.typesafe.play" %% "play-mailer-guice" % "6.0.1"
 )
