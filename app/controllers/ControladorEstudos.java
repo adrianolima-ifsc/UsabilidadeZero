@@ -125,7 +125,7 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarTarefa2() {
 		
-		return ok();
+		return ok("tarefa 2");
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -152,7 +152,23 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result desistirTarefa() {
 		
-		return ok();
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
+		
+		Calendar calendario = Calendar.getInstance();
+		tarefa.setDataHoraFim(calendario.getTime());
+		
+		tarefa.setConcluidoPercebido(false);
+		tarefa.setConcluidoReal(false);
+		
+		tarefa.setConcluidoReal(form.isConcluidoReal());
+			
+		tarefa.update();
+		
+		Long idEstudo = tarefa.getEstudo().getId();
+		Estudo estudo = estudoDAO.comId(idEstudo).get();
+		
+		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas()));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

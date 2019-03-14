@@ -49,8 +49,16 @@
                                         <button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
                                     }
                                 </div>
-                                <div class="col">                            
-            	    				<button id="desistir-tarefa" class="btn btn-sm btn-danger">Desistir</button>
+                                <div class="col"> 
+                                    @b4.formCSRF(routes.ControladorEstudos.desistirTarefa,
+                                        'role -> "form") {
+
+                                        @b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+                                        @b4.hidden( tarefaForm("evento"), 'value -> tarefa.getEvento )
+                                        @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
+
+                                        <button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
+                                    }
                                 </div>
                             </div>
     	    			</div>
