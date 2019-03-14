@@ -44,3 +44,12 @@ a:hover {
 .botao-evento {
 	display: inline-block;
 }
+
+.card {
+	border-radius: 0;
+}
+
+.col-auto {
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+}

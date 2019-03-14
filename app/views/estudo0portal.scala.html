@@ -1,6 +1,6 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], eventos: List[Evento])
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @styles = {
 	<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
@@ -13,35 +13,43 @@
 @mainEstudo("Tarefa 1", tarefa, tarefaForm, styles, scripts) {
 <div>
 	<h1>Portal de Eventos</h1>
-	<div class="container">
-		<div class="row col-md-8 col-md-offset-2">
-			<p hidden>Tarefa: <span>@tarefa.getId</span></p>
+	<div class="container w-50">
+		<div class="row">
 			@for(evento <- eventos) {
-			<div class="col-xs-6 col-sm-4 col-md-3">
-				@b3.formCSRF(routes.ControladorEventos.detalhar, 
-					'id -> "tarefaform", 
-					'class -> "form-horizontal thumbnail evento", 
-					'role -> "form") {
+				<div class="col-3"> 
+					@b4.formCSRF(routes.ControladorEventos.detalhar, 
+						'id -> "tarefaform", 
+						'role -> "form") {
 
-					@b3.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
-					@b3.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-					@b3.hidden( tarefaForm("evento"), 'value -> evento.getId )
-						
-					<input type="submit" value="@evento.getSigla" class="evento">
-				}
-			</div>
+						@b4.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
+						@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+						@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
+							
+						<input type="submit" value="@evento.getSigla" class="card card-body mb-4 w-100 evento">
+					}
+				</div>
 			}
 		</div>
-	</div>
-</div>
-<div>
-	<div class="container">
-		<div class="row text-center">
-			<a href="#">Sobre |</a>
-			<a href="#">Contato |</a>
-			<a href="#">Endereço |</a>
-			<a href="#">Certificados |</a>
-			<a href="#">Siga-nos nas redes sociais</a>
+		<div class="row text-center rodape">
+			<div class="col-auto">
+				<a href="#">Sobre</a>
+			</div>
+			<div class="col-auto"><p>|</p></div>
+			<div class="col-auto">
+				<a href="#">Contato</a>
+			</div>
+			<div class="col-auto"><p>|</p></div>
+			<div class="col-auto">
+				<a href="#">Endereço</a>
+			</div>
+			<div class="col-auto"><p>|</p></div>
+			<div class="col-auto">
+				<a href="#">Certificados</a>
+			</div>
+			<div class="col-auto"><p>|</p></div>
+			<div class="col-auto">
+				<a href="#">Siga-nos nas redes sociais</a>
+			</div>
 		</div>
 	</div>
 </div>
