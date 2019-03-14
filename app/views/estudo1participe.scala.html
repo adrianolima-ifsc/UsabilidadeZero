@@ -8,7 +8,11 @@
 	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
 }
 
-@scripts = {}
+@scripts = {
+	<script type="text/javascript">
+		$('[name="concluidoReal"]').val(true);
+	</script>
+}
 
 @mainEstudo("Tarefa 1", tarefa, tarefaForm, styles, scripts) {
 

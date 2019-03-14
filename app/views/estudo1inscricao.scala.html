@@ -8,9 +8,7 @@
 	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
 }
 
-@scripts = {
-	<script src="@routes.Assets.versioned("js/teste.js")"></script>
-}
+@scripts = {}
 							
 @valores = @{ Seq(
 	"true"->("R$ " + evento.getPreco.toString), 
@@ -51,10 +49,10 @@
 			</div>
 		</div>
 		<div class="row"> 
-			<div class="col-3"> 
+			<div class="col"> 
 				@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
 			</div>
-			<div class="col-3"> 
+			<div class="col"> 
 				@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
 			</div>
 		</div>
