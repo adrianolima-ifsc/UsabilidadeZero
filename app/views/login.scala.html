@@ -1,6 +1,6 @@
 @(usuarioForm : Form[Usuario])
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @styles = {
 	<link href="@routes.Assets.versioned("css/login.css")" rel="stylesheet" media="screen">
@@ -18,15 +18,15 @@
 			@notificacoes()
 			<div class="row">						
 				<div class="col-xs-6 col-sm-6 col-md-6 login-box" style="padding-right:20px; border-right: 1px solid #ccc;">	                           
-					@b3.formCSRF(routes.ControladorUsuario.entrar, 
+					@b4.formCSRF(routes.ControladorUsuario.entrar, 
 						'id -> "loginform", 
 						'class -> "form-horizontal", 
 						'role -> "form") {
-						@b3.email(usuarioForm("email"), 
+						@b4.email(usuarioForm("email"), 
 							'_label -> "Email", 
 							'placeholder -> "Seu email",
 							'autocomplete -> false)
-						@b3.password(usuarioForm("senha"), 
+						@b4.password(usuarioForm("senha"), 
 							'_label -> "Senha",
 							'placeholder -> "Sua senha",
 							'autocomplete -> false) 

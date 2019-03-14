@@ -14,21 +14,18 @@
 
 @main("Painel", styles, scripts) {
 <div class="row">
-    <div class="col-md-2">
-        <nav class="nav-sidebar">
-            <ul class="nav">
-                <li class="active"><a href="javascript:;">Executar</a></li>
-                <li><a href="@routes.HomeController.mostrarEstudoDeCaso(false)">Estudo de Caso 0</a></li>
-                <li><a href="@routes.HomeController.mostrarEstudoDeCaso(true)">Estudo de Caso 1</a></li>
-                <li class="active"><a href="javascript:;">Ajuda</a></li>
-                <li><a href="javascript:;">Como usar</a></li>
-                <li><a href="@routes.HomeController.mostrarSobre">Sobre</a></li>
-                <li class="nav-divider"></li>
-                <li class="active"><a href="@routes.ControladorUsuario.sair"><i class="glyphicon glyphicon-off"></i> Sair</a></li>
+    <nav class="col-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a class="nav-link active" href="#">Executar</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarEstudoDeCaso(false)">Estudo de Caso 0</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarEstudoDeCaso(true)">Estudo de Caso 1</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Ajuda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Como usar</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarSobre">Sobre</a></li>
+                <li class="nav-item"><a class="nav-link active" href="@routes.ControladorUsuario.sair"><i class="glyphicon glyphicon-off"></i> Sair</a></li>
             </ul>
-        </nav>
-    </div>
-	<div class="col-md-8">
+    </nav>
+	<div class="col-9">
 		@conteudo
 	</div>
 </div>

@@ -1,27 +1,22 @@
 @(estudo: Estudo, estudoForm: Form[Estudo], usuario: Usuario)
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @import helper._
 
 @main("Tarefa 1") {
-<div class="row">
-   	<div class="container text-center">
-   		<div class="col-md-6 col-md-offset-3">
-	   		<h2>Tarefa 1</h2>
-	 		<h4>Você deve descobrir o valor de inscrição do próximo @estudo.isTipo
-	   		"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais</h4>
+<div class="container w-50 text-center">
+   	<h2>Tarefa 1</h2>
+ 	<h5>Você deve descobrir o valor de inscrição do próximo "Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais"</h5>
 
-			@b3.formCSRF(routes.ControladorEstudos.iniciarTarefa1, 
-				'id -> "estudoform", 
-				'class -> "form-horizontal", 
-				'role -> "form") {
+	@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa1, 
+		'id -> "estudoform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
 
-				@b3.hidden( estudoForm("id"), 'value -> estudo.getId )
+		@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
 
-				<input type="submit" value="Iniciar" class="btn btn-primary">
-			}
-		</div>
-	</div>
+		<input type="submit" value="Iniciar" class="btn btn-primary">
+	}
 </div>
 }

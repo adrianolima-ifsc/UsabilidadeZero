@@ -1,6 +1,6 @@
 @(estudo: Estudo, estudoForm: Form[Estudo], usuario: Usuario)
 
-@implicitFieldConstructor = @{ b3.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @import helper._
 
@@ -11,12 +11,12 @@
 	   		<h2>Tarefa 2</h2>
 	 		<h4>Você deve fazer a inscrição no evento encontrado com o respectivo pagamento</h4>
 
-			@b3.formCSRF(routes.ControladorEstudos.iniciarTarefa1, 
+			@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa1, 
 				'id -> "estudoform", 
 				'class -> "form-horizontal", 
 				'role -> "form") {
 
-				@b3.hidden( estudoForm("id"), 'value -> estudo.getId )
+				@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
 
 				<input type="submit" value="Iniciar" class="btn btn-primary">
 			}
