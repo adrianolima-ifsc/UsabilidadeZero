@@ -42,20 +42,39 @@ public class ControladorEventos extends Controller {
 		
 		Long cliquesForm = form.getCliques();
 		if (cliquesForm > tarefa.getCliques()) tarefa.setCliques(cliquesForm);
-		
 		tarefa.update();
 		
 		Evento evento = eventoDAO.comId(form.getEvento()).get();
+		evento.setPrograma(calcularPrograma(evento));
 		
 		Estudo estudo = tarefa.getEstudo();
 		if(estudo.isTipo()) {
 			
 			String data = calcularDataEvento(evento.getData(), "-");
 			
-			return ok(estudo1evento.render(tarefa, tarefaForm, evento, data));
+			return ok(estudo1evento.render(tarefa, tarefaForm, evento, inscricaoForm, data));
 		}
 		
 		return ok(estudo0evento.render(tarefa, tarefaForm, evento));
+	}
+
+	private String calcularPrograma(Evento evento) {
+		
+		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
+		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) % 30;
+		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + evento.getData()) / 30) + 1;
+		
+		String dia1 = Integer.toString(dia) + "/" + Integer.toString(mes);
+		String dia2 = Integer.toString(dia + 1) + "/" + Integer.toString(mes);
+		String dia3 = Integer.toString(dia + 2) + "/" + Integer.toString(mes);
+		
+		String programa = evento.getPrograma();
+		
+		programa = programa.replace("@dia1", dia1);
+		programa = programa.replace("@dia2", dia2);
+		programa = programa.replace("@dia3", dia3);
+		
+		return programa;
 	}
 
 	public Result mostrarPrograma() {

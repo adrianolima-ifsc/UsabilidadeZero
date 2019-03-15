@@ -1,4 +1,4 @@
-@(tarefa: Tarefa, tarefaForm: Form[Tarefa], evento: Evento, data: String)
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], evento: Evento, inscricaoForm: Form[Inscricao], data: String)
 
 @implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
@@ -9,6 +9,11 @@
 }
 
 @scripts = {}
+							
+@valores = @{ Seq(
+	"true"->("R$ " + evento.getPreco.toString), 
+	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
+)}
 
 @mainEstudo("Tarefa 1", tarefa, tarefaForm, styles) {
 
@@ -32,60 +37,62 @@
 
 <div class="container w-50">
 	<ul class="nav nav-tabs" id="opcoes-tab" role="tablist">
-		<li class="nav-item"> 
-			@b4.formCSRF(routes.ControladorEventos.mostrarParticipe,
-				'class -> "form-horizontal botao-evento", 
-				'role -> "form") {
-
-				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
-					
-				<input type="submit" value="Participe" class="btn btn-primary btn-block">
-			} 
+		<li class="nav-item">
+			<a class="nav-link active" id="o-evento-tab" data-toggle="tab" href="#o-evento" role="tab" aria-controls="o-evento" aria-selected="true">O Evento</a>
 		</li>
-
 		<li class="nav-item"> 
-			<a class="nav-link" id="programa-tab" data-toggle="tab" href="#programa" role="tab" aria-controls="programa" aria-selected="false">Programa</a>
-			@b4.formCSRF(routes.ControladorEventos.mostrarPrograma,
-				'class -> "form-horizontal botao-evento", 
-				'role -> "form") {
-
-				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
-					
-				<input type="submit" value="Programa" class="btn btn-secondary btn-block">
-			} 
+			<a class="nav-link" id="programa-tab" data-toggle="tab" href="#programa" role="tab" aria-controls="programa" aria-selected="false">Programação</a>
 		</li>
-
 		<li class="nav-item"> 
-			@b4.formCSRF(routes.ControladorEventos.mostrarInformacoes,
-				'class -> "form-horizontal botao-evento", 
-				'role -> "form") {
-
-				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
-					
-				<input type="submit" value="Informações" class="btn btn-secondary btn-block">
-			} 
+			<a class="nav-link" id="informacao-tab" data-toggle="tab" href="#informacao" role="tab" aria-controls="informacao" aria-selected="false">Informações</a>
 		</li>
-
-		<li class="nav-item"> 
-			@b4.formCSRF(routes.ControladorEventos.mostrarPagamento,
-				'class -> "form-horizontal botao-evento", 
-				'role -> "form") {
-
-				@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-				@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
-					
-				<input type="submit" value="Pagamento" class="btn btn-danger btn-block">
-			} 
+		<li class="nav-item">
+			<a class="nav-link" id="inscricao-tab" data-toggle="tab" href="#inscricao" role="tab" aria-controls="inscricao" aria-selected="false">Inscricao</a>
 		</li>
 	</ul>
 	<div class="tab-content" id="conteudo-tab">
+		<div class="tab-pane fade show active" id="o-evento" role="tabpanel" aria-labelledby="o-evento-tab">@Html(evento.getDescricao())</div>
 		<div class="tab-pane fade" id="programa" role="tabpanel" aria-labelledby="programa-tab">@Html(evento.getPrograma)</div>
-	</div>
-	<div class="text-justify">
-		@Html(evento.getDescricao())
+		<div class="tab-pane fade" id="informacao" role="tabpanel" aria-labelledby="informacao-tab">
+		@Html(evento.getInformacoes)</div>
+		<div class="tab-pane fade" id="inscricao" role="tabpanel" aria-labelledby="inscricao-tab">
+			<h1 class="text-center">Inscrição</h1>
+			@b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
+				'role -> "form") {
+
+				@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+				@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+
+				<h4 class="mb-3">Participante</h4>
+				@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
+				@b4.text( inscricaoForm("email"), '_label -> "Email" )
+				@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
+				@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
+				@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
+				@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
+
+				<h4 class="mb-3">Pagamento</h4>
+				<div class="row">
+					<div class="col">
+						@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
+					</div>
+					<div class="col"> 
+						@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col"> 
+						@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
+					</div>
+					<div class="col"> 
+						@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
+					</div>
+				</div>
+				@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+					
+				<input type="submit" value="Participe" class="btn btn-primary">
+			} 
+		</div>
 	</div>
 </div>
 }

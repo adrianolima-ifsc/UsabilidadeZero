@@ -38,7 +38,7 @@
 		<tbody>
 			@for(tarefa <- tarefas) {
 			<tr>
-				<td>1 @tarefa.getCodigo</td>
+				<td>@tarefa.getCodigo</td>
 				<td>@{(tarefa.getDataHoraFim.getTime - tarefa.getDataHoraInicio.getTime)/1000;} s</td>
 				<td>@tarefa.getCliques</td>
 				<td>@tarefa.isConcluidoPercebido</td>
