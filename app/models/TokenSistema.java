@@ -20,7 +20,7 @@ public class TokenSistema extends Model {
 	@OneToOne
 	private Usuario usuario;	
 	@OneToOne(mappedBy = "token")
-	private Tarefa tarefa;
+	private Estudo estudo;
 	private String codigo;
 	private Date expiracao;
 	
@@ -39,12 +39,12 @@ public class TokenSistema extends Model {
 		return usuario;
 	}
 	
-	public Tarefa getTarefa() {
-		return tarefa;
+	public Estudo getEstudo() {
+		return estudo;
 	}
 
-	public void setTarefa(Tarefa tarefa) {
-		this.tarefa = tarefa;
+	public void setEstudo(Estudo estudo) {
+		this.estudo = estudo;
 	}
 
 	public String getCodigo() {
