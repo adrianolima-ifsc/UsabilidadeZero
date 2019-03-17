@@ -26,8 +26,6 @@ public class Tarefa extends Model {
 	public Long cliques;
 	public boolean concluidoReal;
 	public boolean concluidoPercebido;
-	@OneToOne
-	private TokenSistema token;
 
 	public static Finder<Long, Tarefa> find = new Finder<>(Tarefa.class);
 
@@ -110,13 +108,5 @@ public class Tarefa extends Model {
 
 	public void setEvento(Long evento) {
 		this.evento = evento;
-	}
-
-	public TokenSistema getToken() {
-		return token;
-	}
-
-	public void setToken(TokenSistema token) {
-		this.token = token;
 	}
 }

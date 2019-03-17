@@ -25,4 +25,15 @@ public class EstudoDAO {
 		return Optional.ofNullable(estudo);
 	}
 
+	public Optional<Estudo> comToken(String codigo) {
+		
+		Estudo estudo = find
+				.query()
+				.where()
+				.eq("token.codigo", codigo)
+				.findOne();
+		
+		return Optional.ofNullable(estudo);
+	}
+
 }

@@ -13,50 +13,39 @@ public class Estudo extends Model {
 	
 	@Id
 	public Long id;	
-
 	@Constraints.Required
 	public boolean tipo;
-
 	@ManyToOne
 	public Usuario usuario;
-	
 	public Date data;
-
 	@OneToMany(mappedBy = "estudo")
 	public List<Tarefa> tarefas;
+	@OneToOne
+	private TokenSistema token;
 	
 	public static Finder<Long, Estudo> find = new Finder<>(Estudo.class);
 
-	public Long getId() {
-		return id;
+	public Estudo(boolean tipo, Usuario usuario, Date data) {
+
+		this.tipo = tipo;
+		this.usuario = usuario;
+		this.data = data;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getId() {
+		return id;
 	}
 
 	public boolean isTipo() {
 		return tipo;
 	}
 
-	public void setTipo(boolean tipo) {
-		this.tipo = tipo;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public Date getData() {
 		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public List<Tarefa> getTarefas() {
@@ -66,5 +55,12 @@ public class Estudo extends Model {
 	public void setTarefas(List<Tarefa> tarefas) {
 		this.tarefas = tarefas;
 	}
-	
-}
+
+	public TokenSistema getToken() {
+		return token;
+	}
+
+	public void setToken(TokenSistema token) {
+		this.token = token;
+	}
+	}

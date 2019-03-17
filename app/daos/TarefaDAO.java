@@ -25,15 +25,4 @@ public class TarefaDAO {
 		return Optional.ofNullable(tarefa);
 	}
 
-	public Optional<Tarefa> comToken(String codigo) {
-		
-		Tarefa tarefa = find
-				.query()
-				.where()
-				.eq("token.codigo", codigo)
-				.findOne();
-		
-		return Optional.ofNullable(tarefa);
-	}
-
 }
