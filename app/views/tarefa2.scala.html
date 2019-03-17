@@ -5,22 +5,18 @@
 @import helper._
 
 @main("Tarefa 2") {
-<div class="row">
-   	<div class="container text-center">
-   		<div class="col-md-6 col-md-offset-3">
-	   		<h2>Tarefa 2</h2>
-	 		<h4>Você deve fazer a inscrição no evento encontrado com o respectivo pagamento</h4>
+<div class="container w-50 text-center">
+	<h2>Tarefa 2</h2>
+	<h3>Você deve fazer a inscrição no evento encontrado com o respectivo pagamento</h3>
 
-			@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa1, 
-				'id -> "estudoform", 
-				'class -> "form-horizontal", 
-				'role -> "form") {
+	@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa2, 
+		'id -> "estudoform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
 
-				@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
+		@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
 
-				<input type="submit" value="Iniciar" class="btn btn-primary">
-			}
-		</div>
-	</div>
+		<input type="submit" value="Iniciar" class="btn btn-primary">
+	}
 </div>
 }
