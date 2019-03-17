@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import autenticadores.UsuarioAutenticado;
 import daos.EstudoDAO;
 import daos.EventoDAO;
@@ -16,20 +14,20 @@ import daos.TokenSistemaDAO;
 import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
-import models.Inscricao;
 import models.Tarefa;
 import models.TokenSistema;
 import models.Usuario;
-import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
-import play.filters.csrf.AddCSRFToken;
 import play.mvc.Controller;
-import play.mvc.Http;
-import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
-import views.html.*;
+import views.html.estudo0portal;
+import views.html.estudo1portal;
+import views.html.login;
+import views.html.relatorio;
+import views.html.tarefa1;
+import views.html.tarefa2;
 
 public class ControladorEstudos extends Controller {
 
@@ -46,8 +44,8 @@ public class ControladorEstudos extends Controller {
 	
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
-	private Form<Inscricao> inscricaoForm;
-	DynamicForm testeForm;
+	
+	Calendar calendario;
 
 	public static final String AUTH = "auth";
 	
@@ -56,66 +54,66 @@ public class ControladorEstudos extends Controller {
 
 		this.estudoForm = formFactory.form(Estudo.class);
 		this.tarefaForm = formFactory.form(Tarefa.class);
-		this.inscricaoForm = formFactory.form(Inscricao.class);
-		this.testeForm = formFactory.form();
+		this.calendario = Calendar.getInstance();
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarEstudoDeCaso() {
 		
-		Form<Estudo> form = estudoForm.bindFromRequest();
-		Estudo estudo = form.get();	
+		Estudo form = estudoForm.bindFromRequest().get();	
+		Estudo estudo;
 		
-		Calendar calendario = Calendar.getInstance();
-		estudo.setData(calendario.getTime());
-		
-        Usuario usuario = usuarioDAO.comToken(session(AUTH)).get();
-        estudo.setUsuario(usuario);
+		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
+		if(possivelEstudo.isPresent()) {
+			
+			estudo = possivelEstudo.get();
+
+			if(estudo.isTipo() ^ form.isTipo()) {
+			
+				estudo.setToken(null);
+				estudo.update();
+				estudo = criarNovoEstudo(form.isTipo());
+			}
+			
+		} else {
+			
+			estudo = criarNovoEstudo(form.isTipo());
+		}
 		
         estudo.save();
         
-		return ok(tarefa1.render(estudo, estudoForm, usuario));
+        switch (estudo.getTarefas().size()) {
+		
+        case 0:	return ok(tarefa1.render(estudo, estudoForm));
+
+        case 1: return ok(tarefa2.render(estudo, estudoForm));
+		
+        default: return ok("Erro!");
+		}
+        
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarTarefa1() {
 		
-		Form<Estudo> form = estudoForm.bindFromRequest();
-		Estudo formEstudo = form.get();	
+		Estudo form = estudoForm.bindFromRequest().get();	
 		
-		Estudo estudo = estudoDAO.comId(formEstudo.getId()).get();		
-		List<Evento> eventos = eventoDAO.mostraTodos();		
+		Estudo estudo = estudoDAO.comId(form.getId()).get();	
+		List<Evento> eventos = eventoDAO.mostraTodos();	
 		
-		Tarefa tarefa;
-		Optional<Tarefa> possivelTarefa = tarefaDAO.comToken(session(AUTH));
-		
-		if(possivelTarefa.isPresent()) {
-			
-			tarefa = possivelTarefa.get();
-			
-			if(tarefa.getEstudo().getId() != estudo.getId()) {
-				
-				tarefa.setToken(null);
-				tarefa.update();
-				tarefa = criarNovaTarefa(estudo);
-			}
-		
-		} else {
-			
-			tarefa = criarNovaTarefa(estudo);
-		}
+		Tarefa tarefa = new Tarefa(estudo, calendario.getTime());
 
 		if(estudo.isTipo()) {
 			
 			tarefa.setCodigo("EC11");
-			tarefa.update();
+			tarefa.save();
 			
 			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
 		
 		} else {
 			
 			tarefa.setCodigo("EC01");
-			tarefa.update();
+			tarefa.save();
 			
 			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
 		}
@@ -125,7 +123,27 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarTarefa2() {
 		
-		return ok("tarefa 2");
+		Estudo form = estudoForm.bindFromRequest().get();	
+		
+		Estudo estudo = estudoDAO.comId(form.getId()).get();	
+		List<Evento> eventos = eventoDAO.mostraTodos();	
+		
+		Tarefa tarefa = new Tarefa(estudo, calendario.getTime());
+
+		if(estudo.isTipo()) {
+			
+			tarefa.setCodigo("EC12");
+			tarefa.save();
+			
+			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
+		
+		} else {
+			
+			tarefa.setCodigo("EC02");
+			tarefa.save();
+			
+			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
+		}
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -134,7 +152,6 @@ public class ControladorEstudos extends Controller {
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 		
-		Calendar calendario = Calendar.getInstance();
 		tarefa.setDataHoraFim(calendario.getTime());
 		
 		tarefa.setConcluidoPercebido(true);
@@ -146,7 +163,7 @@ public class ControladorEstudos extends Controller {
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas()));
+		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -155,7 +172,6 @@ public class ControladorEstudos extends Controller {
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 		
-		Calendar calendario = Calendar.getInstance();
 		tarefa.setDataHoraFim(calendario.getTime());
 		
 		tarefa.setConcluidoPercebido(false);
@@ -168,7 +184,7 @@ public class ControladorEstudos extends Controller {
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas()));
+		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -187,17 +203,19 @@ public class ControladorEstudos extends Controller {
 	
 	public Tarefa criarNovaTarefa(Estudo estudo) {
 		
-		Calendar calendario = Calendar.getInstance();			
 		Tarefa tarefa = new Tarefa(estudo, calendario.getTime());
 		
-		TokenSistema token = tokenSistemaDAO.comCodigo(session(AUTH)).get();
-		token.setTarefa(tarefa);
-		token.update();
-		
-		tarefa.setToken(token);
-		
-		tarefa.save();
-		
 		return tarefa;
+	}
+	
+	public Estudo criarNovoEstudo(boolean tipo) {
+		
+		Usuario usuario = usuarioDAO.comToken(session(AUTH)).get();
+		Estudo estudo = new Estudo(tipo, usuario, calendario.getTime());
+		
+		TokenSistema token = tokenSistemaDAO.comCodigo(session(AUTH)).get();
+		estudo.setToken(token);
+		
+		return estudo;
 	}
 }

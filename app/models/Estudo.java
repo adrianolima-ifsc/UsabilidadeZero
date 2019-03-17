@@ -1,10 +1,17 @@
 package models;
 
-import java.util.*;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-import io.ebean.*;
-import play.data.validation.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import io.ebean.Finder;
+import io.ebean.Model;
+import play.data.validation.Constraints;
 
 @Entity
 public class Estudo extends Model {
@@ -36,8 +43,16 @@ public class Estudo extends Model {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public boolean isTipo() {
 		return tipo;
+	}
+
+	public void setTipo(boolean tipo) {
+		this.tipo = tipo;
 	}
 
 	public Usuario getUsuario() {
@@ -63,4 +78,4 @@ public class Estudo extends Model {
 	public void setToken(TokenSistema token) {
 		this.token = token;
 	}
-	}
+}

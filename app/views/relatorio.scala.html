@@ -1,4 +1,6 @@
-@(tarefa: Tarefa, tarefaForm: Form[Tarefa], tarefas: List[Tarefa])
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], tarefas: List[Tarefa], estudoForm: Form[Estudo])
+
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @styles = {
     <link href="@routes.Assets.versioned("css/relatorio.css")" rel="stylesheet">
@@ -47,6 +49,14 @@
 			}
 		</tbody>
 	</table>
-	<a class="btn btn-primary" href="@routes.ControladorEstudos.iniciarTarefa2">Próxima Tarefa</a>
+	@b4.formCSRF(routes.ControladorEstudos.iniciarEstudoDeCaso, 
+		'id -> "loginform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
+
+		@b4.hidden( estudoForm("tipo"), 'value -> tarefa.getEstudo.isTipo )
+		
+		<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
+	}
 </div>
 }
