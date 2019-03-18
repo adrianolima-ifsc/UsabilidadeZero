@@ -1,4 +1,4 @@
-@(title: String, tarefa: Tarefa, tarefaForm: Form[Tarefa], styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
 
 @implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col", "col") }
 
@@ -7,10 +7,30 @@
 	routes.javascript.ControladorEstudos.concluirTarefa
 )
 
+@tipoTarefa = @{
+    
+    tarefa.getCodigo match {
+
+        case "EC01" | "EC11" => "Tarefa 1"
+        case "EC02" | "EC12" => "Tarefa 2"
+        case "EC03" | "EC13" => "Tarefa 3"
+    }
+}
+
+@stringTarefa = @{
+    
+    tarefa.getCodigo match {
+
+        case "EC01" | "EC11" => "Você deve descobrir o valor de inscrição do próximo \"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais\""
+        case "EC02" | "EC12" => "Você deve fazer a inscrição no evento encontrado com o respectivo pagamento"
+        case "EC03" | "EC13" => "Tarefa 3"
+    }
+}
+
 <!DOCTYPE html>
 <html lang="pt">
     <head>
-        <title>UsabilidadeZero - @title</title>
+        <title>UsabilidadeZero - @tipoTarefa</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Fonts -->
@@ -30,11 +50,10 @@
         		<div class="container">
     	    		<div class="row align-items-center">
     	    			<div class="col-auto">
-    			    		<h1 class="navbar-brand mb-0">Tarefa 1</h1>
+    			    		<h1 class="navbar-brand mb-0">@tipoTarefa</h1>
     	    			</div>
     	    			<div class="col">
-    	    				<span class="text-light">Você deve descobrir o valor de inscrição do próximo 
-    	    				"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais"</span>
+    	    				<span class="text-light">@stringTarefa</span>
     	    			</div>
     	    			<div class="col-auto text-right">
                             <div class="row">
