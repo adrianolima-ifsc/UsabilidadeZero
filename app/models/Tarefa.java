@@ -28,8 +28,9 @@ public class Tarefa extends Model {
 
 	public static Finder<Long, Tarefa> find = new Finder<>(Tarefa.class);
 
-	public Tarefa(Estudo estudo, Date time) {
+	public Tarefa(String codigo, Estudo estudo, Date time) {
 
+		this.codigo = codigo;
 		this.estudo = estudo;
 		this.dataHoraInicio = time;
 		this.cliques = (long) 0;

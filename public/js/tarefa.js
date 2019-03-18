@@ -1,13 +1,8 @@
 var idTarefa = $("#id-tarefa").text();
 var cliquesTarefa = 0;
 
-//$("#contador").text(cliquesTarefa);
-
-$(document).click(adicionaCliques);
-
-//$(window).onbeforeunload = adicionaCliques;
-
-function adicionaCliques() {
+//Adiciona cliques
+$(document).click(function() {
 
 	cliquesTarefa++;
 
@@ -15,7 +10,7 @@ function adicionaCliques() {
 	$("#contador").text(cliquesTarefa);
 	
 	$.get(jsRoutes.controllers.ControladorEstudos.adicionaCliquesTarefa(idTarefa))
-}
+});
 
 $("#valor").change(function() {
 
