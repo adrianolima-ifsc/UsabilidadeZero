@@ -26,7 +26,7 @@
 					<h3>@evento.getSigla()</h3>
 						<div class="col-md-12">
 					<p class="text-center">
-						@b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
+						@b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
 							'class -> "form-horizontal", 
 							'role -> "form") {
 
@@ -53,7 +53,7 @@
 							@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança" )
 							@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 								
-							<input type="submit" value="Participe" class="btn btn-primary">
+							<input type="submit" id="inscricao" value="Participe" class="btn btn-primary">
 						} 
 					</p>
 				</div>

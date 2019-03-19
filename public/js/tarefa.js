@@ -1,17 +1,25 @@
-// Tarefa 1
-$("#valor").change(function() {
+var idTarefa = $("#id-tarefa").text();
+var idEvento = $('[name="id-evento"]').val();
 
-	let tarefa = $('[name="codigo"]').val();
+// Tarefa 1
+var tarefa = $('[name="codigo"]').val();
+
+$("#valor").change(function() {
 	
 	if (tarefa === "EC01" || tarefa === "EC11") {
 
-		let idEvento = $('[name="id-evento"]').val();
 		if(idEvento == 1) {
-		console.log(tarefa);
 
-			let valor = $('[name="valor"]').val();
-
-			$('[name="concluidoReal"]').val(valor);
+			$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
 		}
+	}
+});
+
+//Tarefa 2
+$("#inscricao").on("click", function() {
+
+	if (tarefa === "EC02" || tarefa === "EC12") {
+
+		console.log(tarefa);
 	}
 });

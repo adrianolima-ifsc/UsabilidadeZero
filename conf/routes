@@ -19,6 +19,7 @@ GET		/portal								controllers.ControladorEstudos.iniciarTarefa2
 + nocsrf
 POST	/concluir							controllers.ControladorEstudos.concluirTarefa
 GET		/desistir							controllers.ControladorEstudos.desistirTarefa
+POST	/inscricao 							controllers.ControladorEstudos.fazerInscricao
 
 POST	/evento								controllers.ControladorEventos.detalhar
 POST	/evento/programa					controllers.ControladorEventos.mostrarPrograma
@@ -36,6 +37,7 @@ POST 	/usuario/:id/remover 				controllers.ControladorUsuario.remover(id:Long)
 
 # Javascript routing
 GET		/cliques/:id						controllers.ControladorEstudos.adicionaCliquesTarefa(id:Long)
+GET		/concluidoReal/:id					controllers.ControladorEstudos.setConcluidoReal(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file						controllers.Assets.versioned(path="/public", file: Asset)

@@ -14,6 +14,7 @@ import daos.TokenSistemaDAO;
 import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
+import models.Inscricao;
 import models.Tarefa;
 import models.TokenSistema;
 import models.Usuario;
@@ -44,6 +45,7 @@ public class ControladorEstudos extends Controller {
 	
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
+	private Form<Inscricao> inscricaoForm;
 
 	public static final String AUTH = "auth";
 	
@@ -52,6 +54,7 @@ public class ControladorEstudos extends Controller {
 
 		this.estudoForm = formFactory.form(Estudo.class);
 		this.tarefaForm = formFactory.form(Tarefa.class);
+		this.inscricaoForm = formFactory.form(Inscricao.class);
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
@@ -143,7 +146,7 @@ public class ControladorEstudos extends Controller {
 		
 		tarefa.setConcluidoPercebido(true);
 		
-		tarefa.setConcluidoReal(form.isConcluidoReal());
+//		tarefa.setConcluidoReal(form.isConcluidoReal());
 			
 		tarefa.update();
 		
@@ -166,7 +169,7 @@ public class ControladorEstudos extends Controller {
 		tarefa.setConcluidoPercebido(false);
 		tarefa.setConcluidoReal(false);
 		
-		tarefa.setConcluidoReal(form.isConcluidoReal());
+//		tarefa.setConcluidoReal(form.isConcluidoReal());
 			
 		tarefa.update();
 		
@@ -184,6 +187,18 @@ public class ControladorEstudos extends Controller {
 		Long cliques = tarefa.getCliques();
 		cliques++;
 		tarefa.setCliques(cliques);
+		
+		tarefa.update();
+		
+		return ok();
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result setConcluidoReal(Long id) {
+		
+		Tarefa tarefa = tarefaDAO.comId(id).get();
+		
+		tarefa.setConcluidoReal(true);
 		
 		tarefa.update();
 		
@@ -219,5 +234,25 @@ public class ControladorEstudos extends Controller {
 		estudo.setToken(token);
 		
 		return estudo;
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result fazerInscricao() {
+		
+		Inscricao form = inscricaoForm.bindFromRequest().get();	
+		
+		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
+		Estudo estudo = tarefa.getEstudo();	
+		List<Evento> eventos = eventoDAO.mostraTodos();	
+		
+
+		if(estudo.isTipo()) {
+			
+			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
+		
+		} else {
+			
+			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
+		}
 	}
 }
