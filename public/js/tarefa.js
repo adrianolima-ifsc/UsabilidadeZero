@@ -1,20 +1,17 @@
-var idTarefa = $("#id-tarefa").text();
-var cliquesTarefa = 0;
-
-//Adiciona cliques
-$(document).click(function() {
-
-	cliquesTarefa++;
-
-	$('input[name="cliques"]').val(cliquesTarefa);
-	$("#contador").text(cliquesTarefa);
-	
-	$.get(jsRoutes.controllers.ControladorEstudos.adicionaCliquesTarefa(idTarefa))
-});
-
+// Tarefa 1
 $("#valor").change(function() {
 
-	let valor = $('[name="valor"]').val();
+	let tarefa = $('[name="codigo"]').val();
+	
+	if (tarefa === "EC01" || tarefa === "EC11") {
 
-	$('[name="concluidoReal"]').val(valor);
+		let idEvento = $('[name="id-evento"]').val();
+		if(idEvento == 1) {
+		console.log(tarefa);
+
+			let valor = $('[name="valor"]').val();
+
+			$('[name="concluidoReal"]').val(valor);
+		}
+	}
 });

@@ -6,13 +6,16 @@
 	<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
 	<link href="@routes.Assets.versioned("css/estudo0.css")" rel="stylesheet" media="screen">
 }
+
+@scripts = {
+}
 							
 @valores = @{ Seq(
 	"true"->("R$ " + evento.getPreco.toString), 
 	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
 )}
 
-@mainEstudo(tarefa, tarefaForm, styles) {
+@mainEstudo(tarefa, tarefaForm, styles, scripts) {
 <div>
 	<h1>Portal de Eventos</h1>
 	<p>@session.get("cliques")</p>
@@ -26,6 +29,8 @@
 						@b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
 							'class -> "form-horizontal", 
 							'role -> "form") {
+
+							@b4.hidden( "id-evento", evento.getId )
 
 							@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
 							@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )

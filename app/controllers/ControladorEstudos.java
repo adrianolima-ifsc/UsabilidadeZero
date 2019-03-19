@@ -85,7 +85,7 @@ public class ControladorEstudos extends Controller {
 
         case 1: return ok(tarefa2.render(estudo, estudoForm));
 		
-        default: return ok("Erro!");
+        default: return ok("Tarefa 3");
 		}
         
 	}
@@ -193,7 +193,7 @@ public class ControladorEstudos extends Controller {
 	public Tarefa criarNovaTarefa(Estudo estudo, Long numTarefa) {
 		
 		if(numTarefa <= estudo.getTarefas().size()) 
-			return estudo.getTarefas().get(numTarefa.intValue());
+			return estudo.getTarefas().get(numTarefa.intValue() - 1);
 		
 		String codigo = "EC" +
 				(estudo.isTipo() ? "1" : "0") +

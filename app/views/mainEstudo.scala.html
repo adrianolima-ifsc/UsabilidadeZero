@@ -62,7 +62,7 @@
                                         'role -> "form") {
 
                                         @b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-                                        @b4.hidden( tarefaForm("evento"), 'value -> tarefa.getEvento )
+                                        @b4.hidden( tarefaForm("codigo"), 'value -> tarefa.getCodigo )
                                         @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
 
                                         <button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
@@ -99,7 +99,8 @@
         <script src="@routes.Assets.versioned("js/outros/jquery.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/popper.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/bootstrap.min.js")"></script>
-		<script src="@routes.Assets.versioned("js/tarefa.js")"></script>
+		<script src="@routes.Assets.versioned("js/contador-cliques.js")"></script>
+        <script src="@routes.Assets.versioned("js/tarefa.js")"></script>
         @scripts
     </body>
 </html>
