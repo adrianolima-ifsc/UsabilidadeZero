@@ -6,3 +6,11 @@ body {
 	font-size: 60px;
 	font-family: 'Ubuntu', sans-serif;
 }
+
+input:valid { 
+	color: green; 
+}
+
+input:invalid { 
+	color: red; 
+}
