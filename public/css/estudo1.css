@@ -1,3 +1,7 @@
 .data-local {
 	padding-top: 2rem;
 }
+
+input:invalid { 
+	color: red; 
+}

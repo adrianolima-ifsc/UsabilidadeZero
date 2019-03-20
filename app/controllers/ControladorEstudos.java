@@ -23,6 +23,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
+import views.html.estudo0participe;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
 import views.html.login;
@@ -240,7 +241,6 @@ public class ControladorEstudos extends Controller {
 		Estudo estudo = tarefa.getEstudo();	
 		List<Evento> eventos = eventoDAO.mostraTodos();	
 		
-
 		if(estudo.isTipo()) {
 			
 			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));

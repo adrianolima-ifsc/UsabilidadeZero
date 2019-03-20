@@ -2,10 +2,9 @@ package models;
 
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Validate;
-import play.data.validation.Constraints.Validatable;
 
 @Validate
-public class Inscricao implements Validatable<String> {
+public class Inscricao {
 	
 	private Long tarefa;
 	private Long evento;
@@ -16,6 +15,7 @@ public class Inscricao implements Validatable<String> {
 	@Constraints.Required
 	private String fone;
 	@Constraints.Required
+	@Constraints.Pattern("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}")
 	private String cpf;
 	@Constraints.Required
 	private String endereco;
@@ -31,11 +31,6 @@ public class Inscricao implements Validatable<String> {
 	private String codigoSeguranca;
 	@Constraints.Required
 	private boolean valor;
-
-	@Override
-	public String validate() {
-        return null;
-	}
 
 	public Long getTarefa() {
 		return tarefa;
