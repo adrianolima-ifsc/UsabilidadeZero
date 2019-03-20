@@ -146,8 +146,6 @@ public class ControladorEstudos extends Controller {
 		
 		tarefa.setConcluidoPercebido(true);
 		
-//		tarefa.setConcluidoReal(form.isConcluidoReal());
-			
 		tarefa.update();
 		
 		Long idEstudo = tarefa.getEstudo().getId();
@@ -167,9 +165,6 @@ public class ControladorEstudos extends Controller {
 		tarefa.setDataHoraFim(calendario.getTime());
 		
 		tarefa.setConcluidoPercebido(false);
-		tarefa.setConcluidoReal(false);
-		
-//		tarefa.setConcluidoReal(form.isConcluidoReal());
 			
 		tarefa.update();
 		

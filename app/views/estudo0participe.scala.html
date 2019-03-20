@@ -15,6 +15,10 @@
 	"true"->("2 x R$ " + (evento.getPreco/2).toString) 
 )}
 
+val validationForm = Form(tuple(
+  "nome" -> nonEmptyText(maxLength = 20)
+))
+
 @mainEstudo(tarefa, tarefaForm, styles, scripts) {
 <div>
 	<h1>Portal de Eventos</h1>

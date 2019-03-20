@@ -1,20 +1,41 @@
 package models;
 
-public class Inscricao {
+import play.data.validation.Constraints;
+import play.data.validation.Constraints.Validate;
+import play.data.validation.Constraints.Validatable;
+
+@Validate
+public class Inscricao implements Validatable<String> {
 	
 	private Long tarefa;
 	private Long evento;
+	@Constraints.Required
 	private String nome;
+	@Constraints.Required
 	private String email;
+	@Constraints.Required
 	private String fone;
+	@Constraints.Required
 	private String cpf;
+	@Constraints.Required
 	private String endereco;
+	@Constraints.Required
 	private String cidade;
+	@Constraints.Required
 	private String numCartao;
+	@Constraints.Required
 	private String titularCartao;
+	@Constraints.Required
 	private String validade;
+	@Constraints.Required
 	private String codigoSeguranca;
+	@Constraints.Required
 	private boolean valor;
+
+	@Override
+	public String validate() {
+        return null;
+	}
 
 	public Long getTarefa() {
 		return tarefa;
