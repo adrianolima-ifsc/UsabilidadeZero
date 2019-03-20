@@ -16,10 +16,15 @@ $("#valor").change(function() {
 });
 
 //Tarefa 2
-$("#inscricao").on("click", function() {
+$('[type="submit"]').on("click", function(e) {
 
 	if (tarefa === "EC02" || tarefa === "EC12") {
 
 		console.log(tarefa);
+
+		e.preventDefault();
+		alert("Testando...")
+
+		$("form").reset;
 	}
 });

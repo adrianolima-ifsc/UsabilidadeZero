@@ -68,8 +68,8 @@
 
 				<h4 class="mb-3">Participante</h4>
 				@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
-				@b4.text( inscricaoForm("email"), '_label -> "Email" )
-				@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
+				@b4.email( inscricaoForm("email"), '_label -> "Email" )
+				@b4.tel( inscricaoForm("fone"), '_label -> "Fone" )
 				@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
 				@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
 				@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
