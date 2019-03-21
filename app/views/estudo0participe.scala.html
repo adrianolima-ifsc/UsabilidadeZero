@@ -8,7 +8,6 @@
 }
 
 @scripts = {
-	<script src="@routes.Assets.versioned("js/outros/jquery.validate.min.js")"></script>
 }
 							
 @valores = @{ Seq(
@@ -19,47 +18,42 @@
 @mainEstudo(tarefa, tarefaForm, styles, scripts) {
 <div>
 	<h1>Portal de Eventos</h1>
-	<p>@session.get("cliques")</p>
-	<div class="container evento-detalhes">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="thumbnail evento-detalhes">
-				<div class="caption">
-					<h3>@evento.getSigla()</h3>
-						<div class="col-md-12">
-					<p class="text-center">
-						@b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
-							'class -> "form-horizontal", 
-							'role -> "form") {
+	<div class="container w-50">
+		<div class="caption">
+			<h3>@evento.getSigla()</h3>
+				<div class="col-md-12">
+			<p class="text-center">
+				@b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
+					'id -> "form-inscricao",
+					'class -> "form-horizontal", 
+					'role -> "form") {
 
-							@b4.hidden( "id-evento", evento.getId )
+					@b4.hidden( "id-evento", evento.getId )
 
-							@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
-							@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+					@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+					@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
 
-							@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
-							<!-- <div class="form-group row  " id="nome_field">
-								<label class="col-form-label col-md-4" for="nome">Nome</label>
-								<div class="col-md-8">
-								    <input type="text" id="nome" name="nome">
-								</div>
-							</div> -->
-							@b4.text( inscricaoForm("email"), '_label -> "Email" )
-							@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
-							@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
-							@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
-							@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
-							@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
-							@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
-							@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
-							@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança" )
-							@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
-								
-							<input type="submit" id="inscricao" value="Participe" class="btn btn-primary">
-						} 
-					</p>
-				</div>
-				</div>
-			</div>
+					@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
+					<!-- <div class="form-group row  " id="nome_field">
+						<label class="col-form-label col-md-4" for="nome">Nome</label>
+						<div class="col-md-8">
+						    <input type="text" id="nome" name="nome">
+						</div>
+					</div> -->
+					@b4.text( inscricaoForm("email"), '_label -> "Email" )
+					@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
+					@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
+					@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
+					@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
+					@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
+					@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
+					@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
+					@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança" )
+					@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+						
+					<input type="submit" id="botao-inscricao" value="Participe" class="btn btn-primary">
+				} 
+			</p>
 		</div>
 	</div>
 </div>

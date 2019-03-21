@@ -1,41 +1,70 @@
-var idTarefa = $("#id-tarefa").text();
-var idEvento = $('[name="id-evento"]').val();
+$(document).ready(function() {
 
-$(function(){
-	$("form").validate();
-})
-// Tarefa 1
-var tarefa = $('[name="codigo"]').val();
+	var idTarefa = $("#id-tarefa").text();
+	var idEvento = $('[name="id-evento"]').val();
 
-$("#valor").change(function() {
-	
-	if (tarefa === "EC01" || tarefa === "EC11") {
+	// Tarefa 1
+	var tarefa = $('[name="codigo"]').val();
 
-		if(idEvento == 1) {
+	$("#valor").change(function() {
+		
+		if (tarefa === "EC01" || tarefa === "EC11") {
 
-			$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+			if(idEvento == 1) {
+
+				$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+			}
 		}
-	}
-});
+	});
 
-//Tarefa 2
-$('[type="submit"]').on("click", function(e) {
+	//Tarefa 2
+	$("#botao-inscricao").click(function(event){
 
-	if (tarefa === "EC02" || tarefa === "EC12") {
+		var form_data = $("#form-inscricao").serializeArray();
+		var error_free = true;
 
-		$("form").validate({
-			rules : {
-				nome:{
-					minlength:3
-				}
-			},
-       		messages:{
-            	nome:{
-                    minlength:"O nome deve ter pelo menos 3 caracteres"
-            	}
-            }
-		})
-	e.preventDefault();
-	}
+		for (var input in form_data) {
 
+			var element = $("#contact_"+form_data[input]['name']);
+			var valid = element.hasClass("valid");
+			var error_element = $("span", element.parent());
+
+			if (error_element.length == 0) {
+
+				console.log(error_element);
+				console.log("Está vazia!");
+			}
+
+			if (!valid) {
+			
+				error_element.removeClass("error").addClass("error_show"); 
+				error_free=false;
+			
+			} else {
+
+				error_element.removeClass("error_show").addClass("error");
+			}
+		}
+
+		if (!error_free) {
+
+			event.preventDefault(); 
+		}
+	});
+
+	$('#email').on('input', function() {
+		
+		var input = $(this);
+		var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+		var is_email = re.test(input.val());
+		
+		if(is_email) {
+		
+			input.removeClass("invalid").addClass("valid");
+		
+		} else {
+
+			input.removeClass("valid").addClass("invalid");
+		}
+	});
 });
