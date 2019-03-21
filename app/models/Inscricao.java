@@ -8,28 +8,16 @@ public class Inscricao {
 	
 	private Long tarefa;
 	private Long evento;
-	@Constraints.Required
 	private String nome;
-	@Constraints.Required
 	private String email;
-	@Constraints.Required
 	private String fone;
-	@Constraints.Required
-	@Constraints.Pattern("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}")
 	private String cpf;
-	@Constraints.Required
 	private String endereco;
-	@Constraints.Required
 	private String cidade;
-	@Constraints.Required
 	private String numCartao;
-	@Constraints.Required
 	private String titularCartao;
-	@Constraints.Required
 	private String validade;
-	@Constraints.Required
 	private String codigoSeguranca;
-	@Constraints.Required
 	private boolean valor;
 
 	public Long getTarefa() {

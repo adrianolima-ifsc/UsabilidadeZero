@@ -1,6 +1,9 @@
 var idTarefa = $("#id-tarefa").text();
 var idEvento = $('[name="id-evento"]').val();
 
+$(function(){
+	$("form").validate();
+})
 // Tarefa 1
 var tarefa = $('[name="codigo"]').val();
 
@@ -20,11 +23,19 @@ $('[type="submit"]').on("click", function(e) {
 
 	if (tarefa === "EC02" || tarefa === "EC12") {
 
-		console.log(tarefa);
-
-		e.preventDefault();
-		alert("Testando...")
-
-		$("form").reset;
+		$("form").validate({
+			rules : {
+				nome:{
+					minlength:3
+				}
+			},
+       		messages:{
+            	nome:{
+                    minlength:"O nome deve ter pelo menos 3 caracteres"
+            	}
+            }
+		})
+	e.preventDefault();
 	}
+
 });
