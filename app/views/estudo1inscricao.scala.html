@@ -25,16 +25,19 @@
 
 <div class="container w-50">
 	<h1 class="text-center">Inscrição</h1>
-	@b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
+	@b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
+		'id -> "form-inscricao",
 		'role -> "form") {
+
+		@b4.hidden( "id-evento", evento.getId )
 
 		@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
 		@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
 
 		<h4 class="mb-3">Participante</h4>
 		@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
-		@b4.text( inscricaoForm("email"), '_label -> "Email" )
-		@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
+		@b4.email( inscricaoForm("email"), '_label -> "Email" )
+		@b4.tel( inscricaoForm("fone"), '_label -> "Fone" )
 		@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
 		@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
 		@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
@@ -58,7 +61,7 @@
 		</div>
 		@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 			
-		<input type="submit" value="Participe" class="btn btn-primary">
+		<input type="submit" id="botao-inscricao" value="Enviar" class="btn btn-primary">
 	} 
 </div>
 }

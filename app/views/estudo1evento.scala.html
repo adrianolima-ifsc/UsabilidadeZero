@@ -39,7 +39,7 @@
 <div class="container w-50">
 	<ul class="nav nav-tabs" id="opcoes-tab" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" id="o-evento-tab" data-toggle="tab" href="#o-evento" role="tab" aria-controls="o-evento" aria-selected="true">O Evento</a>
+			<a class="nav-link active" id="o-evento-tab" data-toggle="tab" href="#o-evento" role="tab" aria-controls="o-evento" aria-selected="true">Apresentação</a>
 		</li>
 		<li class="nav-item"> 
 			<a class="nav-link" id="programa-tab" data-toggle="tab" href="#programa" role="tab" aria-controls="programa" aria-selected="false">Programação</a>
@@ -48,7 +48,7 @@
 			<a class="nav-link" id="informacao-tab" data-toggle="tab" href="#informacao" role="tab" aria-controls="informacao" aria-selected="false">Informações</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="inscricao-tab" data-toggle="tab" href="#inscricao" role="tab" aria-controls="inscricao" aria-selected="false">Inscricao</a>
+			<a class="nav-link" id="inscricao-tab" data-toggle="tab" href="#inscricao" role="tab" aria-controls="inscricao" aria-selected="false">Inscrição</a>
 		</li>
 	</ul>
 	<div class="tab-content" id="conteudo-tab">
@@ -58,43 +58,28 @@
 		@Html(evento.getInformacoes)</div>
 		<div class="tab-pane fade" id="inscricao" role="tabpanel" aria-labelledby="inscricao-tab">
 			<h1 class="text-center">Inscrição</h1>
-			@b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
-				'id -> "form-inscricao",
-				'role -> "form") {
+			<div class="row text-center">
+				<div class="col">
+					<div class="card card-body">
+						<p><i class="fas fa-dollar-sign"></i> @evento.getPreco</p>
+					</div>
+				</div>
+			</div>	
+							
+			<p>Os pagamentos podem ser efetuados via cartão de crédito [Visa/MasterCard], cartão de débito, boleto bancário ou nota de empenho. Outras questões ou solicitações devem ser enviadas por email.</p>
 
-				@b4.hidden( "id-evento", evento.getId )
+			<p>Os pagamentos por boleto e débito encerram-se no dia @data, após esse período estarão disponíveis as formas de pagamento por cartão de crédito, nota de empenho e faturamento. Caso não possa efetuar o pagamento pelas formas citadas, poderá efetuar o pagamento em espécie na secretaria do evento.</p>
+
+			<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
+
+			@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
+				'role -> "form") {
 
 				@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
 				@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
-
-				<h4 class="mb-3">Participante</h4>
-				@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
-				@b4.email( inscricaoForm("email"), '_label -> "Email" )
-				@b4.tel( inscricaoForm("fone"), '_label -> "Fone" )
-				@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
-				@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
-				@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
-
-				<h4 class="mb-3">Pagamento</h4>
-				<div class="row">
-					<div class="col">
-						@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
-					</div>
-					<div class="col"> 
-						@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
-					</div>
-				</div>
-				<div class="row"> 
-					<div class="col"> 
-						@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
-					</div>
-					<div class="col"> 
-						@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
-					</div>
-				</div>
-				@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+				@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
 					
-				<input type="submit" id="botao-inscricao" value="Participe" class="btn btn-primary">
+				<input type="submit" value="Participe" class="btn btn-primary">
 			} 
 		</div>
 	</div>
