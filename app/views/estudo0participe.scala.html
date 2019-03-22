@@ -28,10 +28,10 @@
 					'class -> "form-horizontal", 
 					'role -> "form") {
 
-					@b4.hidden( "id-evento", evento.getId )
+					@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
 
-					@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
-					@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+					@b4.hidden( inscricaoForm("tarefa"), 'class -> "valido", 'value -> tarefa.getId )
+					@b4.hidden( inscricaoForm("evento"), 'class -> "valido", 'value -> evento.getId )
 
 					@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
 					<!-- <div class="form-group row  " id="nome_field">
@@ -51,7 +51,7 @@
 					@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança" )
 					@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 						
-					<input type="submit" id="botao-inscricao" value="Participe" class="btn btn-primary">
+					<input type="submit" id="botao-inscricao" value="Participe" class="">
 				} 
 			</p>
 		</div>

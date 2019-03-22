@@ -3,7 +3,6 @@ package models;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Validate;
 
-@Validate
 public class Inscricao {
 	
 	private Long tarefa;

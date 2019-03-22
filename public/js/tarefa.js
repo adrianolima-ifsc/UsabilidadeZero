@@ -25,8 +25,8 @@ $(document).ready(function() {
 
 		for (var input in form_data) {
 
-			var element = $("#contact_"+form_data[input]['name']);
-			var valid = element.hasClass("valid");
+			var element = $("#contact_" + form_data[input]['name']);
+			var valido = element.hasClass("valido");
 			var error_element = $("span", element.parent());
 
 			if (error_element.length == 0) {
@@ -35,10 +35,10 @@ $(document).ready(function() {
 				console.log("Está vazia!");
 			}
 
-			if (!valid) {
+			if (!valido) {
 			
 				error_element.removeClass("error").addClass("error_show"); 
-				error_free=false;
+				error_free = false;
 			
 			} else {
 
@@ -60,11 +60,52 @@ $(document).ready(function() {
 		
 		if(is_email) {
 		
-			input.removeClass("invalid").addClass("valid");
+			input.removeClass("invalido").addClass("valido");
 		
 		} else {
 
-			input.removeClass("valid").addClass("invalid");
+			input.removeClass("valido").addClass("invalido");
 		}
 	});
+
+	$('#email').on('input', function() {
+
+	})
+
+	$('#fone').on('input', function() {
+
+	})
+
+	$('#cpf').on('input', function() {
+
+	})
+
+	$('#endereco').on('input', function() {
+
+	})
+
+	$('#cidade').on('input', function() {
+
+	})
+
+	$('#numCartao').on('input', function() {
+
+	})
+
+	$('#titularCartao').on('input', function() {
+
+	})
+
+	$('#validade').on('input', function() {
+
+	})
+
+	$('#condigoSeguranca').on('input', function() {
+
+	})
+
+	$('#email').on('input', function() {
+
+	})
+
 });
