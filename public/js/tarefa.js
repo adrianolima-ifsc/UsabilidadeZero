@@ -66,7 +66,10 @@ $(document).ready(function() {
 		
 		} else {
 
-			alert("Sua inscrição foi realizada com sucesso!");
+			if (tarefa == "EC11" || tarefa == "EC12" || tarefa == "EC11") {
+			
+				alert("Sua inscrição foi realizada com sucesso!");
+			}
 
 			if (tarefa == "EC02" || tarefa == "EC12") {
 
