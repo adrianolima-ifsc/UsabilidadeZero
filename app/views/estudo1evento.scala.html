@@ -59,6 +59,7 @@
 		<div class="tab-pane fade" id="inscricao" role="tabpanel" aria-labelledby="inscricao-tab">
 			<h1 class="text-center">Inscrição</h1>
 			@b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
+				'id -> "form-inscricao",
 				'role -> "form") {
 
 				@b4.hidden( "id-evento", evento.getId )
@@ -93,7 +94,7 @@
 				</div>
 				@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 					
-				<input type="submit" value="Participe" class="btn btn-primary">
+				<input type="submit" id="botao-inscricao" value="Participe" class="btn btn-primary">
 			} 
 		</div>
 	</div>
