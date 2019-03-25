@@ -27,3 +27,8 @@ function mascaraCartao(input) {
 	input.val(valor);
 }
 
+	function goBack() {
+		
+	  window.history.back();
+	}
+
