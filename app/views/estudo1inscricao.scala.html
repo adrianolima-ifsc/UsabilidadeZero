@@ -1,6 +1,6 @@
 @(tarefa: Tarefa, tarefaForm: Form[Tarefa], inscricaoForm: Form[Inscricao], evento: Evento)
 
-@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-4", "col-8") }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
@@ -8,7 +8,11 @@
 	<link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
 }
 
-@scripts = {}
+@scripts = {
+	<script src="@routes.Assets.versioned("js/mascaras.js")"></script>
+	<script src="@routes.Assets.versioned("js/validacao.js")"></script>
+	<script src="@routes.Assets.versioned("js/formulario.js")"></script>
+}
 							
 @valores = @{ Seq(
 	"true"->("R$ " + evento.getPreco.toString), 
@@ -35,12 +39,21 @@
 		@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
 
 		<h4 class="mb-3">Participante</h4>
-		@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
-		@b4.email( inscricaoForm("email"), '_label -> "Email" )
-		@b4.tel( inscricaoForm("fone"), '_label -> "Fone" )
-		@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
-		@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
-		@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
+		@b4.text( inscricaoForm("nome"), 
+			'_label -> "Nome*", 
+			'_help -> "Escreva o seu nome completo.",
+			'required -> "true" )
+		
+		@b4.email( inscricaoForm("email"), 
+			'_label -> "Email*", 
+			'_help -> "Insira um email válido.",
+			'placeholder -> "nome@exemplo.com",
+			'required -> "true" )
+
+		@b4.text( inscricaoForm("cpf"), 
+			'_label -> "CPF*", 
+			'_help -> "Utilize apenas números.",
+			'required -> "true" )
 
 		<h4 class="mb-3">Pagamento</h4>
 		<div class="row">
@@ -53,7 +66,7 @@
 		</div>
 		<div class="row"> 
 			<div class="col"> 
-				@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
+				@b4.date( inscricaoForm("validade"), '_label -> "Validade" )
 			</div>
 			<div class="col"> 
 				@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "CVV" )
@@ -61,6 +74,8 @@
 		</div>
 		@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 			
+		<input type="submit" id="botao-voltar" value="Voltar" class="btn btn-primary">
+		<input type="submit" id="botao-limpar" value="Limpar Formulário" class="btn btn-primary">
 		<input type="submit" id="botao-inscricao" value="Enviar" class="btn btn-primary">
 	} 
 </div>

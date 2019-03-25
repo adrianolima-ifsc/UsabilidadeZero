@@ -2,6 +2,10 @@
 	padding-top: 2rem;
 }
 
-input:invalid { 
+.invalido { 
 	color: red; 
+}
+
+.error{
+	color: red;
 }
