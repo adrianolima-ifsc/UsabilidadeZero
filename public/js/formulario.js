@@ -7,20 +7,17 @@ $(document).ready(function() {
 	$('#nome').on('input', function() {
 
 		var input = $(this);
-		testarCampoVazio(input);
+		var valor = testarNome(input);
 
-		var re = /[a-z]{3,}$/;
-		var is_name = re.test(input.val());
-		
+		validarCampo(input, valor);		
 	});
 
 	$('#email').on('input', function() {
 		
 		var input = $(this);
-		var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-		var is_email = re.test(input.val());
-		
-		testarCampoVazio(input);
+		var valor = testarEmail(input);
+
+		validarCampo(input, valor);
 	});
 
 
@@ -28,23 +25,18 @@ $(document).ready(function() {
 
 		var input = $(this);
 		
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 	});
 
 	$('#cpf').on('input', function() {
 		
 		var input = $(this);
-		var valor = input.val();
 
-		if (estudo == 1) {
+		if (estudo == 1) {mascaraCpf(input);}
 
-			mascaraCpf(input);
-		}
+		var valor = testarCpf(input);
 
-		var re = /\d{3}.\d{3}.\d{3}-\d{2}/;
-		var is_cpf = re.test(valor);
-		
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 
 	});
 
@@ -52,14 +44,14 @@ $(document).ready(function() {
 
 		var input = $(this);
 		
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 	});
 
 	$('#cidade').on('input', function() {
 
 		var input = $(this);
 		
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 	});
 
 	$('#numCartao').on('input', function() {
@@ -72,7 +64,7 @@ $(document).ready(function() {
 			mascaraCartao(input);
 		}
 
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 	});
 
 	$('#titularCartao').on('input', function() {
@@ -80,15 +72,18 @@ $(document).ready(function() {
 		var input = $(this);
 		var is_name = input.val();
 		
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 	});
 
 	$('#validade').on('input', function() {
 
 		var input = $(this);
-		var is_name = input.val();
+
+		if(estudo == 1) {mascaraValidade(input);}
 		
-		testarCampoVazio(input);
+		var valor = testarValidade(input);
+		
+		validarCampo(input, valor);
 	});
 
 	$('#codigoSeguranca').on('input', function() {
@@ -96,6 +91,11 @@ $(document).ready(function() {
 		var input = $(this);
 		var is_name = input.val();
 		
-		testarCampoVazio(input);
+		validarCampo(input, valor);
 	});
 })
+
+function goBack() {
+	
+  window.history.back();
+}
