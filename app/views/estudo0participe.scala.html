@@ -8,6 +8,9 @@
 }
 
 @scripts = {
+	<script src="@routes.Assets.versioned("js/mascaras.js")"></script>
+	<script src="@routes.Assets.versioned("js/validacao.js")"></script>
+	<script src="@routes.Assets.versioned("js/formulario.js")"></script>
 }
 							
 @valores = @{ Seq(
@@ -30,28 +33,62 @@
 
 					@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
 
-					@b4.hidden( inscricaoForm("tarefa"), 'class -> "valido", 'value -> tarefa.getId )
-					@b4.hidden( inscricaoForm("evento"), 'class -> "valido", 'value -> evento.getId )
+					@b4.hidden( inscricaoForm("tarefa"), 
+						'class -> "valido", 
+						'value -> tarefa.getId )
+					@b4.hidden( inscricaoForm("evento"), 
+						'class -> "valido", 
+						'value -> evento.getId )
 
-					@b4.text( inscricaoForm("nome"), '_label -> "Nome" )
-					<!-- <div class="form-group row  " id="nome_field">
-						<label class="col-form-label col-md-4" for="nome">Nome</label>
+					<div class="form-group row  " id="nome_field">
+						<label class="col-form-label col-md-4">Nome</label>
 						<div class="col-md-8">
-						    <input type="text" id="nome" name="nome">
+						    <input type="text" id="nome" name="nome" tabindex="-1" required="true">
 						</div>
-					</div> -->
-					@b4.text( inscricaoForm("email"), '_label -> "Email" )
-					@b4.text( inscricaoForm("fone"), '_label -> "Fone" )
-					@b4.text( inscricaoForm("cpf"), '_label -> "CPF" )
-					@b4.text( inscricaoForm("endereco"), '_label -> "Endereço" )
-					@b4.text( inscricaoForm("cidade"), '_label -> "Cidade" )
-					@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão" )
-					@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão" )
-					@b4.text( inscricaoForm("validade"), '_label -> "Validade" )
-					@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança" )
-					@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+					</div>
+					@b4.text( inscricaoForm("email"), 
+						'_label -> "Email",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("fone"), 
+						'_label -> "Fone",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("cpf"), 
+						'_label -> "CPF",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("endereco"), 
+						'_label -> "Endereço",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("cidade"), 
+						'_label -> "Cidade",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("numCartao"), 
+						'_label -> "Número do Cartão",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("titularCartao"), 
+						'_label -> "Titular do Cartão",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("validade"), 
+						'_label -> "Validade",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.text( inscricaoForm("codigoSeguranca"), 
+						'_label -> "Código de Segurança",
+						'tabindex -> "-1",
+						'required -> "true" )
+					@b4.select( inscricaoForm("valor"), options = valores, 
+						'_label -> "Parcelas", 
+						'_default -> "Selecione o número de parcelas",
+						'tabindex -> "-1",
+						'required -> "true" )
 						
-					<input type="submit" id="botao-inscricao" value="Participe" class="">
+					<input type="submit" id="botao-inscricao" value="Participe" tabindex="-1">
 				} 
 			</p>
 		</div>
