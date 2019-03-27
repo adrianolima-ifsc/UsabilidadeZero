@@ -13,7 +13,7 @@ function mascaraCpf(input) {
 	input.val(valor);
 }
 
-function mascaraCartao(input) {
+function mascaraNumCartao(input) {
 
 	var valor = input.val();
 

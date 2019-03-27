@@ -75,7 +75,14 @@ $(document).ready(function() {
 				}
 			}
 		}
+	});
 
+	$(document).keypress(function(e){
+
+		if (estudo == 0) {
+
+			if (e.which == '13') e.preventDefault();
+		}
 	});
 
 });

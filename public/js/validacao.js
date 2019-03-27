@@ -29,6 +29,12 @@ function testarCpf(input) {
 	return regex.test(input.val());
 }
 
+function testarNumCartao(input) {
+
+	var regex = /^\d{16}/;
+	return regex.test(input.val());
+}
+
 function testarValidade(input) {
 
 	var regex = /^[0-1]\d\/2\d{3}$/;

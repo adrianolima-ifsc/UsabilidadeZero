@@ -32,7 +32,7 @@ $(document).ready(function() {
 		
 		var input = $(this);
 
-		if (estudo == 1) {mascaraCpf(input);}
+		if (estudo == 1) mascaraCpf(input);
 
 		var valor = testarCpf(input);
 
@@ -57,12 +57,10 @@ $(document).ready(function() {
 	$('#numCartao').on('input', function() {
 		
 		var input = $(this);
-		var valor = input.val();
 
-		if (estudo == 1) {
+		var valor = testarNumCartao(input);
 
-			mascaraCartao(input);
-		}
+		if (estudo == 1) mascaraNumCartao(input);
 
 		validarCampo(input, valor);
 	});
@@ -79,7 +77,7 @@ $(document).ready(function() {
 
 		var input = $(this);
 
-		if(estudo == 1) {mascaraValidade(input);}
+		if(estudo == 1) mascaraValidade(input);
 		
 		var valor = testarValidade(input);
 		
