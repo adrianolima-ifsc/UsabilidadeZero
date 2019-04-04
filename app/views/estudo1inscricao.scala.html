@@ -75,7 +75,7 @@
 		@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
 			
 		<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
-		<input type="reset" id="botao-limpar" value="Limpar Formulário" class="btn btn-secondary">
+		<input type="reset" id="botao-limpar" value="Limpar Formulário" class="btn btn-secondary" onclick="limparCampos()">
 		<input type="submit" id="botao-inscricao" value="Enviar" class="btn btn-primary">
 	} 
 </div>

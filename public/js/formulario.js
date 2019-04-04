@@ -97,3 +97,17 @@ function goBack() {
 	
   window.history.back();
 }
+
+function limparCampos() {
+
+	var campos = $("#form-inscricao")
+		.find('.form-control')
+		.serializeArray();
+
+	$.each(campos, function(i, campo) {
+
+		var elemento = $('[name='+campo.name+']');
+		elemento.removeClass("valido invalido");
+		elemento.val("");
+	})
+}
