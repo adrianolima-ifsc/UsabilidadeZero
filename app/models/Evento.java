@@ -7,7 +7,7 @@ import io.ebean.*;
 import play.data.validation.Constraints.*;
 
 @Entity
-public class Evento extends Model {
+public class Evento extends Model implements Comparable<Evento> {
 	
 	private static final Long serialVersionUID = 1L;
 	
@@ -85,6 +85,11 @@ public class Evento extends Model {
 	}
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	@Override
+	public int compareTo(Evento e) {
+
+		return this.getSigla().compareTo(e.getSigla());
 	}
 }
 	

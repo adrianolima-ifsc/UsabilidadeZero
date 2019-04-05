@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,7 +101,7 @@ public class ControladorEstudos extends Controller {
 		Estudo form = estudoForm.bindFromRequest().get();	
 		
 		Estudo estudo = estudoDAO.comId(form.getId()).get();	
-		List<Evento> eventos = eventoDAO.mostraTodos();	
+		List<Evento> eventos = eventoDAO.mostraTodos();
 		
 		Tarefa tarefa = criarNovaTarefa(estudo, 1L);
 
@@ -110,6 +111,7 @@ public class ControladorEstudos extends Controller {
 		
 		} else {
 			
+			Collections.shuffle(eventos);
 			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
 		}
 		
