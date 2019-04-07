@@ -4,10 +4,12 @@
 
 @styles = {
     <link href="@routes.Assets.versioned("css/outros/album.css")" rel="stylesheet">
+    <link href="@routes.Assets.versioned("css/estudo1.css")" rel="stylesheet">
 }
 
 @scripts = {
 	<script src="@routes.Assets.versioned("js/filtro.js")"></script>
+	<script src="@routes.Assets.versioned("js/outros/isotope.pkgd.min.js")"></script>
 }
 
 @import java.util.Calendar
@@ -38,7 +40,18 @@
 		<div>			
 			<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
 		</div>
-		<div class="row">
+			<div class="row">
+				<div class="categories">
+					<ul>
+						<li><a href="#" data-filter="*" class="active">All</a></li>
+						<li><a href="#" data-filter=".web">Web Design</a></li>
+						<li><a href="#" data-filter=".photography">Photography</a></li>
+						<li><a href="#" data-filter=".app">Mobile App</a></li>
+						<li><a href="#" data-filter=".branding">Branding</a></li>
+					</ul>
+				</div>
+			</div>
+		<div class="row grid">
 			@for(evento <- eventos) {
 				@if(evento.getData >= 0) {
 					<div id="myDIV" class="col-md-4">
@@ -51,7 +64,7 @@
 							@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 								
 							<button type="submit" class="card card-body mb-4 w-100 box-shadow">
-								<h5 class="cart-title">@evento.getSigla</h5>
+								<h5 class="card-title">@evento.getSigla</h5>
 								<p class="card-text">@evento.getNome</p>
 								<p><small class="text-muted">@evento.getLocal</small></p>
 								<p><small class="text-muted">@dataCalculada(evento.getData)</small></p>

@@ -1,9 +1,24 @@
 $(document).ready(function(){
-	$("#myInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#myDIV *").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
+
+	var grid = $('.grid');
+
+	grid.isotope({
+		itemSelector: '#myDIV',
+		layoutMode: 'fitRows'
 	});
+
+	$("#myInput").on("keyup", function() {
+	
+	 	var value = $(this).val().toLowerCase();
+	
+		grid.isotope({
+
+			filter: function() {
+
+				return $(this).text().toLowerCase().indexOf(value) > -1;
+			}
+		})
+	})
 });
+
 
