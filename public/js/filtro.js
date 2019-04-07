@@ -13,7 +13,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#myInput").on("keyup", function() {
+	$('#input-filtro').on("keyup", function() {
 
 		var value = $(this).val().toLowerCase();
 

@@ -37,15 +37,18 @@
 
 <div class="album py-5 bg-light">
 	<div class="container">
-		<div>			
-			<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
+		<div class="row">
+			<label class="col-auto col-form-label" for="input-filtro">Filtrar eventos: </label>
+			<div class="col">
+				<input class="form-control" id="input-filtro" type="text" placeholder="Filtrar eventos">
+			</div>
 		</div>
 			<div class="row">
-				<div class="categorias">
-					<button data-sort-value="sigla">Sigla</button>
-					<button data-sort-value="nome">Nome</button>
-					<button data-sort-value="local">Local</button>
-					<button data-sort-value="original-order">Data</button>
+				<div class="categorias btn-group" role="group">
+					<button class="btn btn-secondary" data-sort-value="sigla">Sigla</button>
+					<button class="btn btn-secondary" data-sort-value="nome">Nome</button>
+					<button class="btn btn-secondary" data-sort-value="local">Local</button>
+					<button class="btn btn-secondary" data-sort-value="original-order">Data</button>
 				</div>
 			</div>
 		<div class="row grid">
