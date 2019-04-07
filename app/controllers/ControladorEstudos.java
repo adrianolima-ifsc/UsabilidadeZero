@@ -130,6 +130,7 @@ public class ControladorEstudos extends Controller {
 
 		if(estudo.isTipo()) {
 			
+			Collections.sort(eventos);
 			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
 		
 		} else {

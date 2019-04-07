@@ -41,14 +41,11 @@
 			<input class="form-control" id="myInput" type="text" placeholder="Filtrar eventos">
 		</div>
 			<div class="row">
-				<div class="categories">
-					<ul>
-						<li><a href="#" data-filter="*" class="active">All</a></li>
-						<li><a href="#" data-filter=".web">Web Design</a></li>
-						<li><a href="#" data-filter=".photography">Photography</a></li>
-						<li><a href="#" data-filter=".app">Mobile App</a></li>
-						<li><a href="#" data-filter=".branding">Branding</a></li>
-					</ul>
+				<div class="categorias">
+					<button data-sort-value="sigla">Sigla</button>
+					<button data-sort-value="nome">Nome</button>
+					<button data-sort-value="local">Local</button>
+					<button data-sort-value="original-order">Data</button>
 				</div>
 			</div>
 		<div class="row grid">
@@ -64,10 +61,10 @@
 							@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
 								
 							<button type="submit" class="card card-body mb-4 w-100 box-shadow">
-								<h5 class="card-title">@evento.getSigla</h5>
-								<p class="card-text">@evento.getNome</p>
-								<p><small class="text-muted">@evento.getLocal</small></p>
-								<p><small class="text-muted">@dataCalculada(evento.getData)</small></p>
+								<h5 class="card-title sigla">@evento.getSigla</h5>
+								<p class="card-text nome">@evento.getNome</p>
+								<p><small class="text-muted local">@evento.getLocal</small></p>
+								<p><small class="text-muted data-evento">@dataCalculada(evento.getData)</small></p>
 							</button>
 						}
 					</div>

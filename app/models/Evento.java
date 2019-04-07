@@ -89,7 +89,7 @@ public class Evento extends Model implements Comparable<Evento> {
 	@Override
 	public int compareTo(Evento e) {
 
-		return this.getSigla().compareTo(e.getSigla());
+		return this.getData() - e.getData();
 	}
 }
 	

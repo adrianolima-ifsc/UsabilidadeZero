@@ -4,13 +4,19 @@ $(document).ready(function(){
 
 	grid.isotope({
 		itemSelector: '#myDIV',
-		layoutMode: 'fitRows'
+		layoutMode: 'fitRows',
+		getSortData: {
+			sigla: '.sigla',
+			nome: '.nome',
+			local: '.local',
+			dataEvento: '.data-evento'
+		}
 	});
 
 	$("#myInput").on("keyup", function() {
-	
-	 	var value = $(this).val().toLowerCase();
-	
+
+		var value = $(this).val().toLowerCase();
+
 		grid.isotope({
 
 			filter: function() {
@@ -19,6 +25,15 @@ $(document).ready(function(){
 			}
 		})
 	})
+
+	// bind sort button click
+	$('.categorias').on( 'click', 'button', function() {
+
+		var sortValue = $(this).attr('data-sort-value');
+		grid.isotope({ sortBy: sortValue });
+
+		console.log(sortValue);
+	});
 });
 
 
