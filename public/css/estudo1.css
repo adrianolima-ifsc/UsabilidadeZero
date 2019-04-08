@@ -19,3 +19,16 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+#myDIV {
+	background-color: red;
+	height: 15em;
+}
+
+.evento:nth-child(3n) {
+	margin-right: 0;
+}
+
+.evento:nth-child(3n+1) {
+	margin-left: 0;
+}
