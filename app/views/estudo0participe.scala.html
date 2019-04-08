@@ -40,16 +40,18 @@
 						'class -> "valido", 
 						'value -> evento.getId )
 
-					<div class="form-group row  " id="nome_field">
-						<label class="col-form-label col-md-4">Nome</label>
-						<div class="col-md-8">
+					<div class="form-group row" id="nome_field">
+						<label class="col-form-label col-4">Nome</label>
+						<div class="col-8">
 						    <input type="text" id="nome" name="nome" tabindex="-1" required="true">
 						</div>
 					</div>
-					@b4.text( inscricaoForm("email"), 
-						'_label -> "Email",
-						'tabindex -> "-1",
-						'required -> "true" )
+					<div class="form-group row" id="email_field">
+						<label class="col-form-label col-4">Email</label>
+						<div class="col-8">
+						    <input type="text" id="email" name="email" tabindex="-1" required="true">
+						</div>
+					</div>
 					@b4.text( inscricaoForm("fone"), 
 						'_label -> "Fone",
 						'tabindex -> "-1",
