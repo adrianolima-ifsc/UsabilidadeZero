@@ -21,8 +21,11 @@
 }
 
 #myDIV {
-	background-color: red;
 	height: 15em;
+}
+
+.evento {
+	height: 90%;
 }
 
 .evento:nth-child(3n) {
