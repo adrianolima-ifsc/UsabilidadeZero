@@ -38,22 +38,69 @@
 <div class="album py-5 bg-light">
 	<div class="container">
 		<div class="row col-8">
-			<label class="col-auto col-form-label" for="input-filtro">Filtrar eventos: </label>
+			<label class="col-auto col-form-label" for="input-filtro">Pesquisar eventos: </label>
 			<div class="col">
 				<input class="form-control" id="input-filtro" type="text" placeholder="Filtrar eventos">
 			</div>
 		</div>
-			<div class="row">
-				<div class="categorias btn-group mx-auto" role="group">
-					<button class="btn btn-secondary" data-sort-value="original-order">Data</button>
-					<button class="btn btn-secondary" data-sort-value="sigla">Sigla</button>
-					<button class="btn btn-secondary" data-sort-value="nome">Nome</button>
-					<button class="btn btn-secondary" data-sort-value="local">Local</button>
+		<div class="row cabecalho-grid">
+			<div>
+				<h2>Próximos Eventos</h2>
+			</div>
+			<div class="ordena">
+				<h5 class="text-center">Ordenar Eventos</h5>
+				<div class="row">
+					<div class="categorias-proximos btn-group mx-auto" role="group">
+						<button class="btn btn-secondary" data-sort-value="original-order">Data</button>
+						<button class="btn btn-secondary" data-sort-value="sigla">Sigla</button>
+						<button class="btn btn-secondary" data-sort-value="nome">Nome</button>
+						<button class="btn btn-secondary" data-sort-value="local">Local</button>
+					</div>
 				</div>
 			</div>
-		<div class="row grid">
+		</div>
+		<div class="row grid-proximos">
 			@for(evento <- eventos) {
 				@if(evento.getData >= 0) {
+					<div id="myDIV" class="col-md-4">
+						@b4.formCSRF(routes.ControladorEventos.detalhar, 
+							'id -> "tarefaform", 
+							'role -> "form") {
+
+							@b4.hidden( tarefaForm("cliques"), 'name -> "cliques", 'value -> tarefa.getCliques )
+							@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+							@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
+								
+							<button type="submit" class="card card-body mb-4 w-100 box-shadow">
+								<h5 class="card-title sigla">@evento.getSigla</h5>
+								<p class="card-text nome">@evento.getNome</p>
+								<p><small class="text-muted local">@evento.getLocal</small></p>
+								<p><small class="text-muted data-evento">@dataCalculada(evento.getData)</small></p>
+							</button>
+						}
+					</div>
+				}
+			}
+		</div>
+		<div class="row cabecalho-grid">
+			<div>
+				<h2>Eventos Passados</h2>
+			</div>
+			<div class="ordena">
+				<h5 class="text-center">Ordenar Eventos</h5>
+				<div class="row">
+					<div class="categorias-passados btn-group mx-auto" role="group">
+						<button class="btn btn-secondary" data-sort-value="original-order">Data</button>
+						<button class="btn btn-secondary" data-sort-value="sigla">Sigla</button>
+						<button class="btn btn-secondary" data-sort-value="nome">Nome</button>
+						<button class="btn btn-secondary" data-sort-value="local">Local</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row grid-passados">
+			@for(evento <- eventos) {
+				@if(evento.getData < 0) {
 					<div id="myDIV" class="col-md-4">
 						@b4.formCSRF(routes.ControladorEventos.detalhar, 
 							'id -> "tarefaform", 

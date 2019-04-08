@@ -10,3 +10,12 @@
 .error{
 	color: red;
 }
+
+.ordena {
+	padding: 1.5rem;
+}
+
+.cabecalho-grid {
+	align-items: center;
+	justify-content: space-between;
+}
