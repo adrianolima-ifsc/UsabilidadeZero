@@ -62,7 +62,7 @@
 		<div class="row grid-proximos">
 			@for(evento <- eventos) {
 				@if(evento.getData >= 0) {
-					<div id="myDIV" class="col-md-4">
+					<div id="myDIV" class="col-md-4 col-sm-6">
 						@b4.formCSRF(routes.ControladorEventos.detalhar, 
 							'id -> "tarefaform", 
 							'role -> "form") {
@@ -101,7 +101,7 @@
 		<div class="row grid-passados">
 			@for(evento <- eventos) {
 				@if(evento.getData < 0) {
-					<div id="myDIV" class="col-md-4">
+					<div id="myDIV" class="col-md-4 col-sm-6">
 						@b4.formCSRF(routes.ControladorEventos.detalhar, 
 							'id -> "tarefaform", 
 							'role -> "form") {
