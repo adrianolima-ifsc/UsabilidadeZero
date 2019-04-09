@@ -20,13 +20,13 @@
 	justify-content: space-between;
 }
 
-#myDIV {
+/*#myDIV {
 	height: 15em;
 }
 
 .evento {
 	height: 90%;
-}
+}*/
 
 .evento:nth-child(3n) {
 	margin-right: 0;
