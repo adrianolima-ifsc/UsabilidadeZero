@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	// Iniciando isotope
 	var gridProximos = $('.grid-proximos');
 	var gridPassados = $('.grid-passados');
 

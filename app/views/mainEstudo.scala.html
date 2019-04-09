@@ -27,6 +27,15 @@
     }
 }
 
+@tipoEstudo = @{
+    
+    tarefa.getCodigo match {
+
+        case "EC01" | "EC02" | "EC03" => false
+        case "EC11" | "EC12" | "EC13" => true
+    }
+}
+
 <!DOCTYPE html>
 <html lang="pt">
     <head>
@@ -53,7 +62,7 @@
     			    		<h1 class="navbar-brand mb-0">@tipoTarefa</h1>
     	    			</div>
     	    			<div class="col">
-    	    				<span class="text-light">@stringTarefa</span>
+    	    				<span class="text-light">@stringTarefa <a data-toggle="collapse" href="#persona">Aqui</a></span>
     	    			</div>
     	    			<div class="col-auto text-right">
                             <div class="row">
@@ -83,6 +92,22 @@
     	    			</div>
     	    		</div>
         		</div>
+            </div>
+            <div class="navbar fixed-bottom bg-light collapse" id="persona">
+                <p><strong>Nome:</strong> Jakob Nielsen</p>
+                <p><strong>Email:</strong> nielsen&#64;nngroup.com</p>
+                @if(!tipoEstudo) {
+                    <p><strong>Fone:</strong> 123456</p>
+                }
+                <p><strong>CPF:</strong> 157.245.483-05</p>
+                @if(!tipoEstudo) {
+                    <p><strong>Endereço:</strong> Campus Universitário, s/n</p>
+                    <p><strong>Cidade:</strong> Florianópolis</p>
+                }
+                <p><strong># Cartão:</strong> 4609 8687 6694 4752</p>
+                <p><strong>Titular:</strong> JAKOB NIELSEN</p>
+                <p><strong>Validade:</strong> 09/2020</p>
+                <p><strong>CVV:</strong> 902</p>
             </div>
 		</header>
 		<main role="main">
