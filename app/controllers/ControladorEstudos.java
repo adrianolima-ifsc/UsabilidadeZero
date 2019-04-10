@@ -240,11 +240,25 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result fazerInscricao() {
 		
+		Inscricao nielsen = new Inscricao();
+		nielsen.setNome("Jakob Nielsen");
+		
 		Inscricao form = inscricaoForm.bindFromRequest().get();	
 		
 		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
 		Estudo estudo = tarefa.getEstudo();	
 		List<Evento> eventos = eventoDAO.mostraTodos();	
+		
+		if(form.getNome().equals(nielsen.getNome())) {
+			
+			tarefa.setConcluidoReal(true);
+		
+		} else {
+			
+			tarefa.setConcluidoReal(false);
+		}
+		
+		tarefa.update();
 		
 		if(estudo.isTipo()) {
 			

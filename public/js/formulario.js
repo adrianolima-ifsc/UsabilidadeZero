@@ -58,9 +58,11 @@ $(document).ready(function() {
 		
 		var input = $(this);
 
+		//if (estudo == 1) mascaraNumCartao(input);
+		
 		var valor = testarNumCartao(input);
 
-		if (estudo == 1) mascaraNumCartao(input);
+		console.log(valor);
 
 		validarCampo(input, valor);
 	});
