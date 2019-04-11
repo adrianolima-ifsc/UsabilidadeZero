@@ -35,3 +35,7 @@
 .evento:nth-child(3n+1) {
 	margin-left: 0;
 }
+
+.sidebar-evento {
+	position: sticky;
+}

@@ -36,51 +36,63 @@
 	</div>
 </section>
 
-<div class="container w-50">
-	<ul class="nav nav-tabs" id="opcoes-tab" role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active" id="o-evento-tab" data-toggle="tab" href="#o-evento" role="tab" aria-controls="o-evento" aria-selected="true">Apresentação</a>
-		</li>
-		<li class="nav-item"> 
-			<a class="nav-link" id="programa-tab" data-toggle="tab" href="#programa" role="tab" aria-controls="programa" aria-selected="false">Programação</a>
-		</li>
-		<li class="nav-item"> 
-			<a class="nav-link" id="informacao-tab" data-toggle="tab" href="#informacao" role="tab" aria-controls="informacao" aria-selected="false">Informações</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="inscricao-tab" data-toggle="tab" href="#inscricao" role="tab" aria-controls="inscricao" aria-selected="false">Inscrição</a>
-		</li>
-	</ul>
-	<div class="tab-content" id="conteudo-tab">
-		<div class="tab-pane fade show active" id="o-evento" role="tabpanel" aria-labelledby="o-evento-tab">@Html(evento.getDescricao())</div>
-		<div class="tab-pane fade" id="programa" role="tabpanel" aria-labelledby="programa-tab">@Html(evento.getPrograma)</div>
-		<div class="tab-pane fade" id="informacao" role="tabpanel" aria-labelledby="informacao-tab">
-		@Html(evento.getInformacoes)</div>
-		<div class="tab-pane fade" id="inscricao" role="tabpanel" aria-labelledby="inscricao-tab">
-			<h1 class="text-center">Inscrição</h1>
-			<div class="row text-center">
-				<div class="col">
-					<div class="card card-body">
-						<p><i class="fas fa-dollar-sign"></i> @evento.getPreco</p>
+<div class="container">
+	<div class="row">
+		<div class="d-none d-lg-block col-md-2 sidebar-evento">
+			<ul class="section-nav" id="opcoes-tab">
+				<li class="nav-item">
+					<a class="nav-link active" id="o-evento-tab" href="#o-evento">Apresentação</a>
+				</li>
+				<li class="nav-item"> 
+					<a class="nav-link" id="programa-tab" href="#programa">Programação</a>
+				</li>
+				<li class="nav-item"> 
+					<a class="nav-link" id="informacao-tab" href="#informacao">Informações</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="inscricao-tab" href="#inscricao">Inscrição</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-12 col-lg-10 py-md-3 pl-md-5 conteudo-evento" id="conteudo">
+			<div id="o-evento">
+				<h5>Apresentação</h5>
+				@Html(evento.getDescricao())
+			</div>
+			<div id="programa">
+				<h5>Programação</h5>
+				@Html(evento.getPrograma)
+			</div>
+			<div id="informacao">
+				<h5>Outras informações</h5>
+				@Html(evento.getInformacoes)
+			</div>
+			<div id="inscricao">
+				<h5>Inscrição</h5>
+				<div class="row text-center">
+					<div class="col">
+						<div class="card card-body">
+							<p><i class="fas fa-dollar-sign"></i> @evento.getPreco</p>
+						</div>
 					</div>
-				</div>
-			</div>	
-							
-			<p>Os pagamentos podem ser efetuados via cartão de crédito [Visa/MasterCard], cartão de débito, boleto bancário ou nota de empenho. Outras questões ou solicitações devem ser enviadas por email.</p>
+				</div>	
+								
+				<p>Os pagamentos podem ser efetuados via cartão de crédito [Visa/MasterCard], cartão de débito, boleto bancário ou nota de empenho. Outras questões ou solicitações devem ser enviadas por email.</p>
 
-			<p>Os pagamentos por boleto e débito encerram-se no dia @data, após esse período estarão disponíveis as formas de pagamento por cartão de crédito, nota de empenho e faturamento. Caso não possa efetuar o pagamento pelas formas citadas, poderá efetuar o pagamento em espécie na secretaria do evento.</p>
+				<p>Os pagamentos por boleto e débito encerram-se no dia @data, após esse período estarão disponíveis as formas de pagamento por cartão de crédito, nota de empenho e faturamento. Caso não possa efetuar o pagamento pelas formas citadas, poderá efetuar o pagamento em espécie na secretaria do evento.</p>
 
-			<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
+				<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
 
-			@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
-				'role -> "form") {
+				@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
+					'role -> "form") {
 
-				@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
-				@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
-				@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
-					
-				<input type="submit" value="Participe" class="btn btn-primary">
-			} 
+					@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+					@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+					@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
+						
+					<input type="submit" value="Participe" class="btn btn-primary">
+				} 
+			</div>
 		</div>
 	</div>
 	<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
