@@ -58,7 +58,7 @@ $(document).ready(function() {
 		
 		var input = $(this);
 
-		//if (estudo == 1) mascaraNumCartao(input);
+		if (estudo == 1) mascaraNumCartao(input);
 		
 		var valor = testarNumCartao(input);
 

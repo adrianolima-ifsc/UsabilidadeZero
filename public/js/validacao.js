@@ -31,7 +31,7 @@ function testarCpf(input) {
 
 function testarNumCartao(input) {
 
-	var regex = /^\d{16}/;
+	var regex = /^\d/;
 	return regex.test(input.val());
 }
 

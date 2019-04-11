@@ -24,10 +24,8 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
-import views.html.estudo0participe;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
-import views.html.login;
 import views.html.relatorio;
 import views.html.tarefa1;
 import views.html.tarefa2;
@@ -249,16 +247,14 @@ public class ControladorEstudos extends Controller {
 		Estudo estudo = tarefa.getEstudo();	
 		List<Evento> eventos = eventoDAO.mostraTodos();	
 		
-		if(form.getNome().equals(nielsen.getNome())) {
-			
-			tarefa.setConcluidoReal(true);
+		if (form.getEvento() == 2) {
 		
-		} else {
-			
-			tarefa.setConcluidoReal(false);
+			if (testarInscricao(form)) {
+
+				setConcluidoReal(tarefa.getId());	
+				tarefa.update();
+			}
 		}
-		
-		tarefa.update();
 		
 		if(estudo.isTipo()) {
 			
@@ -268,5 +264,18 @@ public class ControladorEstudos extends Controller {
 			
 			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
 		}
+	}
+
+	private boolean testarInscricao(Inscricao form) {
+
+		if(!form.getNome().toLowerCase().equals("jakob nielsen")) {return false;}
+		else if (!form.getEmail().equals("nielsen@nngroup.com")) {return false;}
+		else if (!form.getCpf().equals("157.245.483-05")) {return false;}
+		else if (!form.getNumCartao().replaceAll("\\s+", "").equals("4609868766944752")) {return false;}
+		else if (!form.getTitularCartao().toLowerCase().equals("jakob nielsen")) {return false;}
+		else if (!form.getValidade().equals("09/2020")) {return false;}
+		else if (!form.getCodigoSeguranca().equals("902")) {return false;}
+			
+		return true;
 	}
 }
