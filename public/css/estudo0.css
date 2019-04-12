@@ -29,6 +29,14 @@ a:hover {
 	text-decoration: none;
 }
 
+input[type="text"] {
+	width: 100%;
+}
+
+select {
+	width: 100%;
+}
+
 .evento {
 	background-color: red;
 	border-color: red;

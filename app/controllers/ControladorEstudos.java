@@ -268,12 +268,8 @@ public class ControladorEstudos extends Controller {
 
 	private boolean testarInscricao(Inscricao form) {
 
-		if(!form.getNome().toLowerCase().equals("jakob nielsen")) {return false;}
-		else if (!form.getEmail().equals("nielsen@nngroup.com")) {return false;}
-		else if (!form.getCpf().equals("157.245.483-05")) {return false;}
-		else if (!form.getNumCartao().replaceAll("\\s+", "").equals("4609868766944752")) {return false;}
-		else if (!form.getTitularCartao().toLowerCase().equals("jakob nielsen")) {return false;}
-		else if (!form.getValidade().equals("09/2020")) {return false;}
+		if (!form.getNumCartao().replaceAll("\\s+", "").equals("4609868766944752")) {return false;}
+		else if (!form.getValidade().equals("09/2030")) {return false;}
 		else if (!form.getCodigoSeguranca().equals("902")) {return false;}
 			
 		return true;

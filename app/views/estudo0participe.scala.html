@@ -41,54 +41,75 @@
 						'value -> evento.getId )
 
 					<div class="form-group row" id="nome_field">
-						<label class="col-form-label col-4">Nome</label>
+						<label class="col-form-label col-4"><u>Nome</u></label>
 						<div class="col-8">
 						    <input type="text" id="nome" name="nome" tabindex="-1" required="true">
 						</div>
 					</div>
 					<div class="form-group row" id="email_field">
-						<label class="col-form-label col-4">Email</label>
+						<label class="col-form-label col-4"><u>Email</u></label>
 						<div class="col-8">
 						    <input type="text" id="email" name="email" tabindex="-1" required="true">
 						</div>
 					</div>
-					@b4.text( inscricaoForm("fone"), 
-						'_label -> "Fone",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("cpf"), 
-						'_label -> "CPF",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("endereco"), 
-						'_label -> "Endereço",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("cidade"), 
-						'_label -> "Cidade",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("numCartao"), 
-						'_label -> "Número do Cartão",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("titularCartao"), 
-						'_label -> "Titular do Cartão",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("validade"), 
-						'_label -> "Validade",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.text( inscricaoForm("codigoSeguranca"), 
-						'_label -> "Código de Segurança",
-						'tabindex -> "-1",
-						'required -> "true" )
-					@b4.select( inscricaoForm("valor"), options = valores, 
-						'_label -> "Parcelas", 
-						'_default -> "Selecione o número de parcelas",
-						'tabindex -> "-1",
-						'required -> "true" )
+					<div class="form-group row" id="fone_field">
+						<label class="col-form-label col-4">Fone</label>
+						<div class="col-8">
+						    <input type="text" id="fone" name="fone" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="cpf_field">
+						<label class="col-form-label col-4"><u>CPF</u></label>
+						<div class="col-8">
+						    <input type="text" id="cpf" name="cpf" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="endereco_field">
+						<label class="col-form-label col-4">Endereço</label>
+						<div class="col-8">
+						    <input type="text" id="endereco" name="endereco" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="cidade_field">
+						<label class="col-form-label col-4">Cidade</label>
+						<div class="col-8">
+						    <input type="text" id="cidade" name="cidade" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="numCartao_field">
+						<label class="col-form-label col-4"><u># Cartão</u></label>
+						<div class="col-8">
+						    <input type="text" id="numCartao" name="numCartao" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="titularCartao_field">
+						<label class="col-form-label col-4"><u>Titular do Cartão</u></label>
+						<div class="col-8">
+						    <input type="text" id="titularCartao" name="titularCartao" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="validade_field">
+						<label class="col-form-label col-4"><u>Validade</u></label>
+						<div class="col-8">
+						    <input type="text" id="validade" name="validade" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="codigoSeguranca_field">
+						<label class="col-form-label col-4"><u>CVV</u></label>
+						<div class="col-8">
+						    <input type="text" id="codigoSeguranca" name="codigoSeguranca" tabindex="-1" required="true">
+						</div>
+					</div>
+					<div class="form-group row" id="valor_field">
+						<label class="col-form-label col-4"><u>Forma de Pagto</u></label>
+						<div class="col-8">
+						    <select id="valor" name="valor" tabindex="-1" required="true">
+						    	<option class="blank" selected="true" disabled="disabled">Selecione o número de parcelas</option>
+						    	<option value="true">@("R$ " + evento.getPreco.toString)</option>
+						    	<option value="true">@("2 x R$ " + (evento.getPreco/2).toString)</option>
+						    </select>
+						</div>
+					</div>
 						
 					<input type="submit" id="botao-inscricao" value="Participe" tabindex="-1">
 				} 
