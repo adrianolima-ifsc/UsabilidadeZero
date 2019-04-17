@@ -22,7 +22,7 @@
     tarefa.getCodigo match {
 
         case "EC01" | "EC11" => "Você deve descobrir o valor de inscrição do próximo \"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais\""
-        case "EC02" | "EC12" => "Você deve fazer a inscrição de um participante no evento encontrado com os dados disponíveis <a data-toggle=\"collapse\" href=\"#persona\">aqui</a>."
+        case "EC02" | "EC12" => "Você deve fazer a inscrição de um participante no evento encontrado com os dados disponíveis <a data-toggle=\"collapse\" href=\"#persona\" tabindex=\"-1\">aqui</a>."
         case "EC03" | "EC13" => "Tarefa 3"
     }
 }
@@ -74,7 +74,7 @@
                                         @b4.hidden( tarefaForm("codigo"), 'value -> tarefa.getCodigo )
                                         @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
 
-                                        <button id="concluir-tarefa" class="btn btn-sm btn-success">Concluir</button>
+                                        <button id="concluir-tarefa" class="btn btn-sm btn-success" tabindex="-1">Concluir</button>
                                     }
                                 </div>
                                 <div class="col"> 
@@ -85,7 +85,7 @@
                                         @b4.hidden( tarefaForm("evento"), 'value -> tarefa.getEvento )
                                         @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
 
-                                        <button id="desistir-tarefa" class="btn btn-sm btn-danger">Desistir</button>
+                                        <button id="desistir-tarefa" class="btn btn-sm btn-danger" tabindex="-1">Desistir</button>
                                     }
                                 </div>
                             </div>
