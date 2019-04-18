@@ -62,8 +62,6 @@ $(document).ready(function() {
 		
 		var valor = testarNumCartao(input);
 
-		console.log(valor);
-
 		validarCampo(input, valor);
 	});
 
