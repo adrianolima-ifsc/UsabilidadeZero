@@ -86,16 +86,18 @@
 				@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
 					'role -> "form") {
 
+					@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
+
 					@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
 					@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
 					@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
 						
+					<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
 					<input type="submit" value="Participe" class="btn btn-primary">
 				} 
 			</div>
 		</div>
 	</div>
-	<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
 </div>
 }
 

@@ -8,6 +8,17 @@ $(document).ready(function() {
 	var tarefa = codigo.substr(3,1);
 
 	// Tarefa 1
+	function testando () {
+		if (estudo == 1) {
+
+			if (idEvento == 1) {
+
+				alert("oláaaa!");
+				$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+			}
+		}
+	}
+
 	$("#valor").change(function() {
 		
 		$(this).removeClass("invalido").addClass("valido");
