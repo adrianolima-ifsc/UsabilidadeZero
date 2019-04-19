@@ -11,7 +11,11 @@ public class EventoDAO {
 	
 	public List<Evento> mostraTodos() {
 		
-		return find.all();
+		List<Evento> eventos = find.all();
+		
+		Collections.sort(eventos);
+		
+		return eventos;
 	}
 
 	public Optional<Evento> comId(Long id) {
