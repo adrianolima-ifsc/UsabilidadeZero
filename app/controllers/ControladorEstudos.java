@@ -29,6 +29,7 @@ import views.html.estudo1portal;
 import views.html.relatorio;
 import views.html.tarefa1;
 import views.html.tarefa2;
+import views.html.tarefa3;
 
 public class ControladorEstudos extends Controller {
 
@@ -84,46 +85,33 @@ public class ControladorEstudos extends Controller {
         
         switch (estudo.getTarefas().size()) {
 		
-        case 0:	return ok(tarefa1.render(estudo, estudoForm));
-
-        case 1: return ok(tarefa2.render(estudo, estudoForm));
-		
-        default: return ok("Tarefa 3");
+	        case 0:	return ok(tarefa1.render(estudo, estudoForm, 1L));
+	
+	        case 1: return ok(tarefa2.render(estudo, estudoForm, 2L));
+			
+	        default: return ok(tarefa3.render(estudo, estudoForm, 3L));
 		}
         
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarTarefa1() {
+	public Result iniciarTarefa() {
 		
 		Estudo form = estudoForm.bindFromRequest().get();	
 		
 		Estudo estudo = estudoDAO.comId(form.getId()).get();	
 		List<Evento> eventos = eventoDAO.mostraTodos();
 		
-		Tarefa tarefa = criarNovaTarefa(estudo, 1L);
-
-		if(estudo.isTipo()) {
-			
-			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
+		Tarefa tarefa;
+        
+        switch (estudo.getTarefas().size()) {
 		
-		} else {
-			
-			Collections.shuffle(eventos);
-			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
-		}
-		
-	}
+	        case 0:	tarefa = criarNovaTarefa(estudo, 1L);
 	
-	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarTarefa2() {
-		
-		Estudo form = estudoForm.bindFromRequest().get();	
-		
-		Estudo estudo = estudoDAO.comId(form.getId()).get();	
-		List<Evento> eventos = eventoDAO.mostraTodos();	
-		
-		Tarefa tarefa = criarNovaTarefa(estudo, 2L);
+	        case 1: tarefa = criarNovaTarefa(estudo, 2L);
+			
+	        default: tarefa = criarNovaTarefa(estudo, 3L);
+		}
 
 		if(estudo.isTipo()) {
 			
@@ -134,6 +122,7 @@ public class ControladorEstudos extends Controller {
 			Collections.shuffle(eventos);
 			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
 		}
+		
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
