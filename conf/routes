@@ -14,8 +14,7 @@ GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean
 GET		/sobre								controllers.HomeController.mostrarSobre
 
 POST	/estudo								controllers.ControladorEstudos.iniciarEstudoDeCaso
-POST	/portal								controllers.ControladorEstudos.iniciarTarefa1
-GET		/portal								controllers.ControladorEstudos.iniciarTarefa2
+POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf
 POST	/concluir							controllers.ControladorEstudos.concluirTarefa
 GET		/desistir							controllers.ControladorEstudos.desistirTarefa
