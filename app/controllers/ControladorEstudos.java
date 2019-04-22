@@ -102,16 +102,7 @@ public class ControladorEstudos extends Controller {
 		Estudo estudo = estudoDAO.comId(form.getId()).get();	
 		List<Evento> eventos = eventoDAO.mostraTodos();
 		
-		Tarefa tarefa;
-        
-        switch (estudo.getTarefas().size()) {
-		
-	        case 0:	tarefa = criarNovaTarefa(estudo, 1L);
-	
-	        case 1: tarefa = criarNovaTarefa(estudo, 2L);
-			
-	        default: tarefa = criarNovaTarefa(estudo, 3L);
-		}
+		Tarefa tarefa = criarNovaTarefa(estudo);
 
 		if(estudo.isTipo()) {
 			
@@ -192,19 +183,43 @@ public class ControladorEstudos extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Tarefa criarNovaTarefa(Estudo estudo, Long numTarefa) {
+	public Tarefa criarNovaTarefa(Estudo estudo) {
 		
-		if(numTarefa <= estudo.getTarefas().size()) 
-			return estudo.getTarefas().get(numTarefa.intValue() - 1);
+		Tarefa tarefa;
 		
-		String codigo = "EC" +
-				(estudo.isTipo() ? "1" : "0") +
-				numTarefa.toString();
-
+		List<Tarefa> tarefas = estudo.getTarefas();
+		
+		String codigo = "EC" + (estudo.isTipo() ? "1" : "0");
 		Calendar calendario;
 		calendario = Calendar.getInstance();
-		Tarefa tarefa = new Tarefa(codigo, estudo, calendario.getTime());
+		
+		if (tarefas.size() == 0) {
+			
+			codigo = codigo + "1";
+		
+		} else {
+			
+			Tarefa ultimaTarefa = tarefas.get(tarefas.size() - 1);
+			
+			if (ultimaTarefa.getDataHoraFim() == null) {
+				
+				tarefa = ultimaTarefa;
+				tarefa.setDataHoraFim(calendario.getTime());
+				tarefa.save();
+				
+				return tarefa;
+			
+			} else {
+				
+				String numTarefa = Integer.toString(tarefas.size() + 1);
+				codigo = codigo + numTarefa.toString();
+			}
+			
+		}
+		
+		tarefa = new Tarefa(codigo, estudo, calendario.getTime());
 		tarefa.save();
+
 		
 		return tarefa;
 	}
