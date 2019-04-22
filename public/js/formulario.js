@@ -20,14 +20,6 @@ $(document).ready(function() {
 		validarCampo(input, valor);
 	});
 
-
-	$('#fone').on('input', function() {
-
-		var input = $(this);
-		
-		validarCampo(input, valor);
-	});
-
 	$('#cpf').on('input', function() {
 		
 		var input = $(this);
@@ -38,20 +30,6 @@ $(document).ready(function() {
 
 		validarCampo(input, valor);
 
-	});
-
-	$('#endereco').on('input', function() {
-
-		var input = $(this);
-		
-		validarCampo(input, valor);
-	});
-
-	$('#cidade').on('input', function() {
-
-		var input = $(this);
-		
-		validarCampo(input, valor);
 	});
 
 	$('#numCartao').on('input', function() {
@@ -101,7 +79,7 @@ function goBack() {
 function limparCampos() {
 
 	var campos = $("#form-inscricao")
-		.find('.form-control')
+		.find('.campo')
 		.serializeArray();
 
 	$.each(campos, function(i, campo) {

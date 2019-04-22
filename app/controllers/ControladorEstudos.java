@@ -202,6 +202,7 @@ public class ControladorEstudos extends Controller {
 		return ok();
 	}
 	
+	@Authenticated(UsuarioAutenticado.class)
 	public Tarefa criarNovaTarefa(Estudo estudo, Long numTarefa) {
 		
 		if(numTarefa <= estudo.getTarefas().size()) 
@@ -219,6 +220,7 @@ public class ControladorEstudos extends Controller {
 		return tarefa;
 	}
 	
+	@Authenticated(UsuarioAutenticado.class)
 	public Estudo criarNovoEstudo(boolean tipo) {
 
 		Calendar calendario;
@@ -235,9 +237,6 @@ public class ControladorEstudos extends Controller {
 	
 	@Authenticated(UsuarioAutenticado.class)
 	public Result fazerInscricao() {
-		
-		Inscricao nielsen = new Inscricao();
-		nielsen.setNome("Jakob Nielsen");
 		
 		Inscricao form = inscricaoForm.bindFromRequest().get();	
 		
@@ -265,6 +264,7 @@ public class ControladorEstudos extends Controller {
 		}
 	}
 
+	@Authenticated(UsuarioAutenticado.class)
 	private boolean testarInscricao(Inscricao form) {
 
 		if (!form.getNumCartao().replaceAll("\\s+", "").equals("4609868766944752")) {return false;}

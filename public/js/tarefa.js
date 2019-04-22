@@ -38,7 +38,7 @@ $(document).ready(function() {
 		//e.preventDefault();
 
 		var campos = $("#form-inscricao")
-			.find('.form-control')
+			.find('.ob')
 			.serializeArray();
 		var error_free = true;
 
@@ -54,6 +54,7 @@ $(document).ready(function() {
 			console.log(error_element);
 			console.log(elemento);
 			console.log(elemento.parent());
+			console.log(error_free);
 
 			if (!valido) {
 			
@@ -69,7 +70,8 @@ $(document).ready(function() {
 		if (!error_free) {
 
 			e.preventDefault();
-			alert("Todos os campos devem ser preenchidos!") ;
+			limparCampos();
+			alert("Todos os campos devem ser preenchidos!. Tente novamente.");
 		
 		} else {
 
@@ -82,7 +84,7 @@ $(document).ready(function() {
 
 				if(idEvento == 2) {
 
-					//$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+					$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
 				}
 			}
 		}
