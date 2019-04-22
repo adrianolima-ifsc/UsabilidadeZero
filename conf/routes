@@ -13,11 +13,11 @@ GET		/painel								controllers.ControladorUsuario.mostrarPainel
 GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean)
 GET		/sobre								controllers.HomeController.mostrarSobre
 
-POST	/estudo								controllers.ControladorEstudos.iniciarEstudoDeCaso
+POST	/inciarEstudo						controllers.ControladorEstudos.iniciarEstudoDeCaso
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf
-POST	/concluir							controllers.ControladorEstudos.concluirTarefa
-GET		/desistir							controllers.ControladorEstudos.desistirTarefa
+POST	/concluirTarefa						controllers.ControladorEstudos.concluirTarefa
+GET		/desistirTarefa						controllers.ControladorEstudos.desistirTarefa
 POST	/inscricao 							controllers.ControladorEstudos.fazerInscricao
 
 POST	/evento								controllers.ControladorEventos.detalhar

@@ -89,9 +89,19 @@ public class ControladorEstudos extends Controller {
 	
 	        case 1: return ok(tarefa2.render(estudo, estudoForm, 2L));
 			
-	        default: return ok(tarefa3.render(estudo, estudoForm, 3L));
+	        case 2: return ok(tarefa3.render(estudo, estudoForm, 3L));
+	        
+	        default: concluirEstudoDeCaso(estudo);
+	        return redirect(routes.ControladorUsuario.mostrarPainel());
 		}
         
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public void concluirEstudoDeCaso(Estudo estudo) {
+
+		estudo.setToken(null);
+		estudo.update();		
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
