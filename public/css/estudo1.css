@@ -7,8 +7,12 @@
 	border: 2px solid red;
 }
 
-.error{
+.error {
 	color: red;
+}
+
+.text-muted {
+	display: none;
 }
 
 .ordena {

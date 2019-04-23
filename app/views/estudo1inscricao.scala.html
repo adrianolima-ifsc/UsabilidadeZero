@@ -42,38 +42,58 @@
 		@b4.text( inscricaoForm("nome"), 
 			'_label -> "Nome*", 
 			'_help -> "Escreva o seu nome completo.",
+			'class -> "ob",
+			'placeholder -> "Escreva o seu nome completo",
 			'required -> "true" )
 		
 		@b4.email( inscricaoForm("email"), 
 			'_label -> "Email*", 
 			'_help -> "Insira um email válido.",
+			'class -> "ob",
 			'placeholder -> "nome@exemplo.com",
 			'required -> "true" )
 
 		@b4.text( inscricaoForm("cpf"), 
 			'_label -> "CPF*", 
 			'_help -> "Utilize apenas números.",
+			'class -> "ob",
 			'placeholder -> "Utilize apenas números",
 			'required -> "true" )
 
 		<h4 class="mb-3">Pagamento</h4>
 		<div class="row">
 			<div class="col">
-				@b4.text( inscricaoForm("numCartao"), '_label -> "Número do Cartão*" )
+				@b4.text( inscricaoForm("numCartao"), 
+					'_label -> "Número do Cartão*",
+					'_help -> "Insira um número válido.",
+					'class -> "ob" )
 			</div>
 			<div class="col"> 
-				@b4.text( inscricaoForm("titularCartao"), '_label -> "Titular do Cartão*" )
+				@b4.text( inscricaoForm("titularCartao"), 
+					'_label -> "Titular do Cartão*",
+					'class -> "ob" )
 			</div>
 		</div>
 		<div class="row"> 
 			<div class="col"> 
-				@b4.text( inscricaoForm("validade"), '_label -> "Validade*" )
+				@b4.text( inscricaoForm("validade"), 
+					'_label -> "Validade*",
+					'class -> "ob" )
 			</div>
 			<div class="col"> 
-				@b4.text( inscricaoForm("codigoSeguranca"), '_label -> "Código de Segurança*" )
+				@b4.text( inscricaoForm("codigoSeguranca"), 
+					'_label -> "Código de Segurança*",
+					'class -> "ob" )
 			</div>
 		</div>
-		@b4.select( inscricaoForm("valor"), options = valores, '_label -> "Parcelas", '_default -> "Selecione o número de parcelas" )
+		<div class="form-group" id="valor_field">
+			<label class="col-form-label">Número de parcelas*</label>
+		    <select id="valor" name="valor" class="form-control campo ob">
+		    	<option hidden selected value>Selecione o número de parcelas</option>
+		    	<option value="true">@("R$ " + evento.getPreco.toString)</option>
+		    	<option value="true">@("2 x R$ " + (evento.getPreco/2).toString)</option>
+		    </select>
+		</div>
 			
 		<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
 		<input type="reset" id="botao-limpar" value="Limpar Formulário" class="btn btn-secondary" onclick="limparCampos()">
