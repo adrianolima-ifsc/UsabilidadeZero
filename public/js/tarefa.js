@@ -84,7 +84,7 @@ $(document).ready(function() {
 
 				if(idEvento == 2) {
 
-					$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+					$.get(jsRoutes.controllers.ControladorEstudos.fazerInscricao());
 				}
 			}
 		}
