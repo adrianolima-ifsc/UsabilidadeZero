@@ -176,6 +176,11 @@ public class ControladorEventos extends Controller {
 		return ok(estudo1inscricao.render(tarefa, tarefaForm, inscricaoForm, evento));
 	}
 	
+	public Result mostrarCertificado() {
+		
+		return ok("Certificado");
+	}
+	
 	public String calcularDataEvento(int data, String separador) {
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());

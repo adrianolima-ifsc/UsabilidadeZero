@@ -70,6 +70,16 @@
 							
 						<input type="submit" value="Pagamento">
 					} 
+
+					@b4.formCSRF(routes.ControladorEventos.mostrarCertificado,
+						'class -> "form-horizontal botao-evento", 
+						'role -> "form") {
+
+						@b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+						@b4.hidden( tarefaForm("evento"), 'value -> evento.getId )
+							
+						<input type="submit" value="Certificado">
+					} 
 				</div>
 			</div>
 		</div>
