@@ -1,3 +1,10 @@
+
+
+$('#inscricao').appear(function() {
+
+  console.log("Achou!");
+});
+
 $(document).ready(function() {
 
 	var idTarefa = $("#id-tarefa").text();
@@ -8,16 +15,11 @@ $(document).ready(function() {
 	var tarefa = codigo.substr(3,1);
 
 	// Tarefa 1
-	function testando () {
-		if (estudo == 1) {
 
-			if (idEvento == 1) {
+	$('#inscricao').on('appear',function() {
 
-				alert("oláaaa!");
-				$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
-			}
-		}
-	}
+	  console.log("Achou!");
+	});
 
 	$("#valor").change(function() {
 		
