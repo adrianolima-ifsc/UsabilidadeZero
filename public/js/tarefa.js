@@ -58,12 +58,12 @@ $(document).ready(function() {
 
 			if (!valido) {
 			
-				error_element.addClass("error").removeClass("text-muted"); 
+				error_element.addClass("error").removeClass("no-error"); 
 				error_free = false;
 			
 			} else {
 
-				error_element.removeClass("error").addClass("text-muted");
+				error_element.removeClass("error").addClass("no-error");
 			}
 		})
 

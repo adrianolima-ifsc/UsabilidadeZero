@@ -39,51 +39,56 @@
 		@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
 
 		<h4 class="mb-3">Participante</h4>
-		@b4.text( inscricaoForm("nome"), 
-			'_label -> "Nome*", 
-			'_help -> "Escreva o seu nome completo.",
-			'class -> "ob",
-			'placeholder -> "Escreva o seu nome completo",
-			'required -> "true" )
-		
-		@b4.email( inscricaoForm("email"), 
-			'_label -> "Email*", 
-			'_help -> "Insira um email válido.",
-			'class -> "ob",
-			'placeholder -> "nome@exemplo.com",
-			'required -> "true" )
 
-		@b4.text( inscricaoForm("cpf"), 
-			'_label -> "CPF*", 
-			'_help -> "Utilize apenas números.",
-			'class -> "ob",
-			'placeholder -> "Utilize apenas números",
-			'required -> "true" )
+		<div class="form-group" id="nome_field">
+			<label for="nome">Nome*</label>
+		    <input type="text" id="nome" name="nome" value="" aria-describedby="nome_info_0" class="form-control ob" placeholder="Escreva o seu nome completo" required="true">
+			<small id="nome_info_0" class="form-text no-error">Escreva o seu nome completo.</small>
+		</div>
+
+		<div class="form-group" id="email_field">
+			<label for="email">Email*</label>
+		    <input type="email" id="email" name="email" value="" aria-describedby="email_info_0" class="form-control ob" placeholder="nome&#64;exemplo.com" required="true">
+			<small id="email_info_0" class="form-text no-error">Insira um email válido.</small>
+		</div>
+
+		<div class="form-group" id="cpf_field">
+			<label for="cpf">CPF*</label>
+		    <input type="text" id="cpf" name="cpf" value="" aria-describedby="cpf_info_0" class="form-control ob" placeholder="Informe o número do seu CPF" required="true">
+			<small id="cpf_info_0" class="form-text no-error">Utilize apenas números.</small>
+		</div>
 
 		<h4 class="mb-3">Pagamento</h4>
 		<div class="row">
 			<div class="col">
-				@b4.text( inscricaoForm("numCartao"), 
-					'_label -> "Número do Cartão*",
-					'_help -> "Insira um número válido.",
-					'class -> "ob" )
+				<div class="form-group" id="numCartao_field">
+					<label for="numCartao">Número do Cartão*</label>
+				    <input type="text" id="numCartao" name="numCartao" value="" aria-describedby="numCartao_info_0" class="form-control ob">
+					<small id="numCartao_info_0" class="form-text no-error">Insira um número válido.</small>
+				</div>
 			</div>
-			<div class="col"> 
-				@b4.text( inscricaoForm("titularCartao"), 
-					'_label -> "Titular do Cartão*",
-					'class -> "ob" )
+			<div class="col">
+				<div class="form-group" id="titularCartao_field">
+					<label for="titularCartao">Titular do Cartão*</label>
+				    <input type="text" id="titularCartao" name="titularCartao" value="" class="form-control ob">
+					<small id="numCartao_info_0" class="form-text no-error">Insira um número válido.</small>
+				</div> 
 			</div>
 		</div>
 		<div class="row"> 
-			<div class="col"> 
-				@b4.text( inscricaoForm("validade"), 
-					'_label -> "Validade*",
-					'class -> "ob" )
+			<div class="col">
+				<div class="form-group" id="validade_field">
+					<label for="validade">Validade*</label>
+				    <input type="text" id="validade" name="validade" value="" class="form-control ob">
+					<small id="numCartao_info_0" class="form-text no-error">Insira um número válido.</small>
+				</div>
 			</div>
-			<div class="col"> 
-				@b4.text( inscricaoForm("codigoSeguranca"), 
-					'_label -> "Código de Segurança*",
-					'class -> "ob" )
+			<div class="col">
+				<div class="form-group" id="codigoSeguranca_field">
+					<label for="codigoSeguranca">Código de Segurança*</label>
+				    <input type="text" id="codigoSeguranca" name="codigoSeguranca" value="" class="form-control ob">
+					<small id="numCartao_info_0" class="form-text no-error">Insira um número válido.</small>
+				</div> 
 			</div>
 		</div>
 		<div class="form-group" id="valor_field">
