@@ -193,7 +193,7 @@ public class ControladorEstudos extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Optional<Tarefa> criarNovaTarefa(Estudo estudo) {
+	public Tarefa criarNovaTarefa(Estudo estudo) {
 		
 		Tarefa tarefa;
 		
@@ -214,17 +214,11 @@ public class ControladorEstudos extends Controller {
 			if (ultimaTarefa.getDataHoraFim() == null) {
 				
 				tarefa = ultimaTarefa;
-				tarefa.setDataHoraInicio(calendario.getTime());
 				tarefa.save();
 				
 				return tarefa;
 			
-			} else if (tarefas.size() == 3) {
-				
-				return 
-			}
-			
-			{
+			} else {
 				
 				String numTarefa = Integer.toString(tarefas.size() + 1);
 				codigo = codigo + numTarefa.toString();
