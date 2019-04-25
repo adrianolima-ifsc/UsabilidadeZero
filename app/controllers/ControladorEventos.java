@@ -5,6 +5,7 @@ import java.util.TimeZone;
 
 import javax.inject.Inject;
 
+import autenticadores.UsuarioAutenticado;
 import daos.EventoDAO;
 import daos.TarefaDAO;
 import models.Estudo;
@@ -178,14 +179,42 @@ public class ControladorEventos extends Controller {
 	
 	public Result mostrarCertificado() {
 		
-		return ok("Certificado");
+		Inscricao form = inscricaoForm.bindFromRequest().get();	
+		
+//		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
+//		Estudo estudo = tarefa.getEstudo();	
+//		List<Evento> eventos = eventoDAO.mostraTodos();	
+		
+		if (form.getEvento() == 13) {
+		
+			if (testarCertificado(form)) {
+
+				return ok("Certificado Gerado!!!");
+			}
+		}
+		
+		return ok("Não participou do evento.");
+		
+//		if(estudo.isTipo()) {
+//			
+//			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
+//		
+//		} else {
+//			
+//			Collections.shuffle(eventos);
+//			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
+//		}
+//		
+//		return ok("Certificado");
 	}
 	
 	public String calcularDataEvento(int data, String separador) {
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		
-		int passado = (data < 0) ? (data / 365) - 1 : 0;
+		int passado = hoje.get(Calendar.DAY_OF_YEAR) + data; 
+				
+		passado = (passado < 0) ? (passado / 365) - 1 : 0;
 		
 		int dia = Math.abs(hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
 		int mes = Math.abs((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
@@ -210,6 +239,13 @@ public class ControladorEventos extends Controller {
 		return Integer.toString(dia) + 
 				"/" + Integer.toString(mes) + 
 				"/" + Integer.toString(ano);
+	}
+
+	private boolean testarCertificado(Inscricao form) {
+
+		if (!form.getCpf().equals("683.563.770-64")) {return false;}
+			
+		return true;
 	}
 
 }

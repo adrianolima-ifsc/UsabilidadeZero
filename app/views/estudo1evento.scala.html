@@ -9,7 +9,6 @@
 }
 
 @scripts = {
-	<script src="@routes.Assets.versioned("js/outros/jquery.appear.js")"></script>
 }
 							
 @valores = @{ Seq(
@@ -68,35 +67,63 @@
 				<h5>Outras informações</h5>
 				@Html(evento.getInformacoes)
 			</div>
-			<div id="inscricao">
-				<h5>Inscrição</h5>
-				<div class="row text-center">
-					<div class="col">
-						<div class="card card-body">
-							<p><i class="fas fa-dollar-sign"></i> @evento.getPreco</p>
+			@if(evento.getData > 0) {
+
+				<div id="inscricao">
+					<h5>Inscrição</h5>
+					<div class="row text-center">
+						<div class="col">
+							<div class="card card-body">
+								<p><i class="fas fa-dollar-sign"></i> @evento.getPreco</p>
+							</div>
 						</div>
-					</div>
-				</div>	
-								
-				<p>Os pagamentos podem ser efetuados via cartão de crédito [Visa/MasterCard], cartão de débito, boleto bancário ou nota de empenho. Outras questões ou solicitações devem ser enviadas por email.</p>
+					</div>	
+									
+					<p>Os pagamentos podem ser efetuados via cartão de crédito [Visa/MasterCard], cartão de débito, boleto bancário ou nota de empenho. Outras questões ou solicitações devem ser enviadas por email.</p>
 
-				<p>Os pagamentos por boleto e débito encerram-se no dia @data, após esse período estarão disponíveis as formas de pagamento por cartão de crédito, nota de empenho e faturamento. Caso não possa efetuar o pagamento pelas formas citadas, poderá efetuar o pagamento em espécie na secretaria do evento.</p>
+					<p>Os pagamentos por boleto e débito encerram-se no dia @data, após esse período estarão disponíveis as formas de pagamento por cartão de crédito, nota de empenho e faturamento. Caso não possa efetuar o pagamento pelas formas citadas, poderá efetuar o pagamento em espécie na secretaria do evento.</p>
 
-				<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
+					<p>Importante: sócios da SBC têm desconto especial na inscrição para o @evento.getSigla, além de muitos outros benefícios como: desconto em inscrições em outros mais de quarenta eventos promovidos anualmente pela SBC, desconto para a compra de publicações da SBC e livros da Editora Campus/Elsevier, acesso às listas de discussão mantidas pela sociedade, recebimento da revista Computação Brasil e acesso irrestrito à Biblioteca Digital e às revistas eletrônicas mantidas pela SBC, entre muitos outros. Se você ainda não é sócio da SBC, associe-se agora mesmo clicando <a href="http://www.sbc.org.br">aqui</a>.</p>
 
-				@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
-					'role -> "form") {
+					@b4.formCSRF(routes.ControladorEventos.mostrarInscricao,
+						'role -> "form") {
 
-					@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
+						@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
 
-					@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
-					@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
-					@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
-						
-					<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
-					<input type="submit" value="Participe" class="btn btn-primary">
-				} 
-			</div>
+						@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+						@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+						@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
+							
+						<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
+						<input type="submit" value="Participe" class="btn btn-primary">
+					} 
+				</div>
+
+			} else {
+
+				<div id="certificado">
+					<h5>Certificado</h5>
+
+					@b4.formCSRF(routes.ControladorEventos.mostrarCertificado,
+						'role -> "form") {
+
+						@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
+
+						@b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+						@b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+						@b4.hidden( inscricaoForm("valor"), 'value -> "true", '_id -> "valor")
+
+						<div class="form-group" id="cpf_field">
+							<label for="cpf">CPF*</label>
+						    <input type="text" id="cpf" name="cpf" value="" aria-describedby="cpf_info_0" class="form-control ob" placeholder="Informe o número do seu CPF">
+							<small id="cpf_info_0" class="form-text no-error">Informe o seu CPF digitando apenas números.</small>
+						</div>
+							
+						<input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
+						<input type="submit" value="Gerar Certificado" class="btn btn-primary">
+					} 
+				</div>
+			}
 		</div>
 	</div>
 </div>

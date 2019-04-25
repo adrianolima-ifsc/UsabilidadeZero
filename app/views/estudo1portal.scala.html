@@ -17,9 +17,14 @@
 @dataCalculada(data: Integer) = @{	
 	
 	val hoje = Calendar.getInstance(TimeZone.getDefault());
-	val dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
-	val mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
-	val ano = hoje.get(Calendar.YEAR);
+	
+	val diferenca = hoje.get(Calendar.DAY_OF_YEAR) + data; 
+			
+	val passado = if (diferenca < 0) (diferenca / 365) - 1 else 0;
+	
+	val dia = Math.abs(hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
+	val mes = Math.abs((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
+	val ano = hoje.get(Calendar.YEAR) + passado;
 	
 	Integer.toString(dia) +	" a " +
 			Integer.toString(dia + 2) + 
