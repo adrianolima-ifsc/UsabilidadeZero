@@ -14,7 +14,7 @@ $(document).ready(function() {
 		
 		if (tarefa == 1) {
 
-			if(idEvento == 3) {
+			if(idEvento == 1) {
 
 				$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
 			}

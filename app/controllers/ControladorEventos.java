@@ -184,9 +184,12 @@ public class ControladorEventos extends Controller {
 	public String calcularDataEvento(int data, String separador) {
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
-		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
-		int mes = ((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
-		int ano = hoje.get(Calendar.YEAR);
+		
+		int passado = (data < 0) ? (data / 365) - 1 : 0;
+		
+		int dia = Math.abs(hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
+		int mes = Math.abs((hoje.get(Calendar.DAY_OF_YEAR) + data) / 30) + 1;
+		int ano = hoje.get(Calendar.YEAR) + passado;
 		
 		return Integer.toString(dia) + 
 				" " + separador + " " +
@@ -196,6 +199,8 @@ public class ControladorEventos extends Controller {
 	}
 	
 	public String calcularDataPagamento(int data) {
+		
+		int passado = data / 365;
 		
 		Calendar hoje = Calendar.getInstance(TimeZone.getDefault());
 		int dia = (hoje.get(Calendar.DAY_OF_YEAR) + data) % 30;
