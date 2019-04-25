@@ -49,9 +49,15 @@
 				<li class="nav-item"> 
 					<a class="nav-link" id="informacao-tab" href="#informacao">Informações</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="inscricao-tab" href="#inscricao">Inscrição</a>
-				</li>
+				@if(evento.getData > 0) {
+					<li class="nav-item">
+						<a class="nav-link" id="inscricao-tab" href="#inscricao">Inscrição</a>
+					</li>
+				} else {
+					<li class="nav-item">
+						<a class="nav-link" id="certificado-tab" href="#certificado">Certificado</a>
+					</li>
+				}
 			</ul>
 		</div>
 		<div class="col-12 col-lg-10 py-md-3 pl-md-5 conteudo-evento" id="conteudo">
