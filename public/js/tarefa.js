@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 			if(idEvento == 1) {
 
-				$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+				tarefaConcluida();
 			}
 		}
 	});
@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 			if(idEvento == 1) {
 
-				$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+				tarefaConcluida();
 			}
 		}
 	});
@@ -99,6 +99,11 @@ $(document).ready(function() {
 			if (e.which == '13') e.preventDefault();
 		}
 	});
+
+	function tarefaConcluida() {
+		
+		$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+	}
 
 });
 
