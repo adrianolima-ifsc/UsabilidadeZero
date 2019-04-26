@@ -21,7 +21,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#valor").change(function() {
+	$("#valor").on('click', function() {
 		
 		$(this).removeClass("invalido").addClass("valido");
 		
