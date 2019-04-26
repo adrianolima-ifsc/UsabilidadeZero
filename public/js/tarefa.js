@@ -73,7 +73,7 @@ $(document).ready(function() {
 
 			e.preventDefault();
 			limparCampos();
-			alert("Todos os campos devem ser preenchidos!. Tente novamente.");
+			alert("Os campos devem ser preenchidos corretamente. Tente novamente.");
 		
 		} else {
 
