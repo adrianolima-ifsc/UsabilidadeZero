@@ -1,3 +1,11 @@
 #tabela {
 	padding-top: 3rem;
 }
+
+.fa-check-circle {
+	color: #629c44;
+}
+
+.fa-times-circle {
+	color: #e61610;
+}
