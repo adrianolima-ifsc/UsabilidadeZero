@@ -161,6 +161,22 @@ public class ControladorEventos extends Controller {
 		return ok(estudo1inscricao.render(tarefa, tarefaForm, inscricaoForm, evento));
 	}
 	
+	public Result mostrarCertificadoForm() {
+		
+		Tarefa form = tarefaForm.bindFromRequest().get();
+		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
+		
+		Estudo estudo = tarefa.getEstudo();
+		if(estudo.isTipo()) {
+			
+			String data = calcularDataPagamento(evento);
+			return ok(estudo1participe.render(tarefa, tarefaForm, inscricaoForm, evento, data));
+		}
+		
+		return ok(estudo0certificadoForm.render(tarefa, tarefaForm, inscricaoForm, evento));		
+	}
+	
 	public Result mostrarCertificado() {
 		
 		Inscricao form = inscricaoForm.bindFromRequest().get();	

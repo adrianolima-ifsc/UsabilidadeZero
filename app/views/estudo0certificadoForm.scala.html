@@ -1,0 +1,71 @@
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], inscricaoForm: Form[Inscricao], evento: Evento)
+
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-4", "col-8") }
+
+@styles = {
+	<link href="https://fonts.googleapis.com/css?family=Aguafina+Script" rel="stylesheet"> 
+	<link href="@routes.Assets.versioned("css/estudo0.css")" rel="stylesheet" media="screen">
+}
+
+@scripts = {
+	<script src="@routes.Assets.versioned("js/validacao.js")"></script>
+	<script src="@routes.Assets.versioned("js/formulario.js")"></script>
+}
+
+@mainEstudo(tarefa, tarefaForm, styles, scripts) {
+<div>
+	<h1>Portal de Eventos</h1>
+	<div class="container w-50">
+		<div class="caption">
+			<h3>@evento.getSigla() - Certificado</h3>
+				<div class="col-md-12">
+			<p class="text-center">
+				@b4.formCSRF(routes.ControladorEventos.mostrarCertificado,
+					'id -> "form-certificado",
+					'class -> "form-horizontal", 
+					'role -> "form",
+					'autocomplete -> "off") {
+
+					@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
+					@b4.hidden( "data-evento", evento.getData, 'class -> "valido" )
+
+					@b4.hidden( inscricaoForm("tarefa"), 
+						'class -> "valido", 
+						'value -> tarefa.getId )
+					@b4.hidden( inscricaoForm("evento"), 
+						'class -> "valido", 
+						'value -> evento.getId )
+
+					<div class="form-group row" id="nome_field">
+						<label class="col-form-label col-4"><u>Nome:</u></label>
+						<div class="col-8">
+						    <input type="text" id="nome" name="nome" class="campo ob" tabindex="-1" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group row" id="email_field">
+						<label class="col-form-label col-4"><u>Email:</u></label>
+						<div class="col-8">
+						    <input type="text" id="email" name="email" class="campo ob" tabindex="-1" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group row" id="cpf_field">
+						<label class="col-form-label col-4"><u>CPF:</u></label>
+						<div class="col-8">
+						    <input type="text" id="cpf" name="cpf" class="campo ob" tabindex="-1" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group row" id="endereco_field">
+						<label class="col-form-label col-4"><u>Senha:</u></label>
+						<div class="col-8">
+						    <input type="text" id="endereco" name="endereco" class="campo" tabindex="-1" autocomplete="off">
+						</div>
+					</div>
+						
+					<input type="submit" id="botao-certificado" value="Participe" tabindex="-1">
+				} 
+			</p>
+		</div>
+	</div>
+</div>
+}
+
