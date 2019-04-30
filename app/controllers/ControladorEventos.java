@@ -181,9 +181,10 @@ public class ControladorEventos extends Controller {
 		
 		Inscricao form = inscricaoForm.bindFromRequest().get();	
 		
-//		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
+		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
 //		Estudo estudo = tarefa.getEstudo();	
 //		List<Evento> eventos = eventoDAO.mostraTodos();
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		
 //		if (estudo.isTipo()) {
 //			
@@ -194,7 +195,8 @@ public class ControladorEventos extends Controller {
 		
 			if (testarCertificado(form)) {
 
-				return ok("Certificado Gerado!!!");
+				tarefa.setConcluidoReal(true);
+				return ok(estudo0certificado.render(tarefa, tarefaForm, inscricaoForm, evento));		
 			}
 		}
 		
