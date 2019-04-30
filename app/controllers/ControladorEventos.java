@@ -183,7 +183,12 @@ public class ControladorEventos extends Controller {
 		
 //		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
 //		Estudo estudo = tarefa.getEstudo();	
-//		List<Evento> eventos = eventoDAO.mostraTodos();	
+//		List<Evento> eventos = eventoDAO.mostraTodos();
+		
+//		if (estudo.isTipo()) {
+//			
+//			form.setNome(nome);
+//		}
 		
 		if (form.getEvento() == 13) {
 		
@@ -249,7 +254,10 @@ public class ControladorEventos extends Controller {
 
 	private boolean testarCertificado(Inscricao form) {
 
-		if (!form.getCpf().equals("683.563.770-64")) {return false;}
+		if (!form.getNome().equals("Martin Fowler")) {return false;}
+		else if (!form.getEmail().equals("martin@martinfowler.com")) {return false;}
+		else if (!form.getCpf().equals("683.563.770-64")) {return false;}
+		else if (!form.getEndereco().equals("1234")) {return false;}
 			
 		return true;
 	}
