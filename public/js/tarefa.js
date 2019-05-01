@@ -136,21 +136,10 @@ $(document).ready(function() {
 			limparCampos();
 			alert("Todos os campos devem ser preenchidos corretamente! Tente novamente.");
 		
-		} else {
-
-			if (dataEvento > 0) {
+		} else if (dataEvento > 0) {
 			
-				e.preventDefault();
-				alert("Não é possível emitir certificado de evento que ainda não aconteceu!");
-			}
-
-			if (tarefa == 2) {
-
-				if(idEvento == 2) {
-
-					$.get(jsRoutes.controllers.ControladorEstudos.fazerInscricao());
-				}
-			}
+			e.preventDefault();
+			alert("Não é possível emitir certificado de evento que ainda não aconteceu!");
 		}
 	});
 
