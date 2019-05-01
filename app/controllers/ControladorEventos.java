@@ -191,16 +191,18 @@ public class ControladorEventos extends Controller {
 //			form.setNome(nome);
 //		}
 		
+		boolean participou = false;
+		
 		if (form.getEvento() == 13) {
 		
 			if (testarCertificado(form)) {
 
 				tarefa.setConcluidoReal(true);
-				return ok(estudo0certificado.render(tarefa, tarefaForm, inscricaoForm, evento));		
+				participou = true;
 			}
 		}
 		
-		return ok("Não participou do evento.");
+		return ok(estudo0certificado.render(tarefa, tarefaForm, evento, participou));		
 		
 //		if(estudo.isTipo()) {
 //			
