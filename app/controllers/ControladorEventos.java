@@ -198,6 +198,7 @@ public class ControladorEventos extends Controller {
 			if (testarCertificado(form)) {
 
 				tarefa.setConcluidoReal(true);
+				tarefa.update();
 				participou = true;
 			}
 		}
