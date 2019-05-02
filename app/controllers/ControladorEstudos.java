@@ -26,7 +26,9 @@ import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
+import views.html.estudoCasoInstrucao;
 import views.html.relatorio;
+import views.html.tarefa;
 import views.html.tarefa1;
 import views.html.tarefa2;
 import views.html.tarefa3;
@@ -57,44 +59,94 @@ public class ControladorEstudos extends Controller {
 		this.tarefaForm = formFactory.form(Tarefa.class);
 		this.inscricaoForm = formFactory.form(Inscricao.class);
 	}
-
+	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result iniciarEstudoDeCaso() {
+	public Result mostrarEstudoDeCaso() {
 		
 		Estudo form = estudoForm.bindFromRequest().get();	
+		
+		return ok(estudoCasoInstrucao.render(estudoForm, form.isTipo()));
+	}
+
+//	@Authenticated(UsuarioAutenticado.class)
+//	public Result iniciarEstudoDeCaso() {
+//		
+//		Estudo form = estudoForm.bindFromRequest().get();	
+//		Estudo estudo;
+//		
+//		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
+//		if(possivelEstudo.isPresent()) {
+//			
+//			estudo = possivelEstudo.get();
+//
+//			if(estudo.isTipo() ^ form.isTipo()) {
+//			
+//				estudo.setToken(null);
+//				estudo.update();
+//				estudo = criarNovoEstudo(form.isTipo());
+//			}
+//			
+//		} else {
+//			
+//			estudo = criarNovoEstudo(form.isTipo());
+//		}
+//		
+//        estudo.save();
+//        
+//        switch (estudo.getTarefas().size()) {
+//		
+//	        case 0:	return ok(tarefa1.render(estudo, estudoForm, 1L));
+//	
+//	        case 1: return ok(tarefa2.render(estudo, estudoForm, 2L));
+//			
+//	        case 2: return ok(tarefa3.render(estudo, estudoForm, 3L));
+//	        
+//	        default: concluirEstudoDeCaso(estudo);
+//	        return redirect(routes.ControladorUsuario.mostrarPainel());
+//		}
+//	}
+
+	@Authenticated(UsuarioAutenticado.class)
+	public Result iniciarEstudoZero() {	
+		
 		Estudo estudo;
 		
 		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
-		if(possivelEstudo.isPresent()) {
+		if (possivelEstudo.isPresent()) {
 			
 			estudo = possivelEstudo.get();
 
-			if(estudo.isTipo() ^ form.isTipo()) {
+			if (estudo.getTarefas().size() > 0 || estudo.isTipo()) {
 			
-				estudo.setToken(null);
-				estudo.update();
-				estudo = criarNovoEstudo(form.isTipo());
+				concluirEstudoDeCaso(estudo);
+				estudo = criarNovoEstudo(false);
 			}
 			
 		} else {
 			
-			estudo = criarNovoEstudo(form.isTipo());
+			estudo = criarNovoEstudo(false);
 		}
 		
         estudo.save();
         
-        switch (estudo.getTarefas().size()) {
+	    return ok(tarefa.render(estudo, estudoForm, 1));        
+	}
+
+	@Authenticated(UsuarioAutenticado.class)
+	public Result continuarEstudo() {
 		
-	        case 0:	return ok(tarefa1.render(estudo, estudoForm, 1L));
-	
-	        case 1: return ok(tarefa2.render(estudo, estudoForm, 2L));
-			
-	        case 2: return ok(tarefa3.render(estudo, estudoForm, 3L));
-	        
-	        default: concluirEstudoDeCaso(estudo);
-	        return redirect(routes.ControladorUsuario.mostrarPainel());
-		}
+		Estudo form = estudoForm.bindFromRequest().get();
+		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
+		
+		int numTarefa = (estudo.getTarefas().size() + 1); 
+		
+//		if (estudo.getTarefas().size() == 1) {
+//			
+//			tarefa = 2L;
+//		
+//		} 
         
+	    return ok(tarefa.render(estudo, estudoForm, numTarefa));        
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

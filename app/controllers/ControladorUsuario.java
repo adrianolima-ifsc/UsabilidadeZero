@@ -28,7 +28,6 @@ import views.html.resultados;
 
 public class ControladorUsuario extends Controller {
 
-	private Form<Usuario> usuarioForm;
 	@Inject
 	private Validador validador;
 	@Inject
@@ -40,12 +39,16 @@ public class ControladorUsuario extends Controller {
 	@Inject
 	private EstudoDAO estudoDAO;
 	
+	private Form<Usuario> usuarioForm;
+	private Form<Estudo> estudoForm;
+	
 	public static final String AUTH = "auth";
 
 	@Inject
 	public ControladorUsuario(FormFactory formFactory) {
 
 		this.usuarioForm = formFactory.form(Usuario.class);
+		this.estudoForm = formFactory.form(Estudo.class);
 	}
 
 	public Result lista() {
@@ -164,7 +167,7 @@ public class ControladorUsuario extends Controller {
 		String codigo = session(AUTH);
         Usuario usuario = usuarioDAO.comToken(codigo).get();
 
-		return ok(painel.render(resultados.render(estudos)));
+		return ok(painel.render(estudoForm, resultados.render(estudos)));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

@@ -1,0 +1,46 @@
+@(estudo: Estudo, estudoForm: Form[Estudo], tarefa: Int)
+
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
+
+@import helper._
+
+@titulo = @{
+    
+    tarefa match {
+
+        case 1 => "Tarefa 1"
+        case 2 => "Tarefa 2"
+        case 3 => "Tarefa 3"
+    }	
+}
+
+@descricaoTarefa = @{
+    
+    tarefa match {
+
+        case 1 => "Você deve descobrir o valor de inscrição do próximo \"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais\"";
+
+        case 2 => "Você deve fazer a sua inscrição no \"Simpósio Brasileiro de Qualidade de Software\" utilizando os dados que lhe serão disponibilizados ao iniciar a tarefa.";
+
+        case 3 => "Você deve emitir certificado de participação no último evento em Engenharia de Software utilizando os dados que lhe serão disponibilizados ao iniciar a tarefa.";
+    }
+}
+
+@main(titulo) {
+<div class="container w-50 text-center">
+	<p id="estudo" hidden="true">@estudo.isTipo</p>
+	<p id="tarefa" hidden="true">@tarefa</p>
+   	<h2>@titulo</h2>
+ 	<h5>@descricaoTarefa</h5>
+
+	@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa, 
+		'id -> "estudoform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
+
+		@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
+
+		<input type="submit" value="Iniciar" class="btn btn-primary">
+	}
+</div>
+}

@@ -41,14 +41,6 @@
 		o seu desempenho neste estudo de caso.</p>
 	</div>	
 	<div class="text-center">
-		@b4.formCSRF(routes.ControladorEstudos.iniciarEstudoDeCaso, 
-			'id -> "loginform", 
-			'class -> "form-horizontal", 
-			'role -> "form") {
-
-			@b4.hidden( estudoForm("tipo"), 'value -> tipo )
-			
-			<input type="submit" value="Iniciar" class="btn btn-primary center-block">
-		}
+		<a href="@routes.ControladorEstudos.iniciarEstudoZero" class="btn btn-primary center-block">Iniciar</a>
 	</div>
 }

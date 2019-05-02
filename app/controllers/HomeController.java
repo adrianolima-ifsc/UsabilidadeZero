@@ -36,14 +36,8 @@ public class HomeController extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarSobre() {
 
-		return ok(painel.render(sobre.render(
+		return ok(sobre.render(
 				"UsabilidadeZero",
-				play.core.PlayVersion.current())));
-	}
-	
-	@Authenticated(UsuarioAutenticado.class)
-	public Result mostrarEstudoDeCaso(boolean tipo) {
-		
-		return ok(estudoCasoInstrucao.render(estudoForm, tipo));
+				play.core.PlayVersion.current()));
 	}
 }

@@ -10,10 +10,12 @@ GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmarCa
 
 GET		/painel								controllers.ControladorUsuario.mostrarPainel
 
-GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean)
 GET		/sobre								controllers.HomeController.mostrarSobre
 
-POST	/iniciarEstudo						controllers.ControladorEstudos.iniciarEstudoDeCaso
+POST	/painel								controllers.ControladorEstudos.mostrarEstudoDeCaso
+GET		/iniciarEstudoZero					controllers.ControladorEstudos.iniciarEstudoZero
+POST	/continuarEstudo					controllers.ControladorEstudos.continuarEstudo
+# POST	/iniciarEstudoUm					controllers.ControladorEstudos.iniciarEstudoUm
 # GET		/iniciarEstudo/:ec					controllers.ControladorEstudos.iniciarEstudoDeCaso(ec:Long)
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf

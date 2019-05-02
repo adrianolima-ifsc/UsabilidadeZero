@@ -1,6 +1,6 @@
-@(conteudo: Html = Html(""))
+@(estudoForm : Form[Estudo], conteudo: Html = Html(""))
 
-@implicitField = @{ FieldConstructor(campo.f) }
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
 @import helper._
 
@@ -13,8 +13,8 @@
     <!-- <nav class="col-3">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item"><a class="nav-link active" href="#">Executar</a></li>
-                <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarEstudoDeCaso(false)">Estudo de Caso 0</a></li>
-                <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarEstudoDeCaso(true)">Estudo de Caso 1</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.ControladorEstudos.mostrarEstudoDeCaso()">Estudo de Caso 0</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.ControladorEstudos.mostrarEstudoDeCaso()">Estudo de Caso 1</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#">Ajuda</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Como usar</a></li>
                 <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarSobre">Sobre</a></li>
@@ -34,7 +34,15 @@
     o seu desempenho neste estudo de caso.</p>
     
     <div class="text-center">
-        <a class="btn btn-primary center-block" href="@routes.HomeController.mostrarEstudoDeCaso(false)" role="button">Iniciar</a>
+        @b4.formCSRF(routes.ControladorEstudos.mostrarEstudoDeCaso, 
+            'id -> "iniciarForm", 
+            'class -> "form-horizontal", 
+            'role -> "form") {
+
+            @b4.hidden( estudoForm("tipo"), 'value -> false )
+            
+            <input type="submit" value="Iniciar" class="btn btn-primary center-block">
+        }
     </div>
 </div>
 }
