@@ -1,0 +1,117 @@
+@(estudo: Estudo, estudoForm: Form[Estudo], tarefa: Int)
+
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
+
+@import helper._
+
+@titulo = @{
+    
+    SUS	
+}
+
+@descricaoTarefa = @{
+    
+    tarefa match {
+
+        case 1 => "Você deve descobrir o valor de inscrição do próximo \"Simpósio Brasileiro de Fatores Humanos em Sistemas Computacionais\"";
+
+        case 2 => "Você deve fazer a sua inscrição no \"Simpósio Brasileiro de Qualidade de Software\" utilizando os dados que lhe serão disponibilizados ao iniciar a tarefa.";
+
+        case 3 => "Você deve emitir certificado de participação no último evento em Engenharia de Software utilizando os dados que lhe serão disponibilizados ao iniciar a tarefa.";
+    }
+}
+
+@main(titulo) {
+<div class="container w-50 text-center">
+	<p id="estudo" hidden="true">@estudo.isTipo</p>
+	<p id="tarefa" hidden="true">@tarefa</p>
+   	<h2>SUS</h2>
+ 	<h5>Pesquisa</h5>
+
+	@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa, 
+		'id -> "estudoform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
+
+		@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
+
+		<input type="submit" value="Iniciar" class="btn btn-primary">
+	}  
+    @b4.formCSRF(routes.ControladorEstudos.fazerInscricao,
+        'id -> "form-inscricao",
+        'role -> "form") {
+
+        @b4.hidden( "id-evento", evento.getId )
+
+        @b4.hidden( inscricaoForm("tarefa"), 'value -> tarefa.getId )
+        @b4.hidden( inscricaoForm("evento"), 'value -> evento.getId )
+
+        <h4 class="mb-3">Participante</h4>
+
+        <div class="form-group" id="nome_field">
+            <label for="nome">Nome*</label>
+            <input type="text" id="nome" name="nome" value="" aria-describedby="nome_info_0" class="form-control ob" placeholder="Escreva o seu nome completo">
+            <small id="nome_info_0" class="form-text no-error">Escreva o seu nome completo.</small>
+        </div>
+
+        <div class="form-group" id="email_field">
+            <label for="email">Email*</label>
+            <input type="email" id="email" name="email" value="" aria-describedby="email_info_0" class="form-control ob" placeholder="nome&#64;exemplo.com">
+            <small id="email_info_0" class="form-text no-error">Insira um email válido no seguinte formato: "nome&#64;exemplo.com".</small>
+        </div>
+
+        <div class="form-group" id="cpf_field">
+            <label for="cpf">CPF*</label>
+            <input type="text" id="cpf" name="cpf" value="" aria-describedby="cpf_info_0" class="form-control ob" placeholder="Informe o número do seu CPF">
+            <small id="cpf_info_0" class="form-text no-error">Informe o seu CPF digitando apenas números.</small>
+        </div>
+
+        <h4 class="mb-3">Pagamento</h4>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group" id="numCartao_field">
+                    <label for="numCartao">Número do Cartão*</label>
+                    <input type="text" id="numCartao" name="numCartao" value="" aria-describedby="numCartao_info_0" class="form-control ob">
+                    <small id="numCartao_info_0" class="form-text no-error">Insira um número de cartão válido.</small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group" id="validade_field">
+                    <label for="validade">Validade*</label>
+                    <input type="text" id="validade" name="validade" value="" class="form-control ob">
+                    <small id="validade_info_0" class="form-text no-error">Informe a validade do cartão.</small>
+                </div>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-8">
+                <div class="form-group" id="titularCartao_field">
+                    <label for="titularCartao">Titular do Cartão*</label>
+                    <input type="text" id="titularCartao" name="titularCartao" value="" class="form-control ob">
+                    <small id="titularCartao_info_0" class="form-text no-error">Insira um número válido.</small>
+                </div> 
+            </div>
+            <div class="col-4">
+                <div class="form-group" id="codigoSeguranca_field">
+                    <label for="codigoSeguranca">Código de Segurança*</label>
+                    <input type="text" id="codigoSeguranca" name="codigoSeguranca" value="" class="form-control ob">
+                    <small id="codigoSeguranca_info_0" class="form-text no-error">Insira um número válido.</small>
+                </div> 
+            </div>
+        </div>
+        <div class="form-group" id="valor_field">
+            <label class="col-form-label">Número de parcelas*</label>
+            <select id="valor" name="valor" class="form-control campo ob">
+                <option hidden selected value>Selecione o número de parcelas</option>
+                <option value="true">@("R$ " + evento.getPreco.toString)</option>
+                <option value="true">@("2 x R$ " + (evento.getPreco/2).toString)</option>
+            </select>
+            <small id="valor_info_0" class="form-text no-error">Escolha o número de parcelas.</small>
+        </div>
+            
+        <input type="button" id="botao-voltar" value="Voltar" class="btn btn-danger" onclick="goBack()">
+        <input type="reset" id="botao-limpar" value="Limpar Formulário" class="btn btn-secondary" onclick="limparCampos()">
+        <input type="submit" id="botao-inscricao" value="Enviar" class="btn btn-primary">
+    } 
+</div>
+}

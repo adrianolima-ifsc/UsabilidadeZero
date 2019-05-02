@@ -133,6 +133,32 @@ public class ControladorEstudos extends Controller {
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
+	public Result iniciarEstudoUm() {	
+		
+		Estudo estudo;
+		
+		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
+		if (possivelEstudo.isPresent()) {
+			
+			estudo = possivelEstudo.get();
+
+			if (estudo.getTarefas().size() > 0 || estudo.isTipo()) {
+			
+				concluirEstudoDeCaso(estudo);
+				estudo = criarNovoEstudo(true);
+			}
+			
+		} else {
+			
+			estudo = criarNovoEstudo(true);
+		}
+		
+        estudo.save();
+        
+	    return ok(tarefa.render(estudo, estudoForm, 1));        
+	}
+
+	@Authenticated(UsuarioAutenticado.class)
 	public Result continuarEstudo() {
 		
 		Estudo form = estudoForm.bindFromRequest().get();
@@ -140,11 +166,18 @@ public class ControladorEstudos extends Controller {
 		
 		int numTarefa = (estudo.getTarefas().size() + 1); 
 		
-//		if (estudo.getTarefas().size() == 1) {
-//			
-//			tarefa = 2L;
-//		
-//		} 
+		if (estudo.getTarefas().size() == 3) {
+			
+			if (!estudo.isTipo()) {
+				
+				return redirect(routes.ControladorEstudos.iniciarEstudoUm());
+			
+			} else {
+
+		        return redirect(routes.ControladorUsuario.mostrarPainel());
+			}
+		
+		} 
         
 	    return ok(tarefa.render(estudo, estudoForm, numTarefa));        
 	}

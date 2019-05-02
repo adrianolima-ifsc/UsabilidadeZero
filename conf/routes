@@ -14,9 +14,8 @@ GET		/sobre								controllers.HomeController.mostrarSobre
 
 POST	/painel								controllers.ControladorEstudos.mostrarEstudoDeCaso
 GET		/iniciarEstudoZero					controllers.ControladorEstudos.iniciarEstudoZero
+GET		/iniciarEstudoUm					controllers.ControladorEstudos.iniciarEstudoUm
 POST	/continuarEstudo					controllers.ControladorEstudos.continuarEstudo
-# POST	/iniciarEstudoUm					controllers.ControladorEstudos.iniciarEstudoUm
-# GET		/iniciarEstudo/:ec					controllers.ControladorEstudos.iniciarEstudoDeCaso(ec:Long)
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf
 POST	/concluirTarefa						controllers.ControladorEstudos.concluirTarefa
