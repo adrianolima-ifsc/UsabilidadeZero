@@ -11,12 +11,14 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
         <!-- Icons -->
         <link href="@routes.Assets.versioned("css/outros/nucleo.css")" rel="stylesheet">
-        <link href="@routes.Assets.versioned("css/outros/font-awesome.min.css")" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <!-- Theme CSS -->
         <link href="@routes.Assets.versioned("css/outros/bootstrap.min.css")" rel="stylesheet" media="screen">
         <link href="@routes.Assets.versioned("css/outros/argon.min.css")" rel="stylesheet" media="screen">
-        <!-- Imagens -->
+        <!-- Images -->
         <link href="@routes.Assets.versioned("images/favicon.png")" rel="shortcut icon" type="image/png">
+        <!-- Breadcrubm -->
+        <link href="@routes.Assets.versioned("css/migalha.css")" rel="stylesheet" media="screen">
 
         <link href="@routes.Assets.versioned("css/main.css")" rel="stylesheet" media="screen">
         @styles
@@ -24,12 +26,28 @@
     <body>
         <div class="container">
             <h1 class="principal text-center"><strong>UsabilidadeZero</strong></h1>
+            <div class="row">
+                <div id="migalha" class="btn-group btn-breadcrumb">
+                    <a href="@routes.ControladorUsuario.mostrarPainel" class="btn btn-primary"><i class="fas fa-home"></i></a>
+                    <a href="#" class="btn ec0 disabled">Tarefa 1</a>
+                    <a href="#" class="btn ec0 disabled">Tarefa 2</a>
+                    <a href="#" class="btn ec0 disabled">Tarefa 3</a>
+                    <a href="#" class="btn ec0 disabled">SUS</a>
+                    <a href="#" class="btn ec0 disabled">Parcial</a>
+                    <a href="#" class="btn disabled">Tarefa 1</a>
+                    <a href="#" class="btn disabled">Tarefa 2</a>
+                    <a href="#" class="btn disabled">Tarefa 3</a>
+                    <a href="#" class="btn disabled">SUS</a>
+                    <a href="#" class="btn disabled">Final</a>
+                </div>
+            </div>
             @content
         </div>
         <script src="@routes.Assets.versioned("js/outros/jquery.min.js")"></script>
 		<script src="@routes.Assets.versioned("js/outros/popper.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/bootstrap.min.js")"></script>
         <script src="@routes.Assets.versioned("js/outros/argon.min.js")"></script>
+        <script src="@routes.Assets.versioned("js/migalha.js")"></script>
         @scripts
     </body>
 </html>
