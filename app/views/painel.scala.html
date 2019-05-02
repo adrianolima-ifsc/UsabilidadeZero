@@ -4,17 +4,13 @@
 
 @import helper._
 
-@styles = {
-	<link href="@routes.Assets.versioned("css/painel.css")" rel="stylesheet" media="screen">
-}
+@styles = {}
 
-@scripts = {	
-	<script src="@routes.Assets.versioned("js/painel.js")"></script>
-}
+@scripts = {}
 
 @main("Painel", styles, scripts) {
-<div class="row">
-    <nav class="col-3">
+<div class="">
+    <!-- <nav class="col-3">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item"><a class="nav-link active" href="#">Executar</a></li>
                 <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarEstudoDeCaso(false)">Estudo de Caso 0</a></li>
@@ -27,6 +23,18 @@
     </nav>
 	<div class="col-9">
 		@conteudo
-	</div>
+	</div> -->
+    <p>Nenhuma dica ou orientação será dada durante a execução das tarefas. 
+    Caso você entenda que elas já foram concluídas, você deve clicar no botão "Concluir", 
+    localizado no canto superior direito da sua tela. 
+    Você também pode desistir da tarefa a qualquer momento. 
+    Basta clicar no botão "Desistir", também no canto superior direito da tela.</p>
+    <p>Após executar as 3 tarefas, você deve ainda preencher um rápido questionário de avaliação da atividade. 
+    No final, você receberá um relatório com os resultados de sua participação para que você possa analisar 
+    o seu desempenho neste estudo de caso.</p>
+    
+    <div class="text-center">
+        <a class="btn btn-primary center-block" href="@routes.HomeController.mostrarEstudoDeCaso(false)" role="button">Iniciar</a>
+    </div>
 </div>
 }

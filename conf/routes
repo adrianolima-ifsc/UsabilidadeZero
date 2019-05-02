@@ -13,7 +13,8 @@ GET		/painel								controllers.ControladorUsuario.mostrarPainel
 GET		/painel/:ec							controllers.HomeController.mostrarEstudoDeCaso(ec:Boolean)
 GET		/sobre								controllers.HomeController.mostrarSobre
 
-POST	/inciarEstudo						controllers.ControladorEstudos.iniciarEstudoDeCaso
+POST	/iniciarEstudo						controllers.ControladorEstudos.iniciarEstudoDeCaso
+# GET		/iniciarEstudo/:ec					controllers.ControladorEstudos.iniciarEstudoDeCaso(ec:Long)
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf
 POST	/concluirTarefa						controllers.ControladorEstudos.concluirTarefa

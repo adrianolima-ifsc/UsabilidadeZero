@@ -44,6 +44,6 @@ public class HomeController extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarEstudoDeCaso(boolean tipo) {
 		
-		return ok(painel.render(estudoCasoInstrucao.render(estudoForm, tipo)));
+		return ok(estudoCasoInstrucao.render(estudoForm, tipo));
 	}
 }
