@@ -40,6 +40,7 @@ create table sus (
   q8                            bigint,
   q9                            bigint,
   q10                           bigint,
+  total                         double,
   constraint uq_sus_estudo_id unique (estudo_id),
   constraint pk_sus primary key (id)
 );
