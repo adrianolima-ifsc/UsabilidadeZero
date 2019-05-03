@@ -13,8 +13,8 @@
     <!-- <nav class="col-3">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item"><a class="nav-link active" href="#">Executar</a></li>
-                <li class="nav-item"><a class="nav-link" href="@routes.ControladorEstudos.mostrarEstudoDeCaso()">Estudo de Caso 0</a></li>
-                <li class="nav-item"><a class="nav-link" href="@routes.ControladorEstudos.mostrarEstudoDeCaso()">Estudo de Caso 1</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.ControladorEstudos.mostrarEstudo()">Estudo de Caso 0</a></li>
+                <li class="nav-item"><a class="nav-link" href="@routes.ControladorEstudos.mostrarEstudo()">Estudo de Caso 1</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#">Ajuda</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Como usar</a></li>
                 <li class="nav-item"><a class="nav-link" href="@routes.HomeController.mostrarSobre">Sobre</a></li>
@@ -34,7 +34,7 @@
     o seu desempenho neste estudo de caso.</p>
     
     <div class="text-center">
-        @b4.formCSRF(routes.ControladorEstudos.mostrarEstudoDeCaso, 
+        @b4.formCSRF(routes.ControladorEstudos.mostrarEstudo, 
             'id -> "iniciarForm", 
             'class -> "form-horizontal", 
             'role -> "form") {

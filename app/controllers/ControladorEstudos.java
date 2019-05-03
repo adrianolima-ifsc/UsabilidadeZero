@@ -65,7 +65,7 @@ public class ControladorEstudos extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result mostrarEstudoDeCaso() {
+	public Result mostrarEstudo() {
 		
 		Estudo form = estudoForm.bindFromRequest().get();	
 		
@@ -122,7 +122,7 @@ public class ControladorEstudos extends Controller {
 
 			if (estudo.getTarefas().size() > 0 || estudo.isTipo()) {
 			
-				concluirEstudoDeCaso(estudo);
+				concluirEstudo(estudo);
 				estudo = criarNovoEstudo(false);
 			}
 			
@@ -148,7 +148,7 @@ public class ControladorEstudos extends Controller {
 
 			if (estudo.getTarefas().size() > 0 || estudo.isTipo()) {
 			
-				concluirEstudoDeCaso(estudo);
+				concluirEstudo(estudo);
 				estudo = criarNovoEstudo(true);
 			}
 			
@@ -188,7 +188,7 @@ public class ControladorEstudos extends Controller {
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public void concluirEstudoDeCaso(Estudo estudo) {
+	public void concluirEstudo(Estudo estudo) {
 
 		estudo.setToken(null);
 		estudo.update();		
@@ -254,6 +254,31 @@ public class ControladorEstudos extends Controller {
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
 		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result enviarPesquisa() {
+		
+		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
+		
+		Sus pesquisa = susForm.bindFromRequest().get();
+		
+		Long total = pesquisa.getQ1() - 1;
+		total = total + 5 - pesquisa.getQ2();
+		total = total + pesquisa.getQ3() - 1;
+		total = total + 5 - pesquisa.getQ4();
+		total = total + pesquisa.getQ5() - 1;
+		total = total + 5 - pesquisa.getQ6();
+		total = total + pesquisa.getQ7() - 1;
+		total = total + 5 - pesquisa.getQ8();
+		total = total + pesquisa.getQ9() - 1;
+		total = total + 5 - pesquisa.getQ10();
+		pesquisa.setTotal(total * 2.5);
+		
+		pesquisa.setEstudo(estudo);
+		pesquisa.update();
+		
+		return ok("Pesquisa enviada!");
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

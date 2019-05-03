@@ -25,6 +25,7 @@ public class Sus extends Model {
 	public Long q8;
 	public Long q9;
 	public Long q10;
+	public Double total;
 	
 	public Long getId() {
 		return id;
@@ -120,5 +121,13 @@ public class Sus extends Model {
 	
 	public void setQ10(Long q10) {
 		this.q10 = q10;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 }

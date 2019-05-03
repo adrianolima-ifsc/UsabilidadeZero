@@ -1,6 +1,6 @@
 @(estudo: Estudo, susForm: Form[Sus])
 
-@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-9", "col-3") }
 
 @import helper._
 
@@ -9,21 +9,32 @@
     "SUS"	
 }
 
-@main(titulo) {
-<div class="container w-50 text-center">
-	<p id="estudo" hidden="true">@estudo.isTipo</p>
-	<p id="tarefa" hidden="true">@tarefa</p>
-   	<h2>SUS</h2>
- 	<h5>Pesquisa</h5>
+@opts = @{ 
 
-	@b4.formCSRF(routes.ControladorEstudos.iniciarTarefa, 
+    Seq("1"->1,
+        "2"->2,
+        "3"->3,
+        "4"->4,
+        "5"->5,
+        ) 
+}
+
+@main(titulo) {
+<div class="container">
+	<p id="estudo" hidden="true">@estudo.isTipo</p>
+	<p id="tarefa" hidden="true">sus</p>
+   	<h2 class="text-center">SUS</h2>
+ 	<h5 class="text-center">Pesquisa</h5>
+
+	@b4.formCSRF(routes.ControladorEstudos.enviarPesquisa, 
 		'id -> "susForm", 
 		'class -> "form-horizontal", 
 		'role -> "form") {
 
 		@b4.hidden( susForm("id"), 'value -> estudo.getId )
 
-        <div class="form-check form-check-inline">
+
+        <!-- <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
             <label class="form-check-label" for="inlineRadio1">1</label>
         </div>
@@ -42,7 +53,29 @@
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option3">
             <label class="form-check-label" for="inlineRadio3">5</label>
-        </div>
+        </div> -->
+        
+        @b4.radio( susForm("q1"), options = opts, '_label -> "1.  Penso que usarei este sistema com frequência.", '_inline -> true )
+
+        @b4.radio( susForm("q2"), options = opts, '_label -> "2. Acho o sistema desnecessariamente complexo.", '_inline -> true )
+
+        @b4.radio( susForm("q3"), options = opts, '_label -> "3. Penso que o sistema é fácil de usar.", '_inline -> true )
+
+        @b4.radio( susForm("q4"), options = opts, '_label -> "4. Acho que eu precisaria de ajuda de pessoal técnico para estar apto a usar o sistema.", '_inline -> true )
+
+        @b4.radio( susForm("q5"), options = opts, '_label -> "5. Penso que as várias funções do sistema estão bem integradas.", '_inline -> true )
+
+        @b4.radio( susForm("q6"), options = opts, '_label -> "6. Acho que havia muitas inconsistências neste sistema.", '_inline -> true )
+
+        @b4.radio( susForm("q7"), options = opts, '_label -> "7. Imagino que a maioria das pessoas aprenderiam a usar este sistema rapidamente.", '_inline -> true )
+
+        @b4.radio( susForm("q8"), options = opts, '_label -> "8. Acho o sistema muito complicado de usar.", '_inline -> true )
+
+        @b4.radio( susForm("q9"), options = opts, '_label -> "9. Eu me senti muito confiante usando o sistema.", '_inline -> true )
+
+        @b4.radio( susForm("q10"), options = opts, '_label -> "10. Eu precisaria aprender muitas coisas antes de usar este sistema.", '_inline -> true )
+
+        <input type="submit" id="botao-inscricao" value="Enviar pesquisa" class="btn btn-primary">
     } 
 </div>
 }

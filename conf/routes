@@ -12,10 +12,12 @@ GET		/painel								controllers.ControladorUsuario.mostrarPainel
 
 GET		/sobre								controllers.HomeController.mostrarSobre
 
-POST	/painel								controllers.ControladorEstudos.mostrarEstudoDeCaso
+POST	/painel								controllers.ControladorEstudos.mostrarEstudo
 GET		/iniciarEstudoZero					controllers.ControladorEstudos.iniciarEstudoZero
 GET		/iniciarEstudoUm					controllers.ControladorEstudos.iniciarEstudoUm
-POST	/continuarEstudo					controllers.ControladorEstudos.continuarEstudo
+POST	/estudo								controllers.ControladorEstudos.continuarEstudo
+POST	/relatorio							controllers.ControladorEstudos.enviarPesquisa
+
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf
 POST	/concluirTarefa						controllers.ControladorEstudos.concluirTarefa
