@@ -16,6 +16,7 @@ import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
 import models.Inscricao;
+import models.Sus;
 import models.Tarefa;
 import models.TokenSistema;
 import models.Usuario;
@@ -28,6 +29,7 @@ import views.html.estudo0portal;
 import views.html.estudo1portal;
 import views.html.estudoCasoInstrucao;
 import views.html.relatorio;
+import views.html.sus;
 import views.html.tarefa;
 import views.html.tarefa1;
 import views.html.tarefa2;
@@ -49,6 +51,7 @@ public class ControladorEstudos extends Controller {
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
 	private Form<Inscricao> inscricaoForm;
+	private Form<Sus> susForm;
 
 	public static final String AUTH = "auth";
 	
@@ -58,6 +61,7 @@ public class ControladorEstudos extends Controller {
 		this.estudoForm = formFactory.form(Estudo.class);
 		this.tarefaForm = formFactory.form(Tarefa.class);
 		this.inscricaoForm = formFactory.form(Inscricao.class);
+		this.susForm = formFactory.form(Sus.class);
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -161,21 +165,22 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result continuarEstudo() {
 		
-		Estudo form = estudoForm.bindFromRequest().get();
 		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
 		
 		int numTarefa = (estudo.getTarefas().size() + 1); 
 		
 		if (estudo.getTarefas().size() == 3) {
 			
-			if (!estudo.isTipo()) {
-				
-				return redirect(routes.ControladorEstudos.iniciarEstudoUm());
+			return ok(sus.render(estudo, susForm));
 			
-			} else {
-
-		        return redirect(routes.ControladorUsuario.mostrarPainel());
-			}
+//			if (!estudo.isTipo()) {
+//				
+//				return redirect(routes.ControladorEstudos.iniciarEstudoUm());
+//			
+//			} else {
+//
+//		        return redirect(routes.ControladorUsuario.mostrarPainel());
+//			}
 		
 		} 
         

@@ -27,6 +27,8 @@ public class Estudo extends Model {
 	public Date data;
 	@OneToMany(mappedBy = "estudo")
 	public List<Tarefa> tarefas;
+	@OneToOne(mappedBy = "estudo")
+	public Sus sus;
 	@OneToOne
 	private TokenSistema token;
 	
@@ -69,6 +71,14 @@ public class Estudo extends Model {
 
 	public void setTarefas(List<Tarefa> tarefas) {
 		this.tarefas = tarefas;
+	}
+	
+	public Sus getSus() {
+		return sus;
+	}
+
+	public void setSus(Sus sus) {
+		this.sus = sus;
 	}
 
 	public TokenSistema getToken() {
