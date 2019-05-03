@@ -27,6 +27,23 @@ create table evento (
   constraint pk_evento primary key (id)
 );
 
+create table sus (
+  id                            bigint auto_increment not null,
+  estudo_id                     bigint,
+  q1                            bigint,
+  q2                            bigint,
+  q3                            bigint,
+  q4                            bigint,
+  q5                            bigint,
+  q6                            bigint,
+  q7                            bigint,
+  q8                            bigint,
+  q9                            bigint,
+  q10                           bigint,
+  constraint uq_sus_estudo_id unique (estudo_id),
+  constraint pk_sus primary key (id)
+);
+
 create table tarefa (
   id                            bigint auto_increment not null,
   codigo                        varchar(255),
@@ -70,6 +87,8 @@ alter table estudo add constraint fk_estudo_usuario_id foreign key (usuario_id) 
 
 alter table estudo add constraint fk_estudo_token_id foreign key (token_id) references token_sistema (id) on delete restrict on update restrict;
 
+alter table sus add constraint fk_sus_estudo_id foreign key (estudo_id) references estudo (id) on delete restrict on update restrict;
+
 create index ix_tarefa_estudo_id on tarefa (estudo_id);
 alter table tarefa add constraint fk_tarefa_estudo_id foreign key (estudo_id) references estudo (id) on delete restrict on update restrict;
 
@@ -85,6 +104,8 @@ drop index ix_estudo_usuario_id on estudo;
 
 alter table estudo drop foreign key fk_estudo_token_id;
 
+alter table sus drop foreign key fk_sus_estudo_id;
+
 alter table tarefa drop foreign key fk_tarefa_estudo_id;
 drop index ix_tarefa_estudo_id on tarefa;
 
@@ -95,6 +116,8 @@ alter table token_sistema drop foreign key fk_token_sistema_usuario_id;
 drop table if exists estudo;
 
 drop table if exists evento;
+
+drop table if exists sus;
 
 drop table if exists tarefa;
 
