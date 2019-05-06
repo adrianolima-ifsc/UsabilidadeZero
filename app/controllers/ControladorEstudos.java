@@ -147,7 +147,7 @@ public class ControladorEstudos extends Controller {
 			
 			estudo = possivelEstudo.get();
 
-			if (estudo.getTarefas().size() > 0 || estudo.isTipo()) {
+			if (estudo.getTarefas().size() > 0 || !estudo.isTipo()) {
 			
 				concluirEstudo(estudo);
 				estudo = criarNovoEstudo(true);
@@ -279,15 +279,19 @@ public class ControladorEstudos extends Controller {
 		if (estudo.getSus() == null) {
 			
 			pesquisa.setEstudo(estudo);
+			estudo.setSus(pesquisa);
 			pesquisa.save();
 
 		} else {
 			
 			pesquisa.setEstudo(estudo);
+			estudo.setSus(pesquisa);
 			pesquisa.update();
 		}
 		
-		return ok(relatorioParcial.render(estudo.getSus().getTotal(), estudo.getTarefas(), estudo.isTipo(), estudoForm));
+		Long satisfacao = estudo.getSus().getTotal().longValue(); 
+		
+		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), estudo.isTipo(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
