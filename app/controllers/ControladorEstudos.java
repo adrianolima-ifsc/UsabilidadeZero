@@ -33,9 +33,6 @@ import views.html.relatorioParcial;
 import views.html.relatorioFinal;
 import views.html.sus;
 import views.html.tarefa;
-import views.html.tarefa1;
-import views.html.tarefa2;
-import views.html.tarefa3;
 
 public class ControladorEstudos extends Controller {
 
