@@ -30,6 +30,7 @@ import views.html.estudo1portal;
 import views.html.estudoCasoInstrucao;
 import views.html.relatorioTarefa;
 import views.html.relatorioParcial;
+import views.html.relatorioFinal;
 import views.html.sus;
 import views.html.tarefa;
 import views.html.tarefa1;
@@ -261,6 +262,7 @@ public class ControladorEstudos extends Controller {
 	public Result enviarPesquisa() {
 		
 		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
+		Boolean tipo = estudo.isTipo();
 		
 		Sus pesquisa = susForm.bindFromRequest().get();
 		
@@ -291,7 +293,15 @@ public class ControladorEstudos extends Controller {
 		
 		Long satisfacao = estudo.getSus().getTotal().longValue(); 
 		
-		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), estudo.isTipo(), estudoForm));
+		if (!tipo) {
+			
+			return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
+
+		} else {
+			
+			return ok(relatorioFinal.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
+		}
+		
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
