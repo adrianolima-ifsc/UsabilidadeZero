@@ -1,0 +1,94 @@
+@(satisfacao: Double, tarefas: List[Tarefa], tipoEstudo: Boolean, estudoForm: Form[Estudo])
+
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
+
+@styles = {
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> 
+    <link href="@routes.Assets.versioned("css/relatorio.css")" rel="stylesheet">
+}
+
+@scripts = {
+	<script src="@routes.Assets.versioned("js/concluir-tarefa.js")"></script>
+}
+
+@titulo = @{
+    
+    "SUS"	
+}
+
+@tempo(entrada: Tarefa) = @{
+
+	val tempoTotal = (entrada.getDataHoraFim.getTime - entrada.getDataHoraInicio.getTime)/1000;
+	
+	val horas = (tempoTotal / 3600);
+    val minutos = ((tempoTotal % 3600) / 60);
+    val segundos = (tempoTotal % 60);
+
+    if (horas > 0) {
+    	
+    	horas + "h " + minutos + "min " + segundos + "s";
+
+    } else if (minutos > 0) {
+
+    	minutos + "min " + segundos + "s";
+
+    } else {
+
+    	segundos + "s";
+    }
+}
+
+@main("Parcial", styles, scripts) {
+<div class="container">
+	<p id="estudo" hidden="true">@tipoEstudo</p>
+	<p id="tarefa" hidden="true">relatorio</p>
+
+<div id="tabela" class="container">
+	<h3 class="text-center">Relatório</h3>
+	<table class="table table-hover text-center">
+		<thead>
+			<th></th>
+			<th>Tempo</th>
+			<th>Cliques</th>
+			<th>Concluído Percebido</th>
+			<th>Concluído Real</th>
+		</thead>
+		<tbody>
+			@for(tarefa <- tarefas) {
+			<tr>
+				<td>@{tarefa.getCodigo match {
+					case "EC01" | "EC11" => "Tarefa 1"
+					case "EC02" | "EC12" => "Tarefa 2"
+					case "EC03" | "EC13" => "Tarefa 3"}}</td>
+				<td>@tempo(tarefa)</td>
+				<td>@tarefa.getCliques</td>
+				<td>@if(tarefa.isConcluidoPercebido) {
+						<i class="fas fa-check-circle"></i>
+					} else {
+						<i class="fas fa-times-circle"></i>
+					}</td>
+				<td>@if(tarefa.isConcluidoReal) {
+						<i class="fas fa-check-circle"></i>
+					} else {
+						<i class="fas fa-times-circle"></i>
+					}</td>
+			</tr>
+			}
+			<tr>
+				<td>Satisfação:</td>
+				<td>@satisfacao pts</td>
+			</tr>
+		</tbody>
+	</table>
+	@b4.formCSRF(routes.ControladorEstudos.continuarEstudo, 
+		'id -> "loginform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
+
+		@b4.hidden( estudoForm("tipo"), 'value -> tipoEstudo )
+		
+		<a role="button" class="btn btn-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
+		<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
+	}
+</div>
+}

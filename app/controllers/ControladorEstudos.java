@@ -28,7 +28,8 @@ import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
 import views.html.estudoCasoInstrucao;
-import views.html.relatorio;
+import views.html.relatorioTarefa;
+import views.html.relatorioParcial;
 import views.html.sus;
 import views.html.tarefa;
 import views.html.tarefa1;
@@ -233,7 +234,7 @@ public class ControladorEstudos extends Controller {
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
+		return ok(relatorioTarefa.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -253,7 +254,7 @@ public class ControladorEstudos extends Controller {
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorio.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
+		return ok(relatorioTarefa.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -275,10 +276,18 @@ public class ControladorEstudos extends Controller {
 		total = total + 5 - pesquisa.getQ10();
 		pesquisa.setTotal(total * 2.5);
 		
-		pesquisa.setEstudo(estudo);
-		pesquisa.update();
+		if (estudo.getSus() == null) {
+			
+			pesquisa.setEstudo(estudo);
+			pesquisa.save();
+
+		} else {
+			
+			pesquisa.setEstudo(estudo);
+			pesquisa.update();
+		}
 		
-		return ok("Pesquisa enviada!");
+		return ok(relatorioParcial.render(estudo.getSus().getTotal(), estudo.getTarefas(), estudo.isTipo(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
