@@ -39,7 +39,6 @@ $(document).ready(function() {
 			$('#migalha').find('.ec0.sus').addClass('btn-success').removeClass('disabled');
 			$('#migalha').find('.ec0.relatorio').addClass('btn-danger').removeClass('disabled');
 			break;
-
 		}
 	
 	} else {
@@ -77,9 +76,6 @@ $(document).ready(function() {
 			$('#migalha').find('.ec1.sus').addClass('btn-info').removeClass('disabled');
 			$('#migalha').find('.ec1.relatorio').addClass('btn-danger').removeClass('disabled');
 			break;
-
 		}
 	}
-
-
 })

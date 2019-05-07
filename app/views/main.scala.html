@@ -17,7 +17,7 @@
         <link href="@routes.Assets.versioned("css/outros/argon.min.css")" rel="stylesheet" media="screen">
         <!-- Images -->
         <link href="@routes.Assets.versioned("images/favicon.png")" rel="shortcut icon" type="image/png">
-        <!-- Breadcrubm -->
+        <!-- Breadcrumb -->
         <link href="@routes.Assets.versioned("css/migalha.css")" rel="stylesheet" media="screen">
 
         <link href="@routes.Assets.versioned("css/main.css")" rel="stylesheet" media="screen">
@@ -26,29 +26,30 @@
     <body>
         <div class="container">
             <h1 class="principal text-center"><strong>UsabilidadeZero</strong></h1>
-            <div class="row">
+            <div class="row migalha-container">
                 <div id="migalha" class="btn-group">
                     <a href="@routes.ControladorUsuario.mostrarPainel" class="btn btn-primary"><i class="fas fa-home"></i></a>
                     <div class="btn-group-vertical">
                         <div id="ec0" class="w-100 btn btn-success disabled">Estudo de Caso 0</div>
                         <div class="btn-group">
-                            <div class="btn ec0 t1 disabled">Tarefa 1</div>
-                            <div class="btn ec0 t2 disabled">Tarefa 2</div>
-                            <div class="btn ec0 t3 disabled">Tarefa 3</div>
-                            <div class="btn ec0 sus disabled">SUS</div>
-                            <div class="btn ec0 relatorio disabled">Parcial</div>
+                            <div class="btn btn-sm ec0 t1 disabled">Tarefa 1</div>
+                            <div class="btn btn-sm ec0 t2 disabled">Tarefa 2</div>
+                            <div class="btn btn-sm ec0 t3 disabled">Tarefa 3</div>
+                            <div class="btn btn-sm ec0 sus disabled">SUS</div>
+                            <div class="btn btn-sm ec0 relatorio disabled">Parcial</div>
                         </div>
                     </div>
                     <div class="btn-group-vertical">
                         <div id="ec1" class="w-100 btn btn-info disabled">Estudo de Caso 1</div>
                         <div class="btn-group">
-                            <div class="btn ec1 t1 disabled">Tarefa 1</div>
-                            <div class="btn ec1 t2 disabled">Tarefa 2</div>
-                            <div class="btn ec1 t3 disabled">Tarefa 3</div>
-                            <div class="btn ec1 sus disabled">SUS</div>
-                            <div class="btn ec1 relatorio disabled">Final</div>
+                            <div class="btn btn-sm ec1 t1 disabled">Tarefa 1</div>
+                            <div class="btn btn-sm ec1 t2 disabled">Tarefa 2</div>
+                            <div class="btn btn-sm ec1 t3 disabled">Tarefa 3</div>
+                            <div class="btn btn-sm ec1 sus disabled">SUS</div>
+                            <div class="btn btn-sm ec1 relatorio disabled">Parcial</div>
                         </div>
                     </div>
+                    <a href="@routes.ControladorUsuario.mostrarPainel" class="btn btn-primary"><i class="fas fa-flag-checkered"></i></a>
                 </div>
             </div>
             @content

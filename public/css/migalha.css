@@ -6,14 +6,10 @@
   cursor: default;
 }
 
-.ec0,#ec0 {
+.ec0,#ec0,.ec1,#ec1 {
   border-radius: 0;
 }
 
-#ec1 {
-  border-top-left-radius: 0;
-}
-
-.ec1.t1 {
-  border-bottom-left-radius: 0;
+.migalha-container {
+  justify-content: center;
 }
