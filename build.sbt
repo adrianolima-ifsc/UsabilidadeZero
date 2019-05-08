@@ -18,6 +18,7 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 libraryDependencies ++= Seq(
 	guice,
 	"mysql" % "mysql-connector-java" % "8.0.11",
+	"org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
 	"org.webjars" % "bootstrap" % "3.3.6",
 	"com.adrianhurt" %% "play-bootstrap" % "1.4-P26-B4-SNAPSHOT",
 	"com.typesafe.play" %% "play-mailer" % "6.0.1",
