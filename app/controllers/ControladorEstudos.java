@@ -232,7 +232,7 @@ public class ControladorEstudos extends Controller {
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorioTarefa.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
+		return ok(relatorioTarefa.render(tarefa, tarefaForm, estudo.isTipo(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -252,7 +252,7 @@ public class ControladorEstudos extends Controller {
 		Long idEstudo = tarefa.getEstudo().getId();
 		Estudo estudo = estudoDAO.comId(idEstudo).get();
 		
-		return ok(relatorioTarefa.render(tarefa, tarefaForm, estudo.getTarefas(), estudoForm));
+		return ok(relatorioTarefa.render(tarefa, tarefaForm, estudo.isTipo(), estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
