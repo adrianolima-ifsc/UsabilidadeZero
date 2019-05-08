@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/usabilidade -Dhttp.port=${PORT} -Dplay.evolutions.db.default.autoApply=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL}
+web: target/universal/stage/bin/usabilidade -Dhttp.port=${5432} -Dplay.evolutions.db.default.autoApply=true -Ddb.default.driver=org.postgresql.jdbc.Driver -Ddb.default.url=${postgres://cnirwsrybfsphj:3df1bc89b087a4e8fc74ba1d017d2a8d758f749daf091595461cad9755d488de@ec2-54-225-76-136.compute-1.amazonaws.com:5432/dfm0qurrt24v04}
