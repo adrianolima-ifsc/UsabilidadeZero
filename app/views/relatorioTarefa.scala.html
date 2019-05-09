@@ -1,4 +1,4 @@
-@(tarefa: Tarefa, tarefaForm: Form[Tarefa], tarefas: List[Tarefa], estudoForm: Form[Estudo])
+@(tarefa: Tarefa, tarefaForm: Form[Tarefa], tipoEstudo: Boolean, estudoForm: Form[Estudo])
 
 @implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
@@ -11,6 +11,14 @@
 	<script src="@routes.Assets.versioned("js/concluir-tarefa.js")"></script>
 }
 
+@numTarefa = @{
+
+	tarefa.getCodigo match {
+		case "EC01" | "EC11" => "1"
+		case "EC02" | "EC12" => "2"
+		case "EC03" | "EC13" => "3"}
+}
+
 @tempo(entrada: Tarefa) = @{
 
 	val tempoTotal = (entrada.getDataHoraFim.getTime - entrada.getDataHoraInicio.getTime)/1000;
@@ -19,61 +27,62 @@
     val minutos = ((tempoTotal % 3600) / 60);
     val segundos = (tempoTotal % 60);
 
-    if (horas > 0) {
-    	
-    	horas + "h " + minutos + "min " + segundos + "s";
-
-    } else if (minutos > 0) {
-
-    	minutos + "min " + segundos + "s";
-
-    } else {
-
-    	segundos + "s";
-    }
+    if (horas > 0) {horas + "h " + minutos + "min " + segundos + "s";}
+    else if (minutos > 0) {minutos + "min " + segundos + "s";} 
+    else {segundos + "s";}
 }
 
-@mainEstudo(tarefa, tarefaForm, styles, scripts) {
+@main(numTarefa, styles, scripts) {
+<p id="estudo" hidden="true">@tipoEstudo</p>
+<p id="tarefa" hidden="true">@numTarefa</p>
 
-<div id="tabela" class="container w-50">
-	<h3 class="text-center">Relatório</h3>
-	<table class="table table-hover text-center">
-		<thead>
-			<th>ID Tarefa</th>
-			<th>Tempo</th>
-			<th>Cliques</th>
-			<th>Concluído Percebido</th>
-			<th>Concluído Real</th>
-		</thead>
-		<tbody>
-			@for(tarefa <- tarefas) {
-			<tr>
-				<td>@tarefa.getCodigo</td>
-				<td>@tempo(tarefa)</td>
-				<td>@tarefa.getCliques</td>
-				<td>@if(tarefa.isConcluidoPercebido) {
-						<i class="fas fa-check-circle"></i>
-					} else {
-						<i class="fas fa-times-circle"></i>
-					}</td>
-				<td>@if(tarefa.isConcluidoReal) {
-						<i class="fas fa-check-circle"></i>
-					} else {
-						<i class="fas fa-times-circle"></i>
-					}</td>
-			</tr>
+<div id="tabela container">
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-lg-6">
+			<h3 class="text-center">Resultado Tarefa @numTarefa</h3>
+			<table class="table table-sm table-borderless table-hover text-center">
+				<tbody>
+					<tr class="thead-light">
+						<th colspan="2">Eficiência</th>
+					</tr>
+					<tr>
+						<th>Tempo</th>
+						<td>@tempo(tarefa)</td>
+					<tr>
+						<th>Cliques</th>
+						<td>@tarefa.getCliques</td>
+					</tr>
+					<tr class="thead-light">
+						<th colspan="2">Eficácia</th>
+					</tr>
+						<th>Percebida</th>
+						<td>@if(tarefa.isConcluidoPercebido) {
+								<i class="fas fa-check-circle"></i>
+							} else {
+								<i class="fas fa-times-circle"></i>
+							}</td>
+					</tr>
+					<tr>
+						<th>Real</th>
+						<td>@if(tarefa.isConcluidoReal) {
+								<i class="fas fa-check-circle"></i>
+							} else {
+								<i class="fas fa-times-circle"></i>
+							}</td>
+					</tr>
+				</tbody>
+			</table>
+			@b4.formCSRF(routes.ControladorEstudos.continuarEstudo, 
+				'id -> "loginform", 
+				'class -> "form-horizontal", 
+				'role -> "form") {
+
+				@b4.hidden( estudoForm("tipo"), 'value -> tarefa.getEstudo.isTipo )
+				
+				<a role="button" class="btn btn-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
+				<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
 			}
-		</tbody>
-	</table>
-	@b4.formCSRF(routes.ControladorEstudos.continuarEstudo, 
-		'id -> "loginform", 
-		'class -> "form-horizontal", 
-		'role -> "form") {
-
-		@b4.hidden( estudoForm("tipo"), 'value -> tarefa.getEstudo.isTipo )
-		
-		<a role="button" class="btn btn-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
-		<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
-	}
+		</div>
+	</div>
 </div>
 }
