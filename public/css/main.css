@@ -1,8 +1,17 @@
 body {
-  padding-top: 4.5rem;
 }
 
 .principal {
-	font-size: 60px;
+	font-size: 400%;
 	font-family: 'Ubuntu', sans-serif;
+	padding-top: 4.5rem;
+	padding-bottom: 2.5rem;
+}
+
+.panel-body {
+	padding-top:30px;
+}
+
+.row.login {
+	justify-content: center;
 }
