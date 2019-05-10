@@ -182,18 +182,11 @@ public class ControladorEventos extends Controller {
 		Inscricao form = inscricaoForm.bindFromRequest().get();	
 		
 		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
-//		Estudo estudo = tarefa.getEstudo();	
-//		List<Evento> eventos = eventoDAO.mostraTodos();
 		Evento evento = eventoDAO.comId(form.getEvento()).get();
-		
-//		if (estudo.isTipo()) {
-//			
-//			form.setNome(nome);
-//		}
 		
 		boolean participou = false;
 		
-		if (form.getEvento() == 13) {
+		if (evento.getSigla().equals("SBQS")) {
 		
 			if (testarCertificado(form)) {
 

@@ -15,7 +15,7 @@ $(document).ready(function() {
 		
 		if (tarefa == 1) {
 
-			if(idEvento == 1) {
+			if(siglaEvento == 'BSB') {
 
 				tarefaConcluida();
 			}
@@ -51,14 +51,6 @@ $(document).ready(function() {
 			var valido = elemento.hasClass("valido");
 			var error_element = $("small", $(elemento).parent());
 
-			console.log(campo.name);
-			console.log(campo);
-			console.log(valido);
-			console.log(error_element);
-			console.log(elemento);
-			console.log(elemento.parent());
-			console.log(error_free);
-
 			if (!valido) {
 			
 				error_element.addClass("error").removeClass("no-error"); 
@@ -85,10 +77,12 @@ $(document).ready(function() {
 
 			if (tarefa == 2) {
 
-				if(idEvento == 2) {
+				if(siglaEvento == BRACIS) {
 
 					$.get(jsRoutes.controllers.ControladorEstudos.fazerInscricao());
 				}
+				
+				alert("Sua inscrição foi realizada com sucesso!");
 			}
 		}
 	});
@@ -109,14 +103,6 @@ $(document).ready(function() {
 			var elemento = $('[name='+campo.name+']');
 			var valido = elemento.hasClass("valido");
 			var error_element = $("small", $(elemento).parent());
-
-			// console.log(campo.name);
-			// console.log(campo);
-			// console.log(valido);
-			// console.log(error_element);
-			// console.log(elemento);
-			// console.log(elemento.parent());
-			// console.log(error_free);
 
 			console.log(dataEvento);
 

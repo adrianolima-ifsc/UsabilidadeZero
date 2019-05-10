@@ -398,10 +398,11 @@ public class ControladorEstudos extends Controller {
 		Inscricao form = inscricaoForm.bindFromRequest().get();	
 		
 		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
 		Estudo estudo = tarefa.getEstudo();	
 		List<Evento> eventos = eventoDAO.mostraTodos();	
 		
-		if (form.getEvento() == 2) {
+		if (evento.getSigla().equals("BRACIS")) { //Trocar o teste pelo id
 		
 			if (testarInscricao(form)) {
 
