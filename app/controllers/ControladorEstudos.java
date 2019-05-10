@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
 import models.Inscricao;
+import models.RelatorioEstudo;
 import models.Sus;
 import models.Tarefa;
 import models.TokenSistema;
@@ -67,6 +69,19 @@ public class ControladorEstudos extends Controller {
 	public Result mostrarEstudo() {
 		
 		Estudo form = estudoForm.bindFromRequest().get();	
+		Estudo estudo;
+		
+		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
+		if (possivelEstudo.isPresent()) {
+			
+			estudo = possivelEstudo.get();
+			concluirEstudo(estudo);
+			
+			if (estudo.isTipo()) {
+				
+//				return ok(relatorioFinal.render());
+			}
+		}
 		
 		return ok(estudoCasoInstrucao.render(estudoForm, form.isTipo()));
 	}
@@ -189,6 +204,36 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public void concluirEstudo(Estudo estudo) {
 
+		RelatorioEstudo relatorio = new RelatorioEstudo(estudo);
+		List<Tarefa> tarefas = estudo.getTarefas();
+
+		Long tempo = 0L;
+		Long cliques = 0L;
+		Long percebida = 0L;
+		Long medida = 0L;
+
+		for (Tarefa tarefa : tarefas) {
+			
+			tempo =+ (tarefa.getDataHoraFim().getTime() - tarefa.getDataHoraInicio().getTime())/1000;
+			
+			cliques =+ tarefa.getCliques();
+			
+			if (tarefa.isConcluidoPercebido()) percebida++;
+			if (tarefa.isConcluidoReal()) medida++;
+		}
+		
+		relatorio.setTempo(tempo);
+		relatorio.setCliques(cliques);
+		relatorio.setPercebida(percebida);
+		relatorio.setMedida(medida);
+
+		Double satisfacao = estudo.getSus().getTotal();
+		relatorio.setSatisfacao(satisfacao);
+		
+		relatorio.setEstudo(estudo);
+		estudo.setRelatorio(relatorio);
+		relatorio.save();
+		
 		estudo.setToken(null);
 		estudo.update();		
 	}
@@ -296,14 +341,14 @@ public class ControladorEstudos extends Controller {
 		
 		Long satisfacao = estudo.getSus().getTotal().longValue(); 
 		
-		if (!tipo) {
+//		if (!tipo) {
 			
 			return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
 
-		} else {
+//		} else {
 			
-			return ok(relatorioFinal.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
-		}
+//			return ok(relatorioFinal.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
+//		}
 		
 	}
 	

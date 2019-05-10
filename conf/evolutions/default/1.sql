@@ -27,6 +27,18 @@ create table evento (
   constraint pk_evento primary key (id)
 );
 
+create table relatorio_estudo (
+  id                            bigserial not null,
+  estudo_id                     bigint,
+  tempo                         bigint,
+  cliques                       bigint,
+  percebida                     bigint,
+  medida                        bigint,
+  satisfacao                    bigint,
+  constraint uq_relatorio_estudo_estudo_id unique (estudo_id),
+  constraint pk_relatorio_estudo primary key (id)
+);
+
 create table sus (
   id                            bigserial not null,
   estudo_id                     bigint,
@@ -88,6 +100,8 @@ alter table estudo add constraint fk_estudo_usuario_id foreign key (usuario_id) 
 
 alter table estudo add constraint fk_estudo_token_id foreign key (token_id) references token_sistema (id) on delete restrict on update restrict;
 
+alter table relatorio_estudo add constraint fk_relatorio_estudo_estudo_id foreign key (estudo_id) references estudo (id) on delete restrict on update restrict;
+
 alter table sus add constraint fk_sus_estudo_id foreign key (estudo_id) references estudo (id) on delete restrict on update restrict;
 
 create index ix_tarefa_estudo_id on tarefa (estudo_id);
@@ -105,6 +119,8 @@ drop index if exists ix_estudo_usuario_id;
 
 alter table if exists estudo drop constraint if exists fk_estudo_token_id;
 
+alter table if exists relatorio_estudo drop constraint if exists fk_relatorio_estudo_estudo_id;
+
 alter table if exists sus drop constraint if exists fk_sus_estudo_id;
 
 alter table if exists tarefa drop constraint if exists fk_tarefa_estudo_id;
@@ -117,6 +133,8 @@ alter table if exists token_sistema drop constraint if exists fk_token_sistema_u
 drop table if exists estudo cascade;
 
 drop table if exists evento cascade;
+
+drop table if exists relatorio_estudo cascade;
 
 drop table if exists sus cascade;
 

@@ -1,4 +1,4 @@
-@(satisfacao: Long, tarefas: List[Tarefa], tipoEstudo: Boolean, estudoForm: Form[Estudo])
+@(relatorio0: RelatorioEstudo, relatorio1: RelatorioEstudo, estudoForm: Form[Estudo])
 
 @implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
@@ -11,11 +11,7 @@
 	<script src="@routes.Assets.versioned("js/concluir-tarefa.js")"></script>
 }
 
-@titulo = @{
-    
-    if (tipoEstudo) {"Relatório Final";}
-    else {"Relatório Parcial";}
-}
+@titulo = @{"Relatório Final"}
 
 @tempo(entrada: Tarefa) = @{
 
@@ -32,7 +28,7 @@
 
 @mainCaminho(titulo, styles, scripts) {
 <div class="container">
-	<p id="estudo" hidden="true">@tipoEstudo</p>
+	<p id="estudo" hidden="true">tipoEstudo</p>
 	<p id="tarefa" hidden="true">relatorio</p>
 
 <div id="tabela" class="container">
@@ -53,29 +49,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			@for(tarefa <- tarefas) {
-			<tr>
-				<th>@{tarefa.getCodigo match {
-					case "EC01" | "EC11" => "Tarefa 1"
-					case "EC02" | "EC12" => "Tarefa 2"
-					case "EC03" | "EC13" => "Tarefa 3"}}</th>
-				<td>@tempo(tarefa)</td>
-				<td>@tarefa.getCliques</td>
-				<td>@if(tarefa.isConcluidoPercebido) {
-						<i class="fas fa-check-circle"></i>
-					} else {
-						<i class="fas fa-times-circle"></i>
-					}</td>
-				<td>@if(tarefa.isConcluidoReal) {
-						<i class="fas fa-check-circle"></i>
-					} else {
-						<i class="fas fa-times-circle"></i>
-					}</td>
-			</tr>
-			}
+
 			<tr>
 				<th>Satisfação</th>
-				<td>@satisfacao pts</td>
+				<td>satisfacao pts</td>
 				<td></td>
 				<td></td>
 				<td></td>

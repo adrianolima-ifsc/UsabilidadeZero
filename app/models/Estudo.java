@@ -29,6 +29,8 @@ public class Estudo extends Model {
 	public List<Tarefa> tarefas;
 	@OneToOne(mappedBy = "estudo")
 	public Sus sus;
+	@OneToOne(mappedBy = "estudo")
+	public RelatorioEstudo relatorio;
 	@OneToOne
 	private TokenSistema token;
 	
@@ -87,5 +89,13 @@ public class Estudo extends Model {
 
 	public void setToken(TokenSistema token) {
 		this.token = token;
+	}
+
+	public RelatorioEstudo getRelatorio() {
+		return relatorio;
+	}
+
+	public void setRelatorio(RelatorioEstudo relatorio) {
+		this.relatorio = relatorio;
 	}
 }
