@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	var idTarefa = $("#id-tarefa").text();
 	var idEvento = $('[name="id-evento"]').val();
+	var siglaEvento = $('.sigla').text();
 
 	var codigo = $('[name="codigo"]').val();
 	var estudo = codigo.substr(2,1);
@@ -27,7 +28,7 @@ $(document).ready(function() {
 		
 		if (tarefa == 1) {
 
-			if(idEvento == 1) {
+			if(siglaEvento == 'BSB') {
 
 				tarefaConcluida();
 			}
@@ -153,7 +154,7 @@ $(document).ready(function() {
 
 	function tarefaConcluida() {
 		
-		$.get(jsRoutes.controllers.ControladorEstudos.setConcluidoReal(idTarefa));
+		$.get(jsRoutes.controllers.ControladorEstudos.setConcluido(idTarefa));
 	}
 
 });

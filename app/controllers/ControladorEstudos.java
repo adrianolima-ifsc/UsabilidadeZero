@@ -221,9 +221,12 @@ public class ControladorEstudos extends Controller {
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 
-		Calendar calendario;
-		calendario = Calendar.getInstance();
-		tarefa.setDataHoraFim(calendario.getTime());
+		if (tarefa.getDataHoraFim() == null) {
+			
+			Calendar calendario;
+			calendario = Calendar.getInstance();
+			tarefa.setDataHoraFim(calendario.getTime());
+		}
 		
 		tarefa.setConcluidoPercebido(true);
 		
@@ -241,9 +244,12 @@ public class ControladorEstudos extends Controller {
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 
-		Calendar calendario;
-		calendario = Calendar.getInstance();
-		tarefa.setDataHoraFim(calendario.getTime());
+		if (tarefa.getDataHoraFim() == null) {
+			
+			Calendar calendario;
+			calendario = Calendar.getInstance();
+			tarefa.setDataHoraFim(calendario.getTime());
+		}
 		
 		tarefa.setConcluidoPercebido(false);
 			
@@ -306,17 +312,20 @@ public class ControladorEstudos extends Controller {
 		
 		Tarefa tarefa = tarefaDAO.comId(id).get();
 		
-		Long cliques = tarefa.getCliques();
-		cliques++;
-		tarefa.setCliques(cliques);
-		
-		tarefa.update();
+		if (tarefa.getDataHoraFim() == null) {
+			
+			Long cliques = tarefa.getCliques();
+			cliques++;
+			tarefa.setCliques(cliques);
+			
+			tarefa.update();
+		}
 		
 		return ok();
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
-	public Result setConcluidoReal(Long id) {
+	public Result setConcluido(Long id) {
 		
 		Tarefa tarefa = tarefaDAO.comId(id).get();
 		
@@ -396,7 +405,7 @@ public class ControladorEstudos extends Controller {
 		
 			if (testarInscricao(form)) {
 
-				setConcluidoReal(tarefa.getId());	
+				setConcluido(tarefa.getId());	
 				tarefa.update();
 			}
 		}
