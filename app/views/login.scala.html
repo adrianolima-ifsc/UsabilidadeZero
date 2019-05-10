@@ -11,38 +11,30 @@
 }
 
 @main("Login", styles, scripts) {
-<div class="row">
-	<div class="col-md-3"></div>
-   	<div class="col-xs-12 col-sm-12 col-md-6" >
-		<div style="padding-top:30px" class="panel-body" >
+<div class="row login">
+   	<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4" >
+		<div class="panel-body" >
 			@notificacoes()
-			<div class="row">						
-				<div class="col-xs-6 col-sm-6 col-md-6 login-box" style="padding-right:20px; border-right: 1px solid #ccc;">	                           
-					@b4.formCSRF(routes.ControladorUsuario.entrar, 
-						'id -> "loginform", 
-						'class -> "form-horizontal", 
-						'role -> "form") {
-						@b4.email(usuarioForm("email"), 
-							'_label -> "Email", 
-							'placeholder -> "Seu email",
-							'autocomplete -> false)
-						@b4.password(usuarioForm("senha"), 
-							'_label -> "Senha",
-							'placeholder -> "Sua senha",
-							'autocomplete -> false) 
-                        <p><a href="#">Perdeu a senha?</a></p>			
-						<div style="margin-top:10px" class="form-group">
-							<div class="col-sm-12 controls">
-								<input type="submit" value="Entrar" class="btn btn-primary btn-block">
-							</div>
-						</div> 				
-					}
-				</div>	                
-				<div class="col-xs-6 col-sm-6 col-md-6 social-login-box"> <br />
-					<a href="#" class="btn facebook btn-block" role="button">Entrar com Facebook</a>
-					<br />
-					<a href="#" class="btn google btn-block" role="button">Entrar com Google</a>
-				</div>
+			<div class="">						
+				@b4.formCSRF(routes.ControladorUsuario.entrar, 
+					'id -> "loginform", 
+					'class -> "form-horizontal", 
+					'role -> "form") {
+
+					@b4.email(usuarioForm("email"), 
+						'_label -> "Email", 
+						'placeholder -> "Seu email",
+						'autocomplete -> false)
+
+					@b4.password(usuarioForm("senha"), 
+						'_label -> "Senha",
+						'placeholder -> "Sua senha",
+						'autocomplete -> false) 
+
+					<div class="text-center">
+						<input type="submit" value="Entrar" class="btn btn-primary">
+					</div>
+				}
 			</div>
 		</div>
 	</div>  
