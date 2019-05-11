@@ -33,6 +33,8 @@ public class Estudo extends Model {
 	public RelatorioEstudo relatorio;
 	@OneToOne
 	private TokenSistema token;
+	@OneToOne
+	private Estudo relacionado;
 	
 	public static Finder<Long, Estudo> find = new Finder<>(Estudo.class);
 
@@ -47,18 +49,10 @@ public class Estudo extends Model {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public boolean isTipo() {
 		return tipo;
 	}
-
-	public void setTipo(boolean tipo) {
-		this.tipo = tipo;
-	}
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -97,5 +91,13 @@ public class Estudo extends Model {
 
 	public void setRelatorio(RelatorioEstudo relatorio) {
 		this.relatorio = relatorio;
+	}
+
+	public Estudo getRelacionado() {
+		return relacionado;
+	}
+
+	public void setRelacionado(Estudo relacionado) {
+		this.relacionado = relacionado;
 	}
 }

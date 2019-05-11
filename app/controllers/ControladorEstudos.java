@@ -68,62 +68,29 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarEstudo() {
 		
-		Estudo form = estudoForm.bindFromRequest().get();	
 		Estudo estudo;
+		boolean tipo = false;
 		
 		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
 		if (possivelEstudo.isPresent()) {
 			
 			estudo = possivelEstudo.get();
-			concluirEstudo(estudo);
 			
-			if (estudo.isTipo()) {
+			if (estudo.getTarefas().size() == 3) {
 				
-//				return ok(relatorioFinal.render());
+				concluirEstudo(estudo);
+
+				if (estudo.isTipo()) 
+				return ok(relatorioFinal.render(estudo.getRelatorio(), estudo.getRelatorio(), estudoForm));
+				
+				tipo = true;
 			}
+			
 		}
 		
-		return ok(estudoCasoInstrucao.render(estudoForm, form.isTipo()));
+		return ok(estudoCasoInstrucao.render(estudoForm, tipo));
 	}
-
-//	@Authenticated(UsuarioAutenticado.class)
-//	public Result iniciarEstudoDeCaso() {
-//		
-//		Estudo form = estudoForm.bindFromRequest().get();	
-//		Estudo estudo;
-//		
-//		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
-//		if(possivelEstudo.isPresent()) {
-//			
-//			estudo = possivelEstudo.get();
-//
-//			if(estudo.isTipo() ^ form.isTipo()) {
-//			
-//				estudo.setToken(null);
-//				estudo.update();
-//				estudo = criarNovoEstudo(form.isTipo());
-//			}
-//			
-//		} else {
-//			
-//			estudo = criarNovoEstudo(form.isTipo());
-//		}
-//		
-//        estudo.save();
-//        
-//        switch (estudo.getTarefas().size()) {
-//		
-//	        case 0:	return ok(tarefa1.render(estudo, estudoForm, 1L));
-//	
-//	        case 1: return ok(tarefa2.render(estudo, estudoForm, 2L));
-//			
-//	        case 2: return ok(tarefa3.render(estudo, estudoForm, 3L));
-//	        
-//	        default: concluirEstudoDeCaso(estudo);
-//	        return redirect(routes.ControladorUsuario.mostrarPainel());
-//		}
-//	}
-
+	
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarEstudoZero() {	
 		
@@ -212,6 +179,7 @@ public class ControladorEstudos extends Controller {
 		Long percebida = 0L;
 		Long medida = 0L;
 
+		int numTarefas = 0;
 		for (Tarefa tarefa : tarefas) {
 			
 			tempo =+ (tarefa.getDataHoraFim().getTime() - tarefa.getDataHoraInicio().getTime())/1000;
@@ -220,7 +188,12 @@ public class ControladorEstudos extends Controller {
 			
 			if (tarefa.isConcluidoPercebido()) percebida++;
 			if (tarefa.isConcluidoReal()) medida++;
+			
+			numTarefas++;
 		}
+		
+		percebida = (percebida > 0) ? percebida * 100 / numTarefas : percebida;
+		medida = (medida > 0) ? medida * 100 / numTarefas : medida;
 		
 		relatorio.setTempo(tempo);
 		relatorio.setCliques(cliques);
@@ -241,9 +214,7 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result iniciarTarefa() {
 		
-		Estudo form = estudoForm.bindFromRequest().get();	
-		
-		Estudo estudo = estudoDAO.comId(form.getId()).get();	
+		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();	
 		List<Evento> eventos = eventoDAO.mostraTodos();
 		
 		Tarefa tarefa = criarNovaTarefa(estudo);
@@ -341,15 +312,7 @@ public class ControladorEstudos extends Controller {
 		
 		Long satisfacao = estudo.getSus().getTotal().longValue(); 
 		
-//		if (!tipo) {
-			
-			return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
-
-//		} else {
-			
-//			return ok(relatorioFinal.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
-//		}
-		
+		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

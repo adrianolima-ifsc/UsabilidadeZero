@@ -9,7 +9,9 @@ create table estudo (
   usuario_id                    bigint,
   data                          timestamptz,
   token_id                      bigint,
+  relacionado_id                bigint,
   constraint uq_estudo_token_id unique (token_id),
+  constraint uq_estudo_relacionado_id unique (relacionado_id),
   constraint pk_estudo primary key (id)
 );
 
@@ -34,7 +36,7 @@ create table relatorio_estudo (
   cliques                       bigint,
   percebida                     bigint,
   medida                        bigint,
-  satisfacao                    bigint,
+  satisfacao                    float,
   constraint uq_relatorio_estudo_estudo_id unique (estudo_id),
   constraint pk_relatorio_estudo primary key (id)
 );
@@ -100,6 +102,8 @@ alter table estudo add constraint fk_estudo_usuario_id foreign key (usuario_id) 
 
 alter table estudo add constraint fk_estudo_token_id foreign key (token_id) references token_sistema (id) on delete restrict on update restrict;
 
+alter table estudo add constraint fk_estudo_relacionado_id foreign key (relacionado_id) references estudo (id) on delete restrict on update restrict;
+
 alter table relatorio_estudo add constraint fk_relatorio_estudo_estudo_id foreign key (estudo_id) references estudo (id) on delete restrict on update restrict;
 
 alter table sus add constraint fk_sus_estudo_id foreign key (estudo_id) references estudo (id) on delete restrict on update restrict;
@@ -118,6 +122,8 @@ alter table if exists estudo drop constraint if exists fk_estudo_usuario_id;
 drop index if exists ix_estudo_usuario_id;
 
 alter table if exists estudo drop constraint if exists fk_estudo_token_id;
+
+alter table if exists estudo drop constraint if exists fk_estudo_relacionado_id;
 
 alter table if exists relatorio_estudo drop constraint if exists fk_relatorio_estudo_estudo_id;
 
