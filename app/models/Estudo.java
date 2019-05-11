@@ -48,9 +48,17 @@ public class Estudo extends Model {
 	public Long getId() {
 		return id;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public boolean isTipo() {
 		return tipo;
+	}
+	
+	public void setTipo(boolean tipo) {
+		this.tipo = tipo;
 	}
 	
 	public Usuario getUsuario() {

@@ -13,13 +13,11 @@
 
 @titulo = @{"Relatório Final"}
 
-@tempo(entrada: Tarefa) = @{
+@tempo(entrada: Long) = @{
 
-	val tempoTotal = (entrada.getDataHoraFim.getTime - entrada.getDataHoraInicio.getTime)/1000;
-	
-	val horas = (tempoTotal / 3600);
-    val minutos = ((tempoTotal % 3600) / 60);
-    val segundos = (tempoTotal % 60);
+	val horas = (entrada / 3600);
+    val minutos = ((entrada % 3600) / 60);
+    val segundos = (entrada % 60);
 
     if (horas > 0) {horas + "h " + minutos + "min " + segundos + "s";}
     else if (minutos > 0) {minutos + "min " + segundos + "s";} 
@@ -29,37 +27,50 @@
 @mainCaminho(titulo, styles, scripts) {
 <div class="container">
 	<p id="estudo" hidden="true">tipoEstudo</p>
-	<p id="tarefa" hidden="true">relatorio</p>
+	<p id="tarefa" hidden="true">final</p>
 
 <div id="tabela" class="container">
 	<h3 class="text-center">@titulo</h3>
 	<table class="table table-sm table-borderless table-hover text-center">
 		<thead>
 			<tr class="thead-light">
-				<th></th>
-				<th colspan="2">Eficiência</th>
-				<th colspan="2">Eficácia</th>
-			</tr>
-			<tr>
-				<th></th>
-				<th>Tempo</th>
-				<th>Cliques</th>
-				<th>Percebida</th>
-				<th>Real</th>
+				<th colspan="2"></th>
+				<th>EC0</th>
+				<th>EC1</th>
 			</tr>
 		</thead>
 		<tbody>
-
+			<tr>
+				<th rowspan="2">Eficiência</th>
+				<th>Cliques</th>
+				<td>@relatorio0.getCliques</td>
+				<td>@relatorio1.getCliques</td>
+			</tr>
+			<tr>
+				<th>Tempo</th>
+				<td>@tempo(relatorio0.getTempo)</td>
+				<td>@tempo(relatorio1.getTempo)</td>
+			</tr>
+			<tr>
+				<th rowspan="2">Eficácia</th>
+				<th>Percebida</th>
+				<td>@relatorio0.getPercebida%</td>
+				<td>@relatorio1.getPercebida%</td>
+			</tr>
+			<tr>
+				<th>Medida</th>
+				<td>@relatorio0.getMedida%</td>
+				<td>@relatorio1.getMedida%</td>
+			</tr>
 			<tr>
 				<th>Satisfação</th>
-				<td>satisfacao pts</td>
 				<td></td>
-				<td></td>
-				<td></td>
+				<td>@relatorio0.getSatisfacao pts</td>
+				<td>@relatorio1.getSatisfacao pts</td>
 			</tr>
 		</tbody>
 	</table>
-	@b4.formCSRF(routes.ControladorEstudos.mostrarEstudo, 
+	@b4.formCSRF(routes.ControladorUsuario.mostrarPainel, 
 		'id -> "loginform", 
 		'class -> "form-horizontal", 
 		'role -> "form") {

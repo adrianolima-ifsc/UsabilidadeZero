@@ -10,10 +10,8 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
-import play.routing.JavaScriptReverseRouter;
 import views.html.estudoCasoInstrucao;
 import views.html.login;
-import views.html.painel;
 import views.html.sobre;
 
 public class HomeController extends Controller {
@@ -39,5 +37,13 @@ public class HomeController extends Controller {
 		return ok(sobre.render(
 				"UsabilidadeZero",
 				play.core.PlayVersion.current()));
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result mostrarInstrucoes() {
+		
+		Estudo form = estudoForm.bindFromRequest().get();
+		
+		return ok(estudoCasoInstrucao.render(form.isTipo()));
 	}
 }

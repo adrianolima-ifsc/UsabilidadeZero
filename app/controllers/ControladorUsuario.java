@@ -33,8 +33,6 @@ public class ControladorUsuario extends Controller {
 	@Inject
 	private MailerClient mailer;
 	@Inject
-	private TokenCadastroDAO tokenCadastroDAO;
-	@Inject
 	private UsuarioDAO usuarioDAO;
 	@Inject
 	private EstudoDAO estudoDAO;

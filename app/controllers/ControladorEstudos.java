@@ -68,27 +68,18 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result mostrarEstudo() {
 		
-		Estudo estudo;
-		boolean tipo = false;
+		Estudo form = estudoForm.bindFromRequest().get();
+		Estudo estudo = estudoDAO.comId(form.getId()).get();
+			
+		if (estudo.isTipo()) {
+			
+			Estudo estudoZero = estudo.getRelacionado();
+			concluirEstudo(estudo);
+			return ok(relatorioFinal.render(estudoZero.getRelatorio(), estudo.getRelatorio(), estudoForm));
 		
-		Optional<Estudo> possivelEstudo = estudoDAO.comToken(session(AUTH));
-		if (possivelEstudo.isPresent()) {
-			
-			estudo = possivelEstudo.get();
-			
-			if (estudo.getTarefas().size() == 3) {
-				
-				concluirEstudo(estudo);
-
-				if (estudo.isTipo()) 
-				return ok(relatorioFinal.render(estudo.getRelatorio(), estudo.getRelatorio(), estudoForm));
-				
-				tipo = true;
-			}
-			
+		} else {
+			return ok(estudoCasoInstrucao.render(true)); 
 		}
-		
-		return ok(estudoCasoInstrucao.render(estudoForm, tipo));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -127,10 +118,16 @@ public class ControladorEstudos extends Controller {
 			
 			estudo = possivelEstudo.get();
 
-			if (estudo.getTarefas().size() > 0 || !estudo.isTipo()) {
+			if (!estudo.isTipo()) {
 			
+				Estudo estudoZero = estudo;
 				concluirEstudo(estudo);
+				
 				estudo = criarNovoEstudo(true);
+				estudo.setRelacionado(estudoZero);
+				
+				estudoZero.setRelacionado(estudo);
+				estudoZero.update();
 			}
 			
 		} else {
@@ -150,30 +147,30 @@ public class ControladorEstudos extends Controller {
 		
 		int numTarefa = (estudo.getTarefas().size() + 1); 
 		
-		if (estudo.getTarefas().size() == 3) {
-			
-			return ok(sus.render(estudo, susForm));
-			
-//			if (!estudo.isTipo()) {
-//				
-//				return redirect(routes.ControladorEstudos.iniciarEstudoUm());
-//			
-//			} else {
-//
-//		        return redirect(routes.ControladorUsuario.mostrarPainel());
-//			}
-		
-		} 
+		if (estudo.getTarefas().size() == 3) return ok(sus.render(estudo, susForm));		
         
 	    return ok(tarefa.render(estudo, estudoForm, numTarefa));        
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
 	public void concluirEstudo(Estudo estudo) {
+		
+		if (estudo.getToken() != null) {
+			
+			List<Tarefa> tarefas = estudo.getTarefas();
+			
+			if (tarefas.size() == 3) gerarRelatorio(estudo);
+			
+			estudo.setToken(null);
+			estudo.update();		
+		}
+	}
 
+	private void gerarRelatorio(Estudo estudo) {
+		
 		RelatorioEstudo relatorio = new RelatorioEstudo(estudo);
 		List<Tarefa> tarefas = estudo.getTarefas();
-
+				
 		Long tempo = 0L;
 		Long cliques = 0L;
 		Long percebida = 0L;
@@ -181,34 +178,31 @@ public class ControladorEstudos extends Controller {
 
 		int numTarefas = 0;
 		for (Tarefa tarefa : tarefas) {
-			
-			tempo =+ (tarefa.getDataHoraFim().getTime() - tarefa.getDataHoraInicio().getTime())/1000;
-			
-			cliques =+ tarefa.getCliques();
-			
+
+			tempo += (tarefa.getDataHoraFim().getTime() - tarefa.getDataHoraInicio().getTime());
+
+			cliques += tarefa.getCliques();
+
 			if (tarefa.isConcluidoPercebido()) percebida++;
 			if (tarefa.isConcluidoReal()) medida++;
-			
+
 			numTarefas++;
 		}
-		
+
 		percebida = (percebida > 0) ? percebida * 100 / numTarefas : percebida;
 		medida = (medida > 0) ? medida * 100 / numTarefas : medida;
-		
-		relatorio.setTempo(tempo);
+
+		relatorio.setTempo(tempo/1000);
 		relatorio.setCliques(cliques);
 		relatorio.setPercebida(percebida);
 		relatorio.setMedida(medida);
 
 		Double satisfacao = estudo.getSus().getTotal();
 		relatorio.setSatisfacao(satisfacao);
-		
+
 		relatorio.setEstudo(estudo);
 		estudo.setRelatorio(relatorio);
 		relatorio.save();
-		
-		estudo.setToken(null);
-		estudo.update();		
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
@@ -281,7 +275,6 @@ public class ControladorEstudos extends Controller {
 	public Result enviarPesquisa() {
 		
 		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
-		Boolean tipo = estudo.isTipo();
 		
 		Sus pesquisa = susForm.bindFromRequest().get();
 		
@@ -312,7 +305,7 @@ public class ControladorEstudos extends Controller {
 		
 		Long satisfacao = estudo.getSus().getTotal().longValue(); 
 		
-		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), tipo, estudoForm));
+		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), estudo, estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

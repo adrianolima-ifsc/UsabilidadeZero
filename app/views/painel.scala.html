@@ -10,24 +10,26 @@
 
 @main("Painel", styles, scripts) {
 <div class="">
+
     <p>Nenhuma dica ou orientação será dada durante a execução das tarefas. 
     Caso você entenda que elas já foram concluídas, você deve clicar no botão "Concluir", 
     localizado no canto superior direito da sua tela. 
     Você também pode desistir da tarefa a qualquer momento. 
     Basta clicar no botão "Desistir", também no canto superior direito da tela.</p>
+    
     <p>Após executar as 3 tarefas, você deve ainda preencher um rápido questionário de avaliação da atividade. 
     No final, você receberá um relatório com os resultados de sua participação para que você possa analisar 
     o seu desempenho neste estudo de caso.</p>
     
     <div class="text-center">
-        @b4.formCSRF(routes.ControladorEstudos.mostrarEstudo, 
+        @b4.formCSRF(routes.HomeController.mostrarInstrucoes, 
             'id -> "iniciarForm", 
             'class -> "form-horizontal", 
             'role -> "form") {
 
             @b4.hidden( estudoForm("tipo"), 'value -> false )
             
-            <input type="submit" value="Iniciar Estudo de Caso 0" class="btn btn-primary center-block">
+            <input type="submit" value="Iniciar" class="btn btn-primary center-block">
         }
     </div>
 </div>
