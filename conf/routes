@@ -6,6 +6,7 @@ GET     /                           		controllers.HomeController.index
 GET		/sobre								controllers.HomeController.mostrarSobre
 POST	/instrucoes							controllers.HomeController.mostrarInstrucoes
 
+GET		/usuario/confirma/:email/:codigo	controllers.ControladorUsuario.confirmarCadastro(email, codigo)
 GET		/painel								controllers.ControladorUsuario.mostrarPainel
 POST 	/login	 							controllers.ControladorUsuario.entrar
 GET		/logout								controllers.ControladorUsuario.sair
