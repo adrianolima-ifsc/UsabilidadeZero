@@ -252,8 +252,8 @@ public class ControladorEventos extends Controller {
 
 	private boolean testarCertificado(Inscricao form) {
 
-		if (!form.getNome().equals("Martin Fowler")) {return false;}
-		else if (!form.getEmail().equals("martin@martinfowler.com")) {return false;}
+		if (!form.getNome().toLowerCase().equals("martin fowler")) {return false;}
+		else if (!form.getEmail().toLowerCase().equals("martin@martinfowler.com")) {return false;}
 		else if (!form.getCpf().equals("683.563.770-64")) {return false;}
 		else if (!form.getEndereco().equals("1234")) {return false;}
 			
