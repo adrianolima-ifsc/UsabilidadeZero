@@ -78,7 +78,7 @@ function goBack() {
 
 function limparCampos() {
 
-	var campos = $("#form-inscricao")
+	var campos = $(".formulario")
 		.find('.campo')
 		.serializeArray();
 

@@ -114,6 +114,7 @@
 					<h5>Certificado</h5>
 
 					@b4.formCSRF(routes.ControladorEventos.mostrarCertificado,
+						'class -> "formulario",
 						'role -> "form") {
 
 						@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
