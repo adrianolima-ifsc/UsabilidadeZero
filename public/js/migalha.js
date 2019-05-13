@@ -88,7 +88,7 @@ $(document).ready(function() {
 			$('#migalha').find('.ec0.t3').addClass('btn-success').removeClass('disabled');
 			$('#migalha').find('.ec0.sus').addClass('btn-success').removeClass('disabled');
 			$('#migalha').find('.ec0.relatorio').addClass('btn-success').removeClass('disabled');
-			$('#migalha').find('.final').addClass('btn-danger').removeClass('btn-secondary');
+			$('#migalha').find('.final').addClass('btn-danger').removeClass('btn-light');
 		}
 	}
 })

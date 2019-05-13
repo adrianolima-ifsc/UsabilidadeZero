@@ -1,6 +1,6 @@
 @(estudo: Estudo, susForm: Form[Sus])
 
-@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-9", "col-3") }
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-8", "col-4 d-flex justify-content-between") }
 
 @import helper._
 
@@ -23,39 +23,33 @@
 <div class="container">
 	<p id="estudo" hidden="true">@estudo.isTipo</p>
 	<p id="tarefa" hidden="true">sus</p>
-   	<h2 class="text-center">SUS</h2>
+   	<h2 class="text-center">Pesquisa de Satisfação</h2>
  	<h5 class="text-center">Pesquisa</h5>
 
+    <div class="row">        
+        <div class="col-8"></div>
+        <div class="col-4">
+            <div class="row legenda-sus">
+                <div class="6">
+                    <small><strong>Discordo<br>totalmente</strong></small>
+                </div>
+                <div class="6">
+                    <small><strong>Concordo<br>plenamente</strong></small>
+                </div>
+            </div>
+        </div>
+    </div>
 	@b4.formCSRF(routes.ControladorEstudos.enviarPesquisa, 
 		'id -> "susForm", 
 		'class -> "form-horizontal", 
 		'role -> "form") {
 
 		@b4.hidden( susForm("id"), 'value -> estudo.getId )
-
-
-        <!-- <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">1</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">2</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-            <label class="form-check-label" for="inlineRadio3">3</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option3">
-            <label class="form-check-label" for="inlineRadio3">4</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option3">
-            <label class="form-check-label" for="inlineRadio3">5</label>
-        </div> -->
         
-        @b4.radio( susForm("q1"), options = opts, '_label -> "1.  Penso que usarei este sistema com frequência.", '_inline -> true )
+        @b4.radio( susForm("q1"), 
+            options = opts, 
+            '_label -> "1.  Penso que usarei este sistema com frequência.", 
+            '_inline -> true )
 
         @b4.radio( susForm("q2"), options = opts, '_label -> "2. Acho o sistema desnecessariamente complexo.", '_inline -> true )
 
