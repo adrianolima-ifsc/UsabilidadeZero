@@ -4,10 +4,13 @@
 
 @import helper._
 
-@titulo = @{
-    
-    "SUS"	
+@styles = {}
+
+@scripts = { 
+    <script src="@routes.Assets.versioned("js/sus.js")"></script>
 }
+
+@titulo = @{"SUS"}
 
 @opts = @{ 
 
@@ -15,11 +18,10 @@
         "2"->2,
         "3"->3,
         "4"->4,
-        "5"->5,
-        ) 
+        "5"->5) 
 }
 
-@mainCaminho(titulo) {
+@mainCaminho(titulo, styles, scripts) {
 <div class="container">
 	<p id="estudo" hidden="true">@estudo.isTipo</p>
 	<p id="tarefa" hidden="true">sus</p>
@@ -40,7 +42,7 @@
         </div>
     </div>
 	@b4.formCSRF(routes.ControladorEstudos.enviarPesquisa, 
-		'id -> "susForm", 
+		'id -> "form-sus", 
 		'class -> "form-horizontal", 
 		'role -> "form") {
 
@@ -69,7 +71,7 @@
 
         @b4.radio( susForm("q10"), options = opts, '_label -> "10. Eu precisaria aprender muitas coisas antes de usar este sistema.", '_inline -> true )
 
-        <input type="submit" id="botao-inscricao" value="Enviar pesquisa" class="btn btn-primary">
+        <input type="submit" id="botao-enviar" value="Enviar pesquisa" class="btn btn-primary">
     } 
 </div>
 }
