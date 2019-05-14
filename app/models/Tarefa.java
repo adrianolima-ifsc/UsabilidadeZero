@@ -10,7 +10,7 @@ import io.ebean.Finder;
 import io.ebean.Model;
 
 @Entity
-public class Tarefa extends Model {
+public class Tarefa extends Model implements Comparable<Tarefa> {
 	
 	private static final Long serialVersionUID = 1L;
 	
@@ -20,19 +20,19 @@ public class Tarefa extends Model {
 	@ManyToOne
 	public Estudo estudo;
 	public Long evento;
-	public Date dataHoraInicio;
-	public Date dataHoraFim;
+	public Date inicio;
+	public Date fim;
 	public Long cliques;
 	public boolean concluidoReal;
 	public boolean concluidoPercebido;
 
 	public static Finder<Long, Tarefa> find = new Finder<>(Tarefa.class);
 
-	public Tarefa(String codigo, Estudo estudo, Date time) {
+	public Tarefa(String codigo, Estudo estudo, Date inicio) {
 
 		this.codigo = codigo;
 		this.estudo = estudo;
-		this.dataHoraInicio = time;
+		this.inicio = inicio;
 		this.cliques = (long) 0;
 		this.concluidoReal = false;
 		this.concluidoPercebido = false;
@@ -62,20 +62,20 @@ public class Tarefa extends Model {
 		this.estudo = estudo;
 	}
 
-	public Date getDataHoraInicio() {
-		return dataHoraInicio;
+	public Date getInicio() {
+		return inicio;
 	}
 
-	public void setDataHoraInicio(Date dataHoraInicio) {
-		this.dataHoraInicio = dataHoraInicio;
+	public void setInicio(Date dataHoraInicio) {
+		this.inicio = dataHoraInicio;
 	}
 
-	public Date getDataHoraFim() {
-		return dataHoraFim;
+	public Date getFim() {
+		return fim;
 	}
 
-	public void setDataHoraFim(Date dataHoraFim) {
-		this.dataHoraFim = dataHoraFim;
+	public void setFim(Date dataHoraFim) {
+		this.fim = dataHoraFim;
 	}
 
 	public Long getCliques() {
@@ -108,5 +108,11 @@ public class Tarefa extends Model {
 
 	public void setEvento(Long evento) {
 		this.evento = evento;
+	}
+
+	@Override
+	public int compareTo(Tarefa t) {
+
+		return (int) (this.getId() - t.getId());
 	}
 }

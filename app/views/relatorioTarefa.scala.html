@@ -21,7 +21,7 @@
 
 @tempo(entrada: Tarefa) = @{
 
-	val tempoTotal = (entrada.getDataHoraFim.getTime - entrada.getDataHoraInicio.getTime)/1000;
+	val tempoTotal = (entrada.getFim.getTime - entrada.getInicio.getTime)/1000;
 	
 	val horas = (tempoTotal / 3600);
     val minutos = ((tempoTotal % 3600) / 60);
