@@ -25,3 +25,12 @@ header {
 	justify-content: space-between;
 	text-align: center;
 }
+
+.tarefa {
+	margin-bottom: 0;
+}
+
+.btn{
+	text-transform: uppercase;
+    letter-spacing: .025em;
+}
