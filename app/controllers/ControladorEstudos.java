@@ -168,6 +168,7 @@ public class ControladorEstudos extends Controller {
 		}
 	}
 
+	@Authenticated(UsuarioAutenticado.class)
 	private void gerarRelatorio(Estudo estudo) {
 		
 		RelatorioEstudo relatorio = new RelatorioEstudo(estudo);
@@ -360,10 +361,7 @@ public class ControladorEstudos extends Controller {
 			
 			if (ultimaTarefa.getFim() == null) {
 				
-				tarefa = ultimaTarefa;
-				tarefa.save();
-				
-				return tarefa;
+				return ultimaTarefa;
 			
 			} else {
 				
@@ -375,7 +373,6 @@ public class ControladorEstudos extends Controller {
 		
 		tarefa = new Tarefa(codigo, estudo, calendario.getTime());
 		tarefa.save();
-
 		
 		return tarefa;
 	}
