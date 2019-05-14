@@ -1,6 +1,8 @@
 package controllers;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 import java.util.TimeZone;
 
 import javax.inject.Inject;
@@ -16,6 +18,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security.Authenticated;
 import views.html.*;
 
 public class ControladorEventos extends Controller {
@@ -248,6 +251,46 @@ public class ControladorEventos extends Controller {
 		return Integer.toString(datas[0]) + 
 				"/" + Integer.toString(datas[1] - 2) + 
 				"/" + Integer.toString(datas[2]);
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result fazerInscricao() {
+		
+		Inscricao form = inscricaoForm.bindFromRequest().get();	
+		
+		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
+		Evento evento = eventoDAO.comId(form.getEvento()).get();
+		Estudo estudo = tarefa.getEstudo();	
+		List<Evento> eventos = eventoDAO.mostraTodos();	
+		
+		if (evento.getSigla().equals("BRACIS")) { //Trocar o teste pelo id
+		
+			if (testarInscricao(form)) {
+
+				tarefa.setConcluidoReal(true);	
+				tarefa.update();
+			}
+		}
+		
+		if(estudo.isTipo()) {
+			
+			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
+		
+		} else {
+			
+			Collections.shuffle(eventos);
+			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
+		}
+	}
+
+	@Authenticated(UsuarioAutenticado.class)
+	private boolean testarInscricao(Inscricao form) {
+
+		if (!form.getNumCartao().replaceAll("\\s+", "").equals("4609868766944752")) {return false;}
+		else if (!form.getValidade().equals("09/2030")) {return false;}
+		else if (!form.getCodigoSeguranca().equals("902")) {return false;}
+			
+		return true;
 	}
 
 	private boolean testarCertificado(Inscricao form) {

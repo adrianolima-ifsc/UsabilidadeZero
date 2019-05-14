@@ -391,44 +391,4 @@ public class ControladorEstudos extends Controller {
 		
 		return estudo;
 	}
-	
-	@Authenticated(UsuarioAutenticado.class)
-	public Result fazerInscricao() {
-		
-		Inscricao form = inscricaoForm.bindFromRequest().get();	
-		
-		Tarefa tarefa = tarefaDAO.comId(form.getTarefa()).get();
-		Evento evento = eventoDAO.comId(form.getEvento()).get();
-		Estudo estudo = tarefa.getEstudo();	
-		List<Evento> eventos = eventoDAO.mostraTodos();	
-		
-		if (evento.getSigla().equals("BRACIS")) { //Trocar o teste pelo id
-		
-			if (testarInscricao(form)) {
-
-				setConcluido(tarefa.getId());	
-				tarefa.update();
-			}
-		}
-		
-		if(estudo.isTipo()) {
-			
-			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
-		
-		} else {
-			
-			Collections.shuffle(eventos);
-			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
-		}
-	}
-
-	@Authenticated(UsuarioAutenticado.class)
-	private boolean testarInscricao(Inscricao form) {
-
-		if (!form.getNumCartao().replaceAll("\\s+", "").equals("4609868766944752")) {return false;}
-		else if (!form.getValidade().equals("09/2030")) {return false;}
-		else if (!form.getCodigoSeguranca().equals("902")) {return false;}
-			
-		return true;
-	}
 }

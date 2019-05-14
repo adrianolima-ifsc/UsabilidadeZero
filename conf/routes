@@ -21,7 +21,6 @@ POST	/portal								controllers.ControladorEstudos.iniciarTarefa
 + nocsrf
 POST	/concluirTarefa						controllers.ControladorEstudos.concluirTarefa
 GET		/desistirTarefa						controllers.ControladorEstudos.desistirTarefa
-POST	/inscricao 							controllers.ControladorEstudos.fazerInscricao
 
 POST	/evento								controllers.ControladorEventos.detalhar
 POST	/evento/programa					controllers.ControladorEventos.mostrarPrograma
@@ -30,6 +29,7 @@ POST	/evento/informacoes					controllers.ControladorEventos.mostrarInformacoes
 POST	/evento/pagamento					controllers.ControladorEventos.mostrarPagamento
 POST	/evento/participe					controllers.ControladorEventos.mostrarParticipe
 POST	/evento/inscricao					controllers.ControladorEventos.mostrarInscricao
+POST	/inscricao 							controllers.ControladorEventos.fazerInscricao
 POST	/evento/certificadoForm				controllers.ControladorEventos.mostrarCertificadoForm
 POST	/evento/certificado					controllers.ControladorEventos.mostrarCertificado
 

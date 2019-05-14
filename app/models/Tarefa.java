@@ -66,16 +66,16 @@ public class Tarefa extends Model implements Comparable<Tarefa> {
 		return inicio;
 	}
 
-	public void setInicio(Date dataHoraInicio) {
-		this.inicio = dataHoraInicio;
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
 	}
 
 	public Date getFim() {
 		return fim;
 	}
 
-	public void setFim(Date dataHoraFim) {
-		this.fim = dataHoraFim;
+	public void setFim(Date fim) {
+		this.fim = fim;
 	}
 
 	public Long getCliques() {
