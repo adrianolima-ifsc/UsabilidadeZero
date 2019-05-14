@@ -40,3 +40,9 @@ function testarValidade(input) {
 	var regex = /^[0-1]\d\/2\d{3}$/;
 	return regex.test(input.val());
 }
+
+function testarPreenchido(input) {
+
+	if (input != "") return true;
+	else return false;
+}

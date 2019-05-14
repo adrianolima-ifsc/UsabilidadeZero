@@ -48,7 +48,7 @@ $(document).ready(function() {
 		var input = $(this);
 		var is_name = input.val();
 		
-		validarCampo(input, valor);
+		validarCampo(input, is_name);
 	});
 
 	$('#validade').on('input', function() {
@@ -67,8 +67,21 @@ $(document).ready(function() {
 		var input = $(this);
 		var is_name = input.val();
 		
-		validarCampo(input, valor);
+		validarCampo(input, is_name);
 	});
+
+	$('#senha').on('input', function() {
+
+		var input = $(this);
+		var is_name = input.val();
+
+		validarCampo(input, is_name);
+	});
+
+	$('#valor').on('change', function() {
+
+		$(this).removeClass("invalido").addClass("valido");
+	})
 })
 
 function goBack() {

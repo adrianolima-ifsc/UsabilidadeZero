@@ -24,8 +24,6 @@ $(document).ready(function() {
 
 	$("#valor").on('click', function() {
 		
-		$(this).removeClass("invalido").addClass("valido");
-		
 		if (tarefa == 1) {
 
 			if(siglaEvento == 'BSB') {
