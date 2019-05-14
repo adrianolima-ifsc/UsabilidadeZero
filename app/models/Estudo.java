@@ -24,7 +24,8 @@ public class Estudo extends Model {
 	public boolean tipo;
 	@ManyToOne
 	public Usuario usuario;
-	public Date data;
+	public Date inicio;
+	public Date fim;
 	@OneToMany(mappedBy = "estudo")
 	public List<Tarefa> tarefas;
 	@OneToOne(mappedBy = "estudo")
@@ -38,11 +39,11 @@ public class Estudo extends Model {
 	
 	public static Finder<Long, Estudo> find = new Finder<>(Estudo.class);
 
-	public Estudo(boolean tipo, Usuario usuario, Date data) {
+	public Estudo(boolean tipo, Usuario usuario, Date inicio) {
 
 		this.tipo = tipo;
 		this.usuario = usuario;
-		this.data = data;
+		this.inicio = inicio;
 	}
 
 	public Long getId() {
@@ -65,8 +66,16 @@ public class Estudo extends Model {
 		return usuario;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getInicio() {
+		return inicio;
+	}
+
+	public Date getFim() {
+		return fim;
+	}
+
+	public void setFim(Date fim) {
+		this.fim = fim;
 	}
 
 	public List<Tarefa> getTarefas() {

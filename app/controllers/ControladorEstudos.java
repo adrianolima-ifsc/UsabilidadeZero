@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
 import autenticadores.UsuarioAutenticado;
 import daos.EstudoDAO;
 import daos.EventoDAO;
@@ -157,10 +159,10 @@ public class ControladorEstudos extends Controller {
 		
 		if (estudo.getToken() != null) {
 			
-			List<Tarefa> tarefas = estudo.getTarefas();
+			if (estudo.getSus() != null) gerarRelatorio(estudo);
 			
-			if (tarefas.size() == 3) gerarRelatorio(estudo);
-			
+			Calendar calendario = Calendar.getInstance();
+			estudo.setFim(calendario.getTime());
 			estudo.setToken(null);
 			estudo.update();		
 		}
@@ -179,7 +181,7 @@ public class ControladorEstudos extends Controller {
 		int numTarefas = 0;
 		for (Tarefa tarefa : tarefas) {
 
-			tempo += (tarefa.getDataHoraFim().getTime() - tarefa.getDataHoraInicio().getTime());
+			tempo += (tarefa.getFim().getTime() - tarefa.getInicio().getTime());
 
 			cliques += tarefa.getCliques();
 
@@ -231,11 +233,10 @@ public class ControladorEstudos extends Controller {
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 
-		if (tarefa.getDataHoraFim() == null) {
+		if (tarefa.getFim() == null) {
 			
-			Calendar calendario;
-			calendario = Calendar.getInstance();
-			tarefa.setDataHoraFim(calendario.getTime());
+			Calendar calendario = Calendar.getInstance();
+			tarefa.setFim(calendario.getTime());
 		}
 		
 		tarefa.setConcluidoPercebido(true);
@@ -254,11 +255,10 @@ public class ControladorEstudos extends Controller {
 		Tarefa form = tarefaForm.bindFromRequest().get();
 		Tarefa tarefa = tarefaDAO.comId(form.getId()).get();
 
-		if (tarefa.getDataHoraFim() == null) {
+		if (tarefa.getFim() == null) {
 			
-			Calendar calendario;
-			calendario = Calendar.getInstance();
-			tarefa.setDataHoraFim(calendario.getTime());
+			Calendar calendario = Calendar.getInstance();
+			tarefa.setFim(calendario.getTime());
 		}
 		
 		tarefa.setConcluidoPercebido(false);
@@ -305,6 +305,9 @@ public class ControladorEstudos extends Controller {
 		
 		Long satisfacao = estudo.getSus().getTotal().longValue(); 
 		
+		List<Tarefa> tarefas = estudo.getTarefas();
+		Collections.sort(tarefas);
+		
 		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), estudo, estudoForm));
 	}
 	
@@ -313,7 +316,7 @@ public class ControladorEstudos extends Controller {
 		
 		Tarefa tarefa = tarefaDAO.comId(id).get();
 		
-		if (tarefa.getDataHoraFim() == null) {
+		if (tarefa.getFim() == null) {
 			
 			Long cliques = tarefa.getCliques();
 			cliques++;
@@ -345,8 +348,7 @@ public class ControladorEstudos extends Controller {
 		List<Tarefa> tarefas = estudo.getTarefas();
 		
 		String codigo = "EC" + (estudo.isTipo() ? "1" : "0");
-		Calendar calendario;
-		calendario = Calendar.getInstance();
+		Calendar calendario = Calendar.getInstance();
 		
 		if (tarefas.size() == 0) {
 			
@@ -356,7 +358,7 @@ public class ControladorEstudos extends Controller {
 			
 			Tarefa ultimaTarefa = tarefas.get(tarefas.size() - 1);
 			
-			if (ultimaTarefa.getDataHoraFim() == null) {
+			if (ultimaTarefa.getFim() == null) {
 				
 				tarefa = ultimaTarefa;
 				tarefa.save();
