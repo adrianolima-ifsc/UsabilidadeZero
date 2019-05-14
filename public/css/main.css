@@ -30,7 +30,6 @@ header {
 	margin-bottom: 0;
 }
 
-.btn{
-	text-transform: uppercase;
-    letter-spacing: .025em;
+.btn {
+	transition: unset;
 }
