@@ -69,18 +69,8 @@
     	    			<div class="col-auto text-right">
                             <div class="row">
                                 <div class="col"> 
-                                    @b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
-                                        'role -> "form") {
-
-                                        @b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
-                                        @b4.hidden( tarefaForm("codigo"), 'value -> tarefa.getCodigo )
-                                        @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
-
-                                        <button id="concluir-tarefa" class="btn btn-sm btn-success" tabindex="-1">Concluir</button>
-                                    }
-                                </div>
-                                <div class="col"> 
                                     @b4.formCSRF(routes.ControladorEstudos.desistirTarefa,
+                                        'class -> "tarefa",
                                         'role -> "form") {
 
                                         @b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
@@ -88,6 +78,18 @@
                                         @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
 
                                         <button id="desistir-tarefa" class="btn btn-sm btn-danger" tabindex="-1">Desistir</button>
+                                    }
+                                </div>
+                                <div class="col"> 
+                                    @b4.formCSRF(routes.ControladorEstudos.concluirTarefa,
+                                        'class -> "tarefa",
+                                        'role -> "form") {
+
+                                        @b4.hidden( tarefaForm("id"), 'value -> tarefa.getId )
+                                        @b4.hidden( tarefaForm("codigo"), 'value -> tarefa.getCodigo )
+                                        @b4.hidden( tarefaForm("concluidoReal"), 'value -> "false", '_id -> "concluidoReal")                                
+
+                                        <button id="concluir-tarefa" class="btn btn-sm btn-success" tabindex="-1">Concluir</button>
                                     }
                                 </div>
                             </div>
