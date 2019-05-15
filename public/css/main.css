@@ -33,3 +33,8 @@ header {
 .btn {
 	transition: unset;
 }
+
+.btn.tela-sequencia {
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+}
