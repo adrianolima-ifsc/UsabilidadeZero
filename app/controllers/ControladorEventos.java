@@ -210,19 +210,7 @@ public class ControladorEventos extends Controller {
 			return ok(estudo1certificado.render(tarefa, tarefaForm, evento, participou));		
 		}
 		
-		return ok(estudo0certificado.render(tarefa, tarefaForm, evento, participou));		
-		
-//		if(estudo.isTipo()) {
-//			
-//			return ok(estudo1portal.render(tarefa, tarefaForm, eventos));
-//		
-//		} else {
-//			
-//			Collections.shuffle(eventos);
-//			return ok(estudo0portal.render(tarefa, tarefaForm, eventos));
-//		}
-//		
-//		return ok("Certificado");
+		return ok(estudo0certificado.render(tarefa, tarefaForm, evento, participou));	
 	}
 	
 	public int[] calcularDataEvento(Evento evento) {
