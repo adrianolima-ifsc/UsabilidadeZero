@@ -18,9 +18,8 @@
 )}
 
 @mainEstudo(tarefa, tarefaForm, styles, scripts) {
-<div>
+<div class="container w-50">
 	<h1>Portal de Eventos</h1>
-	<div class="container w-50">
 		<div class="caption">
 			<h3 class="sigla">@evento.getSigla()</h3>
 				<div class="col-md-12">
@@ -32,6 +31,7 @@
 					'autocomplete -> "off") {
 
 					@b4.hidden( "id-evento", evento.getId, 'class -> "valido" )
+					@b4.hidden( "data-evento", evento.getData, 'class -> "valido" )
 
 					@b4.hidden( inscricaoForm("tarefa"), 
 						'class -> "valido", 
@@ -111,7 +111,7 @@
 						</div>
 					</div>
 						
-					<input type="submit" id="botao-inscricao" value="Participe" tabindex="-1">
+					<input type="submit" id="botao-inscricao" class="tela-sequencia" value="Participe" tabindex="-1">
 				} 
 			</p>
 		</div>

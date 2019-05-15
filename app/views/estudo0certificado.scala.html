@@ -18,14 +18,15 @@
 	<div class="container w-50">
 		<div class="caption">
 			<h3>@evento.getSigla() - Certificado</h3>
-				<div class="col-md-12">
-			<p class="text-center">
-				@if(participou) {
-					<iframe src="https://arsoluti.acsoluti.com.br/public/manuais/MPO.100_V.2_-_Manual_de_Emissao_de_Certificado_Digital_Soluti.pdf" style="width:100%; height:100%;" frameborder="0"></iframe>
-				} else {
-					<p>Não foram encontrados certificados vinculados ao CPF informado ou os dados informados estão incorretos. Tente novamente.</p>
-				}
-			</p>
+			<div class="col-md-12">
+				<p class="text-center">
+					@if(participou) {
+						<iframe src="https://arsoluti.acsoluti.com.br/public/manuais/MPO.100_V.2_-_Manual_de_Emissao_de_Certificado_Digital_Soluti.pdf" style="width:100%; height:100%;" frameborder="0"></iframe>
+					} else {
+						<p>Não foram encontrados certificados vinculados ao CPF informado ou os dados informados estão incorretos. Tente novamente.</p>
+					}
+				</p>
+			</div>
 		</div>
 	</div>
 </div>

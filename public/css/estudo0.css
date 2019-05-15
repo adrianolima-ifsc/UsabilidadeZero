@@ -42,6 +42,11 @@ input[type="submit"] {
 	margin: 3px;
 }
 
+input[type="submit"].tela-sequencia {
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+}
+
 .evento {
 	background-color: red;
 	border-color: red;

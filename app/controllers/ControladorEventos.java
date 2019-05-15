@@ -8,6 +8,7 @@ import java.util.TimeZone;
 import javax.inject.Inject;
 
 import autenticadores.UsuarioAutenticado;
+import daos.EstudoDAO;
 import daos.EventoDAO;
 import daos.TarefaDAO;
 import models.Estudo;
@@ -24,13 +25,16 @@ import views.html.*;
 public class ControladorEventos extends Controller {
 	
 	@Inject
-	private EventoDAO eventoDAO;
-	
+	private EventoDAO eventoDAO;	
 	@Inject
 	private TarefaDAO tarefaDAO;
+	@Inject
+	private EstudoDAO estudoDAO;
 	
 	private Form<Tarefa> tarefaForm;
 	private Form<Inscricao> inscricaoForm;
+	
+	public static final String AUTH = "auth";
 	
 	@Inject	
 	public ControladorEventos(FormFactory formFactory) {
@@ -199,6 +203,13 @@ public class ControladorEventos extends Controller {
 			}
 		}
 		
+		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
+		
+		if (estudo.isTipo()) {
+			
+			return ok(estudo1certificado.render(tarefa, tarefaForm, evento, participou));		
+		}
+		
 		return ok(estudo0certificado.render(tarefa, tarefaForm, evento, participou));		
 		
 //		if(estudo.isTipo()) {
@@ -263,13 +274,10 @@ public class ControladorEventos extends Controller {
 		Estudo estudo = tarefa.getEstudo();	
 		List<Evento> eventos = eventoDAO.mostraTodos();	
 		
-		if (evento.getSigla().equals("BRACIS")) { //Trocar o teste pelo id
-		
-			if (testarInscricao(form)) {
+		if (testarInscricao(form)) {
 
-				tarefa.setConcluidoReal(true);	
-				tarefa.update();
-			}
+			tarefa.setConcluidoReal(true);	
+			tarefa.update();
 		}
 		
 		if(estudo.isTipo()) {

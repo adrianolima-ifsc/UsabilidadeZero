@@ -3,6 +3,7 @@ $(document).ready(function() {
 	var idTarefa = $("#id-tarefa").text();
 	var idEvento = $('[name="id-evento"]').val();
 	var siglaEvento = $('.sigla').text();
+	var dataEvento = $('[name="data-evento"]').val();
 
 	var codigo = $('[name="codigo"]').val();
 	var estudo = codigo.substr(2,1);
@@ -15,7 +16,7 @@ $(document).ready(function() {
 		
 		if (tarefa == 1) {
 
-			if(siglaEvento == 'BSB') {
+			if(siglaEvento == 'IHC') {
 
 				tarefaConcluida();
 			}
@@ -26,7 +27,7 @@ $(document).ready(function() {
 		
 		if (tarefa == 1) {
 
-			if(siglaEvento == 'BSB') {
+			if(siglaEvento == 'IHC') {
 
 				tarefaConcluida();
 			}
@@ -68,14 +69,20 @@ $(document).ready(function() {
 		
 		} else {
 
-			if (estudo == 1) {
+			if (dataEvento < 0) {
+			
+				e.preventDefault();
+				limparCampos();
+				alert("Não é possível inscrever-se em um evento que já aconteceu!");
+
+			} else if (estudo == 1) {
 			
 				alert("Sua inscrição foi realizada com sucesso!");
 			}
 
 			if (tarefa == 2) {
 
-				if(siglaEvento == BRACIS) {
+				if(siglaEvento == 'SBQS') {
 
 					$.get(jsRoutes.controllers.ControladorEstudos.fazerInscricao());
 				}
@@ -89,7 +96,6 @@ $(document).ready(function() {
 	$("#botao-certificado").click(function(e){
 
 		//e.preventDefault();
-		var dataEvento = $('[name="data-evento"]').val();
 
 		var campos = $("#form-certificado")
 			.find('.ob')
