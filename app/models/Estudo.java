@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -79,6 +80,8 @@ public class Estudo extends Model {
 	}
 
 	public List<Tarefa> getTarefas() {
+		
+		Collections.sort(tarefas);
 		return tarefas;
 	}
 

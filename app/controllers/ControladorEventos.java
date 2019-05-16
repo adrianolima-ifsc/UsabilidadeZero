@@ -193,7 +193,7 @@ public class ControladorEventos extends Controller {
 		
 		boolean participou = false;
 		
-		if (evento.getSigla().equals("SBQS")) {
+		if (evento.getSigla().equals("SBSI")) {
 		
 			if (testarCertificado(form)) {
 
