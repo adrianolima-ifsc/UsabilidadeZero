@@ -31,7 +31,7 @@ import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
-import views.html.estudoCasoInstrucao;
+import views.html.instrucao;
 import views.html.relatorioTarefa;
 import views.html.relatorioParcial;
 import views.html.relatorioFinal;
@@ -80,7 +80,7 @@ public class ControladorEstudos extends Controller {
 			return ok(relatorioFinal.render(estudoZero.getRelatorio(), estudo.getRelatorio(), estudoForm));
 		
 		} else {
-			return ok(estudoCasoInstrucao.render(true)); 
+			return ok(instrucao.render(true)); 
 		}
 	}
 	
