@@ -33,11 +33,9 @@ POST	/inscricao 							controllers.ControladorEventos.fazerInscricao
 POST	/evento/certificadoForm				controllers.ControladorEventos.mostrarCertificadoForm
 POST	/evento/certificado					controllers.ControladorEventos.mostrarCertificado
 
-GET 	/usuario 							controllers.ControladorUsuario.lista
 # GET 	/usuario/novo 						controllers.ControladorUsuario.novoUsuario
 GET 	/usuario/:id 						controllers.ControladorUsuario.detalhar(id:Long)
 # POST 	/usuario/:id 						controllers.ControladorUsuario.alterar(id:Long)
-POST 	/usuario/:id/remover 				controllers.ControladorUsuario.remover(id:Long)
 
 # Javascript routing
 GET		/cliques/:id						controllers.ControladorEstudos.adicionaCliquesTarefa(id:Long)

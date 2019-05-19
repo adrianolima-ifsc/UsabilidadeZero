@@ -19,17 +19,15 @@
 				@b4.formCSRF(routes.ControladorUsuario.entrar, 
 					'id -> "loginform", 
 					'class -> "form-horizontal", 
-					'role -> "form") {
+					'role -> "form" ) {
+
+					@b4.hidden( usuarioForm("senha"), 'value -> "." )
 
 					@b4.email(usuarioForm("email"), 
 						'_label -> "Email", 
 						'placeholder -> "Seu email",
-						'autocomplete -> false)
-
-					@b4.password(usuarioForm("senha"), 
-						'_label -> "Senha",
-						'placeholder -> "Sua senha",
-						'autocomplete -> false) 
+						'autocomplete -> false,
+						'_help -> "Informe o seu email antes de começar." ) 
 
 					<div class="text-center">
 						<input type="submit" value="Entrar" class="btn btn-primary">
