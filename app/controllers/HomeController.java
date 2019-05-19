@@ -10,7 +10,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
-import views.html.instrucao;
+import views.html.instrucaoEstudo;
 import views.html.login;
 import views.html.sobre;
 
@@ -44,6 +44,6 @@ public class HomeController extends Controller {
 		
 		Estudo form = estudoForm.bindFromRequest().get();
 		
-		return ok(instrucao.render(form.isTipo()));
+		return ok(instrucaoEstudo.render(form.isTipo()));
 	}
 }

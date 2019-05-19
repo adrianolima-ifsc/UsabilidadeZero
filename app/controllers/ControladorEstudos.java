@@ -2,13 +2,10 @@ package controllers;
 
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
-
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import autenticadores.UsuarioAutenticado;
 import daos.EstudoDAO;
@@ -18,7 +15,6 @@ import daos.TokenSistemaDAO;
 import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
-import models.Inscricao;
 import models.RelatorioEstudo;
 import models.Sus;
 import models.Tarefa;
@@ -31,10 +27,10 @@ import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
-import views.html.instrucao;
-import views.html.relatorioTarefa;
-import views.html.relatorioParcial;
+import views.html.instrucaoEstudo;
 import views.html.relatorioFinal;
+import views.html.relatorioParcial;
+import views.html.relatorioTarefa;
 import views.html.sus;
 import views.html.tarefa;
 
@@ -53,7 +49,6 @@ public class ControladorEstudos extends Controller {
 	
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
-	private Form<Inscricao> inscricaoForm;
 	private Form<Sus> susForm;
 
 	public static final String AUTH = "auth";
@@ -63,7 +58,6 @@ public class ControladorEstudos extends Controller {
 
 		this.estudoForm = formFactory.form(Estudo.class);
 		this.tarefaForm = formFactory.form(Tarefa.class);
-		this.inscricaoForm = formFactory.form(Inscricao.class);
 		this.susForm = formFactory.form(Sus.class);
 	}
 	
@@ -80,7 +74,7 @@ public class ControladorEstudos extends Controller {
 			return ok(relatorioFinal.render(estudoZero.getRelatorio(), estudo.getRelatorio(), estudoForm));
 		
 		} else {
-			return ok(instrucao.render(true)); 
+			return ok(instrucaoEstudo.render(true)); 
 		}
 	}
 	
