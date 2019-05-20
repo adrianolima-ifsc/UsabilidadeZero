@@ -71,7 +71,11 @@
 		</tbody>
 	</table>
 	<h3 class="text-center">Avaliação</h3>
-	<p><strong>Eficiência: </strong>Você deu mais cliques no Estudo de Caso @if(relatorio0.getCliques>relatorio1.getCliques){0}else if(relatorio0.getCliques<relatorio1.getCliques){1} e levou mais tempo para terminar o Estudo de Caso @if(relatorio0.getTempo>relatorio1.getTempo){0}else{1}.</p>
+	<ul>
+		<li><p><strong>Eficiência: </strong>Você deu mais cliques no Estudo de Caso @if(relatorio0.getCliques>relatorio1.getCliques){0}else{1} e levou mais tempo para terminar o Estudo de Caso @if(relatorio0.getTempo>relatorio1.getTempo){0}else{1}.</p></li>
+		<li><p><strong>Eficicácia: </strong>Você terminou @relatorio0.getMedida% das tarefas no Estudo de Caso 0 e @relatorio1.getMedida% das tarefas no Estudo de Caso 1.</p></li>
+		<li><p><strong>Satisfação: </strong>Você se sentiu melhor fazendo o Estudo de Caso @if(relatorio0.getSatisfacao>relatorio1.getSatisfacao){0}else{1}.</p></li>
+	</ul>
 	@b4.formCSRF(routes.ControladorUsuario.mostrarPainel, 
 		'id -> "loginform", 
 		'class -> "form-horizontal", 
