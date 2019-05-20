@@ -2,13 +2,10 @@ package controllers;
 
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
-
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import autenticadores.UsuarioAutenticado;
 import daos.EstudoDAO;
@@ -18,7 +15,6 @@ import daos.TokenSistemaDAO;
 import daos.UsuarioDAO;
 import models.Estudo;
 import models.Evento;
-import models.Inscricao;
 import models.RelatorioEstudo;
 import models.Sus;
 import models.Tarefa;
@@ -31,10 +27,11 @@ import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
-import views.html.estudoCasoInstrucao;
-import views.html.relatorioTarefa;
-import views.html.relatorioParcial;
+import views.html.instrucaoEstudo;
+import views.html.instrucaoSus;
 import views.html.relatorioFinal;
+import views.html.relatorioParcial;
+import views.html.relatorioTarefa;
 import views.html.sus;
 import views.html.tarefa;
 
@@ -53,7 +50,6 @@ public class ControladorEstudos extends Controller {
 	
 	private Form<Estudo> estudoForm;
 	private Form<Tarefa> tarefaForm;
-	private Form<Inscricao> inscricaoForm;
 	private Form<Sus> susForm;
 
 	public static final String AUTH = "auth";
@@ -63,7 +59,6 @@ public class ControladorEstudos extends Controller {
 
 		this.estudoForm = formFactory.form(Estudo.class);
 		this.tarefaForm = formFactory.form(Tarefa.class);
-		this.inscricaoForm = formFactory.form(Inscricao.class);
 		this.susForm = formFactory.form(Sus.class);
 	}
 	
@@ -80,7 +75,7 @@ public class ControladorEstudos extends Controller {
 			return ok(relatorioFinal.render(estudoZero.getRelatorio(), estudo.getRelatorio(), estudoForm));
 		
 		} else {
-			return ok(estudoCasoInstrucao.render(true)); 
+			return ok(instrucaoEstudo.render(true)); 
 		}
 	}
 	
@@ -147,11 +142,19 @@ public class ControladorEstudos extends Controller {
 		
 		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
 		
+		if (estudo.getTarefas().size() >= 3) return ok(instrucaoSus.render(estudo, susForm));		
+        
 		int numTarefa = (estudo.getTarefas().size() + 1); 
 		
-		if (estudo.getTarefas().size() == 3) return ok(sus.render(estudo, susForm));		
-        
 	    return ok(tarefa.render(estudo, estudoForm, numTarefa));        
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result iniciarPesquisa() {
+		
+		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
+
+		return ok(sus.render(estudo, susForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
@@ -202,10 +205,19 @@ public class ControladorEstudos extends Controller {
 
 		Double satisfacao = estudo.getSus().getTotal();
 		relatorio.setSatisfacao(satisfacao);
+		
+		if (estudo.getRelatorio() == null) {
 
-		relatorio.setEstudo(estudo);
-		estudo.setRelatorio(relatorio);
-		relatorio.save();
+			relatorio.setEstudo(estudo);
+			estudo.setRelatorio(relatorio);
+			relatorio.save();
+		
+		} else {
+			
+			relatorio.setEstudo(estudo);
+			estudo.setRelatorio(relatorio);
+			relatorio.update();
+		}
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
@@ -275,9 +287,9 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result enviarPesquisa() {
 		
-		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
-		
 		Sus pesquisa = susForm.bindFromRequest().get();
+		
+		Estudo estudo = estudoDAO.comId(pesquisa.getId()).get();
 		
 		Long total = pesquisa.getQ1() - 1;
 		total = total + 5 - pesquisa.getQ2();
@@ -304,12 +316,12 @@ public class ControladorEstudos extends Controller {
 			pesquisa.update();
 		}
 		
-		Long satisfacao = estudo.getSus().getTotal().longValue(); 
-		
 		List<Tarefa> tarefas = estudo.getTarefas();
 		Collections.sort(tarefas);
 		
-		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), estudo, estudoForm));
+		gerarRelatorio(estudo);
+		
+		return ok(relatorioParcial.render(estudo.getTarefas(), estudo, estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

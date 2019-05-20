@@ -1,4 +1,4 @@
-@(satisfacao: Long, tarefas: List[Tarefa], estudo: Estudo, estudoForm: Form[Estudo])
+@(tarefas: List[Tarefa], estudo: Estudo, estudoForm: Form[Estudo])
 
 @implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
 
@@ -13,11 +13,11 @@
 
 @titulo = @{
     
-    if (estudo.isTipo) {"Resultado do Estudo de Caso 1";}
-    else {"Resultado do Estudo de Caso 0";}
+    if (estudo.isTipo) {"Estudo de Caso 1";}
+    else {"Estudo de Caso 0";}
 }
 
-@tempo(entrada: Tarefa) = @{
+@tempoTarefa(entrada: Tarefa) = @{
 
 	val tempoTotal = (entrada.getFim.getTime - entrada.getInicio.getTime)/1000;
 	
@@ -30,15 +30,29 @@
     else {segundos + "s";}
 }
 
+@tempoTotal(entrada: Long) = @{
+
+	val horas = (entrada / 3600);
+    val minutos = ((entrada % 3600) / 60);
+    val segundos = (entrada % 60);
+
+    if (horas > 0) {horas + "h " + minutos + "min " + segundos + "s";}
+    else if (minutos > 0) {minutos + "min " + segundos + "s";} 
+    else {segundos + "s";}
+}
+
 @mainCaminho(titulo, styles, scripts) {
 <p id="estudo" hidden="true">@estudo.isTipo</p>
 <p id="tarefa" hidden="true">relatorio</p>
 
 <div id="tabela" class="container">
-	<h3 class="text-center">@titulo</h3>
+	<h2 class="text-center">@titulo</h2>
 	<table class="table table-sm table-borderless table-hover text-center">
-		<thead>
+		<tbody>
 			<tr class="thead-light">
+				<th colspan="5" class="text-left"><h5>Resultado por tarefa</h5></th>
+			</tr>
+			<tr>
 				<th></th>
 				<th colspan="2">Eficiência</th>
 				<th colspan="2">Eficácia</th>
@@ -50,15 +64,13 @@
 				<th>Percebida</th>
 				<th>Real</th>
 			</tr>
-		</thead>
-		<tbody>
 			@for(tarefa <- tarefas) {
 			<tr>
 				<th>@{tarefa.getCodigo match {
 					case "EC01" | "EC11" => "Tarefa 1"
 					case "EC02" | "EC12" => "Tarefa 2"
 					case "EC03" | "EC13" => "Tarefa 3"}}</th>
-				<td>@tempo(tarefa)</td>
+				<td>@tempoTarefa(tarefa)</td>
 				<td>@tarefa.getCliques</td>
 				<td>@if(tarefa.isConcluidoPercebido) {
 						<i class="fas fa-check-circle"></i>
@@ -72,12 +84,33 @@
 					}</td>
 			</tr>
 			}
+			<tr class="thead-light">
+				<th colspan="5" class="text-left"><h5>Resultado por critério de usabilidade</h5></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th rowspan="2">Eficiência</th>
+				<th>Cliques</th>
+				<td>@estudo.getRelatorio.getCliques</td>
+			</tr>
+			<tr>
+				<th>Tempo</th>
+				<td>@tempoTotal(estudo.getRelatorio.getTempo)</td>
+			</tr>
+			<tr>
+				<th rowspan="2">Eficácia</th>
+				<th>Percebida</th>
+				<td>@estudo.getRelatorio.getPercebida%</td>
+			</tr>
+			<tr>
+				<th>Medida</th>
+				<td>@estudo.getRelatorio.getMedida%</td>
+			</tr>
 			<tr>
 				<th>Satisfação</th>
-				<td>@satisfacao pts</td>
 				<td></td>
-				<td></td>
-				<td></td>
+				<td>@estudo.getRelatorio.getSatisfacao pts</td>
 			</tr>
 		</tbody>
 	</table>
@@ -89,7 +122,7 @@
 		@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
 		
 		<a role="button" class="btn btn-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
-		<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
+		<input type="submit" value="@if(!estudo.isTipo){Próximo Estudo de Caso}else{Relatório Final}" class="btn btn-primary center-block">
 	}
 </div>
 }

@@ -49,14 +49,6 @@ public class ControladorUsuario extends Controller {
 		this.estudoForm = formFactory.form(Estudo.class);
 	}
 
-	public Result lista() {
-
-//		List<Usuario> usuarios = Usuario.find.all();
-
-//		return ok(telaPrincipal.render(usuarios));
-		return ok();
-	}
-
 	public Result entrar() {
 		
 		Form<Usuario> form = usuarioForm.bindFromRequest();
@@ -70,7 +62,65 @@ public class ControladorUsuario extends Controller {
         Usuario usuario = form.get();
         String email = usuario.getEmail();
         
-        String criptoUsuario = Encriptador.crypt(usuario.getEmail());
+        String criptoSenha = Encriptador.crypt("senhaAutomatica");
+        
+        Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
+        
+        if(possivelUsuario.isPresent()) {
+        	
+        	Usuario usuarioCadastrado = possivelUsuario.get();
+        	String senhaCadastrada = usuarioCadastrado.getSenha();
+        	
+        	if(senhaCadastrada.equals(criptoSenha)) {
+        	
+	        	if(usuarioCadastrado.isVerificado()) {
+	        		
+	        		session(AUTH, usuarioCadastrado.getToken().getCodigo());
+	        		flash("success", "Login realizado com sucesso!");
+	        		
+	        		return redirect(routes.ControladorUsuario.mostrarPainel());
+	        		
+	        	} else {
+	        		
+	        		flash("danger", "Usuário não confirmado!");     
+	        		return redirect(routes.HomeController.index());        	   	
+	        	}
+        	
+        	} else {
+        		
+        		String msg = String.format("A senha digitada não partence ao usuário %s. Tente novamente.", email);
+        		
+        		flash("danger", msg);
+        		return redirect(routes.HomeController.index());
+        	}
+        	
+        } else {
+        
+	        usuario.setSenha(criptoSenha);        
+	        usuario.save();
+	        
+	        TokenCadastro token = new TokenCadastro(usuario);
+	        token.save();
+	        
+	        confirmarCadastro(email, token.getCodigo());
+	        
+			return redirect(routes.ControladorUsuario.mostrarPainel());
+        }
+	}
+
+	public Result entrarComSenha() {
+		
+		Form<Usuario> form = usuarioForm.bindFromRequest();
+		
+        if(validador.temErros(form)) {
+        	
+        	flash("danger", "Foram identificados problemas no cadastro!");
+    		return badRequest(login.render(usuarioForm));        	
+        }
+ 
+        Usuario usuario = form.get();
+        String email = usuario.getEmail();
+        
         String criptoSenha = Encriptador.crypt(usuario.getSenha());
         
         Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
@@ -182,15 +232,6 @@ public class ControladorUsuario extends Controller {
 //		Form<Usuario> usuForm = formFactory.form(Usuario.class).fill(Usuario.find.byId(id));
 
 		return ok();
-	}
-
-	public Result remover(Long id) {
-
-//		Usuario.find.ref(id).delete();
-
-		flash("sucesso", "Usuario removido com sucesso");
-
-		return lista();
 	}
 
 }

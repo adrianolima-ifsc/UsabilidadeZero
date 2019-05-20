@@ -1,0 +1,30 @@
+@(estudo: Estudo, susForm: Form[Sus])
+
+@implicitFieldConstructor = @{ b4.vertical.fieldConstructor() }
+
+@import helper._
+
+@titulo = @{"Pesquisa de Satisfação"}
+
+@descricaoTarefa = @{"Agora você deve responder à pesquisa de satisfação a respeito do sistema utilizado (Portal de Eventos). Para cada questão, marque entre 1 (\"Discordo totalmente\") e 5 (\"Concordo plenamente\")."}
+
+@mainCaminho(titulo) {
+<div class="container w-50 text-center">
+	<p id="estudo" hidden="true">@estudo.isTipo</p>
+	<p id="tarefa" hidden="true">sus</p>
+   	<h2>@titulo</h2>
+ 	<h5>Agora você deve responder à pesquisa de satisfação a respeito do sistema utilizado (Portal de Eventos).</h5>
+    <h5>Para cada questão, marque entre 1 ("Discordo totalmente") e 5 ("Concordo plenamente").</h5>
+    <h5>Todas as questões devem ser marcadas.</h5>
+
+	@b4.formCSRF(routes.ControladorEstudos.iniciarPesquisa, 
+		'id -> "estudoform", 
+		'class -> "form-horizontal", 
+		'role -> "form") {
+
+        @b4.hidden( susForm("id"), 'value -> estudo.getId )
+
+		<input type="submit" value="Iniciar" class="btn btn-primary tela-sequencia">
+	}
+</div>
+}
