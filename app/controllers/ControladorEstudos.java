@@ -205,10 +205,19 @@ public class ControladorEstudos extends Controller {
 
 		Double satisfacao = estudo.getSus().getTotal();
 		relatorio.setSatisfacao(satisfacao);
+		
+		if (estudo.getRelatorio() == null) {
 
-		relatorio.setEstudo(estudo);
-		estudo.setRelatorio(relatorio);
-		relatorio.save();
+			relatorio.setEstudo(estudo);
+			estudo.setRelatorio(relatorio);
+			relatorio.save();
+		
+		} else {
+			
+			relatorio.setEstudo(estudo);
+			estudo.setRelatorio(relatorio);
+			relatorio.update();
+		}
 	}
 
 	@Authenticated(UsuarioAutenticado.class)
@@ -307,12 +316,12 @@ public class ControladorEstudos extends Controller {
 			pesquisa.update();
 		}
 		
-		Long satisfacao = estudo.getSus().getTotal().longValue(); 
-		
 		List<Tarefa> tarefas = estudo.getTarefas();
 		Collections.sort(tarefas);
 		
-		return ok(relatorioParcial.render(satisfacao, estudo.getTarefas(), estudo, estudoForm));
+		gerarRelatorio(estudo);
+		
+		return ok(relatorioParcial.render(estudo.getTarefas(), estudo, estudoForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)
