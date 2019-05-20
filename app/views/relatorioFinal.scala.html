@@ -70,7 +70,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<p>Você deu mais cliques no @if(relatorio0.getCliques>relatorio1.getCliques){Estudo de Caso 1}else{Estudo de Caso 0}.</p>
 	@b4.formCSRF(routes.ControladorUsuario.mostrarPainel, 
 		'id -> "loginform", 
 		'class -> "form-horizontal", 
@@ -78,7 +77,8 @@
 
 		@b4.hidden( estudoForm("tipo"), 'value -> "true" )
 		
-		<input type="submit" value="Terminar Estudo" class="btn btn-primary center-block">
+		<a role="button" class="btn btn-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
+		<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
 	}
 </div>
 }
