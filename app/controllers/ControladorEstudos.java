@@ -287,9 +287,9 @@ public class ControladorEstudos extends Controller {
 	@Authenticated(UsuarioAutenticado.class)
 	public Result enviarPesquisa() {
 		
-		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
-		
 		Sus pesquisa = susForm.bindFromRequest().get();
+		
+		Estudo estudo = estudoDAO.comId(pesquisa.getId()).get();
 		
 		Long total = pesquisa.getQ1() - 1;
 		total = total + 5 - pesquisa.getQ2();
