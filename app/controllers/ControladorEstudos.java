@@ -28,6 +28,7 @@ import play.mvc.Security.Authenticated;
 import views.html.estudo0portal;
 import views.html.estudo1portal;
 import views.html.instrucaoEstudo;
+import views.html.instrucaoSus;
 import views.html.relatorioFinal;
 import views.html.relatorioParcial;
 import views.html.relatorioTarefa;
@@ -141,11 +142,19 @@ public class ControladorEstudos extends Controller {
 		
 		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
 		
+		if (estudo.getTarefas().size() >= 3) return ok(instrucaoSus.render(estudo, susForm));		
+        
 		int numTarefa = (estudo.getTarefas().size() + 1); 
 		
-		if (estudo.getTarefas().size() == 3) return ok(sus.render(estudo, susForm));		
-        
 	    return ok(tarefa.render(estudo, estudoForm, numTarefa));        
+	}
+	
+	@Authenticated(UsuarioAutenticado.class)
+	public Result iniciarPesquisa() {
+		
+		Estudo estudo = estudoDAO.comToken(session(AUTH)).get();
+
+		return ok(sus.render(estudo, susForm));
 	}
 	
 	@Authenticated(UsuarioAutenticado.class)

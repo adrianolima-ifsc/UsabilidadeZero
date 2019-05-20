@@ -15,6 +15,7 @@ POST	/painel								controllers.ControladorEstudos.mostrarEstudo
 GET		/iniciarEstudoZero					controllers.ControladorEstudos.iniciarEstudoZero
 GET		/iniciarEstudoUm					controllers.ControladorEstudos.iniciarEstudoUm
 POST	/estudo								controllers.ControladorEstudos.continuarEstudo
+POST	/pesquisa							controllers.ControladorEstudos.iniciarPesquisa
 POST	/relatorio							controllers.ControladorEstudos.enviarPesquisa
 
 POST	/portal								controllers.ControladorEstudos.iniciarTarefa
