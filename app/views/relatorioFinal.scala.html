@@ -41,7 +41,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<th rowspan="2" class="align-middle">Eficiência</th>
+				<th rowspan="2">Eficiência</th>
 				<th>Cliques</th>
 				<td>@relatorio0.getCliques</td>
 				<td>@relatorio1.getCliques</td>
@@ -52,7 +52,7 @@
 				<td>@tempo(relatorio1.getTempo)</td>
 			</tr>
 			<tr>
-				<th rowspan="2" class="align-middle">Eficácia</th>
+				<th rowspan="2">Eficácia</th>
 				<th>Percebida</th>
 				<td>@relatorio0.getPercebida%</td>
 				<td>@relatorio1.getPercebida%</td>
@@ -70,6 +70,8 @@
 			</tr>
 		</tbody>
 	</table>
+	<h3 class="text-center">Avaliação</h3>
+	<p><strong>Eficiência: </strong>Você deu mais cliques no Estudo de Caso @if(relatorio0.getCliques>relatorio1.getCliques){0}else if(relatorio0.getCliques<relatorio1.getCliques){1} e levou mais tempo para terminar o Estudo de Caso @if(relatorio0.getTempo>relatorio1.getTempo){0}else{1}.</p>
 	@b4.formCSRF(routes.ControladorUsuario.mostrarPainel, 
 		'id -> "loginform", 
 		'class -> "form-horizontal", 
@@ -77,8 +79,7 @@
 
 		@b4.hidden( estudoForm("tipo"), 'value -> "true" )
 		
-		<a role="button" class="btn btn-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
-		<input type="submit" value="Próxima Tarefa" class="btn btn-primary center-block">
+		<input type="submit" value="Terminar Estudo" class="btn btn-primary center-block">
 	}
 </div>
 }
