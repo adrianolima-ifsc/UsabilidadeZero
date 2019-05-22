@@ -31,7 +31,7 @@
 
 <div id="tabela" class="container">
 	<h3 class="text-center">@titulo</h3>
-	<table class="table table-sm table-borderless table-hover text-center">
+	<table class="table table-sm text-center">
 		<thead>
 			<tr class="thead-light">
 				<th colspan="2"></th>
@@ -41,7 +41,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<th rowspan="2">Eficiência</th>
+				<th rowspan="2" class="align-middle">Eficiência</th>
 				<th>Cliques</th>
 				<td>@relatorio0.getCliques</td>
 				<td>@relatorio1.getCliques</td>
@@ -52,13 +52,13 @@
 				<td>@tempo(relatorio1.getTempo)</td>
 			</tr>
 			<tr>
-				<th rowspan="2">Eficácia</th>
+				<th rowspan="2" class="align-middle">Eficácia</th>
 				<th>Percebida</th>
 				<td>@relatorio0.getPercebida%</td>
 				<td>@relatorio1.getPercebida%</td>
 			</tr>
 			<tr>
-				<th>Medida</th>
+				<th>Verificada</th>
 				<td>@relatorio0.getMedida%</td>
 				<td>@relatorio1.getMedida%</td>
 			</tr>
@@ -72,9 +72,65 @@
 	</table>
 	<h3 class="text-center">Avaliação</h3>
 	<ul>
-		<li><p><strong>Eficiência: </strong>Você deu mais cliques no Estudo de Caso @if(relatorio0.getCliques>relatorio1.getCliques){0}else{1} e levou mais tempo para terminar o Estudo de Caso @if(relatorio0.getTempo>relatorio1.getTempo){0}else{1}.</p></li>
-		<li><p><strong>Eficicácia: </strong>Você terminou @relatorio0.getMedida% das tarefas no Estudo de Caso 0 e @relatorio1.getMedida% das tarefas no Estudo de Caso 1.</p></li>
-		<li><p><strong>Satisfação: </strong>Você se sentiu melhor fazendo o Estudo de Caso @if(relatorio0.getSatisfacao>relatorio1.getSatisfacao){0}else{1}.</p></li>
+		<li><p><strong>Eficiência: </strong>
+			@if(relatorio0.getCliques>relatorio1.getCliques) {
+				Você deu mais cliques no Estudo de Caso 0
+			} else if(relatorio0.getCliques<relatorio1.getCliques) {
+				Você deu mais cliques no Estudo de Caso 1
+			} else {
+				Você deu a mesma quantidade de cliques nos dois estudos de caso
+			}
+			@if(relatorio0.getTempo>relatorio1.getTempo) {
+				e levou mais tempo para terminar o Estudo de Caso 0
+			} else if(relatorio0.getTempo<relatorio1.getTempo){
+				e levou mais tempo para terminar o Estudo de Caso 1
+			} else {
+				e levou o mesmo tempo para terminar os dois estudos de caso
+			}.</p>
+			<ul>
+				<li><p>
+					@if(relatorio0.getCliques>relatorio1.getCliques) {
+						@if(relatorio0.getTempo<relatorio1.getTempo) {
+							Não é possível concluir em qual estudo de caso a eficiência foi maior.
+						} else {
+							A eficiência foi <strong>maior</strong> no Estudo de Caso 1.
+						} 
+					} else if(relatorio0.getTempo<relatorio1.getTempo) {
+						@if(relatorio0.getCliques>relatorio1.getCliques) {
+							Não é possível concluir em qual estudo de caso a eficiência foi maior.
+						} else {
+							A eficiência foi <strong>maior</strong> no Estudo de Caso 0.
+						}
+					}
+				</p></li>
+			</ul>
+		</li>
+		<li><p><strong>Eficicácia: </strong>Você terminou @relatorio0.getMedida% das tarefas no Estudo de Caso 0 e @relatorio1.getMedida% das tarefas no Estudo de Caso 1.</p>
+			<ul>
+				<li><p>
+					@if(relatorio0.getMedida>relatorio1.getMedida) {
+						A eficácia foi <strong>maior</strong> no Estudo de Caso 0.
+					} else if(relatorio0.getMedida<relatorio1.getMedida) {
+						A eficácia foi <strong>maior</strong> no Estudo de Caso 1.
+					} else {
+						Não é possível concluir em qual estudo de caso a eficácia foi maior.
+					}
+				</p></li>
+			</ul>
+		</li>
+		<li><p><strong>Satisfação: </strong>Você se sentiu melhor fazendo o Estudo de Caso @if(relatorio0.getSatisfacao>relatorio1.getSatisfacao){0}else{1}.</p>
+			<ul>
+				<li><p>
+					@if(relatorio0.getSatisfacao>relatorio1.getSatisfacao) {
+						A satisfação foi <strong>maior</strong> no Estudo de Caso 0.
+					} else if(relatorio0.getSatisfacao<relatorio1.getSatisfacao) {
+						A satisfação foi <strong>maior</strong> no Estudo de Caso 1.
+					} else {
+						Não é possível concluir em qual estudo de caso a satisfação foi maior.
+					}
+				</p></li>
+			</ul>
+		</li>
 	</ul>
 	@b4.formCSRF(routes.ControladorUsuario.mostrarPainel, 
 		'id -> "loginform", 
@@ -82,8 +138,27 @@
 		'role -> "form") {
 
 		@b4.hidden( estudoForm("tipo"), 'value -> "true" )
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Agora você pode voltar ao questionário.</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-footer">
+				<input type="submit" value="OK" class="btn btn-primary center-block tela-sequencia" data-toggle="modal" data-target="#exampleModal">
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		
-		<input type="submit" value="Terminar Estudo" class="btn btn-primary center-block">
+		<div class="row justify-content-center">
+			<button type="button" class="btn btn-primary center-block tela-sequencia" data-toggle="modal" data-target="#exampleModal">Terminar Estudo</button>
+		</div>
 	}
 </div>
 }

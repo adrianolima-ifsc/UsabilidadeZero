@@ -47,18 +47,17 @@
 
 <div id="tabela" class="container">
 	<h2 class="text-center">@titulo</h2>
-	<table class="table table-sm table-borderless table-hover text-center">
+	<table class="table table-sm text-center">
 		<tbody>
 			<tr class="thead-light">
 				<th colspan="5" class="text-left"><h5>Resultado por tarefa</h5></th>
 			</tr>
 			<tr>
-				<th></th>
+				<th rowspan="2"></th>
 				<th colspan="2">Eficiência</th>
 				<th colspan="2">Eficácia</th>
 			</tr>
 			<tr>
-				<th></th>
 				<th>Tempo</th>
 				<th>Cliques</th>
 				<th>Percebida</th>
@@ -85,32 +84,42 @@
 			</tr>
 			}
 			<tr class="thead-light">
-				<th colspan="5" class="text-left"><h5>Resultado por critério de usabilidade</h5></th>
+				<th colspan="5" class="text-left"><h5>Resultado por aspecto de usabilidade</h5></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<th rowspan="2">Eficiência</th>
+				<th rowspan="2" class="align-middle">Eficiência</th>
 				<th>Cliques</th>
 				<td>@estudo.getRelatorio.getCliques</td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
 				<th>Tempo</th>
 				<td>@tempoTotal(estudo.getRelatorio.getTempo)</td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
-				<th rowspan="2">Eficácia</th>
+				<th rowspan="2" class="align-middle">Eficácia</th>
 				<th>Percebida</th>
 				<td>@estudo.getRelatorio.getPercebida%</td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
-				<th>Medida</th>
+				<th>Verificada</th>
 				<td>@estudo.getRelatorio.getMedida%</td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
 				<th>Satisfação</th>
 				<td></td>
 				<td>@estudo.getRelatorio.getSatisfacao pts</td>
+				<td></td>
+				<td></td>
 			</tr>
 		</tbody>
 	</table>
@@ -121,8 +130,10 @@
 
 		@b4.hidden( estudoForm("id"), 'value -> estudo.getId )
 		
-		<a role="button" class="btn btn-outline-secondary center-block" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
-		<input type="submit" value="@if(!estudo.isTipo){Próximo Estudo de Caso}else{Relatório Final}" class="btn btn-primary center-block">
+		<div class="row justify-content-center">
+		<a role="button" class="btn btn-outline-secondary center-block tela-sequencia" href="@routes.ControladorUsuario.mostrarPainel">Página Inicial</a>
+		<input type="submit" value="@if(!estudo.isTipo){Próximo Estudo de Caso}else{Relatório Final}" class="btn btn-primary center-block tela-sequencia">
+	</div>
 	}
 </div>
 }
